@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\PitchingTube.dll
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\PitchingTube.pdb
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\EntityFramework.dll
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\EntityFramework.xml
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\obj\Debug\ResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\obj\Debug\PitchingTube.dll
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\obj\Debug\PitchingTube.pdb
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\PitchingTube.Data.dll
+c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\PitchingTube.Data.pdb
