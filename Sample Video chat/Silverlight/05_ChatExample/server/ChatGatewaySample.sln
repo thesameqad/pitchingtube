@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatGatewaySample", "ChatGatewaySample\ChatGatewaySample.csproj", "{1ACC582E-9CD6-4852-AB89-58E3E06C8E26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1ACC582E-9CD6-4852-AB89-58E3E06C8E26}.Debug|x86.ActiveCfg = Debug|x86
+		{1ACC582E-9CD6-4852-AB89-58E3E06C8E26}.Debug|x86.Build.0 = Debug|x86
+		{1ACC582E-9CD6-4852-AB89-58E3E06C8E26}.Release|x86.ActiveCfg = Release|x86
+		{1ACC582E-9CD6-4852-AB89-58E3E06C8E26}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

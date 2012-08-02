@@ -1,0 +1,20 @@
+﻿<controls:ChildWindow x:Class="_05_Webphone_Silverligth_ChatExample.CWindowConnection"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           Width="271" Height="141" 
+           Title="Connect to the VideoChat service" HasCloseButton="False">
+    <Grid x:Name="LayoutRoot" Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1" Visibility="Collapsed" />
+        <Button x:Name="OKButton" Content="Connect" Click="OKButton_Click" Width="75" Height="23" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" IsEnabled="False" />
+        <TextBlock HorizontalAlignment="Left" Margin="0,18,0,0" TextWrapping="Wrap" Text="NickName:" VerticalAlignment="Top" Width="87" FontWeight="Bold" FontSize="12"/>
+        <TextBox Name="txtNickName" Height="32" Margin="0,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="txtNickName_TextChanged" KeyUp="txtNickName_KeyUp" MaxLength="16" />
+        <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Current connection status:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="lblStatus" HorizontalAlignment="Right" Margin="0" TextWrapping="Wrap" Text="Offline" VerticalAlignment="Top" />
+    </Grid>
+</controls:ChildWindow>

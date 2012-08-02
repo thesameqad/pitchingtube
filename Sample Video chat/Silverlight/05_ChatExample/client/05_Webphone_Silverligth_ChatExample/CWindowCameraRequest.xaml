@@ -1,0 +1,17 @@
+﻿<controls:ChildWindow x:Class="_05_Webphone_Silverligth_ChatExample.CWindowCameraRequest"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           Width="278" Height="142" 
+           Title="Camera request" HasCloseButton="False">
+    <Grid x:Name="LayoutRoot" Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Button x:Name="CancelButton" Content="Reject" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Center" Margin="80,12,0,0" Grid.Row="1" />
+        <Button x:Name="OKButton" Content="Accept" Click="OKButton_Click" Width="75" Height="23" HorizontalAlignment="Center" Margin="0,12,80,0" Grid.Row="1" />
+        <TextBlock TextWrapping="Wrap" Text="Camera request received from zsolt." FontSize="13.333" FontWeight="Bold" Name="lbltext" VerticalAlignment="Center" TextAlignment="Center" />
+    </Grid>
+</controls:ChildWindow>
