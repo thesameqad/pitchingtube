@@ -1,0 +1,26 @@
+﻿@model PitchingTube.Models.User
+
+@{
+    ViewBag.Title = "AccountSettings";
+}
+
+<h2>Account Settings</h2>
+
+<fieldset>
+    <legend>You settings</legend>
+
+    <div class="display-label">UserName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <p>
+        @Html.ActionLink("Change password", "ChangePassword", "Account");
+    </p>
+</fieldset>
+

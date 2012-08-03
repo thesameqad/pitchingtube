@@ -150,6 +150,20 @@ namespace PitchingTube.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult AccountSettings()
+        {
+            
+            MembershipUser currentUser = Membership.GetUser(User.Identity.Name);
+            User user = new User
+            {
+                UserName = currentUser.UserName,
+                Email = currentUser.Email
+            };           
+            
+            return View(user);
+        }
+
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {

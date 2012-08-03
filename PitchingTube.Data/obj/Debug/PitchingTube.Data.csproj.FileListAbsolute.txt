@@ -4,3 +4,9 @@ c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube.Da
 c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
 c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
 c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll.config
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.pdb
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb

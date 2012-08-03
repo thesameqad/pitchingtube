@@ -7,3 +7,12 @@ c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\ob
 c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\obj\Debug\PitchingTube.pdb
 c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\PitchingTube.Data.dll
 c:\users\user\documents\visual studio 2010\Projects\PitchingTube\PitchingTube\bin\PitchingTube.Data.pdb
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.pdb
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\bin\EntityFramework.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.Data.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.Data.pdb
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\bin\EntityFramework.xml
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\obj\Debug\PitchingTube.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube\obj\Debug\PitchingTube.pdb
