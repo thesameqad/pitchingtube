@@ -4,23 +4,28 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PitchingTubeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="PitchingTubeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="PitchingTubeModelStoreContainer">
           <EntitySet Name="aspnet_Profile" EntityType="PitchingTubeModel.Store.aspnet_Profile" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Roles" EntityType="PitchingTubeModel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Users" EntityType="PitchingTubeModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_UsersInRoles" EntityType="PitchingTubeModel.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK__aspnet_Pr__UserI__38996AB5" Association="PitchingTubeModel.Store.FK__aspnet_Pr__UserI__38996AB5">
+          <EntitySet Name="Persons" EntityType="PitchingTubeModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__aspnet_Pr__UserI__76969D2E" Association="PitchingTubeModel.Store.FK__aspnet_Pr__UserI__76969D2E">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__RoleI__4AB81AF0" Association="PitchingTubeModel.Store.FK__aspnet_Us__RoleI__4AB81AF0">
+          <AssociationSet Name="FK__aspnet_Us__RoleI__7A672E12" Association="PitchingTubeModel.Store.FK__aspnet_Us__RoleI__7A672E12">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__UserI__49C3F6B7" Association="PitchingTubeModel.Store.FK__aspnet_Us__UserI__49C3F6B7">
+          <AssociationSet Name="FK__aspnet_Us__UserI__7B5B524B" Association="PitchingTubeModel.Store.FK__aspnet_Us__UserI__7B5B524B">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_aspnet_Users" Association="PitchingTubeModel.Store.FK_Persons_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="Persons" EntitySet="Persons" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="aspnet_Profile">
@@ -63,7 +68,15 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <Association Name="FK__aspnet_Pr__UserI__38996AB5">
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Skype" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__aspnet_Pr__UserI__76969D2E">
           <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_Profile" Type="PitchingTubeModel.Store.aspnet_Profile" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -75,7 +88,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__RoleI__4AB81AF0">
+        <Association Name="FK__aspnet_Us__RoleI__7A672E12">
           <End Role="aspnet_Roles" Type="PitchingTubeModel.Store.aspnet_Roles" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="PitchingTubeModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -87,7 +100,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__UserI__49C3F6B7">
+        <Association Name="FK__aspnet_Us__UserI__7B5B524B">
           <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="PitchingTubeModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -99,8 +112,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+        <Association Name="FK_Persons_aspnet_Users">
+          <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="Persons" Type="PitchingTubeModel.Store.Persons" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PitchingTubeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -115,6 +139,11 @@
           <AssociationSet Name="aspnet_UsersInRoles" Association="PitchingTubeModel.aspnet_UsersInRoles">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <EntitySet Name="Persons" EntityType="PitchingTubeModel.Person" />
+          <AssociationSet Name="FK_Persons_aspnet_Users" Association="PitchingTubeModel.FK_Persons_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="Person" EntitySet="Persons" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="aspnet_Profile">
@@ -152,6 +181,7 @@
           <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="aspnet_Profile" Relationship="PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
           <NavigationProperty Name="aspnet_Roles" Relationship="PitchingTubeModel.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
+          <NavigationProperty Name="Person" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="aspnet_Users" ToRole="Person" />
         </EntityType>
         <Association Name="FK__aspnet_Pr__UserI__38996AB5">
           <End Role="aspnet_Users" Type="PitchingTubeModel.aspnet_Users" Multiplicity="1" />
@@ -168,6 +198,27 @@
         <Association Name="aspnet_UsersInRoles">
           <End Role="aspnet_Roles" Type="PitchingTubeModel.aspnet_Roles" Multiplicity="*" />
           <End Role="aspnet_Users" Type="PitchingTubeModel.aspnet_Users" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="String" Name="Skype" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="Person" ToRole="aspnet_Users" />
+        </EntityType>
+        <Association Name="FK_Persons_aspnet_Users">
+          <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="PitchingTubeModel.Person" Role="Person" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -206,6 +257,15 @@
               <ScalarProperty Name="UserId" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="PitchingTubeModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Skype" ColumnName="Skype" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -220,24 +280,28 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="PitchingTubeData" ZoomLevel="81">
-        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Profile" Width="1.5" PointX="10.5" PointY="11.875" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Roles" Width="1.5" PointX="3" PointY="15.75" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Users" Width="1.5" PointX="8.25" PointY="11.375" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Profile" Width="1.5" PointX="10.5" PointY="11.125" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Roles" Width="1.5" PointX="2.375" PointY="12.75" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Users" Width="1.5" PointX="7.125" PointY="10.875" Height="2.7494921874999996" IsExpanded="true" />
         <AssociationConnector Association="PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="12.9612939453125" />
-          <ConnectorPoint PointX="10.5" PointY="12.9612939453125" />
+          <ConnectorPoint PointX="8.625" PointY="12.2112939453125" />
+          <ConnectorPoint PointX="10.5" PointY="12.2112939453125" />
         </AssociationConnector>
         <AssociationConnector Association="PitchingTubeModel.aspnet_UsersInRoles" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="16.932444661458334" />
-          <ConnectorPoint PointX="9" PointY="16.932444661458334" />
-          <ConnectorPoint PointX="9" PointY="14.701396484375" />
+          <ConnectorPoint PointX="3.875" PointY="13.283396809895834" />
+          <ConnectorPoint PointX="7.125" PointY="13.283396809895834" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="PitchingTubeModel.Person" Width="1.5" PointX="7.5" PointY="15" Height="1.7879850260416674" />
+        <AssociationConnector Association="PitchingTubeModel.FK_Persons_aspnet_Users" >
+          <ConnectorPoint PointX="8.0625" PointY="13.816793619791666" />
+          <ConnectorPoint PointX="8.0625" PointY="15" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

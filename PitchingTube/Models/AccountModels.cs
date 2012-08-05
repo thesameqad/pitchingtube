@@ -63,6 +63,15 @@ namespace PitchingTube.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Skype")]
+        public string Skype { get; set; }
+
+        [Required]
+        [Display(Name = "Phone")]
+        [DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
     }
 
 

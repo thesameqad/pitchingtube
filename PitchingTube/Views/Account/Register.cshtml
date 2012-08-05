@@ -53,8 +53,24 @@
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </div>
 
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Skype)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Skype)
+                @Html.ValidationMessageFor(m => m.Skype)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Phone)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
+
             <p>
-                <input type="submit" value="Register" />
+                <input type="submit" value="Register New User" />
             </p>
         </fieldset>
     </div>

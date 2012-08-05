@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="PersonRepository.cs" />
     <Compile Include="PitchingTubeData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

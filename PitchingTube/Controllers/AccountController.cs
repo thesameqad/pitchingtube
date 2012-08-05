@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using PitchingTube.Models;
+using PitchingTube.Data;
 
 namespace PitchingTube.Controllers
 {
@@ -83,6 +84,18 @@ namespace PitchingTube.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
+                    /* ТУТ У МЕНЯ ПРОБЛЕМА!!!*/
+                    //Error: Keyword not supported: 'data source'.
+
+                    BaseRepository<Person> repo = new BaseRepository<Person>();
+                    //PersonRepository repo = new PersonRepository();
+                    repo.Insert(new Person
+                    {
+                        Phone = model.Phone,
+                        Skype = model.Skype,
+                        PersonId = repo.FirstOrDefault(x => x.aspnet_Users.UserName == model.UserName).aspnet_Users.UserId
+                    });
+
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }

@@ -12,6 +12,11 @@
       <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
       <End Role="aspnet_Users" EntitySet="aspnet_Users" />
     </AssociationSet>
+    <EntitySet Name="Persons" EntityType="PitchingTubeModel.Person" />
+    <AssociationSet Name="FK_Persons_aspnet_Users" Association="PitchingTubeModel.FK_Persons_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Person" EntitySet="Persons" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="aspnet_Profile">
     <Key>
@@ -48,6 +53,7 @@
     <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="aspnet_Profile" Relationship="PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
     <NavigationProperty Name="aspnet_Roles" Relationship="PitchingTubeModel.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
+    <NavigationProperty Name="Person" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="aspnet_Users" ToRole="Person" />
   </EntityType>
   <Association Name="FK__aspnet_Pr__UserI__38996AB5">
     <End Role="aspnet_Users" Type="PitchingTubeModel.aspnet_Users" Multiplicity="1" />
@@ -64,5 +70,26 @@
   <Association Name="aspnet_UsersInRoles">
     <End Role="aspnet_Roles" Type="PitchingTubeModel.aspnet_Roles" Multiplicity="*" />
     <End Role="aspnet_Users" Type="PitchingTubeModel.aspnet_Users" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonId" />
+    </Key>
+    <Property Type="Guid" Name="PersonId" Nullable="false" />
+    <Property Type="String" Name="Skype" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="Person" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_Persons_aspnet_Users">
+    <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="PitchingTubeModel.Person" Role="Person" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>
