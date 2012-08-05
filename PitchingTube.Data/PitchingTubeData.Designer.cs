@@ -18,9 +18,8 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "aspnet_Profile", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PitchingTube.Data.aspnet_Profile), true)]
-[assembly: EdmRelationshipAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Roles), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users))]
-[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PitchingTube.Data.Person), true)]
+[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_User), "aspnet_Profile", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PitchingTube.Data.aspnet_Profile), true)]
+[assembly: EdmRelationshipAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Role), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_User))]
 
 #endregion
 
@@ -91,34 +90,50 @@ namespace PitchingTube.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<aspnet_Roles> aspnet_Roles
+        public ObjectSet<aspnet_Role> aspnet_Role
         {
             get
             {
-                if ((_aspnet_Roles == null))
+                if ((_aspnet_Role == null))
                 {
-                    _aspnet_Roles = base.CreateObjectSet<aspnet_Roles>("aspnet_Roles");
+                    _aspnet_Role = base.CreateObjectSet<aspnet_Role>("aspnet_Role");
                 }
-                return _aspnet_Roles;
+                return _aspnet_Role;
             }
         }
-        private ObjectSet<aspnet_Roles> _aspnet_Roles;
+        private ObjectSet<aspnet_Role> _aspnet_Role;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<aspnet_Users> aspnet_Users
+        public ObjectSet<aspnet_User> aspnet_User
         {
             get
             {
-                if ((_aspnet_Users == null))
+                if ((_aspnet_User == null))
                 {
-                    _aspnet_Users = base.CreateObjectSet<aspnet_Users>("aspnet_Users");
+                    _aspnet_User = base.CreateObjectSet<aspnet_User>("aspnet_User");
                 }
-                return _aspnet_Users;
+                return _aspnet_User;
             }
         }
-        private ObjectSet<aspnet_Users> _aspnet_Users;
+        private ObjectSet<aspnet_User> _aspnet_User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<EmailTemplate> EmailTemplates
+        {
+            get
+            {
+                if ((_EmailTemplates == null))
+                {
+                    _EmailTemplates = base.CreateObjectSet<EmailTemplate>("EmailTemplates");
+                }
+                return _EmailTemplates;
+            }
+        }
+        private ObjectSet<EmailTemplate> _EmailTemplates;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -148,19 +163,27 @@ namespace PitchingTube.Data
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Roles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the aspnet_Role EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToaspnet_Roles(aspnet_Roles aspnet_Roles)
+        public void AddToaspnet_Role(aspnet_Role aspnet_Role)
         {
-            base.AddObject("aspnet_Roles", aspnet_Roles);
+            base.AddObject("aspnet_Role", aspnet_Role);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the aspnet_User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToaspnet_Users(aspnet_Users aspnet_Users)
+        public void AddToaspnet_User(aspnet_User aspnet_User)
         {
-            base.AddObject("aspnet_Users", aspnet_Users);
+            base.AddObject("aspnet_User", aspnet_User);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the EmailTemplates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmailTemplates(EmailTemplate emailTemplate)
+        {
+            base.AddObject("EmailTemplates", emailTemplate);
         }
     
         /// <summary>
@@ -345,15 +368,15 @@ namespace PitchingTube.Data
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users")]
-        public aspnet_Users aspnet_Users
+        public aspnet_User aspnet_Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_User>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_User>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users").Value = value;
             }
         }
         /// <summary>
@@ -361,17 +384,17 @@ namespace PitchingTube.Data
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<aspnet_Users> aspnet_UsersReference
+        public EntityReference<aspnet_User> aspnet_UsersReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_User>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_User>("PitchingTubeModel.FK__aspnet_Pr__UserI__38996AB5", "aspnet_Users", value);
                 }
             }
         }
@@ -382,28 +405,28 @@ namespace PitchingTube.Data
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="aspnet_Roles")]
+    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="aspnet_Role")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Roles : EntityObject
+    public partial class aspnet_Role : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new aspnet_Roles object.
+        /// Create a new aspnet_Role object.
         /// </summary>
         /// <param name="applicationId">Initial value of the ApplicationId property.</param>
         /// <param name="roleId">Initial value of the RoleId property.</param>
         /// <param name="roleName">Initial value of the RoleName property.</param>
         /// <param name="loweredRoleName">Initial value of the LoweredRoleName property.</param>
-        public static aspnet_Roles Createaspnet_Roles(global::System.Guid applicationId, global::System.Guid roleId, global::System.String roleName, global::System.String loweredRoleName)
+        public static aspnet_Role Createaspnet_Role(global::System.Guid applicationId, global::System.Guid roleId, global::System.String roleName, global::System.String loweredRoleName)
         {
-            aspnet_Roles aspnet_Roles = new aspnet_Roles();
-            aspnet_Roles.ApplicationId = applicationId;
-            aspnet_Roles.RoleId = roleId;
-            aspnet_Roles.RoleName = roleName;
-            aspnet_Roles.LoweredRoleName = loweredRoleName;
-            return aspnet_Roles;
+            aspnet_Role aspnet_Role = new aspnet_Role();
+            aspnet_Role.ApplicationId = applicationId;
+            aspnet_Role.RoleId = roleId;
+            aspnet_Role.RoleName = roleName;
+            aspnet_Role.LoweredRoleName = loweredRoleName;
+            return aspnet_Role;
         }
 
         #endregion
@@ -543,17 +566,17 @@ namespace PitchingTube.Data
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Users")]
-        public EntityCollection<aspnet_Users> aspnet_Users
+        public EntityCollection<aspnet_User> aspnet_Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_User>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_User>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Users", value);
                 }
             }
         }
@@ -564,15 +587,15 @@ namespace PitchingTube.Data
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="aspnet_Users")]
+    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="aspnet_User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Users : EntityObject
+    public partial class aspnet_User : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new aspnet_Users object.
+        /// Create a new aspnet_User object.
         /// </summary>
         /// <param name="applicationId">Initial value of the ApplicationId property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
@@ -580,16 +603,16 @@ namespace PitchingTube.Data
         /// <param name="loweredUserName">Initial value of the LoweredUserName property.</param>
         /// <param name="isAnonymous">Initial value of the IsAnonymous property.</param>
         /// <param name="lastActivityDate">Initial value of the LastActivityDate property.</param>
-        public static aspnet_Users Createaspnet_Users(global::System.Guid applicationId, global::System.Guid userId, global::System.String userName, global::System.String loweredUserName, global::System.Boolean isAnonymous, global::System.DateTime lastActivityDate)
+        public static aspnet_User Createaspnet_User(global::System.Guid applicationId, global::System.Guid userId, global::System.String userName, global::System.String loweredUserName, global::System.Boolean isAnonymous, global::System.DateTime lastActivityDate)
         {
-            aspnet_Users aspnet_Users = new aspnet_Users();
-            aspnet_Users.ApplicationId = applicationId;
-            aspnet_Users.UserId = userId;
-            aspnet_Users.UserName = userName;
-            aspnet_Users.LoweredUserName = loweredUserName;
-            aspnet_Users.IsAnonymous = isAnonymous;
-            aspnet_Users.LastActivityDate = lastActivityDate;
-            return aspnet_Users;
+            aspnet_User aspnet_User = new aspnet_User();
+            aspnet_User.ApplicationId = applicationId;
+            aspnet_User.UserId = userId;
+            aspnet_User.UserName = userName;
+            aspnet_User.LoweredUserName = loweredUserName;
+            aspnet_User.IsAnonymous = isAnonymous;
+            aspnet_User.LastActivityDate = lastActivityDate;
+            return aspnet_User;
         }
 
         #endregion
@@ -777,7 +800,7 @@ namespace PitchingTube.Data
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Pr__UserI__38996AB5", "aspnet_Profile")]
-        public aspnet_Profile aspnet_Profile
+        public aspnet_Profile Profile
         {
             get
             {
@@ -793,7 +816,7 @@ namespace PitchingTube.Data
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<aspnet_Profile> aspnet_ProfileReference
+        public EntityReference<aspnet_Profile> ProfileReference
         {
             get
             {
@@ -815,60 +838,155 @@ namespace PitchingTube.Data
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Roles")]
-        public EntityCollection<aspnet_Roles> aspnet_Roles
+        public EntityCollection<aspnet_Role> aspnet_Roles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Roles>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Roles");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Role>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Roles");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Roles>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Roles", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "Person")]
-        public Person Person
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("PitchingTubeModel.FK_Persons_aspnet_Users", "Person").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("PitchingTubeModel.FK_Persons_aspnet_Users", "Person").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Person> PersonReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("PitchingTubeModel.FK_Persons_aspnet_Users", "Person");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("PitchingTubeModel.FK_Persons_aspnet_Users", "Person", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Role>("PitchingTubeModel.aspnet_UsersInRoles", "aspnet_Roles", value);
                 }
             }
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="EmailTemplate")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class EmailTemplate : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new EmailTemplate object.
+        /// </summary>
+        /// <param name="emailTemplateID">Initial value of the EmailTemplateID property.</param>
+        /// <param name="templateName">Initial value of the TemplateName property.</param>
+        /// <param name="subject">Initial value of the Subject property.</param>
+        /// <param name="template">Initial value of the Template property.</param>
+        public static EmailTemplate CreateEmailTemplate(global::System.String emailTemplateID, global::System.String templateName, global::System.String subject, global::System.String template)
+        {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            emailTemplate.EmailTemplateID = emailTemplateID;
+            emailTemplate.TemplateName = templateName;
+            emailTemplate.Subject = subject;
+            emailTemplate.Template = template;
+            return emailTemplate;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EmailTemplateID
+        {
+            get
+            {
+                return _EmailTemplateID;
+            }
+            set
+            {
+                if (_EmailTemplateID != value)
+                {
+                    OnEmailTemplateIDChanging(value);
+                    ReportPropertyChanging("EmailTemplateID");
+                    _EmailTemplateID = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("EmailTemplateID");
+                    OnEmailTemplateIDChanged();
+                }
+            }
+        }
+        private global::System.String _EmailTemplateID;
+        partial void OnEmailTemplateIDChanging(global::System.String value);
+        partial void OnEmailTemplateIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String TemplateName
+        {
+            get
+            {
+                return _TemplateName;
+            }
+            set
+            {
+                OnTemplateNameChanging(value);
+                ReportPropertyChanging("TemplateName");
+                _TemplateName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("TemplateName");
+                OnTemplateNameChanged();
+            }
+        }
+        private global::System.String _TemplateName;
+        partial void OnTemplateNameChanging(global::System.String value);
+        partial void OnTemplateNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Subject
+        {
+            get
+            {
+                return _Subject;
+            }
+            set
+            {
+                OnSubjectChanging(value);
+                ReportPropertyChanging("Subject");
+                _Subject = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Subject");
+                OnSubjectChanged();
+            }
+        }
+        private global::System.String _Subject;
+        partial void OnSubjectChanging(global::System.String value);
+        partial void OnSubjectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Template
+        {
+            get
+            {
+                return _Template;
+            }
+            set
+            {
+                OnTemplateChanging(value);
+                ReportPropertyChanging("Template");
+                _Template = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Template");
+                OnTemplateChanged();
+            }
+        }
+        private global::System.String _Template;
+        partial void OnTemplateChanging(global::System.String value);
+        partial void OnTemplateChanged();
+
+        #endregion
+    
     }
     
     /// <summary>
@@ -885,12 +1003,14 @@ namespace PitchingTube.Data
         /// Create a new Person object.
         /// </summary>
         /// <param name="personId">Initial value of the PersonId property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="skype">Initial value of the Skype property.</param>
         /// <param name="phone">Initial value of the Phone property.</param>
-        public static Person CreatePerson(global::System.Guid personId, global::System.String skype, global::System.String phone)
+        public static Person CreatePerson(global::System.Int32 personId, global::System.Guid userId, global::System.String skype, global::System.String phone)
         {
             Person person = new Person();
             person.PersonId = personId;
+            person.UserId = userId;
             person.Skype = skype;
             person.Phone = phone;
             return person;
@@ -904,7 +1024,7 @@ namespace PitchingTube.Data
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonId
+        public global::System.Int32 PersonId
         {
             get
             {
@@ -922,9 +1042,33 @@ namespace PitchingTube.Data
                 }
             }
         }
-        private global::System.Guid _PersonId;
-        partial void OnPersonIdChanging(global::System.Guid value);
+        private global::System.Int32 _PersonId;
+        partial void OnPersonIdChanging(global::System.Int32 value);
         partial void OnPersonIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Guid _UserId;
+        partial void OnUserIdChanging(global::System.Guid value);
+        partial void OnUserIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -973,50 +1117,33 @@ namespace PitchingTube.Data
         private global::System.String _Phone;
         partial void OnPhoneChanging(global::System.String value);
         partial void OnPhoneChanged();
-
-        #endregion
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "aspnet_Users")]
-        public aspnet_Users aspnet_Users
+        public global::System.String ActivationLink
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users").Value;
+                return _ActivationLink;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users").Value = value;
+                OnActivationLinkChanging(value);
+                ReportPropertyChanging("ActivationLink");
+                _ActivationLink = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ActivationLink");
+                OnActivationLinkChanged();
             }
         }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Users> aspnet_UsersReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users", value);
-                }
-            }
-        }
+        private global::System.String _ActivationLink;
+        partial void OnActivationLinkChanging(global::System.String value);
+        partial void OnActivationLinkChanged();
 
         #endregion
+    
     }
 
     #endregion

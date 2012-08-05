@@ -7,11 +7,15 @@ using System.Web.Routing;
 using System.Web.Security;
 using PitchingTube.Models;
 using PitchingTube.Data;
+using PitchingTube.Mailing;
+using System.Net.Mail;
 
 namespace PitchingTube.Controllers
 {
     public class AccountController : Controller
     {
+
+        PersonRepository personRepository = new PersonRepository();
 
         //
         // GET: /Account/LogOn
@@ -29,9 +33,9 @@ namespace PitchingTube.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                if (Membership.ValidateUser(Membership.GetUserNameByEmail(model.Email), model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -78,26 +82,33 @@ namespace PitchingTube.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                var currentUser = Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, false, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    /* ТУТ У МЕНЯ ПРОБЛЕМА!!!*/
-                    //Error: Keyword not supported: 'data source'.
+                    string activationLink = Util.GetAuthKey(Guid.Parse(currentUser.ProviderUserKey.ToString()), model.Email, model.Password);
+                    var emailModel = new
+                    {
+                        UserName = model.UserName,
+                        Url = string.Format("{0}/Account/Home/?auth={1}", Util.BaseUrl, activationLink)
+                    };
+                    MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("activation", emailModel);
+                    mail.To.Add(model.Email);
 
-                    BaseRepository<Person> repo = new BaseRepository<Person>();
-                    //PersonRepository repo = new PersonRepository();
-                    repo.Insert(new Person
+                    Mailer.SendMail(mail);
+
+                    personRepository.Insert(new Person
                     {
                         Phone = model.Phone,
                         Skype = model.Skype,
-                        PersonId = repo.FirstOrDefault(x => x.aspnet_Users.UserName == model.UserName).aspnet_Users.UserId
+                        UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
+                        ActivationLink = activationLink.Split('$')[1]
                     });
 
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ActivationRequest");
                 }
                 else
                 {
@@ -107,6 +118,33 @@ namespace PitchingTube.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public ActionResult ActivationRequest()
+        {
+            return View();
+        }
+
+        public ActionResult Home(string auth)
+        {
+            Guid userId = Guid.Parse(auth.Split('$')[0]);
+
+            var person = personRepository.FirstOrDefault(p => p.UserId == userId);
+            if (person.ActivationLink == auth.Split('$')[1])
+            {
+                MembershipUser user = Membership.GetUser(person.UserId);
+                if (user != null)
+                {
+                    user.IsApproved = true;
+                    Membership.UpdateUser(user);
+                } 
+                ViewBag.Message = "Your account has been activated. You can login now";
+            }
+            else
+                ViewBag.Message = "That was a wrong link, or it was expired";
+
+            return View();
+            //FormsAuthentication.SetAuthCookie(person.User.UserName, false);
         }
 
         //

@@ -12,8 +12,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_Roles">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Roles">
+    <EntitySetMapping Name="aspnet_Role">
+      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Role">
         <MappingFragment StoreEntitySet="aspnet_Roles">
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -23,8 +23,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_Users">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Users">
+    <EntitySetMapping Name="aspnet_User">
+      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_User">
         <MappingFragment StoreEntitySet="aspnet_Users">
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -44,11 +44,23 @@
         <ScalarProperty Name="UserId" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="EmailTemplates">
+      <EntityTypeMapping TypeName="PitchingTubeModel.EmailTemplate">
+        <MappingFragment StoreEntitySet="EmailTemplate">
+          <ScalarProperty Name="Template" ColumnName="Template" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+          <ScalarProperty Name="EmailTemplateID" ColumnName="EmailTemplateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Persons">
       <EntityTypeMapping TypeName="PitchingTubeModel.Person">
         <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="ActivationLink" ColumnName="ActivationLink" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Skype" ColumnName="Skype" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="PersonId" ColumnName="PersonId" />
         </MappingFragment>
       </EntityTypeMapping>
