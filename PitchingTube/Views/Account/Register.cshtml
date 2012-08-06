@@ -69,6 +69,20 @@
                 @Html.ValidationMessageFor(m => m.Phone)
             </div>
 
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Role)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(m => m.Role, Model.Roles)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.AvatarPath)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="fileUpload" />
+            </div>
+
             <p>
                 <input type="submit" value="Register New User" />
                 <fb:login-button></fb:login-button>

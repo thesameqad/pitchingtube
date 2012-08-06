@@ -10,6 +10,7 @@ using PitchingTube.Data;
 using PitchingTube.Mailing;
 using System.Net.Mail;
 using Facebook.Web;
+using System.IO;
 
 namespace PitchingTube.Controllers
 {
@@ -72,20 +73,22 @@ namespace PitchingTube.Controllers
 
         public ActionResult Register()
         {
-            
+            RegisterModel model = new RegisterModel();
+            model.Email = "1111";
+
             if (FacebookWebContext.Current.IsAuthenticated())
             {
                 return RedirectToAction("Profile", "Home");
             }
             
-            return View();
+            return View(model);
         }
 
         //
         // POST: /Account/Register
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterModel model, HttpPostedFileBase fileUpload)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +96,14 @@ namespace PitchingTube.Controllers
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
                 var currentUser = Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, false, null, out createStatus);
+
+
+                /*Настя: Этот кусок кода мне не нравится, переделаю позже!*/
+                string[] user = new string[1];
+                user[0] = currentUser.UserName;
+                /*------------------------------------------------*/
+
+                Roles.AddUsersToRole(user, model.Role);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -106,6 +117,17 @@ namespace PitchingTube.Controllers
                     mail.To.Add(model.Email);
 
                     Mailer.SendMail(mail);
+
+
+                    //проблема в том, что картинка не передается
+                    //fileUpload = null всегда
+                    if (fileUpload != null)
+                    {
+                        string path = AppDomain.CurrentDomain.BaseDirectory + "UploadedFiles/";
+                        fileUpload.SaveAs(Path.Combine(path, currentUser.ProviderUserKey.ToString()));
+                    }
+
+                
 
                     personRepository.Insert(new Person
                     {
