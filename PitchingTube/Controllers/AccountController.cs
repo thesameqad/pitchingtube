@@ -9,6 +9,7 @@ using PitchingTube.Models;
 using PitchingTube.Data;
 using PitchingTube.Mailing;
 using System.Net.Mail;
+using Facebook.Web;
 
 namespace PitchingTube.Controllers
 {
@@ -71,6 +72,12 @@ namespace PitchingTube.Controllers
 
         public ActionResult Register()
         {
+            
+            if (FacebookWebContext.Current.IsAuthenticated())
+            {
+                return RedirectToAction("Profile", "Home");
+            }
+            
             return View();
         }
 
