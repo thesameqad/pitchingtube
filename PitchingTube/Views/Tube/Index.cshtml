@@ -1,0 +1,37 @@
+﻿@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="alert" style="margin: 0 auto; text-align: center; font-size: 25px; display: none">
+</div>
+<div class="alert2" style="margin: 0 auto; text-align: center; font-size: 25px; display: none">
+</div>
+<div class="content" style="height: 400px">
+</div>
+<script>
+    var timer;
+    var i = 10;
+    function stopInterval() {
+        clearInterval(timer);
+        $(".alert").text("Все ОК! Можем начинать").fadeOut(5000);
+        var timer2 = setInterval(function () {
+            i--;
+            $(".alert2").text("Питч начнется через " + i + " секунд").show();
+            if (i == 0) {
+                clearInterval(timer2);
+                $(".alert2").hide();
+                alert("Go! Go! Go!");
+
+            }
+        }, 1000);
+    }
+    $(document).ready(function () {
+        $(".content").load("/Tube/TubePeopleList");
+        timer = setInterval(function () {
+            $(".content").load("/Tube/TubePeopleList");
+        }, 1000);
+
+        //Refreshes every 30 seconds
+        $.ajaxSetup({ cache: false });  //Turn off caching
+    });
+
+</script>

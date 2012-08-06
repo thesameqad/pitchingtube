@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+    var index = 0;
+}
+<div style="height: 300px">
+    <div id="investor" style="float: left; text-align: center">
+        <h1>
+            Investor</h1>
+    </div>
+    <div id="intreprenuer" style="float: right; text-align: center">
+        <h1>
+            Intreprenuer</h1>
+    </div>
+</div>
+<script>
+        
+        @foreach (var people in ViewBag.Participant)
+        {
+            index++;
+            if (index % 2 == 0)
+            {   
+                
+                  @: $('<div style="padding-bottom: 20px">@people.UserId</div>').insertAfter('#investor h1');
+                
+            }
+            else
+            {
+                
+                   @: $('<div style="padding-bottom: 20px">@people.UserId</div>').insertAfter('#intreprenuer h1');
+               
+            }
+        }
+        $(document).ready(function() {
+            if(@ViewData["Left"]==0) {
+                stopInterval();
+            }
+            else {
+                if(@ViewData["Left"]>4 || @ViewData["Left"]<2) {
+                    $(".alert").html("Осталось " + @ViewData["Left"] + " человек").show(); //.fadeIn(500).delay(1).fadeOut(500);
+                } else {
+                    $(".alert").html("Осталось " + @ViewData["Left"] + " человека").show();
+                }
+            }
+        });
+</script>
