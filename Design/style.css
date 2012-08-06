@@ -1,0 +1,158 @@
+*{
+	margin:0;
+	padding:0;
+}
+html, body {
+background-repet: no repeat;
+}
+body
+{
+       background-image:url("Img/Fon.jpg");
+       background-repet: no repeat;
+}
+#RegBody
+{
+   background-image:url("Img/RegFon.png");
+}
+#TextLogo
+{
+    width:200px; /* Ширина блока */
+    position: absolute;   
+    left:250px;
+    top:60px;	
+    font:24px Verdana;
+ }
+
+#Logo
+{
+    width:200px; /* Ширина блока */
+    position: absolute;   
+    left:430px;
+    top:50px;	
+    font:24px Verdana;
+ }
+
+#MainBody
+ {
+    width:1040px;
+    height: 800px;
+    position: absolute;
+    top:200px;
+    left:340px;
+   }
+
+#InputText
+{
+    width:800px; /* Ширина блока */
+   height:80px;
+    position: absolute;   	
+ }
+
+#RegFormDiv
+{
+    width:350px; /* Ширина блока */  
+    font:55px PFDinTextPro-Thin; 
+    color:#2F4F4F;
+ }
+#A
+{
+    width:80px; /* Ширина блока */
+    position: absolute;   
+    top:86px;
+    left:800px;	
+ }
+#Facebook
+{
+   font-family:"Helvetica Bold";
+   font-size:28px;
+   position: absolute;   
+   top:300px;
+   left:130px;
+}
+#Start
+{
+    position: absolute;   
+   top:355px;
+   left:840px;
+   font-family:"Helvetica Bold";
+font-family: helvetica; 
+font-size:25px; 
+font-weight:bold;
+}
+#clock{
+
+width: 240px;
+height: 100px;
+position: absolute;	
+top:580px;
+}
+
+#bulb{
+
+width: 200px;
+height: 100px;
+position: absolute;
+left:430px;
+top:580px;	
+}
+
+#handshake{
+
+width: 200px;
+height: 100px;
+position: absolute;
+left:780px;
+top:580px;	
+}
+#Play1{
+
+width: 40px;
+height: 40px;
+position: absolute;
+left:150px;	
+top:615px;
+}
+#Play2{
+
+width: 40px;
+height: 40px;
+position: absolute;
+left:545px;	
+top:612px;
+}
+#Play3{
+
+width: 40px;
+height: 40px;
+position: absolute;
+left:893px;	
+top:645px;
+}
+
+#footer{
+    position: absolute;
+    left:330px;
+    top:1030px;	   
+}
+#s:hover
+{
+    background:url("Img/Vvod.png") no-repeat;
+}
+#s:focus
+{
+    background:url("Img/Vvod.png") no-repeat;
+}
+#s
+{
+    border:none;
+	background:url("Img/Vvod.png") no-repeat;
+	font-family:"Helvitica Bold";
+	font-size:40px;
+	padding:22px 20px 20px 20px; /*место ввода слов*/
+	width:780px;
+	height:80px;
+}
+#li1
+{
+    list-style-image:url('Img/Play1.png');
+}
