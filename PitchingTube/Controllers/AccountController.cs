@@ -71,7 +71,7 @@ namespace PitchingTube.Controllers
 
         //
         // GET: /Account/Register
-       [FacebookAuthorize(LoginUrl = "/Account/Register")]
+       //[FacebookAuthorize(LoginUrl = "/Account/Register")]
         public ActionResult Register()
         {
             RegisterModel model = new RegisterModel();
@@ -88,8 +88,8 @@ namespace PitchingTube.Controllers
                 return View(model);
       
             }
-            
-            return View();
+
+            return View(model);
         }
 
         //
