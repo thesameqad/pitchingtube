@@ -3,12 +3,12 @@
 	padding:0;
 }
 html, body {
-background-repet: no repeat;
+background-repeat: no-repeat;
 }
 body
 {
        background-image:url("Img/Fon.jpg");
-       background-repet: no repeat;
+       background-repeat: no-repeat;
 }
 #RegBody
 {
@@ -149,10 +149,21 @@ top:645px;
 	font-family:"Helvitica Bold";
 	font-size:40px;
 	padding:22px 20px 20px 20px; /*место ввода слов*/
-	width:780px;
+	width:650px;
 	height:80px;
+}
+#InputText
+{
+    background:url("Img/Vvod.png") no-repeat;
 }
 #li1
 {
     list-style-image:url('Img/Play1.png');
 }
+
+#startTube
+{
+    margin-left:10px;
+    float:right;
+}
+
