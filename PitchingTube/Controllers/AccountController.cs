@@ -10,6 +10,7 @@ using PitchingTube.Data;
 using PitchingTube.Mailing;
 using System.Net.Mail;
 using Facebook.Web;
+using Facebook.Web.Mvc;
 using System.IO;
 
 namespace PitchingTube.Controllers
@@ -70,18 +71,25 @@ namespace PitchingTube.Controllers
 
         //
         // GET: /Account/Register
-
+       [FacebookAuthorize(LoginUrl = "/Account/Register")]
         public ActionResult Register()
         {
             RegisterModel model = new RegisterModel();
-            model.Email = "1111";
+      
 
             if (FacebookWebContext.Current.IsAuthenticated())
             {
-                return RedirectToAction("Profile", "Home");
+                var client = new  FacebookWebClient();
+                dynamic me = client.Get("me");
+                model.UserName = me.name;
+                model.Email = me.email;
+                model.AvatarPath = me.picture;
+                model.Phone = me.OpenGraphContactProperties.phone;
+                return View(model);
+      
             }
             
-            return View(model);
+            return View();
         }
 
         //
