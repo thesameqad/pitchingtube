@@ -31,8 +31,10 @@ namespace PitchingTube.Models
 
     public class LogOnModel
     {
-        [Required]
+        
         [Display(Name = "Email")]
+        [Required]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Your email is incorrect")]
         public string Email { get; set; }
 
         [Required]
@@ -51,7 +53,7 @@ namespace PitchingTube.Models
         public string UserName { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Your email is incorrect")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -72,7 +74,7 @@ namespace PitchingTube.Models
 
         [Required]
         [Display(Name = "Phone")]
-        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^[\d\-]{10,}$", ErrorMessage = "Phone number is incorrect ")]
         public string Phone { get; set; }
 
         [Required]
@@ -91,24 +93,27 @@ namespace PitchingTube.Models
         {
             get 
             {
-                BaseRepository<aspnet_Roles> repo = new BaseRepository<aspnet_Roles>();
-                List<string> category = repo.ToList().Select(x => x.RoleName).ToList();
-                List<SelectListItem> roles = new List<SelectListItem>();
+                var roles = System.Web.Security.Roles.GetAllRoles();
+                List<SelectListItem> rolesList = new List<SelectListItem>();
 
-                roles.Add(new SelectListItem
+                if (roles.Length == 2)
                 {
-                    Text = category[0],
-                    Value = category[0],
-                    Selected = true
-                });
 
-                roles.Add(new SelectListItem
-                {
-                    Text = category[1],
-                    Value = category[1]
-                });
+                    rolesList.Add(new SelectListItem
+                    {
+                        Text = roles[0],
+                        Value = roles[0],
+                        Selected = true
+                    });
 
-                return roles;
+                    rolesList.Add(new SelectListItem
+                    {
+                        Text = roles[1],
+                        Value = roles[1]
+                    });
+                }
+
+                return rolesList;
             }
         }
     }

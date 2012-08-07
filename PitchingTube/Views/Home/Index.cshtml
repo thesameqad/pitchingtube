@@ -2,8 +2,39 @@
     ViewBag.Title = "Home Page";
 }
 
-<h2>@ViewBag.Message</h2>
-<p>
-    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "startPitchForm" }))
+{
+    <div style="text-align:center">
+    <p class="promoText">@ViewBag.Message</p>
+    <div style="float:left;width:90%;">
+        <input id="description" name="description" style="width:100%;" type="text" value="@ViewBag.DefaultValue"
+        onfocus="this.title=(this.title ? this.title : this.value); this.value=(this.value==this.title ? '' : this.value);" onblur="this.value=(this.value=='' ? this.title : this.value);"/>
+    </div>
+    <div id="startTube">
+    <input type="image" src="@Url.Content("~/Content/img/Rocket.png")" />
+    </div>
+    </div>
+}
+
+<p style="text-align:center;font-size:50px; margin-top:180px;margin-right:60px; font-family:PFDinTextPro-Medium">3 STEPS
+ <font face="PFDinTextPro-Thin" color=#828282> TO GO </font>
 </p>
+<p style="margin-top:80px; margin-left:50px;text-align:center;">
+    <img src="@Url.Content("~/Content/img/All.png")">
+</p>
+<div style="text-align:center;">
+<div id="clock" class="tile">
+    Prepare the 
+    <font  size=6  face="PFDinTextPro-Bold" color="#000000"> one <br/>minute</font> pich
+</div>
+
+<div id="bulb" class="tile" style="margin-left:150px;">
+    Share it with <font size=6 face="PFDinTextPro-Bold" color="#000000"> investors</font>
+</div>
+
+<div id="handshake" class="tile" style="margin-left:150px;>
+    Get useful <font size=6  face="PFDinTextPro-Bold" color="#000000"> contacts</font> and feedback
+</div> 
+</div>
+
 

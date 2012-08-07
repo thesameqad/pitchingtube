@@ -25,9 +25,9 @@
         }, 1000);
     }
     $(document).ready(function () {
-        $(".content").load("/Tube/TubePeopleList");
+        $(".content").load("/Tube/TubePeopleList?tubeid=@ViewBag.TubeId");
         timer = setInterval(function () {
-            $(".content").load("/Tube/TubePeopleList");
+            $(".content").load("/Tube/TubePeopleList?tubeid=@ViewBag.TubeId");
         }, 1000);
 
         //Refreshes every 30 seconds

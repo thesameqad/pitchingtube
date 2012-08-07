@@ -134,7 +134,7 @@ font-weight:bold;
 	top:210px;
 }
 #skype
-{s
+{
     border:none;
 	/*background:url("Img/Vvod.png") no-repeat;*/
 	font-family:"Helvitica Bold";
@@ -226,7 +226,7 @@ top:645px;
    width:100%;
    height:60px;   
 }
-#s
+#description
 {
     border:none;
 	background:url("img/Vvod.png") no-repeat;

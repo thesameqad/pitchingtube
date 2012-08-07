@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Text;
 using System.Security.Cryptography;
+using System.Web.Security;
+using PitchingTube.Data;
 
 namespace PitchingTube.Models
 {
@@ -113,6 +115,21 @@ namespace PitchingTube.Models
                 return baseChars[0].ToString();
             }
             return result;
+        }
+
+        public static string GetAvatarPath()
+        {
+            BaseRepository<Person> repository = new BaseRepository<Person>();
+            
+            string userName = Membership.GetUserNameByEmail(HttpContext.Current.User.Identity.Name);
+            if (!string.IsNullOrWhiteSpace(userName))
+            {
+                Guid userId = (Guid)Membership.GetUser(userName).ProviderUserKey;
+                Person person = repository.FirstOrDefault(p => p.UserId == userId);
+                return person.AvatarPath;
+            }
+            return string.Empty;
+
         }
     }
 }

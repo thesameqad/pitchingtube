@@ -146,9 +146,29 @@
     <EntitySetMapping Name="Participants">
       <EntityTypeMapping TypeName="PitchingTubeModel.Participant">
         <MappingFragment StoreEntitySet="Participants">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="TubeId" ColumnName="TubeId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="PitchingTubeModel.Person">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="AvatarPath" ColumnName="AvatarPath" />
+          <ScalarProperty Name="ActivationLink" ColumnName="ActivationLink" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Skype" ColumnName="Skype" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tubes">
+      <EntityTypeMapping TypeName="PitchingTubeModel.Tube">
+        <MappingFragment StoreEntitySet="Tubes">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TubeId" ColumnName="TubeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -160,16 +180,5 @@
         <ScalarProperty Name="RoleId" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Persons">
-      <EntityTypeMapping TypeName="PitchingTubeModel.Person">
-        <MappingFragment StoreEntitySet="Persons">
-          <ScalarProperty Name="ActivationLink" ColumnName="ActivationLink" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Skype" ColumnName="Skype" />
-          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

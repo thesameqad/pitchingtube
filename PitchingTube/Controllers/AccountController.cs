@@ -71,25 +71,26 @@ namespace PitchingTube.Controllers
 
         //
         // GET: /Account/Register
-       [FacebookAuthorize(LoginUrl = "/Account/Register")]
+        //[FacebookAuthorize(LoginUrl = "/Account/Register")]
         public ActionResult Register()
         {
             RegisterModel model = new RegisterModel();
-      
 
             if (FacebookWebContext.Current.IsAuthenticated())
             {
                 var client = new  FacebookWebClient();
-                dynamic me = client.Get("me");
-                model.UserName = me.name;
-                model.Email = me.email;
-                model.AvatarPath = me.picture;
+                dynamic me = client.Query("select name,pic_small, email from user where uid = me()");
+                
+                    model.UserName = me[0].name;
+                    model.Email = me[0].email;
+                    model.AvatarPath = me[0].pic_small;
+                
                
                 return View(model);
       
             }
             
-            return View();
+            return View(model);
         }
 
         //
@@ -100,58 +101,66 @@ namespace PitchingTube.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                var currentUser = Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, false, null, out createStatus);
-
-
-                /*Настя: Этот кусок кода мне не нравится, переделаю позже!*/
-                string[] user = new string[1];
-                user[0] = currentUser.UserName;
-                /*------------------------------------------------*/
-
-                Roles.AddUsersToRole(user, model.Role);
-
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    string activationLink = Util.GetAuthKey(Guid.Parse(currentUser.ProviderUserKey.ToString()), model.Email, model.Password);
-                    var emailModel = new
+                try{
+                    if (Membership.FindUsersByEmail(model.Email).Count != 0)
                     {
-                        UserName = model.UserName,
-                        Url = string.Format("{0}/Account/Home/?auth={1}", Util.BaseUrl, activationLink)
-                    };
-                    MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("activation", emailModel);
-                    mail.To.Add(model.Email);
+                        ModelState.AddModelError(string.Empty, "The email address is in use");
+                        return View(model);
+                    }
+                    
+                    var currentUser = Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, false, null, out createStatus);
+                    Roles.AddUserToRole(model.UserName,model.Role);
 
-                    Mailer.SendMail(mail);
-
-
-                    //проблема в том, что картинка не передается
-                    //fileUpload = null всегда
-                    if (fileUpload != null)
+                    if (createStatus == MembershipCreateStatus.Success)
                     {
-                        string path = AppDomain.CurrentDomain.BaseDirectory + "UploadedFiles/";
-                        fileUpload.SaveAs(Path.Combine(path, currentUser.ProviderUserKey.ToString()));
+                        string activationLink = Util.GetAuthKey(Guid.Parse(currentUser.ProviderUserKey.ToString()), model.Email, model.Password);
+                        var emailModel = new
+                        {
+                            UserName = model.UserName,
+                            Url = string.Format("{0}/Account/Home/?auth={1}", Util.BaseUrl, activationLink)
+                        };
+                        MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("activation", emailModel);
+                        mail.To.Add(model.Email);
+
+                        Mailer.SendMail(mail);
+
+                        string avatarPath = @"\Content\img\no_avatar.jpg";
+                        if (fileUpload != null)
+                        {
+                            string path = AppDomain.CurrentDomain.BaseDirectory + "UploadedFiles/";
+                            fileUpload.SaveAs(Path.Combine(path, currentUser.ProviderUserKey.ToString()));
+                            avatarPath = @"\UploadedFiles\" + currentUser.ProviderUserKey.ToString();
+                        }
+                        if (!string.IsNullOrWhiteSpace(model.AvatarPath))
+                        {
+                            avatarPath = model.AvatarPath;
+                        }
+                        
+
+                        personRepository.Insert(new Person
+                        {
+                            Phone = model.Phone,
+                            Skype = model.Skype,
+                            UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
+                            ActivationLink = activationLink.Split('$')[1],
+                            AvatarPath = avatarPath
+                        });
+                        return RedirectToAction("ActivationRequest");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(createStatus));
                     }
 
-                
-
-                    personRepository.Insert(new Person
-                    {
-                        Phone = model.Phone,
-                        Skype = model.Skype,
-                        UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
-                        ActivationLink = activationLink.Split('$')[1]
-                    });
-
-                    return RedirectToAction("ActivationRequest");
                 }
-                else
+                catch(Exception ex)
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                    Membership.DeleteUser(model.UserName);
+                    ModelState.AddModelError("", ex);
                 }
             }
+            
 
             // If we got this far, something failed, redisplay form
             return View(model);

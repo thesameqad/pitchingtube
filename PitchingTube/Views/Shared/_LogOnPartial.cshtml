@@ -1,4 +1,5 @@
 ﻿@if(Request.IsAuthenticated) {
+    <img src="@Url.Content(PitchingTube.Models.Util.GetAvatarPath())" height="20px" />
     <text>Welcome @Html.ActionLink(User.Identity.Name,"AccountSettings","Account") @*<strong>@User.Identity.Name</strong>*@!
     [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
 }
