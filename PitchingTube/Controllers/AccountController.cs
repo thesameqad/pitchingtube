@@ -84,7 +84,7 @@ namespace PitchingTube.Controllers
                 model.UserName = me.name;
                 model.Email = me.email;
                 model.AvatarPath = me.picture;
-                model.Phone = me.OpenGraphContactProperties.phone;
+               
                 return View(model);
       
             }
