@@ -1,0 +1,265 @@
+html
+{
+height:100%;    
+}
+body
+{
+   background-image:url("img/Fon.jpg");
+   background-repeat: no-repeat;
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+#page {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    min-height:90%;
+    position:relative;
+}
+
+header, #header {
+    position: relative;
+    margin: 50px 0px;
+    
+}
+#MainBody
+{
+    width:100%;
+}
+#logindisplay {
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    margin: 10px;
+    color: White;
+}
+#RegBody
+{
+   background-image:url("img/RegFon.png");
+}
+#TextLogo
+{
+    font:24px Verdana;
+    font-size:18px;
+    font-family:PFDinTextPro-Black;
+    width: 100px;
+    text-align: right;
+ }
+
+#Logo
+{
+    width:200px; 	
+    font:24px Verdana;
+}
+
+#InputText
+{
+    width:800px; /* Ўирина блока */
+   height:80px; 	
+ }
+
+#RegFormDiv
+{
+    width:350px; /* Ўирина блока */  
+    font:55px PFDinTextPro-Thin; 
+    color:#2F4F4F;
+ }
+#A
+{
+    width:80px; /* Ўирина блока */  
+    top:86px;
+    left:800px;	
+ }
+#Facebook
+{
+   font-family:"Helvetica Bold";
+   font-size:28px;
+   position: absolute;   
+   top:300px;
+   left:130px;
+}
+#RegInf
+{ 
+    top:10px;
+    left:380px;
+ width:70px;
+  font-family: helvetica; 
+font-size:16px; 
+font-weight:bold;
+/*border: 1px solid blue;*/	
+}
+#RegInput
+{ 
+    top:25px;
+    left:480px;
+ width:300px;
+height:400px;
+  font-family: helvetica; 
+font-size:16px; 
+font-weight:bold;	
+}
+#name
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	top:5px;
+}
+#email
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	top:78px;
+}
+#tel
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	top:210px;
+}
+#skype
+{s
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	top:145px;
+}
+#password
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	top:300px;
+}
+#repitPas
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	top:360px;
+}
+#Radio
+{  
+    font-family: helvetica; 
+    font-size:17px; 
+    font-weight:bold;
+}
+#Start
+{   
+    font-family: helvetica; 
+    font-size:25px; 
+    font-weight:bold;
+}
+#clock{
+    width: 240px;
+    height: 100px;
+}
+
+#bulb{
+    width: 200px;
+    height: 100px;
+}
+
+#handshake{
+
+width: 200px;
+height: 100px;
+left:780px;
+top:580px;	
+}
+#Play1{
+
+width: 40px;
+height: 40px;
+position: absolute;
+left:150px;	
+top:615px;
+}
+#Play2{
+
+width: 40px;
+height: 40px;
+position: absolute;
+left:545px;	
+top:612px;
+}
+#Play3{
+
+width: 40px;
+height: 40px;
+position: absolute;
+left:893px;	
+top:645px;
+}
+
+#footer{  
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   
+}
+#s
+{
+    border:none;
+	background:url("img/Vvod.png") no-repeat;
+	font-family:"Helvitica Bold";
+	font-size:40px;
+	padding:22px 20px 20px 20px; /*место ввода слов*/
+	width:650px;
+	height:80px;
+}
+
+#li1
+{
+    list-style-image:url('Img/Play1.png');
+}
+
+#startTube
+{
+    margin-left:10px;
+    float:right;
+}
+.promoText
+{
+    font-size:48px;
+    margin-top:12px;
+    font-family:PFDinTextPro-Thin;
+    color:#363636;
+}
+
+.tile
+{
+    font-size:30px;
+    font-family:PFDinTextPro-Thin; 
+    color:#696969;
+    float:left;
+}
+

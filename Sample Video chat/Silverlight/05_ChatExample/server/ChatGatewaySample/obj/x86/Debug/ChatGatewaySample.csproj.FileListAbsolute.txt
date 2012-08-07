@@ -1,0 +1,7 @@
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\server\ChatGatewaySample\bin\Debug\ChatGatewaySample.exe
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\server\ChatGatewaySample\bin\Debug\ChatGatewaySample.pdb
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\server\ChatGatewaySample\bin\Debug\VoIPSDK.dll
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\server\ChatGatewaySample\bin\Debug\VoIPSDK.xml
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\server\ChatGatewaySample\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\server\ChatGatewaySample\obj\x86\Debug\ChatGatewaySample.exe
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\server\ChatGatewaySample\obj\x86\Debug\ChatGatewaySample.pdb

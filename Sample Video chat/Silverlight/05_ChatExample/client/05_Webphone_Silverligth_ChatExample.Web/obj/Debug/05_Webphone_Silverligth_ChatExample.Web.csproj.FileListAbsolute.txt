@@ -1,0 +1,5 @@
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\client\05_Webphone_Silverligth_ChatExample.Web\bin\05_Webphone_Silverligth_ChatExample.Web.dll
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\client\05_Webphone_Silverligth_ChatExample.Web\bin\05_Webphone_Silverligth_ChatExample.Web.pdb
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\client\05_Webphone_Silverligth_ChatExample.Web\obj\Debug\ResolveAssemblyReference.cache
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\client\05_Webphone_Silverligth_ChatExample.Web\obj\Debug\05_Webphone_Silverligth_ChatExample.Web.dll
+C:\Development\PitchingTube\Sample Video chat\Silverlight\05_ChatExample\client\05_Webphone_Silverligth_ChatExample.Web\obj\Debug\05_Webphone_Silverligth_ChatExample.Web.pdb

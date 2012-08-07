@@ -1,0 +1,9 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="05_Webphone_Silverligth_ChatExample" EntryPointType="_05_Webphone_Silverligth_ChatExample.App" RuntimeVersion="4.0.50826.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="05_Webphone_Silverligth_ChatExample" Source="05_Webphone_Silverligth_ChatExample.dll" />
+    <AssemblyPart x:Name="SLClientSDK" Source="SLClientSDK.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls" Source="System.Windows.Controls.dll" />
+    <AssemblyPart x:Name="System.ServiceModel.Extensions" Source="System.ServiceModel.Extensions.dll" />
+    <AssemblyPart x:Name="System.ServiceModel.NetTcp" Source="System.ServiceModel.NetTcp.dll" />
+  </Deployment.Parts>
+</Deployment>
