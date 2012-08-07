@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using PitchingTube.Data;
+using System.Linq;
 
 namespace PitchingTube.Models
 {
@@ -72,6 +74,43 @@ namespace PitchingTube.Models
         [Display(Name = "Phone")]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+
+        //[Required]
+        [Display(Name = "Avatar")]
+        public string AvatarPath
+        {
+            get;
+            set;
+        }
+
+        public List<SelectListItem> Roles
+        {
+            get 
+            {
+                BaseRepository<aspnet_Roles> repo = new BaseRepository<aspnet_Roles>();
+                List<string> category = repo.ToList().Select(x => x.RoleName).ToList();
+                List<SelectListItem> roles = new List<SelectListItem>();
+
+                roles.Add(new SelectListItem
+                {
+                    Text = category[0],
+                    Value = category[0],
+                    Selected = true
+                });
+
+                roles.Add(new SelectListItem
+                {
+                    Text = category[1],
+                    Value = category[1]
+                });
+
+                return roles;
+            }
+        }
     }
 
 

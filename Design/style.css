@@ -69,12 +69,113 @@ body
    top:300px;
    left:130px;
 }
+#RegInf
+{
+   position: absolute;   
+    top:10px;
+    left:380px;
+ width:70px;
+  font-family: helvetica; 
+font-size:16px; 
+font-weight:bold;
+/*border: 1px solid blue;*/	
+}
+#RegInput
+{
+   position: absolute;   
+    top:25px;
+    left:480px;
+ width:300px;
+height:400px;
+  font-family: helvetica; 
+font-size:16px; 
+font-weight:bold;	
+}
+#name
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	top:5px;
+}
+#email
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	 position: absolute;
+	top:78px;
+}
+#tel
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	 position: absolute;
+	top:210px;
+}
+#skype
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	 position: absolute;
+	top:145px;
+}
+#password
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	 position: absolute;
+	top:300px;
+}
+#repitPas
+{
+    border:none;
+	/*background:url("Img/Vvod.png") no-repeat;*/
+	font-family:"Helvitica Bold";
+	font-size:18px;
+	padding:12px 10px 10px 10px; /*место ввода слов*/
+	width:280px;
+	height:8px;
+	 position: absolute;
+	top:360px;
+}
+#Radio
+{
+    position: absolute;   
+   top:460px;
+   left:480px;
+font-family: helvetica; 
+font-size:17px; 
+font-weight:bold;
+}
 #Start
 {
     position: absolute;   
    top:355px;
    left:840px;
-   font-family:"Helvetica Bold";
 font-family: helvetica; 
 font-size:25px; 
 font-weight:bold;

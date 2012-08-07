@@ -1,0 +1,12 @@
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.pdb
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Mailing\bin\Debug\RazorEngine.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Mailing\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.dll
+C:\Users\1\Documents\GitHub\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.pdb
+C:\Users\Admin\Desktop\thesameqad-pitchingtube-c7a4db6\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.dll
+C:\Users\Admin\Desktop\thesameqad-pitchingtube-c7a4db6\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.pdb
+C:\Users\Admin\Desktop\thesameqad-pitchingtube-c7a4db6\PitchingTube.Mailing\bin\Debug\RazorEngine.dll
+C:\Users\Admin\Desktop\thesameqad-pitchingtube-c7a4db6\PitchingTube.Mailing\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\thesameqad-pitchingtube-c7a4db6\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.dll
+C:\Users\Admin\Desktop\thesameqad-pitchingtube-c7a4db6\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.pdb
