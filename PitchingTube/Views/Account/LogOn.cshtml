@@ -35,6 +35,10 @@
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
 
+            <div>
+                @Html.ActionLink("Fogot password?", "FogotPassword");
+            </div>
+
             <div class="editor-label">
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe)

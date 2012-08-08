@@ -250,15 +250,45 @@ namespace PitchingTube.Controllers
         [Authorize]
         public ActionResult AccountSettings()
         {
-            
-            MembershipUser currentUser = Membership.GetUser(User.Identity.Name);
-            User user = new User
+
+            MembershipUser currentUser = Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name));
+            Users user = new Users
             {
                 UserName = currentUser.UserName,
                 Email = currentUser.Email
             };           
             
             return View(user);
+        }
+
+        public ActionResult FogotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult FogotPassword(LogOnModel model)
+        {
+            MembershipUser currentUser = Membership.GetUser(Membership.GetUserNameByEmail(model.Email));
+
+            var password = currentUser.ResetPassword();
+
+            var emailModel = new
+            {
+                UserName = currentUser.UserName,
+                Url = password
+            };
+            MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("recoverpassword", emailModel);
+            mail.To.Add(model.Email);
+
+            Mailer.SendMail(mail);
+
+            return RedirectToAction("FogotPasswordSuccess");
+        }
+
+        public ActionResult FogotPasswordSuccess()
+        {
+            return View();
         }
 
         #region Status Codes
