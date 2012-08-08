@@ -12,9 +12,15 @@ namespace PitchingTube.Controllers
 {
     public class HomeController : Controller
     {
-        private BaseRepository<Participant> participantRepository = new BaseRepository<Participant>();
+        private ParticipantRepository participantRepository = new ParticipantRepository();
         public ActionResult Index()
         {
+            var tube = participantRepository.UserIsInTube(GetCurrentUserId());
+            if (tube != null)
+            {
+                return RedirectToAction("Index", "Tube", new {tube.TubeId });
+            }
+
             if (User.IsInRole("Investor"))
             {
                 ViewBag.Message = "DESCRIBE YOURSELF IN 3 WORDS";
@@ -32,8 +38,7 @@ namespace PitchingTube.Controllers
         public ActionResult Index(string description)
         {
             int tubeId = FindTube();
-            string userName = Membership.GetUserNameByEmail(User.Identity.Name);
-            Guid userId = Guid.Parse(Membership.GetUser(userName).ProviderUserKey.ToString()); 
+            Guid userId = GetCurrentUserId();
             participantRepository.Insert(new Participant
             {
                 TubeId = tubeId,
@@ -52,7 +57,15 @@ namespace PitchingTube.Controllers
 
         private int FindTube()
         {
+            string userRole = User.IsInRole("Investor") ? "Investor" : "Entrepreneur";
+            participantRepository.FindBestMatchingTube(userRole);
             return 1;
+        }
+
+        private Guid GetCurrentUserId()
+        {
+            string userName = Membership.GetUserNameByEmail(User.Identity.Name);
+            return Guid.Parse(Membership.GetUser(userName).ProviderUserKey.ToString()); 
         }
     }
 }
