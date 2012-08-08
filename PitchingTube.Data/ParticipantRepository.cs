@@ -34,7 +34,18 @@ namespace PitchingTube.Data
 
         public Tube UserIsInTube(Guid userId)
         {
-            return FirstOrDefault(p => p.UserId == userId).Tube;
+            var participant = FirstOrDefault(p => p.UserId == userId);
+            return participant != null?participant.Tube:null;
+        }
+
+        public void RemoveUserFromAllTubes(Guid userId)
+        {
+            var participants = Query(p => p.UserId == userId).ToList();
+            foreach (var participant in participants)
+            {
+                Delete(participant);
+            }
+
         }
     }
 }

@@ -46,5 +46,10 @@ namespace PitchingTube.Data
         {
             return _objectSet.FirstOrDefault(query);
         }
+        public virtual void Delete(T entity)
+        {
+            _objectSet.DeleteObject(entity);
+            _context.SaveChanges();
+        }
     }
 }

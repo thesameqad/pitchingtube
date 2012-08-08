@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
+using PitchingTube.Data;
 
 namespace PitchingTube
 {
@@ -35,6 +37,16 @@ namespace PitchingTube
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Session_End(Object sender, EventArgs e)
+        {
+            string userName = Membership.GetUserNameByEmail(User.Identity.Name);
+            Guid userId = Guid.Parse(Membership.GetUser(userName).ProviderUserKey.ToString());
+
+            ParticipantRepository participantRepository = new ParticipantRepository();
+            participantRepository.RemoveUserFromAllTubes(userId);
+
         }
     }
 }
