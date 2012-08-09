@@ -1,0 +1,28 @@
+﻿.avatar img
+{
+    display: inline-block;
+    height: 75px;
+    width: 75px;
+}
+.left
+{
+    float: left;
+}
+.right
+{
+    float: right;
+}
+.participant-container
+{
+    width: 200px;
+}
+.investorname
+{
+    padding-left: 85px;
+    height: 80px;
+}
+.entrepreunername
+{
+    height: 80px;
+    padding-right: 10px;
+}
