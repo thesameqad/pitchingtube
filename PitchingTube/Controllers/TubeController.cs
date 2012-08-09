@@ -9,6 +9,7 @@ using PitchingTube.Data;
 
 namespace PitchingTube.Controllers
 {
+    [Authorize]
     public class TubeController : Controller
     {
         //
