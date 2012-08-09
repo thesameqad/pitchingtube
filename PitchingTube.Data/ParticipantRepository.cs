@@ -2,28 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Security;
 
 namespace PitchingTube.Data
 {
-    public class ParticipantRepository: BaseRepository<Participant>
+    public class ParticipantRepository : BaseRepository<Participant>
     {
         private BaseRepository<Tube> tubeRepository = new BaseRepository<Tube>();
         public int FindBestMatchingTube(string userRole)
         {
             var tubeList = from p in _objectSet
-                           join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId                           
-                            where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == userRole
-                            group p by p.TubeId into p
-                            where p.Count() <= 4
-                            orderby p.Count()
-                            select p.FirstOrDefault().Tube;
-            var tube = tubeList.FirstOrDefault();;
+                           join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                           where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == userRole
+                           group p by p.TubeId into p
+                           where p.Count() <= 4
+                           orderby p.Count()
+                           select p.FirstOrDefault().Tube;
+            var tube = tubeList.FirstOrDefault(); ;
 
             if (tube == null)
             {
-                var newTube = new Tube { 
+                var newTube = new Tube
+                {
                     CreatedDate = DateTime.Now
-                    };
+                };
                 tubeRepository.Insert(newTube);
                 return newTube.TubeId;
             }
@@ -35,7 +37,7 @@ namespace PitchingTube.Data
         public Tube UserIsInTube(Guid userId)
         {
             var participant = FirstOrDefault(p => p.UserId == userId);
-            return participant != null?participant.Tube:null;
+            return participant != null ? participant.Tube : null;
         }
 
         public void RemoveUserFromAllTubes(Guid userId)
@@ -46,6 +48,27 @@ namespace PitchingTube.Data
                 Delete(participant);
             }
 
+        }
+        public List<UserInfo> TubeParticipants(int tubeId)
+        {
+            var participants = Query(x => x.TubeId == tubeId);
+            var users = new List<UserInfo>();
+            foreach (var participant in participants)
+            {
+                var repository = new BaseRepository<Person>();
+                var avatar = repository.Query(x => x.UserId == participant.UserId).Select(x => x.AvatarPath).FirstOrDefault().Replace("\\", "/");
+                var role = Roles.GetRolesForUser(participant.aspnet_Users.UserName).FirstOrDefault();
+                users.Add(new UserInfo() { Name = participant.aspnet_Users.UserName, Role = role, Description = participant.Description, AvatarPath = avatar });
+            }
+            return users;
+        }
+
+        public class UserInfo
+        {
+            public string Name { get; set; }
+            public string AvatarPath { get; set; }
+            public string Description { get; set; }
+            public string Role { get; set; }
         }
     }
 }

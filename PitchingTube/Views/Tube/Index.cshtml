@@ -1,24 +1,41 @@
 ﻿@{    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="alert" style="margin: 0 auto; text-align: center; font-size: 25px; display: none">
+<link href="@Url.Content("~/Content/tube.css")" rel="stylesheet" type="text/css" />
+<div style="margin: 0 auto; width: 900px; height: 90px">
+    <div style="float: left; text-align: center; height: 0px;">
+        <div class="alertIn" style="margin: 0 auto; text-align: center; font-size: 25px;
+            display: none">
+        </div>
+        <h1>
+            Investor</h1>
+    </div>
+    <div class="alertStart" style="margin: 0 auto; text-align: center; font-size: 25px;
+        display: none">
+    </div>
+    <div style="float: right; text-align: center; height: 0px;">
+        <div class="alertEn" style="margin: 0 auto; text-align: center; font-size: 25px;
+            display: none">
+        </div>
+        <h1>
+            Intreprenuer</h1>
+    </div>
 </div>
-<div class="alert2" style="margin: 0 auto; text-align: center; font-size: 25px; display: none">
+<div class="content" style="height: 400px; margin: 0 auto; width: 900px">
+
 </div>
-<div class="content" style="height: 400px">
-</div>
-<script>
+<script type="text/javascript">
     var timer;
     var i = 10;
     function stopInterval() {
         clearInterval(timer);
-        $(".alert").text("Все ОК! Можем начинать").fadeOut(5000);
+        $(".alertStart").text("Well, starting pitch").fadeOut(5000);
         var timer2 = setInterval(function () {
             i--;
-            $(".alert2").text("Питч начнется через " + i + " секунд").show();
+            $(".alertStart").text("Pitch will be starting in " + i + " seconds").show();
             if (i == 0) {
                 clearInterval(timer2);
-                $(".alert2").hide();
+                $(".alertStart").hide();
                 alert("Go! Go! Go!");
 
             }
@@ -28,10 +45,10 @@
         $(".content").load("/Tube/TubePeopleList?tubeid=@ViewBag.TubeId");
         timer = setInterval(function () {
             $(".content").load("/Tube/TubePeopleList?tubeid=@ViewBag.TubeId");
-        }, 1000);
+        }, 2000);
 
         //Refreshes every 30 seconds
-        $.ajaxSetup({ cache: false });  //Turn off caching
+        $.ajaxSetup({ cache: true });  //Turn off caching
     });
 
 </script>

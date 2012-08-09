@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using PitchingTube.Data;
 
 
@@ -19,26 +20,27 @@ namespace PitchingTube.Controllers
             return View();
         }
 
-        //public ActionResult Generate()
-        //{
-        //    var repository = new BaseRepository<Participant>();
+        public ActionResult Generate()
+        {
+            var repository = new BaseRepository<Participant>();
 
-        //    var tubeId = 06082012;
-        //    //for (int i = 0; i < 6; i++)
-        //    //{
-        //    //    var entity = new Participant() { TubeId = tubeId, UserId = new Random().Next(06082012, 96082012) };
-        //    //    repository.Insert(entity);
-        //    //}
-        //    return RedirectToAction("Index");
-        //}
+            var tubeId = 1;
+            for (int i = 0; i < 6; i++)
+            {
+                var entity = new Participant() { TubeId = tubeId, UserId = Guid.NewGuid() };
+                repository.Insert(entity);
+            }
+            return RedirectToAction("Index");
+        }
 
         public ActionResult TubePeopleList(int tubeId)
         {
-            var repository = new BaseRepository<Participant>();
-            var model = repository.Query(x => x.TubeId == tubeId).ToList();
-            ViewData["Left"] = 10 - model.Count;
-            ViewBag.Participant = model;
-            return View(ViewBag);
+            var repository = new ParticipantRepository();
+            var model = repository.TubeParticipants(tubeId);
+            ViewData["LeftInvestor"] = 5 - model.Count(x => x.Role=="Investor");
+            ViewData["LeftEntrepreneur"] = 5 - model.Count(x => x.Role == "Entrepreneur");
+           // ViewBag.Participant = model;
+            return View(model);
         }
     }
 }
