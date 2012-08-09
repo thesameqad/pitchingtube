@@ -24,7 +24,8 @@ namespace PitchingTube.Data
             {
                 var newTube = new Tube
                 {
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    TubeMode = TubeMode.Opened
                 };
                 tubeRepository.Insert(newTube);
                 return newTube.TubeId;

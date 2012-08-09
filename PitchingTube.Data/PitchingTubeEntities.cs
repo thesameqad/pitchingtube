@@ -33,4 +33,24 @@ namespace PitchingTube.Data
             return mail;
         }
     }
+
+    public partial class Tube
+    {
+        public TubeMode TubeMode
+        {
+            get { return (TubeMode)Mode; }
+            set { Mode = (int)value; }
+        }
+    }
+
+    public enum TubeMode{
+        Opened,
+        FirstPitch,
+        SecondPitch,
+        ThirdPitch,
+        FourthPitch,
+        FifthPitch,
+        Nominations,
+        Closed
+    }
 }

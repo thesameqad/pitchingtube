@@ -3753,6 +3753,30 @@ namespace PitchingTube.Data
         private global::System.DateTime _CreatedDate;
         partial void OnCreatedDateChanging(global::System.DateTime value);
         partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Mode
+        {
+            get
+            {
+                return _Mode;
+            }
+            set
+            {
+                OnModeChanging(value);
+                ReportPropertyChanging("Mode");
+                _Mode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Mode");
+                OnModeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Mode;
+        partial void OnModeChanging(Nullable<global::System.Int32> value);
+        partial void OnModeChanged();
 
         #endregion
     
