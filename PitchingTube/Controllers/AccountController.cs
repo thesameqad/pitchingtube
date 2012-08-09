@@ -62,6 +62,7 @@ namespace PitchingTube.Controllers
         //
         // GET: /Account/LogOff
 
+        [Authorize]
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -241,7 +242,8 @@ namespace PitchingTube.Controllers
 
         //
         // GET: /Account/ChangePasswordSuccess
-
+        
+        [Authorize]
         public ActionResult ChangePasswordSuccess()
         {
             return View();
