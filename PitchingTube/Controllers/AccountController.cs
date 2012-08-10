@@ -76,6 +76,8 @@ namespace PitchingTube.Controllers
         public ActionResult Register()
         {
             RegisterModel model = new RegisterModel();
+            model.AvatarPath = "../../Content/img/no_avatar.jpg";
+
 
             if (FacebookWebContext.Current.IsAuthenticated())
             {
@@ -126,14 +128,14 @@ namespace PitchingTube.Controllers
 
                         Mailer.SendMail(mail);
 
-                        string avatarPath = @"\Content\img\no_avatar.jpg";
+                        string avatarPath = "";
                         if (fileUpload != null)
                         {
                             string path = AppDomain.CurrentDomain.BaseDirectory + "UploadedFiles/";
-                            fileUpload.SaveAs(Path.Combine(path, currentUser.ProviderUserKey.ToString()));
-                            avatarPath = @"\UploadedFiles\" + currentUser.ProviderUserKey.ToString();
+                            fileUpload.SaveAs(Path.Combine(path, currentUser.ProviderUserKey.ToString()+".jpg"));
+                            avatarPath = "../../UploadedFiles/" + currentUser.ProviderUserKey.ToString()+".jpg";
                         }
-                        if (!string.IsNullOrWhiteSpace(model.AvatarPath))
+                        else if (!string.IsNullOrWhiteSpace(model.AvatarPath))
                         {
                             avatarPath = model.AvatarPath;
                         }

@@ -59,6 +59,18 @@
       <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
       <End Role="aspnet_Users" EntitySet="aspnet_Users" />
     </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__Appli__1E3A7A34" Association="PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__Appli__4C364F0E" Association="PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__Appli__7A3223E8" Association="PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="aspnet_Applications">
     <Key>
@@ -71,6 +83,9 @@
     <NavigationProperty Name="aspnet_Membership" Relationship="PitchingTubeModel.FK__aspnet_Me__Appli__7C4F7684" FromRole="aspnet_Applications" ToRole="aspnet_Membership" />
     <NavigationProperty Name="aspnet_Paths" Relationship="PitchingTubeModel.FK__aspnet_Pa__Appli__7B5B524B" FromRole="aspnet_Applications" ToRole="aspnet_Paths" />
     <NavigationProperty Name="aspnet_Roles" Relationship="PitchingTubeModel.FK__aspnet_Ro__Appli__7F2BE32F" FromRole="aspnet_Applications" ToRole="aspnet_Roles" />
+    <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users1" Relationship="PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users2" Relationship="PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
   </EntityType>
   <EntityType Name="aspnet_Membership">
     <Key>
@@ -181,6 +196,9 @@
     <NavigationProperty Name="aspnet_Profile" Relationship="PitchingTubeModel.FK__aspnet_Pr__UserI__7E37BEF6" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
     <NavigationProperty Name="Participants" Relationship="PitchingTubeModel.FK_Participants_aspnet_Users" FromRole="aspnet_Users" ToRole="Participant" />
     <NavigationProperty Name="aspnet_Roles" Relationship="PitchingTubeModel.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
+    <NavigationProperty Name="aspnet_Applications" Relationship="PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+    <NavigationProperty Name="aspnet_Applications1" Relationship="PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+    <NavigationProperty Name="aspnet_Applications2" Relationship="PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
   </EntityType>
   <EntityType Name="aspnet_WebEvent_Events">
     <Key>
@@ -230,7 +248,7 @@
     <Property Type="Guid" Name="UserId" Nullable="false" />
     <Property Type="String" Name="Skype" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="ActivationLink" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ActivationLink" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Type="String" Name="AvatarPath" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Tube">
@@ -240,6 +258,7 @@
     <Property Type="Int32" Name="TubeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
     <NavigationProperty Name="Participants" Relationship="PitchingTubeModel.FK_Participants_Tubes" FromRole="Tube" ToRole="Participant" />
+    <Property Type="Int32" Name="Mode" />
   </EntityType>
   <Association Name="FK__aspnet_Me__Appli__7C4F7684">
     <End Type="PitchingTubeModel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
@@ -364,5 +383,41 @@
   <Association Name="aspnet_UsersInRoles">
     <End Type="PitchingTubeModel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
     <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+  </Association>
+  <Association Name="FK__aspnet_Us__Appli__1E3A7A34">
+    <End Type="PitchingTubeModel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+    <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__Appli__4C364F0E">
+    <End Type="PitchingTubeModel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+    <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__Appli__7A3223E8">
+    <End Type="PitchingTubeModel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+    <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>
