@@ -10,6 +10,7 @@ using System.Web.Security;
 
 namespace PitchingTube.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private ParticipantRepository participantRepository = new ParticipantRepository();

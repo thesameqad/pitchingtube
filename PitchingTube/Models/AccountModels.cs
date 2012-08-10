@@ -96,22 +96,16 @@ namespace PitchingTube.Models
                 var roles = System.Web.Security.Roles.GetAllRoles();
                 List<SelectListItem> rolesList = new List<SelectListItem>();
 
-                if (roles.Length == 2)
+                for (int index = 0; index < roles.Length; index++)
                 {
-
-                    rolesList.Add(new SelectListItem
-                    {
-                        Text = roles[0],
-                        Value = roles[0],
-                        Selected = true
-                    });
-
-                    rolesList.Add(new SelectListItem
-                    {
-                        Text = roles[1],
-                        Value = roles[1]
+                    rolesList.Add( new SelectListItem {
+                            Text = roles[index],
+                            Value = roles[index]
                     });
                 }
+
+                rolesList[0].Selected = true;
+                    
 
                 return rolesList;
             }
