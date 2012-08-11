@@ -167,6 +167,7 @@
     <EntitySetMapping Name="Tubes">
       <EntityTypeMapping TypeName="PitchingTubeModel.Tube">
         <MappingFragment StoreEntitySet="Tubes">
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="TubeId" ColumnName="TubeId" />
         </MappingFragment>

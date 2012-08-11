@@ -84,7 +84,7 @@
                 <input type="file" name="fileUpload" id="fileUpload" onchange="readURL(this)" />
                 @if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
                 {
-                    <img id="avatarPreview" src="@Model.AvatarPath"/>
+                    <img id="avatarPreview" src="@Model.AvatarPath" height="40"/>
                     <input type="hidden" name="AvatarPath" id="AvatarPath" value="@Model.AvatarPath"/>
                 }
             </div>
