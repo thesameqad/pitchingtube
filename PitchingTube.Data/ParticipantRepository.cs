@@ -57,11 +57,47 @@ namespace PitchingTube.Data
             foreach (var participant in participants)
             {
                 var repository = new BaseRepository<Person>();
-                var avatar = repository.Query(x => x.UserId == participant.UserId).Select(x => x.AvatarPath).FirstOrDefault().Replace("\\", "/");
+                var person = repository.FirstOrDefault(x => x.UserId == participant.UserId);
+                var avatar = person.AvatarPath.Replace("\\", "/");
                 var role = Roles.GetRolesForUser(participant.aspnet_Users.UserName).FirstOrDefault();
                 users.Add(new UserInfo() { Name = participant.aspnet_Users.UserName, Role = role, Description = participant.Description, AvatarPath = avatar });
             }
             return users;
+        }
+
+        public override void Insert(Participant newEntity)
+        {
+            string roleName = (from u in _context.aspnet_Users
+                              where u.UserId == newEntity.UserId
+                              select u.aspnet_Roles.FirstOrDefault().RoleName).FirstOrDefault();
+
+            int indexNumber = (from p in _objectSet
+                              join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                              where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName 
+                              && p.TubeId == newEntity.TubeId
+                              select p).Count();
+            newEntity.IndexNumber = indexNumber;
+            base.Insert(newEntity);
+
+        }
+
+        public Participant FindPartner(Guid userId, int tubeId, int roundNumber)
+        {
+            string roleName = (from u in _context.aspnet_Users
+                               where u.UserId == userId
+                               select u.aspnet_Roles.FirstOrDefault().RoleName).FirstOrDefault();
+
+            int indexNumber = FirstOrDefault(p => p.UserId == userId && p.TubeId == tubeId).IndexNumber ?? 0;
+            roleName = roleName == "Investor"? "Enterepreneur":"Investor";
+
+            var participant = (from p in _objectSet
+                              join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                              where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName 
+                              && p.TubeId == tubeId && p.IndexNumber == indexNumber+roundNumber 
+                              select p).FirstOrDefault();
+
+            return participant;
+
         }
 
         public class UserInfo

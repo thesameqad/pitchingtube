@@ -26,13 +26,14 @@
 </div>
 <script type="text/javascript">
     var timer;
-    var i = 10;
+    var i = 2;
     function stopInterval() {
         clearInterval(timer);
         $(".alertStart").text("Well, starting pitch").fadeOut(5000);
         var timer2 = setInterval(function () {
+        alert("here");
             i--;
-            $(".alertStart").text("Pitch will be starting in " + i + " seconds").show();
+            $(".alertStart").text("Pitch will be started in " + i + " seconds").show();
             if (i == 0) {
                 clearInterval(timer2);
                 $(".alertStart").hide();
@@ -50,5 +51,10 @@
         //Refreshes every 30 seconds
         $.ajaxSetup({ cache: true });  //Turn off caching
     });
+
+    function startPitch()
+    {
+        window.location.href="@Url.Content("StartPitch")";
+    } 
 
 </script>

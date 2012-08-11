@@ -239,6 +239,7 @@
     <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Participants_aspnet_Users" FromRole="Participant" ToRole="aspnet_Users" />
     <NavigationProperty Name="Tube" Relationship="PitchingTubeModel.FK_Participants_Tubes" FromRole="Participant" ToRole="Tube" />
+    <Property Type="Int32" Name="IndexNumber" />
   </EntityType>
   <EntityType Name="Person">
     <Key>

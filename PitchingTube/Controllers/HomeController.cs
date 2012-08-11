@@ -18,17 +18,23 @@ namespace PitchingTube.Controllers
         public ActionResult Index()
         {
             var tube = participantRepository.UserIsInTube(GetCurrentUserId());
-            switch (tube.TubeMode)
+
+            if (tube != null)
             {
-                case TubeMode.Opened:
-                    return RedirectToAction("Index", "Tube", new { tube.TubeId });
-                case TubeMode.FirstPitch:
-                    //Redirect to FirstPitch page
-                    break;
-                case TubeMode.Closed:
-                    break;
-                default:
-                    break;
+                switch (tube.TubeMode)
+                {
+                    case TubeMode.Opened:
+                        return RedirectToAction("Index", "Tube", new { tube.TubeId });
+                    case TubeMode.FirstPitch:
+                        //Redirect to FirstPitch page
+                        break;
+                    case TubeMode.Closed:
+                        break;
+                    default:
+                        break;
+                }
+
+                Session["currentTube"] = tube;
             }
 
             if (User.IsInRole("Investor"))

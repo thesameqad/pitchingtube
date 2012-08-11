@@ -139,16 +139,16 @@ namespace PitchingTube.Controllers
                         {
                             avatarPath = model.AvatarPath;
                         }
+                        Person newPerson = new Person
+                            {
+                                Phone = model.Phone,
+                                Skype = model.Skype,
+                                UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
+                                ActivationLink = activationLink.Split('$')[1],
+                                AvatarPath = avatarPath
+                            };
+                        personRepository.Insert(newPerson);
                         
-
-                        personRepository.Insert(new Person
-                        {
-                            Phone = model.Phone,
-                            Skype = model.Skype,
-                            UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
-                            ActivationLink = activationLink.Split('$')[1],
-                            AvatarPath = avatarPath
-                        });
                         return RedirectToAction("ActivationRequest");
                     }
                     else
@@ -160,6 +160,7 @@ namespace PitchingTube.Controllers
                 catch(Exception ex)
                 {
                     Membership.DeleteUser(model.UserName);
+                    
                     ModelState.AddModelError("", ex);
                 }
             }

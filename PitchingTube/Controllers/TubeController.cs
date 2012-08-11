@@ -15,33 +15,31 @@ namespace PitchingTube.Controllers
         //
         // GET: /Tube/
 
+        private ParticipantRepository participantRepository = new ParticipantRepository();
+
         public ActionResult Index(int tubeId)
         {
             ViewBag.TubeId = tubeId;
             return View();
         }
 
-        public ActionResult Generate()
-        {
-            var repository = new BaseRepository<Participant>();
-
-            var tubeId = 1;
-            for (int i = 0; i < 6; i++)
-            {
-                var entity = new Participant() { TubeId = tubeId, UserId = Guid.NewGuid() };
-                repository.Insert(entity);
-            }
-            return RedirectToAction("Index");
-        }
-
         public ActionResult TubePeopleList(int tubeId)
         {
-            var repository = new ParticipantRepository();
-            var model = repository.TubeParticipants(tubeId);
+            var model = participantRepository.TubeParticipants(tubeId);
             ViewData["LeftInvestor"] = 5 - model.Count(x => x.Role=="Investor");
             ViewData["LeftEntrepreneur"] = 5 - model.Count(x => x.Role == "Entrepreneur");
            // ViewBag.Participant = model;
             return View(model);
+        }
+        [HttpGet]
+        public ActionResult StartPitch()
+        {
+            Guid userId =(Guid) Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
+            //just a showcase. Will be removed in the future
+            ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, (int)Session["currentTube"], 0);
+            
+            return View();
+
         }
     }
 }

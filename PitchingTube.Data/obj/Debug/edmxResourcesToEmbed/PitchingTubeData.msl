@@ -146,6 +146,7 @@
     <EntitySetMapping Name="Participants">
       <EntityTypeMapping TypeName="PitchingTubeModel.Participant">
         <MappingFragment StoreEntitySet="Participants">
+          <ScalarProperty Name="IndexNumber" ColumnName="IndexNumber" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="TubeId" ColumnName="TubeId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
