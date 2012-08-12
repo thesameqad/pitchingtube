@@ -14,15 +14,15 @@
 }
 .participant-container
 {
-    width: 200px;
+    width: 250px;
 }
 .investorname
 {
-    padding-left: 85px;
+    padding-left: 10px;
     height: 80px;
 }
 .entrepreunername
 {
     height: 80px;
-    padding-right: 10px;
+    padding-left: 85px;
 }

@@ -3,7 +3,7 @@
 }
 <link href="@Url.Content("~/Content/tube.css")" rel="stylesheet" type="text/css" />
 <div style="margin: 0 auto; width: 900px; height: 90px">
-    <div style="float: left; text-align: center; height: 0px;">
+    <div style="float: left; text-align: center; height: 0px; width: 250px">
         <div class="alertIn" style="margin: 0 auto; text-align: center; font-size: 25px;
             display: none">
         </div>
@@ -13,44 +13,80 @@
     <div class="alertStart" style="margin: 0 auto; text-align: center; font-size: 25px;
         display: none">
     </div>
-    <div style="float: right; text-align: center; height: 0px;">
+    <div style="float: right; text-align: center; height: 0px; width: 250px">
         <div class="alertEn" style="margin: 0 auto; text-align: center; font-size: 25px;
             display: none">
         </div>
         <h1>
-            Intreprenuer</h1>
+            Entrepreneur</h1>
     </div>
 </div>
 <div class="content" style="height: 400px; margin: 0 auto; width: 900px">
-
+    <div class="left" id="columnleft" style="width: 250px">
+    </div>
+    <div class="right" id="columnright" style="width: 250px">
+    </div>
 </div>
 <script type="text/javascript">
     var timer;
-    var i = 2;
+    var i = 10;
+    var count = 0;
     function stopInterval() {
         clearInterval(timer);
         $(".alertStart").text("Well, starting pitch").fadeOut(5000);
         var timer2 = setInterval(function () {
-        alert("here");
             i--;
-            $(".alertStart").text("Pitch will be started in " + i + " seconds").show();
+            $(".alertStart").text("Pitch will be starting in " + i + " seconds").show();
             if (i == 0) {
                 clearInterval(timer2);
                 $(".alertStart").hide();
-                alert("Go! Go! Go!");
+                startPitch();
 
             }
         }, 1000);
     }
     $(document).ready(function () {
-        $(".content").load("/Tube/TubePeopleList?tubeid=@ViewBag.TubeId");
-        timer = setInterval(function () {
-            $(".content").load("/Tube/TubePeopleList?tubeid=@ViewBag.TubeId");
-        }, 2000);
-
+        getPerticipants();
+        timer = setInterval(getPerticipants, 2000);
         //Refreshes every 30 seconds
-        $.ajaxSetup({ cache: true });  //Turn off caching
+        $.ajaxSetup({ cache: false });  //Turn off caching
     });
+    function Insertp(i, x) {
+        if (x[i].Role == "Investor") {
+            var tmp = '<div class="participant-container left"><div class="avatar"><img src="' + x[i].AvatarPath + '" alt="user-avatar" class="right"/><div class="investorname"><h2>' + x[i].Name + '</h2></div><div>' + x[i].Description + '</div></div></div>';
+            $('#columnleft').append(tmp);
+        } else {
+            var tmp2 = '<div class="participant-container right"><div class="avatar"><img src="' + x[i].AvatarPath + '" alt="user-avatar" class="left"/><div class="entrepreunername"><h2>' + x[i].Name + '</h2></div><div>' + x[i].Description + '</div></div></div>';
+            $('#columnright').append(tmp2);
+        }
+    }
+    function getPerticipants() {
+        $.getJSON("/Tube/TubePeopleList?tubeid=" + @ViewBag.TubeId, function(x) {
+            if (x.leftInvestor == 0 && x.leftEntrepreneur == 0) {
+                stopInterval();
+            } else {
+                if (x.leftEntrepreneur > 1) {
+                    $(".alertEn").html("Left " + x.leftEntrepreneur + " entrepreneurs").show();
+                } else {
+                    $(".alertEn").html("Left " + x.leftEntrepreneur + " entrepreneur").show();
+                }
+                if (x.leftInvestor > 1) {
+                    $(".alertIn").html("Left " + x.leftInvestor + " investors").show();
+                } else {
+                    $(".alertIn").html("Left " + x.leftInvestor + " investor").show();
+                }
+            }
+            if(count < x.model.length) {
+                for (var i = count; i < x.model.length; i++)
+                    Insertp(i, x.model);
+                count = x.model.length;
+            }
+            if(count == 0)
+                for (var i = 0; i < x.model.length; i++)
+                    Insertp(i, x.model);
+     
+        });
+    }
 
     function startPitch()
     {
