@@ -10,3 +10,9 @@ C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Mailing\bin\Debug\Razor
 C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Mailing\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.dll
 C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.pdb
+C:\Users\Dissid\Documents\PitchingTube\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.dll
+C:\Users\Dissid\Documents\PitchingTube\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.pdb
+C:\Users\Dissid\Documents\PitchingTube\PitchingTube.Mailing\bin\Debug\RazorEngine.dll
+C:\Users\Dissid\Documents\PitchingTube\PitchingTube.Mailing\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Dissid\Documents\PitchingTube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.dll
+C:\Users\Dissid\Documents\PitchingTube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.pdb

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
+
+@{
+    ViewBag.Title = "Nomination";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var index = 0;
+}
+
+@using (Html.BeginForm(new { tubeId = ViewData["tubeId"] }))
+{
+<h2>Nomination</h2>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Ball
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    index++;
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+           <input type="text" id="user-@index" name="Rating" />
+           <input type="hidden" value="@item.UserId" name="Id"/>
+        </td>
+    </tr>
+}
+<tr>
+        <td colspan="2">
+           <input type="submit" value="go" />
+        </td>
+</tr>
+</table>
+    
+}

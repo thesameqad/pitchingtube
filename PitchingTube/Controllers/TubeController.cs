@@ -42,5 +42,51 @@ namespace PitchingTube.Controllers
             return View();
 
         }
+        [HttpGet]
+        public ActionResult Nomination(int tubeId)
+        {
+            
+            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
+            if (role != "Investor")
+            {
+                return null;
+            }
+            else
+            {
+                var repository = new ParticipantRepository();
+                var repositoryP = new BaseRepository<Person>();
+                var model = repository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
+                    .Select(x => new ParticipantRepository.UserInfo() { 
+                        UserId = x.UserId, 
+                        Name = x.aspnet_Users.UserName, 
+                        Description = x.Description,
+                        AvatarPath = repositoryP.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
+                        Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
+                    }
+                    );
+                ViewData["tubeId"] = tubeId;
+                return View(model);
+            }
+           
+        }
+        [HttpPost]
+        public ActionResult Nomination(IEnumerable<Guid> Id, IEnumerable<int> Rating, int tubeId)
+        {
+            var repository = new BaseRepository<Nomination>();
+            for (var i = 0; i < Id.Count(); i++)
+            {
+
+                repository.Insert(new Nomination()
+                {
+                    TubeId = tubeId,
+                    InvestorId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey,
+                    EnterepreneurId = Id.ElementAt(i),
+                    Rating = Rating.ElementAt(i),
+                    Panding = Convert.ToInt32(true)
+                });
+            }
+            
+                return null;
+        }
     }
 }
