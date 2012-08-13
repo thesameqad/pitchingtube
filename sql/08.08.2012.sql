@@ -2,6 +2,9 @@ ALTER TABLE [dbo].[Persons](
 	ADD [AvatarPath] [nvarchar](200) NULL)
 GO
 
+drop table [dbo].[Tubes]
+GO
+
 CREATE TABLE [dbo].[Tubes](
 	[TubeId] [int] IDENTITY(1,1) NOT NULL,
 	[CreatedDate] [datetime] NOT NULL,

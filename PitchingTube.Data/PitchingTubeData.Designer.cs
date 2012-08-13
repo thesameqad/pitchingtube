@@ -29,9 +29,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Participants_aspnet_Users", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "Participant", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Participant), true)]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Participants_Tubes", "Tube", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.Tube), "Participant", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Participant), true)]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Roles), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users))]
-[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Applications), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users), true)]
-[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__4C364F0E", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Applications), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users), true)]
-[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__7A3223E8", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Applications), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users), true)]
+[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Person), true)]
 
 #endregion
 
@@ -623,72 +621,6 @@ namespace PitchingTube.Data
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Roles>("PitchingTubeModel.FK__aspnet_Ro__Appli__7F2BE32F", "aspnet_Roles", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Users")]
-        public EntityCollection<aspnet_Users> aspnet_Users
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Users", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__4C364F0E", "aspnet_Users")]
-        public EntityCollection<aspnet_Users> aspnet_Users1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E", "aspnet_Users", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__7A3223E8", "aspnet_Users")]
-        public EntityCollection<aspnet_Users> aspnet_Users2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8", "aspnet_Users", value);
                 }
             }
         }
@@ -2841,110 +2773,18 @@ namespace PitchingTube.Data
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Applications")]
-        public aspnet_Applications aspnet_Applications
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "Person")]
+        public EntityCollection<Person> Persons
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Applications").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Applications").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Applications> aspnet_ApplicationsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Applications");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Person>("PitchingTubeModel.FK_Persons_aspnet_Users", "Person");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__1E3A7A34", "aspnet_Applications", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__4C364F0E", "aspnet_Applications")]
-        public aspnet_Applications aspnet_Applications1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E", "aspnet_Applications").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E", "aspnet_Applications").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Applications> aspnet_Applications1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E", "aspnet_Applications");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__4C364F0E", "aspnet_Applications", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__7A3223E8", "aspnet_Applications")]
-        public aspnet_Applications aspnet_Applications2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8", "aspnet_Applications").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8", "aspnet_Applications").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Applications> aspnet_Applications2Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8", "aspnet_Applications");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__7A3223E8", "aspnet_Applications", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Person>("PitchingTubeModel.FK_Persons_aspnet_Users", "Person", value);
                 }
             }
         }
@@ -3720,15 +3560,13 @@ namespace PitchingTube.Data
         /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="skype">Initial value of the Skype property.</param>
         /// <param name="phone">Initial value of the Phone property.</param>
-        /// <param name="activationLink">Initial value of the ActivationLink property.</param>
-        public static Person CreatePerson(global::System.Int32 personId, global::System.Guid userId, global::System.String skype, global::System.String phone, global::System.String activationLink)
+        public static Person CreatePerson(global::System.Int32 personId, global::System.Guid userId, global::System.String skype, global::System.String phone)
         {
             Person person = new Person();
             person.PersonId = personId;
             person.UserId = userId;
             person.Skype = skype;
             person.Phone = phone;
-            person.ActivationLink = activationLink;
             return person;
         }
 
@@ -3837,7 +3675,7 @@ namespace PitchingTube.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String ActivationLink
         {
@@ -3849,7 +3687,7 @@ namespace PitchingTube.Data
             {
                 OnActivationLinkChanging(value);
                 ReportPropertyChanging("ActivationLink");
-                _ActivationLink = StructuralObject.SetValidValue(value, false);
+                _ActivationLink = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("ActivationLink");
                 OnActivationLinkChanged();
             }
@@ -3884,6 +3722,47 @@ namespace PitchingTube.Data
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "aspnet_Users")]
+        public aspnet_Users aspnet_Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<aspnet_Users> aspnet_UsersReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Persons_aspnet_Users", "aspnet_Users", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
