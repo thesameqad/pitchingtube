@@ -14,7 +14,7 @@ namespace PitchingTube.Controllers
     public class HomeController : Controller
     {
         private ParticipantRepository participantRepository = new ParticipantRepository();
-        [Authorize]
+
         public ActionResult Index()
         {
             var tube = participantRepository.UserIsInTube(GetCurrentUserId());
@@ -74,8 +74,8 @@ namespace PitchingTube.Controllers
         private int FindTube()
         {
             string userRole = User.IsInRole("Investor") ? "Investor" : "Entrepreneur";
-            participantRepository.FindBestMatchingTube(userRole);
-            return 1;
+            var tubeId = participantRepository.FindBestMatchingTube(userRole);
+            return tubeId;
         }
 
         private Guid GetCurrentUserId()

@@ -182,5 +182,17 @@
         <ScalarProperty Name="RoleId" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Nominations">
+      <EntityTypeMapping TypeName="PitchingTubeModel.Nomination">
+        <MappingFragment StoreEntitySet="Nominations">
+          <ScalarProperty Name="Panding" ColumnName="Panding" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="EnterepreneurId" ColumnName="EnterepreneurId" />
+          <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+          <ScalarProperty Name="TubeId" ColumnName="TubeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

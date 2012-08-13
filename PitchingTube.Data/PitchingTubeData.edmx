@@ -18,6 +18,7 @@
           <EntitySet Name="aspnet_UsersInRoles" EntityType="PitchingTubeModel.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_WebEvent_Events" EntityType="PitchingTubeModel.Store.aspnet_WebEvent_Events" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmailTemplate" EntityType="PitchingTubeModel.Store.EmailTemplate" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Nominations" EntityType="PitchingTubeModel.Store.Nominations" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Participants" EntityType="PitchingTubeModel.Store.Participants" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Persons" EntityType="PitchingTubeModel.Store.Persons" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tubes" EntityType="PitchingTubeModel.Store.Tubes" store:Type="Tables" Schema="dbo" />
@@ -213,6 +214,17 @@
           <Property Name="TemplateName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Template" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nominations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TubeId" Type="int" Nullable="false" />
+          <Property Name="InvestorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EnterepreneurId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Panding" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Participants">
           <Key>
@@ -466,6 +478,7 @@
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="Person" EntitySet="Persons" />
           </AssociationSet>
+          <EntitySet Name="Nominations" EntityType="PitchingTubeModel.Nomination" />
         </EntityContainer>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -788,6 +801,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Nomination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TubeId" Nullable="false" />
+          <Property Type="Guid" Name="InvestorId" Nullable="false" />
+          <Property Type="Guid" Name="EnterepreneurId" Nullable="false" />
+          <Property Type="Int32" Name="Rating" Nullable="false" />
+          <Property Type="Int32" Name="Panding" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -975,6 +999,18 @@
               <ScalarProperty Name="RoleId" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Nominations">
+            <EntityTypeMapping TypeName="PitchingTubeModel.Nomination">
+              <MappingFragment StoreEntitySet="Nominations">
+                <ScalarProperty Name="Panding" ColumnName="Panding" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="EnterepreneurId" ColumnName="EnterepreneurId" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="TubeId" ColumnName="TubeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1076,6 +1112,7 @@
           <ConnectorPoint PointX="4.9687475" PointY="18.881823789062494" />
           <ConnectorPoint PointX="4.9687475" PointY="6.1148893229166665" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="PitchingTubeModel.Nomination" Width="1.5" PointX="7.375" PointY="0.75" Height="2.1725878906250031" />
       </Diagram>
     </Diagrams>
   </Designer>

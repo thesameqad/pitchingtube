@@ -23,23 +23,70 @@ namespace PitchingTube.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult TubePeopleList(int tubeId)
         {
-            var model = participantRepository.TubeParticipants(tubeId);
-            ViewData["LeftInvestor"] = 5 - model.Count(x => x.Role=="Investor");
-            ViewData["LeftEntrepreneur"] = 5 - model.Count(x => x.Role == "Entrepreneur");
-           // ViewBag.Participant = model;
-            return View(model);
+            var repository = new ParticipantRepository();
+            var model = repository.TubeParticipants(tubeId);
+            var leftInvestor = 5 - model.Count(x => x.Role == "Investor");
+            var leftEntrepreneur = 5 - model.Count(x => x.Role == "Entrepreneur");
+            return new JsonResult() { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [HttpGet]
         public ActionResult StartPitch()
         {
-            Guid userId =(Guid) Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
+            Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
             //just a showcase. Will be removed in the future
             ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, (int)Session["currentTube"], 0);
-            
+
             return View();
 
+        }
+        [HttpGet]
+        public ActionResult Nomination(int tubeId)
+        {
+            
+            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
+            if (role != "Investor")
+            {
+                return null;
+            }
+            else
+            {
+                var repository = new ParticipantRepository();
+                var repositoryP = new BaseRepository<Person>();
+                var model = repository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
+                    .Select(x => new ParticipantRepository.UserInfo() { 
+                        UserId = x.UserId, 
+                        Name = x.aspnet_Users.UserName, 
+                        Description = x.Description,
+                        AvatarPath = repositoryP.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
+                        Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
+                    }
+                    );
+                ViewData["tubeId"] = tubeId;
+                return View(model);
+            }
+           
+        }
+        [HttpPost]
+        public ActionResult Nomination(IEnumerable<Guid> Id, IEnumerable<int> Rating, int tubeId)
+        {
+            var repository = new BaseRepository<Nomination>();
+            for (var i = 0; i < Id.Count(); i++)
+            {
+
+                repository.Insert(new Nomination()
+                {
+                    TubeId = tubeId,
+                    InvestorId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey,
+                    EnterepreneurId = Id.ElementAt(i),
+                    Rating = Rating.ElementAt(i),
+                    Panding = Convert.ToInt32(true)
+                });
+            }
+            
+                return null;
         }
     }
 }

@@ -60,7 +60,7 @@ namespace PitchingTube.Data
                 var person = repository.FirstOrDefault(x => x.UserId == participant.UserId);
                 var avatar = person.AvatarPath.Replace("\\", "/");
                 var role = Roles.GetRolesForUser(participant.aspnet_Users.UserName).FirstOrDefault();
-                users.Add(new UserInfo() { Name = participant.aspnet_Users.UserName, Role = role, Description = participant.Description, AvatarPath = avatar });
+                users.Add(new UserInfo() {UserId = person.UserId, Name = participant.aspnet_Users.UserName, Role = role, Description = participant.Description, AvatarPath = avatar });
             }
             return users;
         }
@@ -102,6 +102,7 @@ namespace PitchingTube.Data
 
         public class UserInfo
         {
+            public Guid UserId { get; set; }
             public string Name { get; set; }
             public string AvatarPath { get; set; }
             public string Description { get; set; }

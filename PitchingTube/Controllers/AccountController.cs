@@ -25,6 +25,8 @@ namespace PitchingTube.Controllers
 
         public ActionResult LogOn()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
             return View();
         }
 
@@ -34,6 +36,9 @@ namespace PitchingTube.Controllers
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(Membership.GetUserNameByEmail(model.Email), model.Password))
@@ -75,6 +80,9 @@ namespace PitchingTube.Controllers
         //[FacebookAuthorize(LoginUrl = "/Account/Register")]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             RegisterModel model = new RegisterModel();
             model.AvatarPath = "../../Content/img/no_avatar.jpg";
 
@@ -102,6 +110,9 @@ namespace PitchingTube.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel model, HttpPostedFileBase fileUpload)
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             if (ModelState.IsValid)
             {
                 MembershipCreateStatus createStatus;
@@ -268,12 +279,17 @@ namespace PitchingTube.Controllers
 
         public ActionResult FogotPassword()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
             return View();
         }
 
         [HttpPost]
         public ActionResult FogotPassword(LogOnModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             MembershipUser currentUser = Membership.GetUser(Membership.GetUserNameByEmail(model.Email));
 
             var password = currentUser.ResetPassword();

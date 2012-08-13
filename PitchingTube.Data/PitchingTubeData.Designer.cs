@@ -304,6 +304,22 @@ namespace PitchingTube.Data
             }
         }
         private ObjectSet<Tube> _Tubes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Nomination> Nominations
+        {
+            get
+            {
+                if ((_Nominations == null))
+                {
+                    _Nominations = base.CreateObjectSet<Nomination>("Nominations");
+                }
+                return _Nominations;
+            }
+        }
+        private ObjectSet<Nomination> _Nominations;
 
         #endregion
         #region AddTo Methods
@@ -418,6 +434,14 @@ namespace PitchingTube.Data
         public void AddToTubes(Tube tube)
         {
             base.AddObject("Tubes", tube);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Nominations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToNominations(Nomination nomination)
+        {
+            base.AddObject("Nominations", nomination);
         }
 
         #endregion
@@ -3327,6 +3351,191 @@ namespace PitchingTube.Data
         private global::System.String _Template;
         partial void OnTemplateChanging(global::System.String value);
         partial void OnTemplateChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="Nomination")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Nomination : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Nomination object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="tubeId">Initial value of the TubeId property.</param>
+        /// <param name="investorId">Initial value of the InvestorId property.</param>
+        /// <param name="enterepreneurId">Initial value of the EnterepreneurId property.</param>
+        /// <param name="rating">Initial value of the Rating property.</param>
+        /// <param name="panding">Initial value of the Panding property.</param>
+        public static Nomination CreateNomination(global::System.Int32 id, global::System.Int32 tubeId, global::System.Guid investorId, global::System.Guid enterepreneurId, global::System.Int32 rating, global::System.Int32 panding)
+        {
+            Nomination nomination = new Nomination();
+            nomination.Id = id;
+            nomination.TubeId = tubeId;
+            nomination.InvestorId = investorId;
+            nomination.EnterepreneurId = enterepreneurId;
+            nomination.Rating = rating;
+            nomination.Panding = panding;
+            return nomination;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TubeId
+        {
+            get
+            {
+                return _TubeId;
+            }
+            set
+            {
+                OnTubeIdChanging(value);
+                ReportPropertyChanging("TubeId");
+                _TubeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TubeId");
+                OnTubeIdChanged();
+            }
+        }
+        private global::System.Int32 _TubeId;
+        partial void OnTubeIdChanging(global::System.Int32 value);
+        partial void OnTubeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid InvestorId
+        {
+            get
+            {
+                return _InvestorId;
+            }
+            set
+            {
+                OnInvestorIdChanging(value);
+                ReportPropertyChanging("InvestorId");
+                _InvestorId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InvestorId");
+                OnInvestorIdChanged();
+            }
+        }
+        private global::System.Guid _InvestorId;
+        partial void OnInvestorIdChanging(global::System.Guid value);
+        partial void OnInvestorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid EnterepreneurId
+        {
+            get
+            {
+                return _EnterepreneurId;
+            }
+            set
+            {
+                OnEnterepreneurIdChanging(value);
+                ReportPropertyChanging("EnterepreneurId");
+                _EnterepreneurId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EnterepreneurId");
+                OnEnterepreneurIdChanged();
+            }
+        }
+        private global::System.Guid _EnterepreneurId;
+        partial void OnEnterepreneurIdChanging(global::System.Guid value);
+        partial void OnEnterepreneurIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Rating
+        {
+            get
+            {
+                return _Rating;
+            }
+            set
+            {
+                OnRatingChanging(value);
+                ReportPropertyChanging("Rating");
+                _Rating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Rating");
+                OnRatingChanged();
+            }
+        }
+        private global::System.Int32 _Rating;
+        partial void OnRatingChanging(global::System.Int32 value);
+        partial void OnRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Panding
+        {
+            get
+            {
+                return _Panding;
+            }
+            set
+            {
+                OnPandingChanging(value);
+                ReportPropertyChanging("Panding");
+                _Panding = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Panding");
+                OnPandingChanged();
+            }
+        }
+        private global::System.Int32 _Panding;
+        partial void OnPandingChanging(global::System.Int32 value);
+        partial void OnPandingChanged();
 
         #endregion
     

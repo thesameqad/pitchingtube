@@ -63,6 +63,7 @@
       <End Role="aspnet_Users" EntitySet="aspnet_Users" />
       <End Role="Person" EntitySet="Persons" />
     </AssociationSet>
+    <EntitySet Name="Nominations" EntityType="PitchingTubeModel.Nomination" />
   </EntityContainer>
   <EntityType Name="aspnet_Applications">
     <Key>
@@ -385,4 +386,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Nomination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="TubeId" Nullable="false" />
+    <Property Type="Guid" Name="InvestorId" Nullable="false" />
+    <Property Type="Guid" Name="EnterepreneurId" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="false" />
+    <Property Type="Int32" Name="Panding" Nullable="false" />
+  </EntityType>
 </Schema>
