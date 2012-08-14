@@ -7,6 +7,7 @@ using System.Web.Security;
 using PitchingTube.Data;
 
 
+
 namespace PitchingTube.Controllers
 {
     [Authorize]
@@ -41,9 +42,22 @@ namespace PitchingTube.Controllers
 
             //just a showcase. Will be removed in the future
             ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, 5).UserId;
-
+            BaseRepository<Partner> partner = new BaseRepository<Partner>();
+            partner.Insert(new Partner() 
+                {
+                    UserId=userId,
+                    PartnerId= participantRepository.FindPartner(userId, tubeId, 0).UserId
+                });
+            
             return View();
 
+        }
+        [HttpGet]
+        public ActionResult History(Guid UserId)
+        {
+            var repository = new PartnerRepository();
+            var model = repository.History(UserId);
+            return View();
         }
         [HttpGet]
         public ActionResult Nomination(int tubeId)

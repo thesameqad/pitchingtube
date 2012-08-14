@@ -107,7 +107,7 @@ namespace PitchingTube.Data
                               where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName 
                               && p.TubeId == tubeId && p.IndexNumber == indexNumber//indexNumber+roundNumber 
                               select p).FirstOrDefault();
-
+          
             return participant;
 
         }
