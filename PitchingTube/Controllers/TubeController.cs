@@ -33,6 +33,34 @@ namespace PitchingTube.Controllers
             var leftEntrepreneur = 5 - model.Count(x => x.Role == "Entrepreneur");
             return new JsonResult() { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        [HttpGet]
+        public ActionResult ShareContacts(int tubeId)
+        {
+            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
+            if (role != "Investor")
+            {
+                return null;
+            }
+            else
+            {
+                var repository = new ParticipantRepository();
+                var repositoryP = new BaseRepository<Person>();
+                var model = repository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
+                      .Select(x => new ParticipantRepository.UserInfo()
+                      {
+                          UserId = x.UserId,
+                          Name = x.aspnet_Users.UserName,
+                          Description = x.Description,
+                          AvatarPath = repositoryP.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
+                          Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
+                      }
+                      );
+                ViewData["tubeId"] = tubeId;
+                return View(model);
+            }
+        }
+
         [HttpGet]
         public ActionResult StartPitch(int tubeId)
         {
@@ -44,12 +72,12 @@ namespace PitchingTube.Controllers
 
             List<ParticipantRepository.UserInfo> model = participantRepository.FindCurrentPairs(tubeId, roundNumber);
 
-            //BaseRepository<Partner> partner = new BaseRepository<Partner>();
-            //partner.Insert(new Partner()
-            //    {
-            //        UserId = userId,
-            //        PartnerId = ViewBag.CurrentPartnerId.UserId
-            //    });
+            BaseRepository<Partner> partner = new BaseRepository<Partner>();
+            partner.Insert(new Partner()
+                {
+                    UserId = userId,
+                    PartnerId = ViewBag.CurrentPartnerId.UserId
+                });
             
             return View(model);
 
