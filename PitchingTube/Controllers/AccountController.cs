@@ -290,21 +290,28 @@ namespace PitchingTube.Controllers
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
 
-            MembershipUser currentUser = Membership.GetUser(Membership.GetUserNameByEmail(model.Email));
-
-            var password = currentUser.ResetPassword();
-
-            var emailModel = new
+            try
             {
-                UserName = currentUser.UserName,
-                Url = password
-            };
-            MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("recoverpassword", emailModel);
-            mail.To.Add(model.Email);
+                MembershipUser currentUser = Membership.GetUser(Membership.GetUserNameByEmail(model.Email));
+                var password = currentUser.ResetPassword();
 
-            Mailer.SendMail(mail);
+                var emailModel = new
+                {
+                    UserName = currentUser.UserName,
+                    Url = password
+                };
+                MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("recoverpassword", emailModel);
+                mail.To.Add(model.Email);
 
-            return RedirectToAction("FogotPasswordSuccess");
+                Mailer.SendMail(mail);
+                return RedirectToAction("FogotPasswordSuccess");
+            }
+            catch
+            {
+                ViewBag.Message = "Your account has not been activated. You can register now";
+                return View();
+            }
+            
         }
 
         public ActionResult FogotPasswordSuccess()

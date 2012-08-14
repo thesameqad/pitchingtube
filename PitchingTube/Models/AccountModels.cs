@@ -31,10 +31,10 @@ namespace PitchingTube.Models
 
     public class LogOnModel
     {
-        
-        [Display(Name = "Email")]
+
         [Required]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Your email is incorrect")]
+        [RegularExpression(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Your email is incorrect")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
