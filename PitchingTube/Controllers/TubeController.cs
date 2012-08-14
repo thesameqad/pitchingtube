@@ -33,6 +33,32 @@ namespace PitchingTube.Controllers
             return new JsonResult() { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [HttpGet]
+        public ActionResult ShareContacts(int tubeId)
+        {
+            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
+            if (role != "Investor")
+            {
+                return null;
+            }
+            else
+            {
+                var repository = new ParticipantRepository();
+                var repositoryP = new BaseRepository<Person>();
+                var model = repository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
+                      .Select(x => new ParticipantRepository.UserInfo()
+                      {
+                          UserId = x.UserId,
+                          Name = x.aspnet_Users.UserName,
+                          Description = x.Description,
+                          AvatarPath = repositoryP.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
+                          Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
+                      }
+                      );
+                ViewData["tubeId"] = tubeId;
+                return View(model);
+            }
+        }
+        [HttpGet]
         public ActionResult StartPitch(int tubeId)
         {
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
+
+@{
+    ViewBag.Title = "ShareContacts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm(new { tubeId = ViewData["tubeId"] }))
+{
+<h2>ShareContacts</h2>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Ball
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        
+    </tr>
+</table>
+    
+}
