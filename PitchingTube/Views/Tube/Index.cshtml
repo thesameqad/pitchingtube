@@ -90,7 +90,7 @@
 
     function startPitch()
     {
-        window.location.href="@Url.Content("StartPitch")";
+        window.location.href="@Url.Content("/Tube/StartPitch?tubeid=") + @ViewBag.TubeId";
     } 
 
 </script>

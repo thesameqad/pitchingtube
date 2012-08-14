@@ -73,7 +73,9 @@ namespace PitchingTube.Controllers
 
         private int FindTube()
         {
-            string userRole = User.IsInRole("Investor") ? "Investor" : "Entrepreneur";
+            //string userRole = User.IsInRole("Investor") ? "Investor" : "Entrepreneur";
+           // Membership.GetUserNameByEmail(User.Identity.Name)
+            string userRole = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault() ;
             var tubeId = participantRepository.FindBestMatchingTube(userRole);
             return tubeId;
         }

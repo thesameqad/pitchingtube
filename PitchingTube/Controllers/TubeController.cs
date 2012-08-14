@@ -33,11 +33,14 @@ namespace PitchingTube.Controllers
             return new JsonResult() { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [HttpGet]
-        public ActionResult StartPitch()
+        public ActionResult StartPitch(int tubeId)
         {
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
+
+            //int currTube
+
             //just a showcase. Will be removed in the future
-            ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, (int)Session["currentTube"], 0);
+            ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, 5).UserId;
 
             return View();
 

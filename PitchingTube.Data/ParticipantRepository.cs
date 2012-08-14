@@ -88,12 +88,24 @@ namespace PitchingTube.Data
                                select u.aspnet_Roles.FirstOrDefault().RoleName).FirstOrDefault();
 
             int indexNumber = FirstOrDefault(p => p.UserId == userId && p.TubeId == tubeId).IndexNumber ?? 0;
-            roleName = roleName == "Investor"? "Enterepreneur":"Investor";
+            //roleName = roleName == "Investor"? "Enterepreneur":"Investor";
+
+            if (roleName == "Investor")
+            {
+                roleName = "Enterepreneur";
+                indexNumber += roundNumber;
+                indexNumber = indexNumber == 5 ? 0 : indexNumber;
+            }
+            else {
+                roleName = "Investor";
+                indexNumber -= roundNumber;
+                indexNumber = indexNumber == -1 ? 4 : indexNumber;
+            }
 
             var participant = (from p in _objectSet
                               join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
                               where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName 
-                              && p.TubeId == tubeId && p.IndexNumber == indexNumber+roundNumber 
+                              && p.TubeId == tubeId && p.IndexNumber == indexNumber//indexNumber+roundNumber 
                               select p).FirstOrDefault();
 
             return participant;
