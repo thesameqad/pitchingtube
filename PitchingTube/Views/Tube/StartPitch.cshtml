@@ -1,8 +1,34 @@
-﻿@{
+﻿@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
+
+@{
     ViewBag.Title = "StartPitch";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>StartPitch</h2>
 
-@ViewBag.CurrentPartnerId
+<p>YourPartner<br />
+    @ViewBag.CurrentPartnerId.UserId
+</p>
+
+<p>
+    Other Rooms
+</p>
+<table>
+    @for (int i = 0; i < Model.Count(); i += 2)
+    {
+        if (Model.ElementAt(i).UserId != ViewBag.CurrentPartnerId.UserId &&
+           Model.ElementAt(i).UserId != (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(Model.ElementAt(i).AvatarPath)" height="20px" /><br/>
+                    @Model.ElementAt(i).Name
+                </td>
+                <td>
+                    <img src="@Url.Content(Model.ElementAt(i+1).AvatarPath)" height="20px" /><br/>
+                    @Model.ElementAt(i+1).Name
+                </td>
+            </tr>
+        }
+    }
+</table>

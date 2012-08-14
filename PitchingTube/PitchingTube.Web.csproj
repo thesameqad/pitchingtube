@@ -201,10 +201,10 @@
     <Content Include="Views\Account\FogotPasswordSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Tube\StartPitch.cshtml" />
+    <Content Include="Views\Tube\Nomination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Tube\Nomination.cshtml" />
+    <Content Include="Views\Tube\StartPitch.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -73,8 +73,9 @@ namespace PitchingTube.Controllers
 
         private int FindTube()
         {
+            //I don't know why, but it is not work. It is always return "Entrepreneur"
             //string userRole = User.IsInRole("Investor") ? "Investor" : "Entrepreneur";
-           // Membership.GetUserNameByEmail(User.Identity.Name)
+
             string userRole = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault() ;
             var tubeId = participantRepository.FindBestMatchingTube(userRole);
             return tubeId;
