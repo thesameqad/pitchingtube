@@ -30,6 +30,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Participants_Tubes", "Tube", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.Tube), "Participant", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Participant), true)]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Roles), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users))]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Person), true)]
+[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Applications), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users))]
 
 #endregion
 
@@ -320,6 +321,22 @@ namespace PitchingTube.Data
             }
         }
         private ObjectSet<Nomination> _Nominations;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Partner> Partners
+        {
+            get
+            {
+                if ((_Partners == null))
+                {
+                    _Partners = base.CreateObjectSet<Partner>("Partners");
+                }
+                return _Partners;
+            }
+        }
+        private ObjectSet<Partner> _Partners;
 
         #endregion
         #region AddTo Methods
@@ -442,6 +459,14 @@ namespace PitchingTube.Data
         public void AddToNominations(Nomination nomination)
         {
             base.AddObject("Nominations", nomination);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Partners EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPartners(Partner partner)
+        {
+            base.AddObject("Partners", partner);
         }
 
         #endregion
@@ -645,6 +670,28 @@ namespace PitchingTube.Data
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Roles>("PitchingTubeModel.FK__aspnet_Ro__Appli__7F2BE32F", "aspnet_Roles", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Users")]
+        public EntityCollection<aspnet_Users> aspnet_Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("PitchingTubeModel.FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Users", value);
                 }
             }
         }
@@ -2812,6 +2859,44 @@ namespace PitchingTube.Data
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Applications")]
+        public aspnet_Applications aspnet_Applications
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Applications").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Applications").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<aspnet_Applications> aspnet_ApplicationsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Applications");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("PitchingTubeModel.FK__aspnet_Us__Appli__0DAF0CB0", "aspnet_Applications", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -3750,6 +3835,148 @@ namespace PitchingTube.Data
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="Partner")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Partner : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Partner object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="partnerId">Initial value of the PartnerId property.</param>
+        /// <param name="contacts">Initial value of the Contacts property.</param>
+        public static Partner CreatePartner(global::System.Int32 id, global::System.Guid userId, global::System.Guid partnerId, global::System.String contacts)
+        {
+            Partner partner = new Partner();
+            partner.Id = id;
+            partner.UserId = userId;
+            partner.PartnerId = partnerId;
+            partner.Contacts = contacts;
+            return partner;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                if (_UserId != value)
+                {
+                    OnUserIdChanging(value);
+                    ReportPropertyChanging("UserId");
+                    _UserId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserId");
+                    OnUserIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _UserId;
+        partial void OnUserIdChanging(global::System.Guid value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PartnerId
+        {
+            get
+            {
+                return _PartnerId;
+            }
+            set
+            {
+                if (_PartnerId != value)
+                {
+                    OnPartnerIdChanging(value);
+                    ReportPropertyChanging("PartnerId");
+                    _PartnerId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PartnerId");
+                    OnPartnerIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PartnerId;
+        partial void OnPartnerIdChanging(global::System.Guid value);
+        partial void OnPartnerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Contacts
+        {
+            get
+            {
+                return _Contacts;
+            }
+            set
+            {
+                if (_Contacts != value)
+                {
+                    OnContactsChanging(value);
+                    ReportPropertyChanging("Contacts");
+                    _Contacts = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Contacts");
+                    OnContactsChanged();
+                }
+            }
+        }
+        private global::System.String _Contacts;
+        partial void OnContactsChanging(global::System.String value);
+        partial void OnContactsChanged();
+
+        #endregion
+    
     }
     
     /// <summary>

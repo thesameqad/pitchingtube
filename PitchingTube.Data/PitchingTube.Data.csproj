@@ -47,6 +47,7 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="EmailTemplate.cs" />
     <Compile Include="ParticipantRepository.cs" />
+    <Compile Include="PartnerRepository.cs" />
     <Compile Include="PersonRepository.cs" />
     <Compile Include="PitchingTubeEntities.cs" />
     <Compile Include="PitchingTubeData.Designer.cs">
