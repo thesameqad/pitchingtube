@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PitchingTubeModelStoreContainer" CdmEntityContainer="PitchingTubeEntities">
-    <EntitySetMapping Name="aspnet_Applications">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Applications">
-        <MappingFragment StoreEntitySet="aspnet_Applications">
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-          <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
-          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="aspnet_Membership">
       <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Membership">
         <MappingFragment StoreEntitySet="aspnet_Membership">
@@ -38,47 +28,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_Paths">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Paths">
-        <MappingFragment StoreEntitySet="aspnet_Paths">
-          <ScalarProperty Name="LoweredPath" ColumnName="LoweredPath" />
-          <ScalarProperty Name="Path" ColumnName="Path" />
-          <ScalarProperty Name="PathId" ColumnName="PathId" />
-          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_PersonalizationAllUsers">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_PersonalizationAllUsers">
-        <MappingFragment StoreEntitySet="aspnet_PersonalizationAllUsers">
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
-          <ScalarProperty Name="PathId" ColumnName="PathId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_PersonalizationPerUser">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_PersonalizationPerUser">
-        <MappingFragment StoreEntitySet="aspnet_PersonalizationPerUser">
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="PathId" ColumnName="PathId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_Profile">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Profile">
-        <MappingFragment StoreEntitySet="aspnet_Profile">
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="PropertyValuesBinary" ColumnName="PropertyValuesBinary" />
-          <ScalarProperty Name="PropertyValuesString" ColumnName="PropertyValuesString" />
-          <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="aspnet_Roles">
       <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_Roles">
         <MappingFragment StoreEntitySet="aspnet_Roles">
@@ -87,15 +36,6 @@
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_SchemaVersions">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_SchemaVersions">
-        <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
-          <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
-          <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
-          <ScalarProperty Name="Feature" ColumnName="Feature" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -112,27 +52,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="aspnet_WebEvent_Events">
-      <EntityTypeMapping TypeName="PitchingTubeModel.aspnet_WebEvent_Events">
-        <MappingFragment StoreEntitySet="aspnet_WebEvent_Events">
-          <ScalarProperty Name="Details" ColumnName="Details" />
-          <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
-          <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
-          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
-          <ScalarProperty Name="ApplicationVirtualPath" ColumnName="ApplicationVirtualPath" />
-          <ScalarProperty Name="ApplicationPath" ColumnName="ApplicationPath" />
-          <ScalarProperty Name="Message" ColumnName="Message" />
-          <ScalarProperty Name="EventDetailCode" ColumnName="EventDetailCode" />
-          <ScalarProperty Name="EventCode" ColumnName="EventCode" />
-          <ScalarProperty Name="EventOccurrence" ColumnName="EventOccurrence" />
-          <ScalarProperty Name="EventSequence" ColumnName="EventSequence" />
-          <ScalarProperty Name="EventType" ColumnName="EventType" />
-          <ScalarProperty Name="EventTime" ColumnName="EventTime" />
-          <ScalarProperty Name="EventTimeUtc" ColumnName="EventTimeUtc" />
-          <ScalarProperty Name="EventId" ColumnName="EventId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EmailTemplates">
       <EntityTypeMapping TypeName="PitchingTubeModel.EmailTemplate">
         <MappingFragment StoreEntitySet="EmailTemplate">
@@ -143,6 +62,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Nominations">
+      <EntityTypeMapping TypeName="PitchingTubeModel.Nomination">
+        <MappingFragment StoreEntitySet="Nominations">
+          <ScalarProperty Name="Panding" ColumnName="Panding" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="EnterepreneurId" ColumnName="EnterepreneurId" />
+          <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+          <ScalarProperty Name="TubeId" ColumnName="TubeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Participants">
       <EntityTypeMapping TypeName="PitchingTubeModel.Participant">
         <MappingFragment StoreEntitySet="Participants">
@@ -150,6 +81,16 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="TubeId" ColumnName="TubeId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partners">
+      <EntityTypeMapping TypeName="PitchingTubeModel.Partner">
+        <MappingFragment StoreEntitySet="Partners">
+          <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+          <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -182,17 +123,5 @@
         <ScalarProperty Name="RoleId" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Nominations">
-      <EntityTypeMapping TypeName="PitchingTubeModel.Nomination">
-        <MappingFragment StoreEntitySet="Nominations">
-          <ScalarProperty Name="Panding" ColumnName="Panding" />
-          <ScalarProperty Name="Rating" ColumnName="Rating" />
-          <ScalarProperty Name="EnterepreneurId" ColumnName="EnterepreneurId" />
-          <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
-          <ScalarProperty Name="TubeId" ColumnName="TubeId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

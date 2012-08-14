@@ -1,59 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PitchingTubeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="PitchingTubeModelStoreContainer">
-    <EntitySet Name="aspnet_Applications" EntityType="PitchingTubeModel.Store.aspnet_Applications" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="aspnet_Membership" EntityType="PitchingTubeModel.Store.aspnet_Membership" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="aspnet_Paths" EntityType="PitchingTubeModel.Store.aspnet_Paths" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="PitchingTubeModel.Store.aspnet_PersonalizationAllUsers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="PitchingTubeModel.Store.aspnet_PersonalizationPerUser" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="aspnet_Profile" EntityType="PitchingTubeModel.Store.aspnet_Profile" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="aspnet_Roles" EntityType="PitchingTubeModel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="aspnet_SchemaVersions" EntityType="PitchingTubeModel.Store.aspnet_SchemaVersions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="aspnet_Users" EntityType="PitchingTubeModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="aspnet_UsersInRoles" EntityType="PitchingTubeModel.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="aspnet_WebEvent_Events" EntityType="PitchingTubeModel.Store.aspnet_WebEvent_Events" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="EmailTemplate" EntityType="PitchingTubeModel.Store.EmailTemplate" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Nominations" EntityType="PitchingTubeModel.Store.Nominations" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Participants" EntityType="PitchingTubeModel.Store.Participants" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Partners" EntityType="PitchingTubeModel.Store.Partners" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons" EntityType="PitchingTubeModel.Store.Persons" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tubes" EntityType="PitchingTubeModel.Store.Tubes" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK__aspnet_Me__Appli__7C4F7684" Association="PitchingTubeModel.Store.FK__aspnet_Me__Appli__7C4F7684">
-      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
-      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Me__UserI__7D439ABD" Association="PitchingTubeModel.Store.FK__aspnet_Me__UserI__7D439ABD">
+    <AssociationSet Name="FK__aspnet_Me__UserI__22AA2996" Association="PitchingTubeModel.Store.FK__aspnet_Me__UserI__22AA2996">
       <End Role="aspnet_Users" EntitySet="aspnet_Users" />
       <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
     </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pa__Appli__7B5B524B" Association="PitchingTubeModel.Store.FK__aspnet_Pa__Appli__7B5B524B">
-      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
-      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pe__PathI__00200768" Association="PitchingTubeModel.Store.FK__aspnet_Pe__PathI__00200768">
-      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
-      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pe__PathI__02084FDA" Association="PitchingTubeModel.Store.FK__aspnet_Pe__PathI__02084FDA">
-      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
-      <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pe__UserI__01142BA1" Association="PitchingTubeModel.Store.FK__aspnet_Pe__UserI__01142BA1">
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pr__UserI__7E37BEF6" Association="PitchingTubeModel.Store.FK__aspnet_Pr__UserI__7E37BEF6">
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-      <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Ro__Appli__7F2BE32F" Association="PitchingTubeModel.Store.FK__aspnet_Ro__Appli__7F2BE32F">
-      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
-      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Us__RoleI__02FC7413" Association="PitchingTubeModel.Store.FK__aspnet_Us__RoleI__02FC7413">
+    <AssociationSet Name="FK__aspnet_Us__RoleI__4AB81AF0" Association="PitchingTubeModel.Store.FK__aspnet_Us__RoleI__4AB81AF0">
       <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
       <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Us__UserI__03F0984C" Association="PitchingTubeModel.Store.FK__aspnet_Us__UserI__03F0984C">
+    <AssociationSet Name="FK__aspnet_Us__UserI__49C3F6B7" Association="PitchingTubeModel.Store.FK__aspnet_Us__UserI__49C3F6B7">
       <End Role="aspnet_Users" EntitySet="aspnet_Users" />
       <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
     </AssociationSet>
@@ -70,15 +36,6 @@
       <End Role="Persons" EntitySet="Persons" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="aspnet_Applications">
-    <Key>
-      <PropertyRef Name="ApplicationId" />
-    </Key>
-    <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
-    <Property Name="LoweredApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
-    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="256" />
-  </EntityType>
   <EntityType Name="aspnet_Membership">
     <Key>
       <PropertyRef Name="UserId" />
@@ -105,43 +62,6 @@
     <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
     <Property Name="Comment" Type="ntext" />
   </EntityType>
-  <EntityType Name="aspnet_Paths">
-    <Key>
-      <PropertyRef Name="PathId" />
-    </Key>
-    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="256" />
-    <Property Name="LoweredPath" Type="nvarchar" Nullable="false" MaxLength="256" />
-  </EntityType>
-  <EntityType Name="aspnet_PersonalizationAllUsers">
-    <Key>
-      <PropertyRef Name="PathId" />
-    </Key>
-    <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PageSettings" Type="image" Nullable="false" />
-    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="aspnet_PersonalizationPerUser">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PathId" Type="uniqueidentifier" />
-    <Property Name="UserId" Type="uniqueidentifier" />
-    <Property Name="PageSettings" Type="image" Nullable="false" />
-    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="aspnet_Profile">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PropertyNames" Type="ntext" Nullable="false" />
-    <Property Name="PropertyValuesString" Type="ntext" Nullable="false" />
-    <Property Name="PropertyValuesBinary" Type="image" Nullable="false" />
-    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
-  </EntityType>
   <EntityType Name="aspnet_Roles">
     <Key>
       <PropertyRef Name="RoleId" />
@@ -151,15 +71,6 @@
     <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
     <Property Name="LoweredRoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
     <Property Name="Description" Type="nvarchar" MaxLength="256" />
-  </EntityType>
-  <EntityType Name="aspnet_SchemaVersions">
-    <Key>
-      <PropertyRef Name="Feature" />
-      <PropertyRef Name="CompatibleSchemaVersion" />
-    </Key>
-    <Property Name="Feature" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="CompatibleSchemaVersion" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="aspnet_Users">
     <Key>
@@ -180,26 +91,6 @@
     </Key>
     <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-  <EntityType Name="aspnet_WebEvent_Events">
-    <Key>
-      <PropertyRef Name="EventId" />
-    </Key>
-    <Property Name="EventId" Type="char" Nullable="false" MaxLength="32" />
-    <Property Name="EventTimeUtc" Type="datetime" Nullable="false" />
-    <Property Name="EventTime" Type="datetime" Nullable="false" />
-    <Property Name="EventType" Type="nvarchar" Nullable="false" MaxLength="256" />
-    <Property Name="EventSequence" Type="decimal" Nullable="false" Precision="19" />
-    <Property Name="EventOccurrence" Type="decimal" Nullable="false" Precision="19" />
-    <Property Name="EventCode" Type="int" Nullable="false" />
-    <Property Name="EventDetailCode" Type="int" Nullable="false" />
-    <Property Name="Message" Type="nvarchar" MaxLength="1024" />
-    <Property Name="ApplicationPath" Type="nvarchar" MaxLength="256" />
-    <Property Name="ApplicationVirtualPath" Type="nvarchar" MaxLength="256" />
-    <Property Name="MachineName" Type="nvarchar" Nullable="false" MaxLength="256" />
-    <Property Name="RequestUrl" Type="nvarchar" MaxLength="1024" />
-    <Property Name="ExceptionType" Type="nvarchar" MaxLength="256" />
-    <Property Name="Details" Type="ntext" />
   </EntityType>
   <EntityType Name="EmailTemplate">
     <Key>
@@ -231,6 +122,15 @@
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="IndexNumber" Type="int" />
   </EntityType>
+  <EntityType Name="Partners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PartnerId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Contacts" Type="nchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="Persons">
     <Key>
       <PropertyRef Name="PersonId" />
@@ -250,19 +150,7 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="Mode" Type="int" />
   </EntityType>
-  <Association Name="FK__aspnet_Me__Appli__7C4F7684">
-    <End Role="aspnet_Applications" Type="PitchingTubeModel.Store.aspnet_Applications" Multiplicity="1" />
-    <End Role="aspnet_Membership" Type="PitchingTubeModel.Store.aspnet_Membership" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Applications">
-        <PropertyRef Name="ApplicationId" />
-      </Principal>
-      <Dependent Role="aspnet_Membership">
-        <PropertyRef Name="ApplicationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Me__UserI__7D439ABD">
+  <Association Name="FK__aspnet_Me__UserI__22AA2996">
     <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="1" />
     <End Role="aspnet_Membership" Type="PitchingTubeModel.Store.aspnet_Membership" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -274,79 +162,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__aspnet_Pa__Appli__7B5B524B">
-    <End Role="aspnet_Applications" Type="PitchingTubeModel.Store.aspnet_Applications" Multiplicity="1" />
-    <End Role="aspnet_Paths" Type="PitchingTubeModel.Store.aspnet_Paths" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Applications">
-        <PropertyRef Name="ApplicationId" />
-      </Principal>
-      <Dependent Role="aspnet_Paths">
-        <PropertyRef Name="ApplicationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pe__PathI__00200768">
-    <End Role="aspnet_Paths" Type="PitchingTubeModel.Store.aspnet_Paths" Multiplicity="0..1" />
-    <End Role="aspnet_PersonalizationPerUser" Type="PitchingTubeModel.Store.aspnet_PersonalizationPerUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Paths">
-        <PropertyRef Name="PathId" />
-      </Principal>
-      <Dependent Role="aspnet_PersonalizationPerUser">
-        <PropertyRef Name="PathId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pe__PathI__02084FDA">
-    <End Role="aspnet_Paths" Type="PitchingTubeModel.Store.aspnet_Paths" Multiplicity="1" />
-    <End Role="aspnet_PersonalizationAllUsers" Type="PitchingTubeModel.Store.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Paths">
-        <PropertyRef Name="PathId" />
-      </Principal>
-      <Dependent Role="aspnet_PersonalizationAllUsers">
-        <PropertyRef Name="PathId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pe__UserI__01142BA1">
-    <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="0..1" />
-    <End Role="aspnet_PersonalizationPerUser" Type="PitchingTubeModel.Store.aspnet_PersonalizationPerUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="aspnet_PersonalizationPerUser">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pr__UserI__7E37BEF6">
-    <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="1" />
-    <End Role="aspnet_Profile" Type="PitchingTubeModel.Store.aspnet_Profile" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="aspnet_Profile">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Ro__Appli__7F2BE32F">
-    <End Role="aspnet_Applications" Type="PitchingTubeModel.Store.aspnet_Applications" Multiplicity="1" />
-    <End Role="aspnet_Roles" Type="PitchingTubeModel.Store.aspnet_Roles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Applications">
-        <PropertyRef Name="ApplicationId" />
-      </Principal>
-      <Dependent Role="aspnet_Roles">
-        <PropertyRef Name="ApplicationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Us__RoleI__02FC7413">
+  <Association Name="FK__aspnet_Us__RoleI__4AB81AF0">
     <End Role="aspnet_Roles" Type="PitchingTubeModel.Store.aspnet_Roles" Multiplicity="1" />
     <End Role="aspnet_UsersInRoles" Type="PitchingTubeModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
     <ReferentialConstraint>
@@ -358,7 +174,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__aspnet_Us__UserI__03F0984C">
+  <Association Name="FK__aspnet_Us__UserI__49C3F6B7">
     <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="1" />
     <End Role="aspnet_UsersInRoles" Type="PitchingTubeModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
     <ReferentialConstraint>

@@ -14,21 +14,34 @@
     Other Rooms
 </p>
 <table>
-    @for (int i = 0; i < Model.Count(); i += 2)
+<tr>
+@{
+    int count = 0;
+    foreach (var itemModel in Model)
     {
-        if (Model.ElementAt(i).UserId != ViewBag.CurrentPartnerId.UserId &&
-           Model.ElementAt(i).UserId != (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey)
+        if (itemModel.UserId != ViewBag.CurrentPartnerId.UserId &&
+           itemModel.UserId != (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey)
         {
-            <tr>
+            <td>
+                <img src="@Url.Content(itemModel.AvatarPath)" height="60px" /><br/>
+                @Html.DisplayFor(m => itemModel.Name)
+            </td>
+            if(count % 2 == 0)
+            {
                 <td>
-                    <img src="@Url.Content(Model.ElementAt(i).AvatarPath)" height="20px" /><br/>
-                    @Model.ElementAt(i).Name
+                    >
                 </td>
+            }
+            else{
                 <td>
-                    <img src="@Url.Content(Model.ElementAt(i+1).AvatarPath)" height="20px" /><br/>
-                    @Model.ElementAt(i+1).Name
+                    |<br/>|<br/>|<br/>|<br/>|
                 </td>
-            </tr>
+            }
+            
         }
+        count++;
     }
+}
+</tr>
+
 </table>

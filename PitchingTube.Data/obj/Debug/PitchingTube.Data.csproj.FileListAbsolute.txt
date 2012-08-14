@@ -34,3 +34,12 @@ D:\project\pitchingtube3\PitchingTube.Data\bin\Debug\PitchingTube.Mailing.pdb
 D:\project\pitchingtube3\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
 D:\project\pitchingtube3\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
 D:\project\pitchingtube3\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll.config
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Mailing.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\RazorEngine.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Mailing.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb

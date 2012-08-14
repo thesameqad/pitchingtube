@@ -94,12 +94,12 @@ namespace PitchingTube.Data
             {
                 roleName = "Enterepreneur";
                 indexNumber += roundNumber;
-                indexNumber = indexNumber == 5 ? 0 : indexNumber;
+                indexNumber = indexNumber >= 5 ? indexNumber - 5 : indexNumber;
             }
             else {
                 roleName = "Investor";
                 indexNumber -= roundNumber;
-                indexNumber = indexNumber == -1 ? 4 : indexNumber;
+                indexNumber = indexNumber <= -1 ? indexNumber + 5 : indexNumber;
             }
 
             var participant = (from p in _objectSet
@@ -107,9 +107,61 @@ namespace PitchingTube.Data
                               where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName 
                               && p.TubeId == tubeId && p.IndexNumber == indexNumber//indexNumber+roundNumber 
                               select p).FirstOrDefault();
-
+          
             return participant;
 
+        }
+
+        public List<UserInfo> FindCurrentPairs(int tubeId, int roundNumber)
+        {
+            List<UserInfo> currentPairs = new List<UserInfo>();
+
+            var tube = (from p in _objectSet
+                        join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                        join person in _context.Persons on aspnet_User.UserId equals person.UserId
+                        where p.TubeId == tubeId
+                        select new
+                        {
+                            UserId = aspnet_User.UserId,
+                            UserName = aspnet_User.UserName,
+                            AvatarPath = person.AvatarPath,
+                            IndexNumber = p.IndexNumber
+                        });
+
+            var investors = from t in tube
+                            join aspnet_User in _context.aspnet_Users on t.UserId equals aspnet_User.UserId
+                            where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Investor"
+                            select t;
+
+            var entrepreneurs = from t in tube
+                                join aspnet_User in _context.aspnet_Users on t.UserId equals aspnet_User.UserId
+                                where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur"
+                                select t;
+
+            foreach (var inv in investors)
+            {
+                currentPairs.Add(new UserInfo
+                {
+                    UserId = inv.UserId,
+                    Name = inv.UserName,
+                    AvatarPath = inv.AvatarPath
+                });
+
+                int indexNumber = (int)inv.IndexNumber + roundNumber;
+
+                var hisPair = (from e in entrepreneurs
+                               where e.IndexNumber == (indexNumber >= 5 ? indexNumber - 5 : indexNumber)
+                               select e).FirstOrDefault();
+
+                currentPairs.Add(new UserInfo
+                {
+                    UserId = hisPair.UserId,
+                    Name = hisPair.UserName,
+                    AvatarPath = hisPair.AvatarPath
+                });
+            }
+
+            return currentPairs;
         }
 
         public class UserInfo

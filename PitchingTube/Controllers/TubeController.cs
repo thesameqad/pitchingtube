@@ -7,6 +7,7 @@ using System.Web.Security;
 using PitchingTube.Data;
 
 
+
 namespace PitchingTube.Controllers
 {
     [Authorize]
@@ -37,14 +38,31 @@ namespace PitchingTube.Controllers
         {
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
 
-            //int currTube
-
             //just a showcase. Will be removed in the future
-            ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, 5).UserId;
+            int roundNumber = 2;
+            ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, roundNumber);
 
-            return View();
+            List<ParticipantRepository.UserInfo> model = participantRepository.FindCurrentPairs(tubeId, roundNumber);
+
+            //BaseRepository<Partner> partner = new BaseRepository<Partner>();
+            //partner.Insert(new Partner()
+            //    {
+            //        UserId = userId,
+            //        PartnerId = ViewBag.CurrentPartnerId.UserId
+            //    });
+            
+            return View(model);
 
         }
+
+        [HttpGet]
+        public ActionResult History(Guid UserId)
+        {
+            var repository = new PartnerRepository();
+            var model = repository.History(UserId);
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Nomination(int tubeId)
         {
