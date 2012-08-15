@@ -62,23 +62,36 @@ namespace PitchingTube.Controllers
         }
 
         [HttpGet]
-        public ActionResult StartPitch(int tubeId)
+        public ActionResult StartPitch()
         {
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
 
+            var tube = participantRepository.UserIsInTube(userId);
+            int tubeId = tube.TubeId;
+
+            tube.TubeMode += 1;
+
+            //BaseRepository<Tube> tubeRepository = new BaseRepository<Tube>();
+            //tubeRepository.Update(tube);
+            //new BaseRepository<Tube>().Update(tube);
+
+            int roundNumber = (int)tube.TubeMode;
+
+            if (tube.TubeMode == TubeMode.Nominations)
+                return RedirectToAction("Nomination", new { tubeId = tubeId });
+
             //just a showcase. Will be removed in the future
-            int roundNumber = 2;
             ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, roundNumber);
 
             List<ParticipantRepository.UserInfo> model = participantRepository.FindCurrentPairs(tubeId, roundNumber);
 
             BaseRepository<Partner> partner = new BaseRepository<Partner>();
             partner.Insert(new Partner()
-                {
-                    UserId = userId,
-                    PartnerId = ViewBag.CurrentPartnerId.UserId
-                });
-            
+            {
+                UserId = userId,
+                PartnerId = ViewBag.CurrentPartnerId.UserId
+            });
+
             return View(model);
 
         }

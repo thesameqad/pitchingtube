@@ -10,6 +10,12 @@
     @ViewBag.CurrentPartnerId.UserId
 </p>
 
+<div id="time">
+    00:00
+</div>
+<div id="timeStatus">
+</div>
+
 <p>
     Other Rooms
 </p>
@@ -43,5 +49,49 @@
     }
 }
 </tr>
-
 </table>
+
+<script language="javascript">
+    var minutes = 0;
+    var seconds = 0;
+
+    var statusArray = new Array(
+            { time: 0, status: "Sharing idea" },
+            { time: 60, status: "Asking questions" },
+            { time: 100, status: "Exchanging contacts" }
+        );
+
+        $(document).ready(function () {
+
+            $('#time').text("00:00");
+            $('#timeStatus').text(statusArray[0].status);
+
+            timer = setInterval(function () {
+                seconds += 1;
+                if (seconds == 60) {
+                    minutes += 1;
+                    seconds = 0;
+                }
+                $('#time').text("0" + minutes + ":" + (seconds - 10 < 0 ? "0" : "") + seconds);
+
+                var currentTime = minutes * 60 + seconds;
+
+                for (var i = 0; i < statusArray.length; i++) {
+                    if (currentTime == statusArray[i].time)
+                        $('#timeStatus').text(statusArray[i].status);
+                }
+
+                if (currentTime == 120) {
+                    clearInterval(timer);
+                    alert("Pitch is stopped");
+                    newRound();
+                }
+            }, 1000);
+        });
+
+    function newRound()
+    {
+        window.location.href="@Url.Content("/Tube/StartPitch")";
+    } 
+
+</script>
