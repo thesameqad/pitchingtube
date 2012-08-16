@@ -52,6 +52,7 @@ C:\Users\Admin\Desktop\pitchingtube\PitchingTube\bin\Facebook.Web.Mvc.xml
 C:\Users\Admin\Desktop\pitchingtube\PitchingTube\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\pitchingtube\PitchingTube\obj\Debug\PitchingTube.dll
 C:\Users\Admin\Desktop\pitchingtube\PitchingTube\obj\Debug\PitchingTube.pdb
+<<<<<<< HEAD
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube\bin\PitchingTube.dll
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube\bin\PitchingTube.pdb
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube\bin\EntityFramework.dll
@@ -70,3 +71,23 @@ C:\Users\Dima\Desktop\pitchingtube\PitchingTube\bin\Facebook.Web.Mvc.xml
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube\obj\Debug\PitchingTube.dll
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube\obj\Debug\PitchingTube.pdb
+=======
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\EntityFramework.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\Facebook.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\Facebook.Web.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\Facebook.Web.Mvc.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.Data.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.Mailing.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\RazorEngine.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.Data.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\PitchingTube.Mailing.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\EntityFramework.xml
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\Facebook.xml
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\Facebook.Web.xml
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\bin\Facebook.Web.Mvc.xml
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\obj\Debug\PitchingTube.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube\obj\Debug\PitchingTube.pdb
+>>>>>>> f8ae3abe80de09387c979b7a65513e0be3819733

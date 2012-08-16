@@ -92,7 +92,7 @@ namespace PitchingTube.Data
 
             if (roleName == "Investor")
             {
-                roleName = "Enterepreneur";
+                roleName = "Entrepreneur";
                 indexNumber += roundNumber;
                 indexNumber = indexNumber >= 5 ? indexNumber - 5 : indexNumber;
             }

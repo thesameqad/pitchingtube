@@ -16,6 +16,7 @@ C:\Users\Admin\Desktop\thesameqad-pitchingtube-15a6f72\PitchingTube.Data\bin\Deb
 C:\Users\Admin\Desktop\thesameqad-pitchingtube-15a6f72\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\thesameqad-pitchingtube-15a6f72\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
 C:\Users\Admin\Desktop\thesameqad-pitchingtube-15a6f72\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb
+<<<<<<< HEAD
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll.config
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.pdb
@@ -25,3 +26,14 @@ C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Mail
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
 C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb
+=======
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll.config
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Mailing.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\RazorEngine.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Mailing.pdb
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
+C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb
+>>>>>>> f8ae3abe80de09387c979b7a65513e0be3819733
