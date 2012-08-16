@@ -1,5 +1,4 @@
-ALTER TABLE [dbo].[Persons](
-	ADD [AvatarPath] [nvarchar](200) NULL)
+ALTER TABLE [dbo].[Persons]( ADD [AvatarPath] [nvarchar](200) NULL)
 GO
 
 drop table [dbo].[Tubes]
