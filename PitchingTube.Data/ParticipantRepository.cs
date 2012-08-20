@@ -3,24 +3,70 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace PitchingTube.Data
 {
     public class ParticipantRepository : BaseRepository<Participant>
     {
         private BaseRepository<Tube> tubeRepository = new BaseRepository<Tube>();
+
+
+        private int findTube(string userRole)
+        {
+            int tubeId = 0;
+            try
+            {
+                SqlConnectionStringBuilder connectionstring = new SqlConnectionStringBuilder();
+                connectionstring.DataSource = @".\SQLEXPRESS";
+                connectionstring.InitialCatalog = "PitchingTube";
+                connectionstring.IntegratedSecurity = true;
+
+                SqlConnection connection = new SqlConnection(connectionstring.ConnectionString);
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandText = "findTube";
+
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "UserRole";
+                param.Value = userRole;
+
+                command.Parameters.Add(param);
+                command.CommandType = CommandType.StoredProcedure;
+
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+
+                tubeId = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+            }
+            return tubeId;
+        }
+
         public int FindBestMatchingTube(string userRole)
         {
-            var tubeList = from p in _objectSet
-                           join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
-                           where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == userRole
-                           group p by p.TubeId into p
-                           where p.Count() <= 4
-                           orderby p.Count()
-                           select p.FirstOrDefault().Tube;
-            var tube = tubeList.FirstOrDefault(); ;
+            //var tubeList = from p in _objectSet
+            //               join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+            //               where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == userRole
+            //               group p by p.TubeId into p
+            //               where p.Count() <= 4
+            //               orderby p.Count() descending
+            //               select p.FirstOrDefault().Tube;
 
-            if (tube == null)
+            //var tube = tubes.FirstOrDefault();
+
+            var tube = findTube(userRole);
+
+            if (tube == 0)//null)
             {
                 var newTube = new Tube
                 {
@@ -31,7 +77,7 @@ namespace PitchingTube.Data
                 return newTube.TubeId;
             }
 
-            return tube.TubeId;
+            return tube;//.TubeId;
 
         }
 
@@ -92,7 +138,7 @@ namespace PitchingTube.Data
 
             if (roleName == "Investor")
             {
-                roleName = "Enterepreneur";
+                roleName = "Entrepreneur";
                 indexNumber += roundNumber;
                 indexNumber = indexNumber >= 5 ? indexNumber - 5 : indexNumber;
             }

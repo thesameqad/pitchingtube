@@ -189,9 +189,6 @@
     <Content Include="Views\Shared\FacebookInit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Profile.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Tube\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Tube\StartPitch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tube\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Tube\ShareContacts.cshtml" />

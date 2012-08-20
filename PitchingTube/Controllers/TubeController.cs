@@ -37,28 +37,22 @@ namespace PitchingTube.Controllers
         [HttpGet]
         public ActionResult ShareContacts(int tubeId)
         {
-            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
+            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();        
             if (role != "Investor")
             {
                 return null;
             }
-            else
             {
-                var repository = new ParticipantRepository();
-                var repositoryP = new BaseRepository<Person>();
-                var model = repository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
-                      .Select(x => new ParticipantRepository.UserInfo()
-                      {
-                          UserId = x.UserId,
-                          Name = x.aspnet_Users.UserName,
-                          Description = x.Description,
-                          AvatarPath = repositoryP.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
-                          Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
-                      }
-                      );
-                ViewData["tubeId"] = tubeId;
+                var repository = new BaseRepository<Person>();
+                Guid Userid = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
+                var PartnerId = participantRepository.FindPartner(Userid, tubeId, (int)participantRepository.UserIsInTube(Userid).Mode);
+                var model = repository.Query(x => x.UserId == Userid).FirstOrDefault();
+
+                ViewBag.Email = PartnerId.aspnet_Users.aspnet_Membership.Email;
+                
                 return View(model);
             }
+
         }
 
         [HttpGet]

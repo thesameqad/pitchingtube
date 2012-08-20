@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
+﻿@using PitchingTube.Data
+@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
 
 @{
     ViewBag.Title = "StartPitch";
@@ -50,6 +51,16 @@
 }
 </tr>
 </table>
+
+@*<div>
+@{
+    PartnerRepository repo = new PartnerRepository();
+    List<PartnerRepository.PartnerInfo> partners = new List<PartnerRepository.PartnerInfo>();
+    partners = repo.History((Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey);
+}
+    @Html.Partial("History", partners)
+</div>*@
+
 
 <script language="javascript">
     var minutes = 0;
