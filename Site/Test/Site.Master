@@ -1,0 +1,32 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Test.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="hc" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body >
+    <form runat="server">
+        <div class="containerMain">
+            <div class="stripe"><img src="Images/Polosa.png" alt="" /></div>
+            <div class="containerToolbar">
+                <div class="toolbar">
+                    <a href="#"><img src="Images/icon-facebook.png" alt="" /></a>
+                    <a href="#"><img src="Images/icon-google-plus.png" alt="" /></a>
+                    <a href="#"><img src="Images/icon-twitter.png" alt="" /></a>
+                </div>
+            </div>
+            <div class="containerLogo">
+                <img src="Images/Logo.png" alt="PitchingTube" />
+            </div>
+            <asp:ContentPlaceHolder ID="mc" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div class="clearer"></div>
+        <div class="footer">
+            <b><%=DateTime.Now.Year %></b> Copyright <b>PitchingTube</b>
+        </div>
+    </form>
+</body>
+</html>
