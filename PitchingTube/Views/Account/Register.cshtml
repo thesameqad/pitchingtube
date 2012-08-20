@@ -4,7 +4,168 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Create a New Account</h2>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<div class="containerRegistration">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
+        <div class="frame">
+            <table style="width: 100%">
+                <tr class="TableTr">
+                    <td class="style3" rowspan="2" style="width: 40px">REGISTRATION <br>FORM</td>
+                    <td class="style1">
+                        @Html.LabelFor(m => m.UserName)
+                    </td>
+                    <td class="style2" >
+                        @Html.TextBoxFor(m => m.UserName, new {@class = "TextBox"})
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </td>
+                </tr>
+                <tr class="TableTr">
+                    <td class="style1">
+                        @Html.LabelFor(m => m.Email)
+                    </td>
+                    <td class="style2">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "TextBox" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </td>
+                </tr>
+                <tr class="TableTr">
+                    <td rowspan="2" align="center" >
+                      <a href="#" >  
+                          <span class="sectionHeader">
+                              <img src="../../Content/img/F.png" alt="" /><br/>
+                          </span>
+                      </a>
+                        
+                        @* @if (!Facebook.Web.FacebookWebContext.Current.IsAuthenticated())
+                        {
+                            <fb:login-button scope="email" ></fb:login-button>
+                        }*@
+
+                        @*<a href="#" >
+                            <div class="sectionHeader">
+                                <img src="../../Content/img/F.png" alt="" /><br/>
+                            </div>
+                        </a>*@
+                    </td>
+                    <td class="style1">
+                        @Html.LabelFor(m => m.Skype)
+                    </td>
+                    <td class="style2">
+                        @Html.TextBoxFor(m => m.Skype, new { @class = "TextBox" })
+                        @Html.ValidationMessageFor(m => m.Skype)
+                    </td>
+                </tr>
+                <tr class="TableTr" >
+                    <td class="style1" >
+                        @Html.LabelFor(m => m.Phone)
+                    </td>
+                    <td class="style2" >
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "TextBox" })
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </td>
+                </tr>
+                <tr class="TableTr">
+                    <td style="font-size: 18px" align="center">Вход через <br/>Facebook</td>
+                    <td class="style1">
+                        @Html.LabelFor(m => m.Password)
+                    </td>
+                    <td class="style2">
+                        @Html.PasswordFor(m => m.Password, new { @class = "TextBox" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </td>
+                    
+                </tr>
+                <tr class="TableTr">
+                    <td class="style3"></td>
+                    <td class="style1">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                    </td>
+                    <td class="style2">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "TextBox" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </td>
+                    <td rowspan="3">
+                        <div class="sectionHeader" id="Label7">
+                            <input type="image" src="../../Content/img/btn-go.png" alt="" style="padding-left: 15px; font-size: 25px">
+                            <span style="padding-left:25px; font-size: 25px;color: #474747;text-decoration: none">Start</span>
+                        </div>
+                        
+                        @*<a href="#" style="padding-left: 15px; font-size: 25px">
+                            <div class="sectionHeader">
+                                <img src="../../Content/img/btn-go.png" alt="" /><br/><span style="padding-left:25px">Start</span>
+                            </div>
+                        </a>*@
+                    </td>
+
+                </tr>
+                <tr class="TableTr">
+                    <td class="style3"></td>
+                    <td class="style1">
+                        @Html.LabelFor(m => m.AvatarPath)
+                    </td>
+                    <td class="style2">
+                        <input class="TextBox" type="file" name="fileUpload" id="fileUpload" onchange="readURL(this)" />
+                        @if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
+                        {
+                            <img id="avatarPreview" src="@Model.AvatarPath" height="40"/>
+                            <input type="hidden" name="AvatarPath" id="AvatarPath" value="@Model.AvatarPath"/>
+                        }
+                    </td>
+                    
+
+                </tr>
+
+                <tr class="TableTr">
+                    <td class="style3" ></td>
+                    <td class="style1"></td>    
+                    <td class="style2">
+                       @Html.DropDownListFor(m => m.Role, Model.Roles)
+                        @*@foreach(var role in Model.Roles)
+                        {
+                            @Html.RadioButtonFor(m => m.Role, role)
+                        }*@
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>
+    <div class="boxSections">
+        <div class="subheader">
+            <div runat="server" ID="lblSteps"><b>3 STEPS</b> TO GO</div>
+        </div>
+        <div class="cell">
+            <a href="#">
+                <span class="sectionHeader" runat="server" ID="lblPitch">
+                    <img src="../../Content/img/icon-timer.png" alt="" /><br/>
+                    Prepare the <b>one minute</b> pitch</span>&nbsp;
+                <img src="../../Content/img/icon-more.png" alt="" align="absbottom" /></a>
+        </div>
+        <div class="spacer">&nbsp;</div>
+        <div class="cell">
+            <a href="#">
+                <span class="sectionHeader" runat="server" ID="lblShare">
+                    <img src="../../Content/img/icon-lamp.png" alt="" /><br/>
+                    Share it with <b>investors</b></span>&nbsp;
+                <img src="../../Content/img/icon-more.png" alt="" align="absbottom" /></a>
+        </div>
+        <div class="spacer">&nbsp;</div>
+        <div class="cell">
+            <a href="#">
+                <span class="sectionHeader" runat="server" ID="lblFeedback">
+                    <img src="../../Content/img/icon-handshake.png" alt="" /><br/>
+                    Get useful <b>contacts</b> and feedback</span>&nbsp;
+                <img src="../../Content/img/icon-more.png" alt="" align="absbottom" /></a>
+        </div>
+    </div>
+
+
+
+@*<h2>Create a New Account</h2>
 <p>
     Use the form below to create a new account. 
 </p>
@@ -15,7 +176,7 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm("Register","Account",FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
     <div>
@@ -98,7 +259,7 @@
 
             </p>
         </fieldset>
-    </div>
+    </div>*@
     
     <script type="text/javascript">
         function readURL(input) {
@@ -113,4 +274,4 @@
             }
         }
     </script>
-}
+@*}*@

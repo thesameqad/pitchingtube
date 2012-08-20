@@ -1,265 +1,429 @@
-html
+html, body, form
 {
-height:100%;    
+    margin: 0;
+	padding: 0;
+	border: 0;
+	width: 100%;
+    height: 100%;
+    z-index: 0;
 }
+
 body
 {
-   background-image:url("img/Fon.jpg");
-   background-repeat: no-repeat;
-   margin:0;
-   padding:0;
-   height:100%;
+    font: 12px Helvetica, Arial, sans-serif, Tahoma, Verdana;
+    color: #474747;
+    background-image:url("../Content/img/Fon.png")
 }
 
-#page {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    min-height:90%;
-    position:relative;
+a {
+    text-decoration: none
 }
 
-header, #header {
-    position: relative;
-    margin: 50px 0px;
-    
-}
-#MainBody
-{
-    width:100%;
-}
-#logindisplay {
-    font-size: 1.1em;
-    display: block;
-    text-align: right;
-    margin: 10px;
-    color: White;
-}
-#RegBody
-{
-   background-image:url("img/RegFon.png");
-}
-#TextLogo
-{
-    font:24px Verdana;
-    font-size:18px;
-    font-family:PFDinTextPro-Black;
-    width: 100px;
-    text-align: right;
- }
+a:link { color: #474747 }
+a:visited {color: #474747 }
+a:active {color: #474747 }
+a:hover {color: #474747 }
 
-#Logo
-{
-    width:200px; 	
-    font:24px Verdana;
+ul {
+    list-style: none
 }
 
-#InputText
+table
 {
-    width:800px; /* Ўирина блока */
-   height:80px; 	
- }
-
-#RegFormDiv
-{
-    width:350px; /* Ўирина блока */  
-    font:55px PFDinTextPro-Thin; 
-    color:#2F4F4F;
- }
-#A
-{
-    width:80px; /* Ўирина блока */  
-    top:86px;
-    left:800px;	
- }
-#Facebook
-{
-   font-family:"Helvetica Bold";
-   font-size:28px;
-   position: absolute;   
-   top:300px;
-   left:130px;
+    border-collapse:collapse;    
+    padding:0px
 }
-#RegInf
+
+img {
+    border: 0px
+
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-weight: 200;
+    margin: 0px
+}
+
+.clearer {
+    clear: both
+}
+
+.stripe {
+    height: 5px;
+}
+
+.containerToolbar {
+    width: 800px;
+    margin: 0 auto;
+    height: 36px;
+    padding-top: 5px
+}
+
+.containerToolbar .toolbar {
+    float: right;
+    height: 100%;
+    width: 120px;
+}
+
+.containerMain {
+    width: 100%;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em
+}
+
+.containerLogo {
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 10px
+}
+
+.containerInvestors {
+    width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 60px;
+    text-align: center
+}
+
+.containerInvestors h1.header {
+    font-size: 40px;
+    padding-bottom: 30px
+}
+
+.txtIdea {
+    background-color: #D6FACC;
+    border-radius: 8px 0 0 8px;
+    border-width: 0;
+    font-size: 50px;
+    font-weight: bold;
+    height: 79px;
+    padding-left: 20px;
+    width: 685px
+}
+
+.boxSections {
+    width: 800px;
+    margin: 30px auto 0px;
+    text-align: center;
+    padding-bottom:40px;
+}
+
+.boxSections .subheader {
+    font-size: 40px;
+    padding-bottom: 40px
+}
+
+.boxSections .spacer{
+    float: left;
+    width: 190px
+}
+
+.boxSections .cell{
+    float: left;
+    width: 140px;
+    text-align: left;
+    padding-bottom: 40px;
+}
+
+.boxSections .cell .sectionHeader{
+    font-size: 22px
+}
+
+.containerRegistration {
+    width: 100%;
+    background-color: #D6FACC;
+    height: auto;
+    margin-top: 40px
+}
+
+.containerRegistration .frame{
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 20px
+}
+.containerRegistration .frame .TableTr
+{
+	height:30px;
+}
+.containerRegistration .frame .style1
+{
+	text-align: right;
+	font: 15px Helvetica Bold;	
+	width:30px;
+}
+.containerRegistration .frame .style2
+{
+	text-align: left;	
+	padding-left:5px;
+	width:230px;
+}
+.containerRegistration .frame .style3
+{
+	font-family:Helvetica_Light-Normal;
+    font-size:40px;
+    text-align:right;
+    padding-right:20px;
+}
+.containerRegistration .frame .TextBox
+{
+	width:220px;
+	height:25px;	
+	background-color:Honeydew;
+	font: 15px Helvetica Bold;
+	border:0px ;
+	border-radius: 5px 5px 5px 5px;
+	margin: 5px 0 0 0;
+}
+.containerRegistration .frame .TextBox:focus 
 { 
-    top:10px;
-    left:380px;
- width:70px;
-  font-family: helvetica; 
-font-size:16px; 
-font-weight:bold;
-/*border: 1px solid blue;*/	
+	border: 3px solid #3CB371; 
 }
-#RegInput
+.containerRegistration .frame .TextBox:hover 
 { 
-    top:25px;
-    left:480px;
- width:300px;
-height:400px;
-  font-family: helvetica; 
-font-size:16px; 
-font-weight:bold;	
+	border: 3px solid #3CB371; 
 }
-#name
+.containerPitch{
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-left:200px;
+    padding-bottom:70px;
+    text-align: center;
+}
+.containerPitch .Tr{
+    height:60px;
+    font:20px PFDinTextPro-Thin;
+}
+.containerPitch .time
 {
-    border:none;
-	/*background:url("Img/Vvod.png") no-repeat;*/
-	font-family:"Helvitica Bold";
+	font:70px PFDinTextPro-Thin;
+	text-align:right;
+	padding-right:5px;	
+	vertical-align:top;
+}
+.containerPitch .video
+{
+	vertical-align:top;
+}
+.containerPitch .investor
+{
+	font:20px PFDinTextPro-Thin;	
+	text-align:left;
+	padding-left:5px;
+	background-color:#D6FACC;
+}
+.containerPitch .question
+{
+	font:20px PFDinTextPro-Thin;	
+	text-align:right;
+	padding-right:5px;
+}
+.containerPitch .style3
+{	
+	text-align:left;
+	padding-left:5px;
+	background-color:#D6FACC;
+	padding-top:20px;
+	width:55px;
+}
+.containerPitch .style4
+{
+	text-align:left;
+	font:18px PFDinTextPro-Light;	
+}
+.containerPitch .AtherRooms
+{
+	width:100%;	
+}
+.containerPitch .AtherRooms .Probel
+{
+	width:58px;
+}
+.containerPitch .AtherRooms .RoomTr
+{
+	height:60px;	
+}
+.containerPitch .AtherRooms .LeftRoomTrFIO
+{
+	height:60px;
+	vertical-align:top;	
+	font:18px PFDinTextPro-Light;	
+	text-align:left;
+}
+.containerPitch .AtherRooms .RightRoomTrFIO
+{
+	height:60px;
+	vertical-align:top;	
+	font:18px PFDinTextPro-Light;	
+	text-align:right;
+}
+.ConteinerPpreloader 
+{
+	width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    text-align: center;
+} 
+.ConteinerPpreloader  .Preloader
+{
+	padding-top:150px;
+}
+.ConteinerPpreloader .Searching
+{
+	font: 40px Tahoma;
+	color:#696969;			
+}
+.ConteinerPpreloader .Minutes
+{
+	font: 35px Tahoma;
+	color:#696969;			
+}
+.ConteinerPpreloader .Message
+{
+	background-color:#D6FACC;
+	width:600px;
+	height:180px;
+	margin: 0 auto;	
+}
+.ConteinerPpreloader .Message .title
+{
+	margin: 0 auto;	
+	font: 40px Tahoma;
+	color:#696969;	
+	margin-top:30px;
+}
+.ConteinerPpreloader .Message .Button1
+{
+	width:120px;
+	height:40px;
+	border:none;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	margin-top:20px;
+}
+.ConteinerPpreloader .Message .Button2
+{
+	width:120px;
+	height:40px;
+	border:none;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	margin-top:20px;
+}
+.ConteinerResult
+{
+	width: 800px;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 50px	
+}
+.ConteinerResult .resultTable
+{
+}
+.ConteinerResult .resultTable .Tr
+{
+	height:120px;
+}
+.ConteinerResult .Title
+{
+	font-size:20px;
+	padding-bottom:15px;
+	padding-left:15px;
+}
+.ConteinerResult .Number
+{
+	font-size:55px;
+	font-weight: 100;
+	font-family: Garamond Premier Pro Light;
+	text-align:right;
+}
+.ConteinerResult .Zvezda
+{
+	vertical-align:super;
+	text-align:left;	
+}
+.ConteinerResult .Name
+{
 	font-size:18px;
-	padding:12px 10px 10px 10px; /*место ввода слов*/
-	width:280px;
-	height:8px;
-	top:5px;
+	padding-bottom:30px;
 }
-#email
+.ConteinerResult .Idea
 {
-    border:none;
-	/*background:url("Img/Vvod.png") no-repeat;*/
-	font-family:"Helvitica Bold";
+	font-size:16px;
+	font-weight: bold;
+	font-family:Helvetica Neue;
+	vertical-align:super;
+}
+.ConteinerResult .Idea .DescribeIdea
+{
+	padding-right:50px;	
+}
+.ConteinerResult .Preloader
+{
+	width:70px;
+	text-align:center;
+}
+.ConteinerResult .Galochka
+{
+	text-align:left;
+	padding-bottom:2px;
+}
+.ConteinerResult .Galochka .Panding
+{
+	margin-top:-30px;
+	text-align:center;	
+}
+.ConteinerNomination
+{
+	width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    font-family:Tahoma;
+}
+.ConteinerNomination .Tr
+{
+	height:100px;
+}
+.ConteinerNomination .Tr .Idea
+{
+	font:18px Helvetica Bold;
+    vertical-align:sub;
+    padding-left:20px;
+}
+.ConteinerNomination .Tr .Idea .DescribeIdea
+{
+	padding-right:10PX;
+	width:300px;
+}
+.ConteinerNomination .FIO
+{
+    font:18px Helvetica Bold;
+    vertical-align:bottom;
+}
+.ConteinerNomination  .Button1
+{
+	width:80px;
+	height:40px;
+	border:none;
 	font-size:18px;
-	padding:12px 10px 10px 10px; /*место ввода слов*/
-	width:280px;
-	height:8px;
-	top:78px;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	float:right;
+	margin-left:10px;
+	margin-top:7px;
 }
-#tel
-{
-    border:none;
-	/*background:url("Img/Vvod.png") no-repeat;*/
-	font-family:"Helvitica Bold";
-	font-size:18px;
-	padding:12px 10px 10px 10px; /*место ввода слов*/
-	width:280px;
-	height:8px;
-	top:210px;
+.footer {
+    width: 800px;
+    height: 4em;
+    margin: 0 auto;
 }
-#skype
-{
-    border:none;
-	/*background:url("Img/Vvod.png") no-repeat;*/
-	font-family:"Helvitica Bold";
-	font-size:18px;
-	padding:12px 10px 10px 10px; /*место ввода слов*/
-	width:280px;
-	height:8px;
-	top:145px;
-}
-#password
-{
-    border:none;
-	/*background:url("Img/Vvod.png") no-repeat;*/
-	font-family:"Helvitica Bold";
-	font-size:18px;
-	padding:12px 10px 10px 10px; /*место ввода слов*/
-	width:280px;
-	height:8px;
-	top:300px;
-}
-#repitPas
-{
-    border:none;
-	/*background:url("Img/Vvod.png") no-repeat;*/
-	font-family:"Helvitica Bold";
-	font-size:18px;
-	padding:12px 10px 10px 10px; /*место ввода слов*/
-	width:280px;
-	height:8px;
-	top:360px;
-}
-#Radio
-{  
-    font-family: helvetica; 
-    font-size:17px; 
-    font-weight:bold;
-}
-#Start
-{   
-    font-family: helvetica; 
-    font-size:25px; 
-    font-weight:bold;
-}
-#clock{
-    width: 240px;
-    height: 100px;
-}
-
-#bulb{
-    width: 200px;
-    height: 100px;
-}
-
-#handshake{
-
-width: 200px;
-height: 100px;
-left:780px;
-top:580px;	
-}
-#Play1{
-
-width: 40px;
-height: 40px;
-position: absolute;
-left:150px;	
-top:615px;
-}
-#Play2{
-
-width: 40px;
-height: 40px;
-position: absolute;
-left:545px;	
-top:612px;
-}
-#Play3{
-
-width: 40px;
-height: 40px;
-position: absolute;
-left:893px;	
-top:645px;
-}
-
-#footer{  
-   position:absolute;
-   bottom:0;
-   width:100%;
-   height:60px;   
-}
-#description
-{
-    border:none;
-	background:url("img/Vvod.png") no-repeat;
-	font-family:"Helvitica Bold";
-	font-size:40px;
-	padding:22px 20px 20px 20px; /*место ввода слов*/
-	width:650px;
-	height:80px;
-}
-
-#li1
-{
-    list-style-image:url('Img/Play1.png');
-}
-
-#startTube
-{
-    margin-left:10px;
-    float:right;
-}
-.promoText
-{
-    font-size:48px;
-    margin-top:12px;
-    font-family:PFDinTextPro-Thin;
-    color:#363636;
-}
-
-.tile
-{
-    font-size:30px;
-    font-family:PFDinTextPro-Thin; 
-    color:#696969;
-    float:left;
-}
-

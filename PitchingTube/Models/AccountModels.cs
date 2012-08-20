@@ -49,7 +49,7 @@ namespace PitchingTube.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Name")]
         public string UserName { get; set; }
 
         [Required]
@@ -64,7 +64,7 @@ namespace PitchingTube.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Retype")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -95,7 +95,7 @@ namespace PitchingTube.Models
             {
                 var roles = System.Web.Security.Roles.GetAllRoles();
                 List<SelectListItem> rolesList = new List<SelectListItem>();
-
+    
                 for (int index = 0; index < roles.Length; index++)
                 {
                     rolesList.Add( new SelectListItem {

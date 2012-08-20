@@ -8,28 +8,56 @@
     <script type="text/javascript" src="/Scripts/jquery.validate.min.js"></script>
     <script src="/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
 </head>
-<body>
-   <div id="page">
-   
-   <div id="header">
-    <div id="TextLogo" style="float:left;"> PITCHING<br /><strong>TUBE</strong></div>
-
-    <div id="Logo" style="float:left;">
-        <img src="@Url.Content("~/Content/img/logo.png")" alt="" />
-    </div>
-
-    <div id="logindisplay">
-        @Html.Partial("_LogOnPartial")
-    </div>
-    <div style="clear:both"></div>
-   </div>
-   <div id="MainBody">
-             @RenderBody()
-             @{ Html.RenderPartial("FacebookInit"); }
+<body>      
+    <form runat="server">
+        <div class="containerMain">
+            <div class="stripe"><img src="../../Content/img/Polosa.png" alt="" /></div>
+            <div class="containerToolbar">
+                <div class="toolbar">
+                    <a href="#"><img src="../../Content/img/icon-facebook.png" alt="" /></a>
+                    <a href="#"><img src="../../Content/img/icon-google-plus.png" alt="" /></a>
+                    <a href="#"><img src="../../Content/img/icon-twitter.png" alt="" /></a>
+                </div>
+            </div>
+            <div class="containerLogo">
+                <img src="../../Content/img/Logo.png" alt="PitchingTube" />
+            </div>
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
+            <div id="mc">
+                @RenderBody()
+                @{ Html.RenderPartial("FacebookInit"); }
+            </div>
         </div>
-        <div id="footer">
-        <p> 2012 <font color="#B5B5B5">Copyright</font> PichingTube </p>
-   </div>
-   </div> 
-</body>
+        <div class="clearer"></div>
+        <div class="footer">
+            <b>@DateTime.Now.Year </b> Copyright <b>PitchingTube</b>
+        </div>
+        
+    </form>
+
+        @*<div id="page">
+   
+            <div id="header">
+                <div id="TextLogo" style="float:left;"> PITCHING<br /><strong>TUBE</strong></div>
+
+                <div id="Logo" style="float:left;">
+                    <img src="@Url.Content("~/Content/img/logo.png")" alt="" />
+                </div>
+
+                <div id="logindisplay">
+                    @Html.Partial("_LogOnPartial")
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div id="MainBody">
+                @RenderBody()
+                @{ Html.RenderPartial("FacebookInit"); }
+            </div>
+            <div id="footer">
+                <p> 2012 <font color="#B5B5B5">Copyright</font> PichingTube </p>
+            </div>
+        </div> *@
+    </body>
 </html>

@@ -3,38 +3,51 @@
 }
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "startPitchForm" }))
-{
-    <div style="text-align:center">
-    <p class="promoText">@ViewBag.Message</p>
-    <div style="float:left;width:90%;">
-        <input id="description" name="description" style="width:100%;" type="text" value="@ViewBag.DefaultValue"
-        onfocus="this.title=(this.title ? this.title : this.value); this.value=(this.value==this.title ? '' : this.value);" onblur="this.value=(this.value=='' ? this.title : this.value);"/>
-    </div>
-    <div id="startTube">
-    <input type="image" src="@Url.Content("~/Content/img/Rocket.png")" />
-    </div>
-    </div>
+{  
+    <div class="containerInvestors">
+        <h1 class="header">@ViewBag.Message</h1>
+        <table>
+            <tr>
+                <td style="height: 81px">
+                    <input id="txtIdeaDescription" class="txtIdea" name="description" type="text" value="@ViewBag.DefaultValue"
+                            onfocus="this.title=(this.title ? this.title : this.value); this.value=(this.value==this.title ? '' : this.value);" onblur="this.value=(this.value=='' ? this.title : this.value);"/>
+                </td>
+                <td>
+                    <input id="ibGo" type="image" src="@Url.Content("../../Content/img/btn-go.png")" style="right: 10px; position: relative"/>
+                </td>
+            </tr>
+        </table>
+    </div>   
 }
 
-<p style="text-align:center;font-size:50px; margin-top:180px;margin-right:60px; font-family:PFDinTextPro-Medium">3 STEPS
- <font face="PFDinTextPro-Thin" color=#828282> TO GO </font>
-</p>
-<p style="margin-top:80px; margin-left:50px;text-align:center;">
-    <img src="@Url.Content("~/Content/img/All.png")">
-</p>
-<div style="text-align:center;">
-<div id="clock" class="tile">
-    Prepare the 
-    <font  size=6  face="PFDinTextPro-Bold" color="#000000"> one <br/>minute</font> pich
+<div class="boxSections">
+    <div class="subheader">
+        <p id="lblSteps"><b>3 STEPS</b> TO GO</p>
+    </div>
+    <div class="cell">
+        <a href="#">
+            <span class="sectionHeader" id="lblPitch">
+                <img src="../../Content/img/icon-timer.png" alt="" /><br/>
+                Prepare the <b>one minute</b> pitch</span>&nbsp;
+            <img src="../../Content/img/icon-more.png" alt="" align="absbottom" /></a>
+    </div>
+    <div class="spacer">&nbsp;</div>
+    <div class="cell">
+        <a href="#">
+            <span class="sectionHeader" id="lblShare">
+                <img src="../../Content/img/icon-lamp.png" alt="" /><br/>
+                Share it with <b>investors</b></span>&nbsp;
+            <img src="../../Content/img/icon-more.png" alt="" align="absbottom" /></a>
+    </div>
+    <div class="spacer">&nbsp;</div>
+    <div class="cell">
+        <a href="#">
+            <span class="sectionHeader" id="lblFeedback">
+                <img src="../../Content/img/icon-handshake.png" alt="" /><br/>
+                Get useful <b>contacts</b> and feedback</span>&nbsp;
+            <img src="../../Content/img/icon-more.png" alt="" align="absbottom" /></a>
+    </div>
 </div>
 
-<div id="bulb" class="tile" style="margin-left:150px;">
-    Share it with <font size=6 face="PFDinTextPro-Bold" color="#000000"> investors</font>
-</div>
-
-<div id="handshake" class="tile" style="margin-left:150px;">
-    Get useful <font size=6  face="PFDinTextPro-Bold" color="#000000"> contacts</font> and feedback
-</div> 
-</div>
 
 
