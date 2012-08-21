@@ -8,24 +8,29 @@ namespace PitchingTube.Data
 {
     public class PartnerRepository : BaseRepository <Partner>
     {
-        public class PartnerInfo
-        {
-            public string Name { get; set; }
-            public string AvatarPath { get; set; }
-            public string Contact { get; set; }
-        }
-        public List<PartnerInfo> History(Guid UserId)
+        private ParticipantRepository participantRepository = new ParticipantRepository();
+        private BaseRepository<aspnet_Users> userPepository = new BaseRepository<aspnet_Users>();
+
+        public List<PitchingTube.Data.ParticipantRepository.UserInfo> History(Guid UserId)
         {
             var HistoryPartners = Query(x => x.UserId == UserId);
-            var partners = new List<PartnerInfo>();
+            var partners = new List<PitchingTube.Data.ParticipantRepository.UserInfo>();
             foreach (var partner in HistoryPartners)
             {
                 var repository = new BaseRepository<Person>();
                 var person = repository.FirstOrDefault(x => x.UserId == partner.PartnerId);
                 var avatar = person.AvatarPath.Replace("\\", "/");
-                var partnerName = new BaseRepository<aspnet_Users>();
-                var name = partnerName.FirstOrDefault(x => x.UserId == partner.PartnerId);
-                partners.Add(new PartnerInfo() { Name = name.UserName,  AvatarPath = avatar, Contact=partner.Contacts });
+                var user = userPepository.FirstOrDefault(x => x.UserId == partner.PartnerId);
+
+                var participant = participantRepository.FirstOrDefault(x => x.UserId == partner.PartnerId);
+
+                partners.Add(new PitchingTube.Data.ParticipantRepository.UserInfo() { 
+                    Name = user.UserName,  
+                    AvatarPath = avatar,
+                    Description = participant.Description,
+                    Role = user.aspnet_Roles.FirstOrDefault().RoleName,
+                    UserId = partner.UserId,
+                    Contacts=partner.Contacts });
             }
             return partners;
         }

@@ -236,26 +236,26 @@ h1, h2, h3, h4, h5, h6
 	text-align:left;
 	font:18px PFDinTextPro-Light;	
 }
-.containerPitch .AtherRooms
+.containerPitch .OtherRooms
 {
 	width:100%;	
 }
-.containerPitch .AtherRooms .Probel
+.containerPitch .OtherRooms .Probel
 {
 	width:58px;
 }
-.containerPitch .AtherRooms .RoomTr
+.containerPitch .OtherRooms .RoomTr
 {
 	height:60px;	
 }
-.containerPitch .AtherRooms .LeftRoomTrFIO
+.containerPitch .OtherRooms .LeftRoomTrFIO
 {
 	height:60px;
 	vertical-align:top;	
 	font:18px PFDinTextPro-Light;	
 	text-align:left;
 }
-.containerPitch .AtherRooms .RightRoomTrFIO
+.containerPitch .OtherRooms .RightRoomTrFIO
 {
 	height:60px;
 	vertical-align:top;	
