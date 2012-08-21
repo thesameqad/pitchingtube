@@ -222,11 +222,19 @@ namespace PitchingTube.Data
 
             return currentPairs;
         }
+        public string GetPay(Guid userId)
+        {
+            var pay = (from u in _context.Persons
+                       where u.UserId == userId
+                       select u.Pay).FirstOrDefault();
+            return pay;
+        }
 
         public class UserInfo
         {
             public Guid UserId { get; set; }
             public string Name { get; set; }
+            public string Email { get; set; }
             public string AvatarPath { get; set; }
             public string Description { get; set; }
             public string Role { get; set; }

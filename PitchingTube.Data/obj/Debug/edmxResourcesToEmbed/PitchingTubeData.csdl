@@ -137,6 +137,7 @@
     <Property Type="String" Name="ActivationLink" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="AvatarPath" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="Person" ToRole="aspnet_Users" />
+    <Property Type="String" Name="Pay" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Tube">
     <Key>

@@ -2370,6 +2370,30 @@ namespace PitchingTube.Data
         private global::System.String _AvatarPath;
         partial void OnAvatarPathChanging(global::System.String value);
         partial void OnAvatarPathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Pay
+        {
+            get
+            {
+                return _Pay;
+            }
+            set
+            {
+                OnPayChanging(value);
+                ReportPropertyChanging("Pay");
+                _Pay = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Pay");
+                OnPayChanged();
+            }
+        }
+        private global::System.String _Pay;
+        partial void OnPayChanging(global::System.String value);
+        partial void OnPayChanged();
 
         #endregion
     
