@@ -224,10 +224,11 @@ namespace PitchingTube.Data
         }
         public string GetPay(Guid userId)
         {
-            var pay = (from u in _context.Persons
-                       where u.UserId == userId
-                       select u.Pay).FirstOrDefault();
-            return pay;
+            //var pay = (from u in _context.Persons
+            //           where u.UserId == userId
+            //           select u.Pay).FirstOrDefault();
+            //return pay;
+            return null;
         }
 
         public class UserInfo
@@ -241,7 +242,6 @@ namespace PitchingTube.Data
             public int Nomination { get; set; }
             public int Panding { get; set; }
             public string Contacts { get; set; }
-            public string Email { get; set; }
         }
 
         public List<UserInfo> GetResult(int tubeId)
