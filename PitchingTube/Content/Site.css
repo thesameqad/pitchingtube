@@ -1,324 +1,429 @@
-﻿/*----------------------------------------------------------
-The base color for this template is #5c87b2. If you'd like
-to use a different color start by replacing all instances of
-#5c87b2 with your new color.
-----------------------------------------------------------*/
-body {
-    background-color: #5c87b2;
-    font-size: .85em;
-    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+﻿html, body, form
+{
     margin: 0;
-    padding: 0;
-    color: #696969;
+	padding: 0;
+	border: 0;
+	width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
-a:link {
-    color: #034af3;
-    text-decoration: underline;
+body
+{
+    font: 12px Helvetica, Arial, sans-serif, Tahoma, Verdana;
+    color: #474747;
+    background-image:url("../Content/img/Fon.png")
 }
 
-a:visited {
-    color: #505abc;
+a {
+    text-decoration: none
 }
 
-a:hover {
-    color: #1d60ff;
-    text-decoration: none;
+a:link { color: #474747 }
+a:visited {color: #474747 }
+a:active {color: #474747 }
+a:hover {color: #474747 }
+
+ul {
+    list-style: none
 }
 
-a:active {
-    color: #12eb87;
+table
+{
+    border-collapse:collapse;    
+    padding:0px
 }
 
-p, ul {
-    margin-bottom: 20px;
-    line-height: 1.6em;
+img {
+    border: 0px
+
 }
 
-header,
-footer,
-nav,
-section {
-    display: block;
+h1, h2, h3, h4, h5, h6
+{
+    font-weight: 200;
+    margin: 0px
 }
 
-/* HEADINGS   
-----------------------------------------------------------*/
-h1, h2, h3, h4, h5, h6 {
-    font-size: 1.5em;
-    color: #000;
+.clearer {
+    clear: both
 }
 
-h1 {
-    font-size: 2em;
-    padding-bottom: 0;
-    margin-bottom: 0;
+.stripe {
+    height: 5px;
 }
 
-h2 {
-    padding: 0 0 10px 0;
+.containerToolbar {
+    width: 800px;
+    margin: 0 auto;
+    height: 36px;
+    padding-top: 5px
 }
 
-h3 {
-    font-size: 1.2em;
+.containerToolbar .toolbar {
+    float: right;
+    height: 100%;
+    width: 120px;
 }
 
-h4 {
-    font-size: 1.1em;
+.containerMain {
+    width: 100%;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em
 }
 
-h5, h6 {
-    font-size: 1em;
+.containerLogo {
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 10px
 }
 
-/* PRIMARY LAYOUT ELEMENTS   
-----------------------------------------------------------*/
-
-/* you can specify a greater or lesser percentage for the 
-page width. Or, you can specify an exact pixel width. */
-.page {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+.containerInvestors {
+    width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 60px;
+    text-align: center
 }
 
-header, #header {
-    position: relative;
-    margin-bottom: 0px;
-    color: #000;
-    padding: 0;
+.containerInvestors h1.header {
+    font-size: 40px;
+    padding-bottom: 30px
 }
 
-header h1, #header h1 {
+.txtIdea {
+    background-color: #D6FACC;
+    border-radius: 8px 0 0 8px;
+    border-width: 0;
+    font-size: 50px;
     font-weight: bold;
-    padding: 5px 0;
-    margin: 0;
-    color: #fff;
-    border: none;
-    line-height: 2em;
-    font-size: 32px !important;
-    text-shadow: 1px 1px 2px #111;
+    height: 79px;
+    padding-left: 20px;
+    width: 685px
 }
 
-#main {
-    padding: 30px 30px 15px 30px;
-    background-color: #fff;
-    border-radius: 4px 0 0 0;
-    -webkit-border-radius: 4px 0 0 0;
-    -moz-border-radius: 4px 0 0 0;
-}
-
-footer, 
-#footer {
-    background-color: #fff;
-    color: #999;
-    padding: 10px 0;
+.boxSections {
+    width: 800px;
+    margin: 30px auto 0px;
     text-align: center;
-    line-height: normal;
-    margin: 0 0 30px 0;
-    font-size: .9em;
-    border-radius: 0 0 4px 4px;
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
+    padding-bottom:40px;
 }
 
-/* TAB MENU   
-----------------------------------------------------------*/
-ul#menu {
-    border-bottom: 1px #5C87B2 solid;
-    padding: 0 0 2px;
-    position: relative;
-    margin: 0;
-    text-align: right;
+.boxSections .subheader {
+    font-size: 40px;
+    padding-bottom: 40px
 }
 
-ul#menu li {
-    display: inline;
-    list-style: none;
-}
-
-ul#menu li#greeting {
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    color: #fff;
-}
-
-ul#menu li a {
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
-    border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-}
-
-ul#menu li a:hover {
-    background-color: #fff;
-    text-decoration: none;
-}
-
-ul#menu li a:active {
-    background-color: #a6e2a6;
-    text-decoration: none;
-}
-
-ul#menu li.selected a {
-    background-color: #fff;
-    color: #000;
-}
-
-/* FORM LAYOUT ELEMENTS   
-----------------------------------------------------------*/
-
-fieldset {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
-}
-
-legend {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-textarea {
-    min-height: 75px;
-}
-
-input[type="text"], 
-input[type="password"] {
-    border: 1px solid #ccc;
-    padding: 2px;
-    font-size: 1.2em;
-    color: #444;
-    width: 200px;
-}
-
-select {
-    border: 1px solid #ccc;
-    padding: 2px;
-    font-size: 1.2em;
-    color: #444;
-}
-
-input[type="submit"] {
-    font-size: 1.2em;
-    padding: 5px;
-}
-
-/* TABLE
-----------------------------------------------------------*/
-
-table {
-    border: solid 1px #e8eef4;
-    border-collapse: collapse;
-}
-
-table td {
-    padding: 5px;
-    border: solid 1px #e8eef4;
-}
-
-table th {
-    padding: 6px 5px;
-    text-align: left;
-    background-color: #e8eef4;
-    border: solid 1px #e8eef4;
-}
-
-/* MISC  
-----------------------------------------------------------*/
-.clear {
-    clear: both;
-}
-
-.error {
-    color: Red;
-}
-
-nav, 
-#menucontainer {
-    margin-top: 40px;
-}
-
-div#title {
-    display: block;
+.boxSections .spacer{
     float: left;
+    width: 190px
+}
+
+.boxSections .cell{
+    float: left;
+    width: 140px;
     text-align: left;
+    padding-bottom: 40px;
 }
 
-#logindisplay {
-    font-size: 1.1em;
-    display: block;
-    text-align: right;
-    margin: 10px;
-    color: White;
+.boxSections .cell .sectionHeader{
+    font-size: 22px
 }
 
-#logindisplay a:link {
-    color: white;
-    text-decoration: underline;
+.containerRegistration {
+    width: 100%;
+    background-color: #D6FACC;
+    height: auto;
+    margin-top: 40px
 }
 
-#logindisplay a:visited {
-    color: white;
-    text-decoration: underline;
+.containerRegistration .frame{
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 20px
 }
-
-#logindisplay a:hover {
-    color: white;
-    text-decoration: none;
+.containerRegistration .frame .TableTr
+{
+	height:30px;
 }
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error {
-    color: #ff0000;
+.containerRegistration .frame .style1
+{
+	text-align: right;
+	font: 15px Helvetica Bold;	
+	width:30px;
 }
-
-.field-validation-valid {
-    display: none;
+.containerRegistration .frame .style2
+{
+	text-align: left;	
+	padding-left:5px;
+	width:230px;
 }
-
-.input-validation-error {
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
+.containerRegistration .frame .style3
+{
+	font-family:Helvetica_Light-Normal;
+    font-size:40px;
+    text-align:right;
+    padding-right:20px;
 }
-
-.validation-summary-errors {
-    font-weight: bold;
-    color: #ff0000;
+.containerRegistration .frame .TextBox
+{
+	width:220px;
+	height:25px;	
+	background-color:Honeydew;
+	font: 15px Helvetica Bold;
+	border:0px ;
+	border-radius: 5px 5px 5px 5px;
+	margin: 5px 0 0 0;
 }
-
-.validation-summary-valid {
-    display: none;
+.containerRegistration .frame .TextBox:focus 
+{ 
+	border: 3px solid #3CB371; 
 }
-
-/* Styles for editor and display helpers
-----------------------------------------------------------*/
-.display-label, 
-.editor-label {
-    margin: 1em 0 0 0;
+.containerRegistration .frame .TextBox:hover 
+{ 
+	border: 3px solid #3CB371; 
 }
-
-.display-field, 
-.editor-field {
-    margin: 0.5em 0 0 0;
+.containerPitch{
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-left:200px;
+    padding-bottom:70px;
+    text-align: center;
 }
-
-.text-box {
-    width: 30em;
+.containerPitch .Tr{
+    height:60px;
+    font:20px PFDinTextPro-Thin;
 }
-
-.text-box.multi-line {
-    height: 6.5em;
+.containerPitch .time
+{
+	font:70px PFDinTextPro-Thin;
+	text-align:right;
+	padding-right:5px;	
+	vertical-align:top;
 }
-
-.tri-state {
-    width: 6em;
+.containerPitch .video
+{
+	vertical-align:top;
+}
+.containerPitch .investor
+{
+	font:20px PFDinTextPro-Thin;	
+	text-align:left;
+	padding-left:5px;
+	background-color:#D6FACC;
+}
+.containerPitch .question
+{
+	font:20px PFDinTextPro-Thin;	
+	text-align:right;
+	padding-right:5px;
+}
+.containerPitch .style3
+{	
+	text-align:left;
+	padding-left:5px;
+	background-color:#D6FACC;
+	padding-top:20px;
+	width:55px;
+}
+.containerPitch .style4
+{
+	text-align:left;
+	font:18px PFDinTextPro-Light;	
+}
+.containerPitch .AtherRooms
+{
+	width:100%;	
+}
+.containerPitch .AtherRooms .Probel
+{
+	width:58px;
+}
+.containerPitch .AtherRooms .RoomTr
+{
+	height:60px;	
+}
+.containerPitch .AtherRooms .LeftRoomTrFIO
+{
+	height:60px;
+	vertical-align:top;	
+	font:18px PFDinTextPro-Light;	
+	text-align:left;
+}
+.containerPitch .AtherRooms .RightRoomTrFIO
+{
+	height:60px;
+	vertical-align:top;	
+	font:18px PFDinTextPro-Light;	
+	text-align:right;
+}
+.ConteinerPpreloader 
+{
+	width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    text-align: center;
+} 
+.ConteinerPpreloader  .Preloader
+{
+	padding-top:150px;
+}
+.ConteinerPpreloader .Searching
+{
+	font: 40px Tahoma;
+	color:#696969;			
+}
+.ConteinerPpreloader .Minutes
+{
+	font: 35px Tahoma;
+	color:#696969;			
+}
+.ConteinerPpreloader .Message
+{
+	background-color:#D6FACC;
+	width:600px;
+	height:180px;
+	margin: 0 auto;	
+}
+.ConteinerPpreloader .Message .title
+{
+	margin: 0 auto;	
+	font: 40px Tahoma;
+	color:#696969;	
+	margin-top:30px;
+}
+.ConteinerPpreloader .Message .Button1
+{
+	width:120px;
+	height:40px;
+	border:none;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	margin-top:20px;
+}
+.ConteinerPpreloader .Message .Button2
+{
+	width:120px;
+	height:40px;
+	border:none;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	margin-top:20px;
+}
+.ConteinerResult
+{
+	width: 800px;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 50px	
+}
+.ConteinerResult .resultTable
+{
+}
+.ConteinerResult .resultTable .Tr
+{
+	height:120px;
+}
+.ConteinerResult .Title
+{
+	font-size:20px;
+	padding-bottom:15px;
+	padding-left:15px;
+}
+.ConteinerResult .Number
+{
+	font-size:55px;
+	font-weight: 100;
+	font-family: Garamond Premier Pro Light;
+	text-align:right;
+}
+.ConteinerResult .Zvezda
+{
+	vertical-align:super;
+	text-align:left;	
+}
+.ConteinerResult .Name
+{
+	font-size:18px;
+	padding-bottom:30px;
+}
+.ConteinerResult .Idea
+{
+	font-size:16px;
+	font-weight: bold;
+	font-family:Helvetica Neue;
+	vertical-align:super;
+}
+.ConteinerResult .Idea .DescribeIdea
+{
+	padding-right:50px;	
+}
+.ConteinerResult .Preloader
+{
+	width:70px;
+	text-align:center;
+}
+.ConteinerResult .Galochka
+{
+	text-align:left;
+	padding-bottom:2px;
+}
+.ConteinerResult .Galochka .Panding
+{
+	margin-top:-30px;
+	text-align:center;	
+}
+.ConteinerNomination
+{
+	width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    font-family:Tahoma;
+}
+.ConteinerNomination .Tr
+{
+	height:100px;
+}
+.ConteinerNomination .Tr .Idea
+{
+	font:18px Helvetica Bold;
+    vertical-align:sub;
+    padding-left:20px;
+}
+.ConteinerNomination .Tr .Idea .DescribeIdea
+{
+	padding-right:10PX;
+	width:300px;
+}
+.ConteinerNomination .FIO
+{
+    font:18px Helvetica Bold;
+    vertical-align:bottom;
+}
+.ConteinerNomination  .Button1
+{
+	width:80px;
+	height:40px;
+	border:none;
+	font-size:18px;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	float:right;
+	margin-left:10px;
+	margin-top:7px;
+}
+.footer {
+    width: 800px;
+    height: 4em;
+    margin: 0 auto;
 }
