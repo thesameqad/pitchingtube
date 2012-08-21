@@ -6,6 +6,49 @@
     var index = 0;
 }
 
+
+<div class="ConteinerNomination">
+    @using (Html.BeginForm(new { tubeId = ViewData["tubeId"] }))
+    {
+        <p style="font-size: 22px; padding-left: 10px">INVESTOR</p>
+        <table class="">
+            @foreach (var item in Model)
+            {
+                index++;
+                <tr class="Tr">
+                    <td>
+                        <img src="../../Content/img/NominationAvator.png"> 
+                    </td>
+                    <td class="FIO">
+                        @Html.DisplayFor(modelItem => item.Name) 
+                    </td>
+                    <td class="Idea">
+                        IDEA <br/>
+                        <p class="DescribeIdea"> @Html.DisplayFor(modelItem => item.Description) </p>
+                    </td>
+                    <td>
+                        @for (int i = 0; i < 10; i++)
+                        {
+                            <img src="../../Content/img/BlackStar.png" />
+                        }      
+                    </td>
+                    @*                    <td>
+                        <input type="text" id="user-@index" name="Rating" />
+                        <input type="hidden" value="@item.UserId" name="Id"/>
+                    </td>*@
+                </tr>
+            }
+           
+        </table>
+        <input type="submit" value="Done" class="Button1" style="color: white"/>
+        @*<asp:Button runat="server" id="Button1" CssClass="Button1" Text="Done" ForeColor="White"></asp:Button>*@
+        <p style="font-size: 18px; float: right">If you are finished, puch </p>
+    }
+</div>
+
+
+
+@*
 @using (Html.BeginForm(new { tubeId = ViewData["tubeId"] }))
 {
 <h2>Nomination</h2>
@@ -41,4 +84,4 @@
 </tr>
 </table>
     
-}
+}*@

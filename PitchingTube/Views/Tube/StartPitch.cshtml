@@ -17,16 +17,14 @@
                 </td>
                 <td class="investor">
                     CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
-                    <img src="@ViewBag.CurrentParter.AvatarPath" alt="" />
+                    <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" />
                     </td>
                 <td class="style3">@ViewBag.CurrentPartner.Name</td>
             </tr>
-            @Html.Partial("History",((List<ParticipantRepository.UserInfo>)ViewBag.History))
+            @*@Html.Partial("History",((List<ParticipantRepository.UserInfo>)ViewBag.History))*@
             </table>
 
-            @Html.Partial("Live", ((List<ParticipantRepository.UserInfo>)ViewBag.CurrentPairs))
-            
-        
+            @*@Html.Partial("Live", ((List<ParticipantRepository.UserInfo>)ViewBag.CurrentPairs))*@
 </div>
 
 @*<p>YourPartner<br />

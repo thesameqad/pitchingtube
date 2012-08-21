@@ -34,22 +34,16 @@
                 </tr>
                 <tr class="TableTr">
                     <td rowspan="2" align="center" >
-                      <a href="#" >  
-                          <span class="sectionHeader">
-                              <img src="../../Content/img/F.png" alt="" /><br/>
-                          </span>
-                      </a>
-                        
-                        @* @if (!Facebook.Web.FacebookWebContext.Current.IsAuthenticated())
-                        {
-                            <fb:login-button scope="email" ></fb:login-button>
-                        }*@
-
-                        @*<a href="#" >
-                            <div class="sectionHeader">
-                                <img src="../../Content/img/F.png" alt="" /><br/>
+                        <a href="#" >
+                            <div class="sectionHeader" style="position:relative;width:216px;height:72px;" >
+                                <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;z-index:111;">
+                                    <img src="../../Content/img/F.png" style="cursor:pointer" />
+                                </div>
+                                <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;overflow:hidden;z-index:333;opacity:0;filter:alpha(opacity=0);">
+                                    <fb:login-button scope="email" show-faces="true" width="216"></fb:login-button>
+                                </div>  
                             </div>
-                        </a>*@
+                        </a>
                     </td>
                     <td class="style1">
                         @Html.LabelFor(m => m.Skype)
@@ -69,7 +63,8 @@
                     </td>
                 </tr>
                 <tr class="TableTr">
-                    <td style="font-size: 18px" align="center">Вход через <br/>Facebook</td>
+                    @*<td style="font-size: 18px" align="center">Вход через <br/>Facebook</td>*@
+                    <td class="style3"></td>
                     <td class="style1">
                         @Html.LabelFor(m => m.Password)
                     </td>
@@ -80,7 +75,7 @@
                     
                 </tr>
                 <tr class="TableTr">
-                    <td class="style3"></td>
+                    <td style="font-size: 18px" align="center">Вход через <br/>Facebook</td>
                     <td class="style1">
                         @Html.LabelFor(m => m.ConfirmPassword)
                     </td>
@@ -90,17 +85,19 @@
                     </td>
                     <td rowspan="3">
                         <div class="sectionHeader" id="Label7">
-                            <input type="image" src="../../Content/img/btn-go.png" alt="" style="padding-left: 15px; font-size: 25px" />
+                            <input type="image" src="../../Content/img/btn-go.png" alt="" style="padding-left: 15px; font-size: 25px" /><br/>
                             <span style="padding-left:25px; font-size: 25px;color: #474747;text-decoration: none">Start</span>
                         </div>
-                        
-                        @*<a href="#" style="padding-left: 15px; font-size: 25px">
-                            <div class="sectionHeader">
-                                <img src="../../Content/img/btn-go.png" alt="" /><br/><span style="padding-left:25px">Start</span>
-                            </div>
-                        </a>*@
                     </td>
 
+                </tr>
+                <tr class="TableTr">
+                    <td class="style3" ></td>
+                    <td class="style1"></td>    
+                    <td class="style2">
+                        @Html.RadioButtonFor(m => m.Role, "Entrepreneur", true)Entrepreneur
+                        @Html.RadioButtonFor(m => m.Role, "Investor", false)Investor
+                    </td>
                 </tr>
                 <tr class="TableTr">
                     <td class="style3"></td>
@@ -119,19 +116,22 @@
 
                 </tr>
 
-                <tr class="TableTr">
-                    <td class="style3" ></td>
-                    <td class="style1"></td>    
-                    <td class="style2">
-                       @Html.DropDownListFor(m => m.Role, Model.Roles)
-                        @*@foreach(var role in Model.Roles)
-                        {
-                            @Html.RadioButtonFor(m => m.Role, role)
-                        }*@
-                    </td>
-                </tr>
             </table>
         </div>
+        
+        <script type="text/javascript">
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#avatarPreview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
     }
 </div>
     <div class="boxSections">
@@ -260,18 +260,5 @@
             </p>
         </fieldset>
     </div>*@
-    
-    <script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('#avatarPreview').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @*}*@

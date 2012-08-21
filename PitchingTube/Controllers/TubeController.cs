@@ -18,7 +18,7 @@ namespace PitchingTube.Controllers
         // GET: /Tube/
 
         private ParticipantRepository participantRepository = new ParticipantRepository();
-        private BaseRepository<Partner> partnerRepository = new BaseRepository<Partner>();
+        private PartnerRepository partnerRepository = new PartnerRepository();
         private PersonRepository personRepository = new PersonRepository();
 
         public ActionResult Index(int tubeId)
@@ -74,7 +74,7 @@ namespace PitchingTube.Controllers
 
             int roundNumber = (int)tube.TubeMode;
 
-            if (tube.TubeMode == TubeMode.Nominations)
+            //if (tube.TubeMode == TubeMode.Nominations)
                 return RedirectToAction("Nomination", new { tubeId = tubeId });
 
             //just a showcase. Will be removed in the future
@@ -86,11 +86,10 @@ namespace PitchingTube.Controllers
                 Name = currentParticipant.aspnet_Users.UserName,
                 Description = currentParticipant.Description,
                 AvatarPath = personRepository.FirstOrDefault(x => x.UserId == currentParticipant.UserId).AvatarPath,
-                Role = currentParticipant.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
+                Role = User.IsInRole("Entrepreneur") ? "Investor" : "Entrepreneur"//currentParticipant.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
             };
-
+          
             List<ParticipantRepository.UserInfo> currentPairsModel = participantRepository.FindCurrentPairs(tubeId, roundNumber);
-
             
             partnerRepository.Insert(new Partner()
             {
@@ -99,11 +98,11 @@ namespace PitchingTube.Controllers
             });
 
             //ViewBag setup 
-            ViewBag.History = History(userId);
+            //ViewBag.History = History(userId);
 
             ViewBag.CurrentPairs = currentPairsModel;
 
-            ViewBag.CurrentParter = partnerModel; 
+            ViewBag.CurrentPartner = partnerModel; 
 
             return View();
 
@@ -112,8 +111,8 @@ namespace PitchingTube.Controllers
         [HttpGet]
         public ActionResult History(Guid UserId)
         {
-            var repository = new PartnerRepository();
-            var model = repository.History(UserId);
+            //var repository = new PartnerRepository();
+            var model = partnerRepository.History(UserId);
             return View();
         }
 
