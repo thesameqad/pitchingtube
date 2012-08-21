@@ -1,5 +1,35 @@
 ﻿@model List<PitchingTube.Models.UserInfo>
 
+
+<table class="OtherRooms">
+        <tr class="RoomTr">
+        @for (int i = 0; i < Model.Count; i +=2)
+        {
+                <td></td>
+                <td class="style1" rowspan="3"><img src="@Url.Content("~/Content/img/Romb.png")" alt="" /></td>
+                <td></td>
+                <td></td>
+        }
+        </tr>
+    <tr class="RoomTr">
+         @for (int i = 0; i < Model.Count; i += 2)
+         {
+             <td class="LeftFoto"> <img src="@Url.Content(Model[i].AvatarPath)" alt="" width="60"/> </td>
+             <td><img src="@Url.Content(Model[i+1].AvatarPath)" alt="" width="60"/></td>
+             <td class="Probel"></td>
+         }
+    </tr>
+    <tr>
+             @for (int i = 0; i < Model.Count; i += 2)
+             {
+                <td class="LeftRoomTrFIO">@Model[i].Name</td>
+                <td class="RightRoomTrFIO">@Model[i+1].Name</td>
+                <td ></td>
+             }
+    </tr>
+            
+</table>
+@*
 <table class="OtherRooms">
             <tr class="RoomTr">
                 <td></td>
@@ -26,4 +56,5 @@
                 </tr>    
             }
             
-</table>
+</table>*@
+

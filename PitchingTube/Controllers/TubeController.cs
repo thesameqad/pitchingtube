@@ -30,8 +30,7 @@ namespace PitchingTube.Controllers
         [HttpGet]
         public ActionResult TubePeopleList(int tubeId)
         {
-            var repository = new ParticipantRepository();
-            var model = repository.TubeParticipants(tubeId);
+            var model = participantRepository.TubeParticipants(tubeId);
             var leftInvestor = 5 - model.Count(x => x.Role == "Investor");
             var leftEntrepreneur = 5 - model.Count(x => x.Role == "Entrepreneur");
             return new JsonResult() { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -46,10 +45,9 @@ namespace PitchingTube.Controllers
                 return null;
             }
             {
-                var repository = new BaseRepository<Person>();
                 Guid Userid = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
                 var PartnerId = participantRepository.FindPartner(Userid, tubeId, (int)participantRepository.UserIsInTube(Userid).Mode);
-                var model = repository.Query(x => x.UserId == Userid).FirstOrDefault();
+                var model = personRepository.Query(x => x.UserId == Userid).FirstOrDefault();
 
                 ViewBag.Email = PartnerId.aspnet_Users.aspnet_Membership.Email;
 
@@ -72,13 +70,18 @@ namespace PitchingTube.Controllers
 
             int roundNumber = (int)entity.TubeMode;
 
-            if (entity.TubeMode == TubeMode.Nominations)
-                return RedirectToAction("Nomination", new { tubeId = tube.TubeId });
+            if (entity.TubeMode >= TubeMode.Nominations)
+            {
+                if(User.IsInRole("Investor"))
+                    return RedirectToAction("Nomination", new { tubeId = tube.TubeId });
+                else
+                    return RedirectToAction("Results", new { tubeId = tube.TubeId });
+            }
 
             //just a showcase. Will be removed in the future
             Participant currentParticipant = participantRepository.FindPartner(userId, tube.TubeId, roundNumber);
 
-            ParticipantRepository.UserInfo partnerModel = new ParticipantRepository.UserInfo
+            UserInfo partnerModel = new UserInfo
             {
                 UserId = currentParticipant.UserId,
                 Name = currentParticipant.aspnet_Users.UserName,
@@ -87,7 +90,7 @@ namespace PitchingTube.Controllers
                 Role = User.IsInRole("Entrepreneur") ? "Investor" : "Entrepreneur"//currentParticipant.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
             };
 
-            List<ParticipantRepository.UserInfo> currentPairsModel = participantRepository.FindCurrentPairs(tube.TubeId, roundNumber);
+            List<UserInfo> currentPairsModel = Util.ConverUserDataListToUserModelList(participantRepository.FindCurrentPairs(userId,currentParticipant.UserId, tube.TubeId, roundNumber));
 
             partnerRepository.Insert(new Partner()
             {
@@ -96,7 +99,7 @@ namespace PitchingTube.Controllers
             });
 
             //ViewBag setup 
-            ViewBag.History = Util.ConverUserDataListToUserModelList(partnerRepository.History(userId));
+            ViewBag.History = Util.ConverUserDataListToUserModelList(partnerRepository.History(userId, currentParticipant.UserId));
 
             ViewBag.CurrentPairs = currentPairsModel;
 
@@ -117,15 +120,13 @@ namespace PitchingTube.Controllers
             }
             else
             {
-                var repository = new ParticipantRepository();
-                var repositoryP = new BaseRepository<Person>();
-                var model = repository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
+                var model = participantRepository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
                     .Select(x => new ParticipantRepository.UserInfo()
                     {
                         UserId = x.UserId,
                         Name = x.aspnet_Users.UserName,
                         Description = x.Description,
-                        AvatarPath = repositoryP.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
+                        AvatarPath = personRepository.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
                         Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
                     }
                     );
@@ -135,23 +136,24 @@ namespace PitchingTube.Controllers
 
         }
         [HttpPost]
-        public ActionResult Nomination(IEnumerable<Guid> Id, IEnumerable<int> Rating, int tubeId)
+        public ActionResult Nomination(IEnumerable<string> ids, IEnumerable<string> ratings, int tubeId)
         {
             var repository = new BaseRepository<Nomination>();
-            for (var i = 0; i < Id.Count(); i++)
+            for (var i = 0; i < ids.Count(); i++)
             {
-
+                int rating = 0;
+                int.TryParse(ratings.ElementAt(i), out rating);
                 repository.Insert(new Nomination()
                 {
                     TubeId = tubeId,
                     InvestorId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey,
-                    EnterepreneurId = Id.ElementAt(i),
-                    Rating = Rating.ElementAt(i),
+                    EnterepreneurId = Guid.Parse(ids.ElementAt(i)),
+                    Rating = rating,
                     Panding = Convert.ToInt32(true)
                 });
             }
 
-            return null;
+            return RedirectToAction("Results", new { tubeId = tubeId});
         }
 
         public ActionResult Results(int tubeId)

@@ -18,7 +18,7 @@
                 </td>
                 <td class="investor">
                     CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
-                    <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" />
+                    <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
                     </td>
                 <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description</td>
             </tr>
@@ -80,24 +80,24 @@
 
 <script language="javascript">
     var minutes = 0;
-    var seconds = 0;
+    var seconds = 10;
 
     var statusArray = new Array(
-            { time: 0, status: "Sharing idea" },
+            { time: 120, status: "Sharing idea" },
             { time: 60, status: "Asking questions" },
-            { time: 100, status: "Exchanging contacts" }
+            { time: 20, status: "Exchanging contacts" }
         );
 
         $(document).ready(function () {
 
-            $('#time').text("00:00");
+            $('#time').text("02:00");
             $('#timeStatus').text(statusArray[0].status);
 
             timer = setInterval(function () {
-                seconds += 1;
-                if (seconds == 60) {
-                    minutes += 1;
-                    seconds = 0;
+                seconds -= 1;
+                if (seconds == -1) {
+                    minutes -= 1;
+                    seconds = 59;
                 }
                 $('#time').text("0" + minutes + ":" + (seconds - 10 < 0 ? "0" : "") + seconds);
 
@@ -108,7 +108,7 @@
                         $('#timeStatus').text(statusArray[i].status);
                 }
 
-                if (currentTime == 120) {
+                if (currentTime == 0) {
                     clearInterval(timer);
                     alert("Pitch is stopped");
                     newRound();

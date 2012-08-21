@@ -17,7 +17,7 @@
                 index++;
                 <tr class="Tr">
                     <td>
-                        <img src="@item.AvatarPath"/> 
+                        <img src="@item.AvatarPath" alt="" width="60"/> 
                     </td>
                     <td class="FIO">
                         @Html.DisplayFor(modelItem => item.Name) 
@@ -29,22 +29,36 @@
                     <td>
                         @for (int i = 0; i < 10; i++)
                         {
-                            <img src="../../Content/img/BlackStar.png" />
-                        }      
+                            <input name="@String.Format("star{0}",index)" type="radio" class="star" value="@i"/>
+                            
+                        }   
+                        <input type="hidden" name="ratings" id="star-input-@index" />   
+                        <input type="hidden" value="@item.UserId" name="ids"/>
                     </td>
                     @*                    <td>
                         <input type="text" id="user-@index" name="Rating" />
-                        <input type="hidden" value="@item.UserId" name="Id"/>
+                        
                     </td>*@
                 </tr>
             }
            
         </table>
-        <input type="submit" value="Done" class="Button1" style="color: white"/>
+        <input type="submit" value="Done" class="Button1" id="submit-form" style="color: white"/>
         @*<asp:Button runat="server" id="Button1" CssClass="Button1" Text="Done" ForeColor="White"></asp:Button>*@
         <p style="font-size: 18px; float: right">If you are finished, puch </p>
     }
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#submit-form").bind("click", function () {
+            for (var i = 0; i < 5;i++)
+                $("#star-input-"+i).val($('input:radio[name=star'+i+']:checked').val());
+        }
+        );
+
+    });
+</script>
 
 
 

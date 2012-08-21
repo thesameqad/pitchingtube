@@ -28,6 +28,7 @@ namespace PitchingTube.Data
 
         public virtual void Update(T entity)
         {
+            _objectSet.Detach(entity);
             _objectSet.AddObject(entity);
             _context.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
             _context.SaveChanges();

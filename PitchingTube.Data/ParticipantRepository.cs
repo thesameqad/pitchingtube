@@ -168,8 +168,10 @@ namespace PitchingTube.Data
 
         }
 
-        public List<UserInfo> FindCurrentPairs(int tubeId, int roundNumber)
+        public List<UserInfo> FindCurrentPairs(Guid userId, Guid partnerId, int tubeId, int roundNumber)
         {
+
+
             List<UserInfo> currentPairs = new List<UserInfo>();
 
             var tube = (from p in _objectSet
@@ -186,16 +188,17 @@ namespace PitchingTube.Data
 
             var investors = from t in tube
                             join aspnet_User in _context.aspnet_Users on t.UserId equals aspnet_User.UserId
-                            where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Investor"
+                            where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Investor" && aspnet_User.UserId != userId && aspnet_User.UserId != partnerId
                             select t;
 
             var entrepreneurs = from t in tube
                                 join aspnet_User in _context.aspnet_Users on t.UserId equals aspnet_User.UserId
-                                where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur"
+                                where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur" && aspnet_User.UserId != userId && aspnet_User.UserId != partnerId
                                 select t;
 
             foreach (var inv in investors)
             {
+
                 currentPairs.Add(new UserInfo
                     {
                         UserId = inv.UserId,
@@ -230,6 +233,7 @@ namespace PitchingTube.Data
             public int Nomination { get; set; }
             public int Panding { get; set; }
             public string Contacts { get; set; }
+            public string Email { get; set; }
         }
 
         public List<UserInfo> GetResult(int tubeId)
