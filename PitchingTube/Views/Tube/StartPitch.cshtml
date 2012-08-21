@@ -1,4 +1,4 @@
-﻿@using PitchingTube.Data
+﻿@using PitchingTube.Models
 
 @{
     ViewBag.Title = "StartPitch";
@@ -9,22 +9,23 @@
 <div class="containerPitch">
         <table >
             <tr class="Tr">
-                <td id="time" class="time" >00:00
-                    <p class="question" id="timeStatus"></p>
+                <td class="time" >
+                    <div id="time">00:00</div>
+                    <div class="question" id="timeStatus"></div>
                 </td>
                 <td class="video" rowspan="5" >
-                    <img src="@Url.Content("Content/img/Video.png")" alt="" /> 
+                    <img src="@Url.Content("/Content/img/Video.png")" alt="" /> 
                 </td>
                 <td class="investor">
                     CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
                     <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" />
                     </td>
-                <td class="style3">@ViewBag.CurrentPartner.Name</td>
+                <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description</td>
             </tr>
-            @*@Html.Partial("History",((List<ParticipantRepository.UserInfo>)ViewBag.History))*@
+            @Html.Partial("History", ((IEnumerable<UserInfo>)ViewBag.History))
             </table>
 
-            @*@Html.Partial("Live", ((List<ParticipantRepository.UserInfo>)ViewBag.CurrentPairs))*@
+            @Html.Partial("Live", ((List<UserInfo>)ViewBag.CurrentPairs))
 </div>
 
 @*<p>YourPartner<br />

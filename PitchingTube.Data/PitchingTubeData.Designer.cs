@@ -1971,14 +1971,12 @@ namespace PitchingTube.Data
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="partnerId">Initial value of the PartnerId property.</param>
-        /// <param name="contacts">Initial value of the Contacts property.</param>
-        public static Partner CreatePartner(global::System.Int32 id, global::System.Guid userId, global::System.Guid partnerId, global::System.String contacts)
+        public static Partner CreatePartner(global::System.Int32 id, global::System.Guid userId, global::System.Guid partnerId)
         {
             Partner partner = new Partner();
             partner.Id = id;
             partner.UserId = userId;
             partner.PartnerId = partnerId;
-            partner.Contacts = contacts;
             return partner;
         }
 
@@ -2063,7 +2061,7 @@ namespace PitchingTube.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Contacts
         {
@@ -2075,7 +2073,7 @@ namespace PitchingTube.Data
             {
                 OnContactsChanging(value);
                 ReportPropertyChanging("Contacts");
-                _Contacts = StructuralObject.SetValidValue(value, false);
+                _Contacts = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Contacts");
                 OnContactsChanged();
             }

@@ -34,5 +34,19 @@ namespace PitchingTube.Data
             }
             return partners;
         }
+
+        public override void Insert(Partner newEntity)
+        {
+            var partner = from p in _context.Partners
+                          join pa in _context.Participants on p.UserId equals pa.UserId
+                          join t in _context.Tubes on pa.TubeId equals t.TubeId
+                          where p.UserId == newEntity.UserId
+                          && p.PartnerId == newEntity.PartnerId
+                          && t.TubeId == newEntity.aspnet_Users.Participants.FirstOrDefault().TubeId
+                          select p;
+
+            if(partner == null)
+                base.Insert(newEntity);
+        }
     }
 }

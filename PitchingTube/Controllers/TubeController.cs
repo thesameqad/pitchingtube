@@ -74,7 +74,7 @@ namespace PitchingTube.Controllers
 
             int roundNumber = (int)tube.TubeMode;
 
-            //if (tube.TubeMode == TubeMode.Nominations)
+            if (tube.TubeMode == TubeMode.Nominations)
                 return RedirectToAction("Nomination", new { tubeId = tubeId });
 
             //just a showcase. Will be removed in the future
@@ -89,16 +89,16 @@ namespace PitchingTube.Controllers
                 Role = User.IsInRole("Entrepreneur") ? "Investor" : "Entrepreneur"//currentParticipant.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
             };
           
-            List<ParticipantRepository.UserInfo> currentPairsModel = participantRepository.FindCurrentPairs(tubeId, roundNumber);
+            List<UserInfo> currentPairsModel = Util.ConverUserDataListToUserModelList(participantRepository.FindCurrentPairs(tubeId, roundNumber));
             
-            partnerRepository.Insert(new Partner()
+            partnerRepository.Insert(new Partner
             {
                 UserId = userId,
                 PartnerId = currentParticipant.UserId
             });
 
             //ViewBag setup 
-            //ViewBag.History = History(userId);
+            ViewBag.History = Util.ConverUserDataListToUserModelList(partnerRepository.History(userId));
 
             ViewBag.CurrentPairs = currentPairsModel;
 
@@ -106,14 +106,6 @@ namespace PitchingTube.Controllers
 
             return View();
 
-        }
-
-        [HttpGet]
-        public ActionResult History(Guid UserId)
-        {
-            //var repository = new PartnerRepository();
-            var model = partnerRepository.History(UserId);
-            return View();
         }
 
         [HttpGet]

@@ -5,12 +5,15 @@ using System.Web;
 
 namespace PitchingTube.Models
 {
-    public class GeneralUserModel
+
+    public class UserInfo
     {
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public Guid UserID { get; set; }
-        public string Description { get; set; }
+        public Guid UserId { get; set; }
+        public string Name { get; set; }
         public string AvatarPath { get; set; }
+        public string Description { get; set; }
+        public string Role { get; set; }
+        public string Contacts { get; set; }
+        public string Email { get; set; }
     }
 }

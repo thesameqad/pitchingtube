@@ -268,9 +268,9 @@ namespace PitchingTube.Controllers
         {
 
             MembershipUser currentUser = Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name));
-            GeneralUserModel user = new GeneralUserModel
+            UserInfo user = new UserInfo
             {
-                UserName = currentUser.UserName,
+                Name = currentUser.UserName,
                 Email = currentUser.Email
             };           
             

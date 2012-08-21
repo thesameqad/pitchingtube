@@ -131,5 +131,29 @@ namespace PitchingTube.Models
             return string.Empty;
 
         }
+
+        public static PitchingTube.Models.UserInfo ConverUserDataToUserModel(PitchingTube.Data.ParticipantRepository.UserInfo from)
+        {
+            return new PitchingTube.Models.UserInfo
+            {
+                AvatarPath = from.AvatarPath,
+                Contacts = from.Contacts,
+                Description = from.Description,
+                Email = from.Email,
+                Name = from.Name,
+                Role = from.Role,
+                UserId = from.UserId
+            };
+        }
+
+        public static List<PitchingTube.Models.UserInfo> ConverUserDataListToUserModelList(List<PitchingTube.Data.ParticipantRepository.UserInfo> from)
+        {
+            List<PitchingTube.Models.UserInfo> result = new List<UserInfo>();
+            foreach (var item in from)
+	        {
+                result.Add(ConverUserDataToUserModel(item));
+	        }
+            return result;
+        }
     }
 }

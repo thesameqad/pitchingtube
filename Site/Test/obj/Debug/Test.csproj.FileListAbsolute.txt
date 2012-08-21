@@ -1,0 +1,5 @@
+C:\Development\pitchingtubetemp\Site\Test\bin\Test.dll
+C:\Development\pitchingtubetemp\Site\Test\bin\Test.pdb
+C:\Development\pitchingtubetemp\Site\Test\obj\Debug\ResolveAssemblyReference.cache
+C:\Development\pitchingtubetemp\Site\Test\obj\Debug\Test.dll
+C:\Development\pitchingtubetemp\Site\Test\obj\Debug\Test.pdb
