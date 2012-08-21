@@ -85,6 +85,7 @@
     <EntitySetMapping Name="Persons">
       <EntityTypeMapping TypeName="PitchingTubeModel.Person">
         <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="Pay" ColumnName="Pay" />
           <ScalarProperty Name="AvatarPath" ColumnName="AvatarPath" />
           <ScalarProperty Name="ActivationLink" ColumnName="ActivationLink" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />

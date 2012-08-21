@@ -39,8 +39,18 @@ namespace PitchingTube.Controllers
 
             if (User.IsInRole("Investor"))
             {
-                ViewBag.Message = "DESCRIBE YOURSELF IN 3 WORDS";
-                ViewBag.DefaulValue = "making investments";
+                Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
+                if (participantRepository.GetPay(userId) == "no")
+                {
+                    ViewBag.Pay = "no";
+                }
+                else
+                {
+                    ViewBag.Message = "DESCRIBE YOURSELF IN 3 WORDS";
+                    ViewBag.DefaulValue = "making investments";
+                }
+
+
             }
             else
             {

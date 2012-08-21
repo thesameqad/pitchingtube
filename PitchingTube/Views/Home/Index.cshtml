@@ -5,6 +5,12 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "startPitchForm" }))
 {  
     <div class="containerInvestors">
+    @if(ViewBag.Pay=="no") 
+    {
+        <input type="button" value="Start free trial" />
+    }
+    else
+    {
         <h1 class="header">@ViewBag.Message</h1>
         <table>
             <tr>
@@ -17,6 +23,7 @@
                 </td>
             </tr>
         </table>
+    }
     </div>   
 }
 
