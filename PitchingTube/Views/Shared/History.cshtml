@@ -1,0 +1,21 @@
+﻿@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
+
+@{
+    ViewBag.Title = "History";
+}
+
+<tr class="Tr">
+                    <td ></td>
+                    <td >HISTORY</td>
+                    <td  ></td>
+</tr>
+@{
+    foreach (var itemModel in Model)
+    {
+        <tr class="Tr">
+                    <td  ></td>
+                    <td ><img src="@itemModel.AvatarPath" alt="" /> </td>
+                    <td class="style4" >@itemModel.Name<br /> @itemModel.Description</td>
+        </tr>
+    }
+}

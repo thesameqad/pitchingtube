@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using PitchingTube.Data;
+using PitchingTube.Models;
 
 
 
@@ -17,6 +18,8 @@ namespace PitchingTube.Controllers
         // GET: /Tube/
 
         private ParticipantRepository participantRepository = new ParticipantRepository();
+        private BaseRepository<Partner> partnerRepository = new BaseRepository<Partner>();
+        private PersonRepository personRepository = new PersonRepository();
 
         public ActionResult Index(int tubeId)
         {
@@ -75,18 +78,34 @@ namespace PitchingTube.Controllers
                 return RedirectToAction("Nomination", new { tubeId = tubeId });
 
             //just a showcase. Will be removed in the future
-            ViewBag.CurrentPartnerId = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, roundNumber);
+            Participant currentParticipant = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, roundNumber);
 
-            List<ParticipantRepository.UserInfo> model = participantRepository.FindCurrentPairs(tubeId, roundNumber);
+            ParticipantRepository.UserInfo partnerModel = new ParticipantRepository.UserInfo
+            {
+                UserId = currentParticipant.UserId,
+                Name = currentParticipant.aspnet_Users.UserName,
+                Description = currentParticipant.Description,
+                AvatarPath = personRepository.FirstOrDefault(x => x.UserId == currentParticipant.UserId).AvatarPath,
+                Role = currentParticipant.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
+            };
 
-            BaseRepository<Partner> partner = new BaseRepository<Partner>();
-            partner.Insert(new Partner()
+            List<ParticipantRepository.UserInfo> currentPairsModel = participantRepository.FindCurrentPairs(tubeId, roundNumber);
+
+            
+            partnerRepository.Insert(new Partner()
             {
                 UserId = userId,
-                PartnerId = ViewBag.CurrentPartnerId.UserId
+                PartnerId = currentParticipant.UserId
             });
 
-            return View(model);
+            //ViewBag setup 
+            ViewBag.History = History(userId);
+
+            ViewBag.CurrentPairs = currentPairsModel;
+
+            ViewBag.CurrentParter = partnerModel; 
+
+            return View();
 
         }
 
