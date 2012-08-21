@@ -85,7 +85,7 @@ namespace PitchingTube.Controllers
                 UserId = userId,
                 PartnerId = ViewBag.CurrentPartnerId.UserId
             });
-
+            ViewBag.History = History(userId);
             return View(model);
 
         }

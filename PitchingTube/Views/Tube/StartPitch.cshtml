@@ -52,14 +52,9 @@
 </tr>
 </table>
 
-@*<div>
-@{
-    PartnerRepository repo = new PartnerRepository();
-    List<PartnerRepository.PartnerInfo> partners = new List<PartnerRepository.PartnerInfo>();
-    partners = repo.History((Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey);
-}
-    @Html.Partial("History", partners)
-</div>*@
+<div>
+    @Html.Partial("History", ViewBag.History);
+</div>
 
 
 <script language="javascript">
