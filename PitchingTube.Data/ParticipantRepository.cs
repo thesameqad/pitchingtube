@@ -66,25 +66,28 @@ namespace PitchingTube.Data
 
             var tube = findTube(userRole);
 
-            if (tube == 0)//null)
+            if (tube == 0) //null)
             {
                 var newTube = new Tube
-                {
-                    CreatedDate = DateTime.Now,
-                    TubeMode = TubeMode.Opened
-                };
+                    {
+                        CreatedDate = DateTime.Now,
+                        TubeMode = TubeMode.Opened
+                    };
                 tubeRepository.Insert(newTube);
                 return newTube.TubeId;
             }
 
-            return tube;//.TubeId;
+            return tube; //.TubeId;
 
         }
 
-        public Tube UserIsInTube(Guid userId)
+        public int? UserIsInTube(Guid userId)
         {
             var participant = FirstOrDefault(p => p.UserId == userId);
-            return participant != null ? participant.Tube : null;
+            if (participant != null)
+                return participant.TubeId;
+            else
+                return null;
         }
 
         public void RemoveUserFromAllTubes(Guid userId)
@@ -96,6 +99,7 @@ namespace PitchingTube.Data
             }
 
         }
+
         public List<UserInfo> TubeParticipants(int tubeId)
         {
             var participants = Query(x => x.TubeId == tubeId);
@@ -106,7 +110,14 @@ namespace PitchingTube.Data
                 var person = repository.FirstOrDefault(x => x.UserId == participant.UserId);
                 var avatar = person.AvatarPath.Replace("\\", "/");
                 var role = Roles.GetRolesForUser(participant.aspnet_Users.UserName).FirstOrDefault();
-                users.Add(new UserInfo() {UserId = person.UserId, Name = participant.aspnet_Users.UserName, Role = role, Description = participant.Description, AvatarPath = avatar });
+                users.Add(new UserInfo()
+                    {
+                        UserId = person.UserId,
+                        Name = participant.aspnet_Users.UserName,
+                        Role = role,
+                        Description = participant.Description,
+                        AvatarPath = avatar
+                    });
             }
             return users;
         }
@@ -114,14 +125,14 @@ namespace PitchingTube.Data
         public override void Insert(Participant newEntity)
         {
             string roleName = (from u in _context.aspnet_Users
-                              where u.UserId == newEntity.UserId
-                              select u.aspnet_Roles.FirstOrDefault().RoleName).FirstOrDefault();
+                               where u.UserId == newEntity.UserId
+                               select u.aspnet_Roles.FirstOrDefault().RoleName).FirstOrDefault();
 
             int indexNumber = (from p in _objectSet
-                              join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
-                              where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName 
-                              && p.TubeId == newEntity.TubeId
-                              select p).Count();
+                               join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                               where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName
+                                     && p.TubeId == newEntity.TubeId
+                               select p).Count();
             newEntity.IndexNumber = indexNumber;
             base.Insert(newEntity);
 
@@ -142,18 +153,20 @@ namespace PitchingTube.Data
                 indexNumber += roundNumber;
                 indexNumber = indexNumber >= 5 ? indexNumber - 5 : indexNumber;
             }
-            else {
+            else
+            {
                 roleName = "Investor";
                 indexNumber -= roundNumber;
                 indexNumber = indexNumber <= -1 ? indexNumber + 5 : indexNumber;
             }
 
             var participant = (from p in _objectSet
-                              join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
-                              where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName 
-                              && p.TubeId == tubeId && p.IndexNumber == indexNumber//indexNumber+roundNumber 
-                              select p).FirstOrDefault();
-          
+                               join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                               where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName
+                                     && p.TubeId == tubeId && p.IndexNumber == indexNumber
+                               //indexNumber+roundNumber 
+                               select p).FirstOrDefault();
+
             return participant;
 
         }
@@ -167,12 +180,12 @@ namespace PitchingTube.Data
                         join person in _context.Persons on aspnet_User.UserId equals person.UserId
                         where p.TubeId == tubeId
                         select new
-                        {
-                            UserId = aspnet_User.UserId,
-                            UserName = aspnet_User.UserName,
-                            AvatarPath = person.AvatarPath,
-                            IndexNumber = p.IndexNumber
-                        });
+                            {
+                                UserId = aspnet_User.UserId,
+                                UserName = aspnet_User.UserName,
+                                AvatarPath = person.AvatarPath,
+                                IndexNumber = p.IndexNumber
+                            });
 
             var investors = from t in tube
                             join aspnet_User in _context.aspnet_Users on t.UserId equals aspnet_User.UserId
@@ -187,11 +200,11 @@ namespace PitchingTube.Data
             foreach (var inv in investors)
             {
                 currentPairs.Add(new UserInfo
-                {
-                    UserId = inv.UserId,
-                    Name = inv.UserName,
-                    AvatarPath = inv.AvatarPath
-                });
+                    {
+                        UserId = inv.UserId,
+                        Name = inv.UserName,
+                        AvatarPath = inv.AvatarPath
+                    });
 
                 int indexNumber = (int)inv.IndexNumber + roundNumber;
 
@@ -200,11 +213,11 @@ namespace PitchingTube.Data
                                select e).FirstOrDefault();
 
                 currentPairs.Add(new UserInfo
-                {
-                    UserId = hisPair.UserId,
-                    Name = hisPair.UserName,
-                    AvatarPath = hisPair.AvatarPath
-                });
+                    {
+                        UserId = hisPair.UserId,
+                        Name = hisPair.UserName,
+                        AvatarPath = hisPair.AvatarPath
+                    });
             }
 
             return currentPairs;
@@ -217,8 +230,64 @@ namespace PitchingTube.Data
             public string AvatarPath { get; set; }
             public string Description { get; set; }
             public string Role { get; set; }
-            public string Contacts { get; set; }
-            public string Email { get; set; }
+            public int Nomination { get; set; }
+            public int Panding { get; set; }
+        }
+
+        public List<UserInfo> GetResult(int tubeId)
+        {
+            var repository = new BaseRepository<Nomination>();
+            var repositoryP = new BaseRepository<Person>();
+            var list = new List<UserInfo>();
+            var enterepreneursId = repository.Query(
+                x =>
+                x.TubeId == tubeId && x.Panding == 1 &&
+                x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur").Select(x => x.EnterepreneurId).
+                Distinct();
+            foreach (var enterepreneurId in enterepreneursId)
+            {
+                var model =
+                    repository.Query(x => x.TubeId == tubeId && x.EnterepreneurId == enterepreneurId && x.Panding == 1).
+                        Select(x => new UserInfo()
+                            {
+                                UserId = x.EnterepreneurId,
+                                Name = x.aspnet_Users.UserName,
+                                Description =
+                                    new ParticipantRepository().FirstOrDefault(
+                                        z => z.TubeId == tubeId && z.UserId == enterepreneurId).Description,
+                                Nomination =
+                                    repository.Query(
+                                        y =>
+                                        y.TubeId == tubeId && y.EnterepreneurId == enterepreneurId && x.Panding == 1).
+                                        Sum(y => y.Rating),
+                                Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName,
+                                AvatarPath =
+                                    repositoryP.FirstOrDefault(y => y.UserId == enterepreneurId).AvatarPath.Replace(
+                                        "\\", "/"),
+                            }).FirstOrDefault();
+                list.Add(model);
+            }
+
+            var investors =
+                Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Investor").
+                    Select(x => x.UserId);
+            foreach (var investor in investors)
+            {
+                var model = new ParticipantRepository().Query(x => x.TubeId == tubeId && x.UserId == investor).Select(
+                    x => new UserInfo()
+                        {
+                            UserId = x.UserId,
+                            Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName,
+                            Name = x.aspnet_Users.UserName,
+                            AvatarPath =
+                                repositoryP.FirstOrDefault(y => y.UserId == investor).AvatarPath.Replace("\\", "/"),
+                            Panding =
+                                repository.Query(z => z.TubeId == tubeId && z.InvestorId == x.UserId).Select(
+                                    z => z.Panding).FirstOrDefault()
+                        }).FirstOrDefault();
+                list.Add(model);
+            }
+            return list;
         }
     }
 }

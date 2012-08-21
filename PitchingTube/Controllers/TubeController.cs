@@ -63,18 +63,16 @@ namespace PitchingTube.Controllers
         {
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
 
-            var tube = participantRepository.UserIsInTube(userId);
-            int tubeId = tube.TubeId;
+            var tubeId = participantRepository.UserIsInTube(userId);
 
-            tube.TubeMode += 1;
+            var repository = new BaseRepository<Tube>();
+            var entity = repository.Query(x => x.TubeId == tubeId).FirstOrDefault();
+            entity.TubeMode += 1;
+            repository.Update(entity);
 
-            //BaseRepository<Tube> tubeRepository = new BaseRepository<Tube>();
-            //tubeRepository.Update(tube);
-            //new BaseRepository<Tube>().Update(tube);
+            int roundNumber = (int)entity.TubeMode;
 
-            int roundNumber = (int)tube.TubeMode;
-
-            if (tube.TubeMode == TubeMode.Nominations)
+            if (entity.TubeMode == TubeMode.Nominations)
                 return RedirectToAction("Nomination", new { tubeId = tubeId });
 
             //just a showcase. Will be removed in the future
@@ -153,6 +151,13 @@ namespace PitchingTube.Controllers
             }
             
                 return null;
+        }
+
+        public ActionResult Results(int tubeId)
+        {
+            var repository = new ParticipantRepository();
+            var results = repository.GetResult(tubeId);
+            return View(results);
         }
     }
 }

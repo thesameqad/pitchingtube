@@ -24,6 +24,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Person), true)]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Participants_Tubes", "Tube", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.Tube), "Participant", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Participant), true)]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Roles), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users))]
+[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Nominations_aspnet_Users", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "Nomination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Nomination), true)]
 
 #endregion
 
@@ -142,22 +143,6 @@ namespace PitchingTube.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Nomination> Nominations
-        {
-            get
-            {
-                if ((_Nominations == null))
-                {
-                    _Nominations = base.CreateObjectSet<Nomination>("Nominations");
-                }
-                return _Nominations;
-            }
-        }
-        private ObjectSet<Nomination> _Nominations;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Participant> Participants
         {
             get
@@ -218,6 +203,22 @@ namespace PitchingTube.Data
             }
         }
         private ObjectSet<Tube> _Tubes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Nomination> Nominations
+        {
+            get
+            {
+                if ((_Nominations == null))
+                {
+                    _Nominations = base.CreateObjectSet<Nomination>("Nominations");
+                }
+                return _Nominations;
+            }
+        }
+        private ObjectSet<Nomination> _Nominations;
 
         #endregion
         #region AddTo Methods
@@ -255,14 +256,6 @@ namespace PitchingTube.Data
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Nominations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToNominations(Nomination nomination)
-        {
-            base.AddObject("Nominations", nomination);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Participants EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToParticipants(Participant participant)
@@ -292,6 +285,14 @@ namespace PitchingTube.Data
         public void AddToTubes(Tube tube)
         {
             base.AddObject("Tubes", tube);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Nominations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToNominations(Nomination nomination)
+        {
+            base.AddObject("Nominations", nomination);
         }
 
         #endregion
@@ -1422,6 +1423,28 @@ namespace PitchingTube.Data
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_Nominations_aspnet_Users", "Nomination")]
+        public EntityCollection<Nomination> Nominations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Nomination>("PitchingTubeModel.FK_Nominations_aspnet_Users", "Nomination");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Nomination>("PitchingTubeModel.FK_Nominations_aspnet_Users", "Nomination", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1671,7 +1694,7 @@ namespace PitchingTube.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Guid EnterepreneurId
         {
@@ -1681,11 +1704,14 @@ namespace PitchingTube.Data
             }
             set
             {
-                OnEnterepreneurIdChanging(value);
-                ReportPropertyChanging("EnterepreneurId");
-                _EnterepreneurId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EnterepreneurId");
-                OnEnterepreneurIdChanged();
+                if (_EnterepreneurId != value)
+                {
+                    OnEnterepreneurIdChanging(value);
+                    ReportPropertyChanging("EnterepreneurId");
+                    _EnterepreneurId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EnterepreneurId");
+                    OnEnterepreneurIdChanged();
+                }
             }
         }
         private global::System.Guid _EnterepreneurId;
@@ -1742,6 +1768,47 @@ namespace PitchingTube.Data
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_Nominations_aspnet_Users", "aspnet_Users")]
+        public aspnet_Users aspnet_Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Nominations_aspnet_Users", "aspnet_Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Nominations_aspnet_Users", "aspnet_Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<aspnet_Users> aspnet_UsersReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Nominations_aspnet_Users", "aspnet_Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("PitchingTubeModel.FK_Nominations_aspnet_Users", "aspnet_Users", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
