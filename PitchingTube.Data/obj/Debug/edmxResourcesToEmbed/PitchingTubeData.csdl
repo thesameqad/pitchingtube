@@ -5,7 +5,6 @@
     <EntitySet Name="aspnet_Roles" EntityType="PitchingTubeModel.aspnet_Roles" />
     <EntitySet Name="aspnet_Users" EntityType="PitchingTubeModel.aspnet_Users" />
     <EntitySet Name="EmailTemplates" EntityType="PitchingTubeModel.EmailTemplate" />
-    <EntitySet Name="Nominations" EntityType="PitchingTubeModel.Nomination" />
     <EntitySet Name="Participants" EntityType="PitchingTubeModel.Participant" />
     <EntitySet Name="Partners" EntityType="PitchingTubeModel.Partner" />
     <EntitySet Name="Persons" EntityType="PitchingTubeModel.Person" />
@@ -33,6 +32,11 @@
     <AssociationSet Name="aspnet_UsersInRoles" Association="PitchingTubeModel.aspnet_UsersInRoles">
       <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
       <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <EntitySet Name="Nominations" EntityType="PitchingTubeModel.Nomination" />
+    <AssociationSet Name="FK_Nominations_aspnet_Users" Association="PitchingTubeModel.FK_Nominations_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Nomination" EntitySet="Nominations" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="aspnet_Membership">
@@ -89,6 +93,7 @@
     <NavigationProperty Name="Partners" Relationship="PitchingTubeModel.FK_Partners_aspnet_Users" FromRole="aspnet_Users" ToRole="Partner" />
     <NavigationProperty Name="Persons" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="aspnet_Users" ToRole="Person" />
     <NavigationProperty Name="aspnet_Roles" Relationship="PitchingTubeModel.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
+    <NavigationProperty Name="Nominations" Relationship="PitchingTubeModel.FK_Nominations_aspnet_Users" FromRole="aspnet_Users" ToRole="Nomination" />
   </EntityType>
   <EntityType Name="EmailTemplate">
     <Key>
@@ -98,17 +103,6 @@
     <Property Type="String" Name="TemplateName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="Subject" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="Template" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Nomination">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="TubeId" Nullable="false" />
-    <Property Type="Guid" Name="InvestorId" Nullable="false" />
-    <Property Type="Guid" Name="EnterepreneurId" Nullable="false" />
-    <Property Type="Int32" Name="Rating" Nullable="false" />
-    <Property Type="Int32" Name="Panding" Nullable="false" />
   </EntityType>
   <EntityType Name="Participant">
     <Key>
@@ -216,5 +210,30 @@
   <Association Name="aspnet_UsersInRoles">
     <End Type="PitchingTubeModel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
     <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Nomination">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="EnterepreneurId" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="TubeId" Nullable="false" />
+    <Property Type="Guid" Name="InvestorId" Nullable="false" />
+    <Property Type="Guid" Name="EnterepreneurId" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="false" />
+    <Property Type="Int32" Name="Panding" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Nominations_aspnet_Users" FromRole="Nomination" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_Nominations_aspnet_Users">
+    <End Type="PitchingTubeModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="PitchingTubeModel.Nomination" Role="Nomination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Nomination">
+        <PropertyRef Name="EnterepreneurId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

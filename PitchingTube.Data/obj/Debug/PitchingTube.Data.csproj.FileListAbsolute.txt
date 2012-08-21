@@ -16,3 +16,12 @@ C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\Pitchin
 C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll
 C:\Users\Admin\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.pdb
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll.config
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.dll
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Data.pdb
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Mailing.dll
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\RazorEngine.dll
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\bin\Debug\PitchingTube.Mailing.pdb
+C:\Users\Lima\Documents\GitHub\pitchingtube\PitchingTube.Data\obj\Debug\PitchingTube.Data.dll

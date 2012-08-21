@@ -81,13 +81,10 @@ namespace PitchingTube.Data
 
         }
 
-        public int? UserIsInTube(Guid userId)
+        public Tube UserIsInTube(Guid userId)
         {
             var participant = FirstOrDefault(p => p.UserId == userId);
-            if (participant != null)
-                return participant.TubeId;
-            else
-                return null;
+            return participant != null ? participant.Tube : null;
         }
 
         public void RemoveUserFromAllTubes(Guid userId)
@@ -206,7 +203,7 @@ namespace PitchingTube.Data
                         AvatarPath = inv.AvatarPath
                     });
 
-                int indexNumber = (int)inv.IndexNumber + roundNumber;
+                int indexNumber = (int) inv.IndexNumber + roundNumber;
 
                 var hisPair = (from e in entrepreneurs
                                where e.IndexNumber == (indexNumber >= 5 ? indexNumber - 5 : indexNumber)
@@ -232,6 +229,7 @@ namespace PitchingTube.Data
             public string Role { get; set; }
             public int Nomination { get; set; }
             public int Panding { get; set; }
+            public string Contacts { get; set; }
         }
 
         public List<UserInfo> GetResult(int tubeId)

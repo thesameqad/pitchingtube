@@ -40,7 +40,7 @@ namespace PitchingTube.Controllers
         [HttpGet]
         public ActionResult ShareContacts(int tubeId)
         {
-            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();        
+            var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
             if (role != "Investor")
             {
                 return null;
@@ -52,7 +52,7 @@ namespace PitchingTube.Controllers
                 var model = repository.Query(x => x.UserId == Userid).FirstOrDefault();
 
                 ViewBag.Email = PartnerId.aspnet_Users.aspnet_Membership.Email;
-                
+
                 return View(model);
             }
 
@@ -63,20 +63,20 @@ namespace PitchingTube.Controllers
         {
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
 
-            var tubeId = participantRepository.UserIsInTube(userId);
+            var tube = participantRepository.UserIsInTube(userId);
 
             var repository = new BaseRepository<Tube>();
-            var entity = repository.Query(x => x.TubeId == tubeId).FirstOrDefault();
+            var entity = repository.Query(x => x.TubeId == tube.TubeId).FirstOrDefault();
             entity.TubeMode += 1;
             repository.Update(entity);
 
             int roundNumber = (int)entity.TubeMode;
 
             if (entity.TubeMode == TubeMode.Nominations)
-                return RedirectToAction("Nomination", new { tubeId = tubeId });
+                return RedirectToAction("Nomination", new { tubeId = tube.TubeId });
 
             //just a showcase. Will be removed in the future
-            Participant currentParticipant = participantRepository.FindPartner(userId, tubeId/*(int)Session["currentTube"]*/, roundNumber);
+            Participant currentParticipant = participantRepository.FindPartner(userId, tube.TubeId, roundNumber);
 
             ParticipantRepository.UserInfo partnerModel = new ParticipantRepository.UserInfo
             {
@@ -86,10 +86,10 @@ namespace PitchingTube.Controllers
                 AvatarPath = personRepository.FirstOrDefault(x => x.UserId == currentParticipant.UserId).AvatarPath,
                 Role = User.IsInRole("Entrepreneur") ? "Investor" : "Entrepreneur"//currentParticipant.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
             };
-          
-            List<UserInfo> currentPairsModel = Util.ConverUserDataListToUserModelList(participantRepository.FindCurrentPairs(tubeId, roundNumber));
-            
-            partnerRepository.Insert(new Partner
+
+            List<ParticipantRepository.UserInfo> currentPairsModel = participantRepository.FindCurrentPairs(tube.TubeId, roundNumber);
+
+            partnerRepository.Insert(new Partner()
             {
                 UserId = userId,
                 PartnerId = currentParticipant.UserId
@@ -100,7 +100,7 @@ namespace PitchingTube.Controllers
 
             ViewBag.CurrentPairs = currentPairsModel;
 
-            ViewBag.CurrentPartner = partnerModel; 
+            ViewBag.CurrentPartner = partnerModel;
 
             return View();
 
@@ -109,7 +109,7 @@ namespace PitchingTube.Controllers
         [HttpGet]
         public ActionResult Nomination(int tubeId)
         {
-            
+
             var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
             if (role != "Investor")
             {
@@ -120,9 +120,10 @@ namespace PitchingTube.Controllers
                 var repository = new ParticipantRepository();
                 var repositoryP = new BaseRepository<Person>();
                 var model = repository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
-                    .Select(x => new ParticipantRepository.UserInfo() { 
-                        UserId = x.UserId, 
-                        Name = x.aspnet_Users.UserName, 
+                    .Select(x => new ParticipantRepository.UserInfo()
+                    {
+                        UserId = x.UserId,
+                        Name = x.aspnet_Users.UserName,
                         Description = x.Description,
                         AvatarPath = repositoryP.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
                         Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
@@ -131,7 +132,7 @@ namespace PitchingTube.Controllers
                 ViewData["tubeId"] = tubeId;
                 return View(model);
             }
-           
+
         }
         [HttpPost]
         public ActionResult Nomination(IEnumerable<Guid> Id, IEnumerable<int> Rating, int tubeId)
@@ -149,8 +150,8 @@ namespace PitchingTube.Controllers
                     Panding = Convert.ToInt32(true)
                 });
             }
-            
-                return null;
+
+            return null;
         }
 
         public ActionResult Results(int tubeId)
