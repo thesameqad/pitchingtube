@@ -19,7 +19,15 @@
                 </div>
             </div>
             <div class="containerLogo">
-                <img src="Images/Logo.png" alt="PitchingTube" />
+                <div class="containerLogoLogotype"><img src="Images/Logo.png" alt="PitchingTube" /></div>
+                <div class="ConteinerUserLogin">
+                    <table>
+                        <tr>
+                            <td><strong>Jonh Lennon</strong><td>
+                            <td><img src="Images/AvatorLogo.png" ></td> 
+                            <td><a href=""><strong>  | Exit</strong></a></td>      
+                    </table>
+                </div>
             </div>
             <asp:ContentPlaceHolder ID="mc" runat="server"></asp:ContentPlaceHolder>
         </div>

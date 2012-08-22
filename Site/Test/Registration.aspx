@@ -5,34 +5,39 @@
     <div class="containerRegistration">
         <div class="frame">
             <table style="width: 100%">
+                <tr>
+                    <td></td> 
+                    <td colspan="3" class="style3"> REGISTRATION FORM</td>
+                </tr>
                 <tr class="TableTr">
-                    <td class="style3" rowspan="2" style="width:40px">REGISTRATION <br>FORM</td>
+                    <td class="Grand">Grand finale brings</td>
                     <td class="style1">
                         <asp:Label runat="server" id="lblName">Name</asp:Label>
                     </td>
                     <td class="style2" >
                         <asp:TextBox runat="server" id="txtName" CssClass="TextBox"></asp:TextBox>
                     </td>
+                    <td class="free"></td>
                 </tr>
                 <tr class="TableTr">
+                    <td class="Games">Games to end</td>
                     <td class="style1">
                         <asp:Label runat="server" id="Label1">Email</asp:Label>
                     </td>
                     <td class="style2">
                         <asp:TextBox runat="server" id="TextBox1" CssClass="TextBox"></asp:TextBox>
                     </td>
+                    <td class="free"></td>
                 </tr>
                 <tr class="TableTr">
-                    <td rowspan="2" align="center" ><a href="#" >
-                            <asp:Label class="sectionHeader" runat="server" ID="Label4">
-                            <img src="Images/F.png" alt="" /><br/>
-                            </asp:Label></a></td>
+                    <td rowspan="2" class="Her"><strong>Her world record-setting victory has now been dissected more times than a medical school cadaver. Sports commentators, scientists, and swimming fans have produced charts, statistics and thousends of world both defending and questioning the authenticity of Yes performance</strong></td>
                     <td class="style1">
                         <asp:Label runat="server" id="Label2">Skype</asp:Label>
                     </td>
                     <td class="style2">
                         <asp:TextBox runat="server" id="TextBox2" CssClass="TextBox"></asp:TextBox>
                     </td>
+                    <td class="free"></td>
                 </tr>
                 <tr class="TableTr" >
                     <td class="style1" >
@@ -41,22 +46,25 @@
                     <td class="style2" >
                         <asp:TextBox runat="server" id="TextBox3" CssClass="TextBox"></asp:TextBox>
                     </td>
+                    <td class="free"></td>
                 </tr>
                 <tr class="TableTr">
-                    <td style="font-size:18px" align="center">Вход через <br>Facebook</td>
+                    <td rowspan="2" align="center" ><a href="#" >
+                            <asp:Label class="sectionHeader" runat="server" ID="Label4">
+                            <img src="Images/F.png" alt="" /><br/>
+                            </asp:Label></a></td>
                     <td class="style1">
                         <asp:Label runat="server" id="Label5">Password</asp:Label>
                     </td>
                     <td class="style2">
                         <asp:TextBox runat="server" id="TextBox5" CssClass="TextBox" ></asp:TextBox>
                     </td>
-                    <td rowspan="3" ><a href="#" style="padding-left:15px; font-size:25px">
+                    <td rowspan="3" class="button"><a href="#" style="padding-left:15px; font-size:25px">
                             <asp:Label class="sectionHeader" runat="server" ID="Label7">
                             <img src="Images/btn-go.png" alt="" /><br/><span style="padding-left:25px">Start</span>
                             </asp:Label></a></td>
                 </tr>
                 <tr class="TableTr">
-                    <td class="style3"></td>
                     <td class="style1">
                         <asp:Label runat="server" id="Label6">Retype</asp:Label>
                     </td>
@@ -66,7 +74,7 @@
 
                 </tr>
                 <tr class="TableTr">
-                    <td class="style3" ></td>
+                    <td style="font-size:18px" align="center">Вход через <br>Facebook</td>
                     <td class="style1">    
                     <td class="style2">
                         <asp:RadioButton runat="server" id="RadioBut2" Text="Investor"></asp:RadioButton>

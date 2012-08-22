@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6
 }
 
 .clearer {
-    clear: both
+    clear: both;
 }
 
 .stripe {
@@ -63,7 +63,9 @@ h1, h2, h3, h4, h5, h6
 .containerToolbar .toolbar {
     float: right;
     height: 100%;
-    width: 120px;
+    width: 220px;
+    text-align:center;
+    background-image:url(../Images/BlackRectangle.png);
 }
 
 .containerMain {
@@ -77,9 +79,18 @@ h1, h2, h3, h4, h5, h6
 .containerLogo {
     width: 800px;
     margin: 0 auto;
-    padding-top: 10px
+    padding-top: 10px;
+    padding-bottom:40px;
 }
-
+.containerLogo .containerLogoLogotype
+{
+	float:left;	
+}
+.containerLogo .ConteinerUserLogin
+{
+    float:right;
+    vertical-align:text-top;		
+}
 .containerInvestors {
     width: 800px;
     height: 100%;
@@ -134,7 +145,7 @@ h1, h2, h3, h4, h5, h6
 
 .containerRegistration {
     width: 100%;
-    background-color: #D6FACC;
+    background-color: #F0FFF0;
     height: auto;
     margin-top: 40px
 }
@@ -143,30 +154,53 @@ h1, h2, h3, h4, h5, h6
     width: 800px;
     margin: 0 auto;
     padding-top: 10px;
-    padding-bottom: 20px
+    padding-bottom: 20px;
 }
 .containerRegistration .frame .TableTr
 {
 	height:30px;
+}
+.containerRegistration .frame .TableTr .Grand
+{
+	font-family:Helvetica;
+	font-size:30px;
+}
+.containerRegistration .frame .TableTr .Games
+{
+	font-family:Helvetica;
+	font-size:30px;
+}
+.containerRegistration .frame .TableTr .Her
+{
+	font-family:Helvetica;
+	font-size:14px;
+	padding-right:40px;
+	padding-top:10px;
+	padding-bottom:10px;
 }
 .containerRegistration .frame .style1
 {
 	text-align: right;
 	font: 15px Helvetica Bold;	
 	width:30px;
+	background-color:#D6FACC;
+	padding-left:10px;
 }
 .containerRegistration .frame .style2
 {
 	text-align: left;	
 	padding-left:5px;
 	width:230px;
+	background-color:#D6FACC;
+	padding-left:10px;
 }
 .containerRegistration .frame .style3
 {
 	font-family:Helvetica_Light-Normal;
     font-size:40px;
-    text-align:right;
-    padding-right:20px;
+    background-color:#D6FACC;
+    padding-left:10px;
+    padding-top:20px;
 }
 .containerRegistration .frame .TextBox
 {
@@ -185,6 +219,15 @@ h1, h2, h3, h4, h5, h6
 .containerRegistration .frame .TextBox:hover 
 { 
 	border: 3px solid #3CB371; 
+}
+.containerRegistration .frame .TableTr .button
+{
+	background-color:#D6FACC;
+	padding-right:10px;	
+}
+.containerRegistration .frame .TableTr .free
+{
+	background-color:#D6FACC;	
 }
 .containerPitch{
     width: 1000px;
