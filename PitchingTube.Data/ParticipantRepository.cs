@@ -300,6 +300,18 @@ namespace PitchingTube.Data
             return list;
         }
 
-        public 
+        public object getNominationAndPendingStatus(int tubeId)
+        {
+            //object data;
+
+            IEnumerable<UserInfo> results = GetResult(tubeId);
+
+            object data = new
+                       {
+                           nomination = results.Where(p => p.Role == "Entrepreneur").Select(p => p.Nomination),
+                           pending = results.Where(p => p.Role == "Investor").Select(p => p.Pending)
+                       };
+            return data;
+        }
     }
 }

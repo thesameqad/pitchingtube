@@ -165,9 +165,11 @@ namespace PitchingTube.Controllers
 
         public JsonResult GetRatings(int tubeId)
         {
-            IEnumerable<int> results = participantRepository.GetResult(tubeId).Select(p => p.Nomination);
-
-            return Json(results, JsonRequestBehavior.AllowGet);
+            return new JsonResult
+                       {
+                           Data = participantRepository.getNominationAndPendingStatus(tubeId),
+                           JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                       };
 
         }
     }
