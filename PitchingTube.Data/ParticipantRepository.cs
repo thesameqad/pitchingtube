@@ -302,8 +302,6 @@ namespace PitchingTube.Data
 
         public object getNominationAndPendingStatus(int tubeId)
         {
-            //object data;
-
             IEnumerable<UserInfo> results = GetResult(tubeId);
 
             object data = new

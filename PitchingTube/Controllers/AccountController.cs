@@ -23,12 +23,12 @@ namespace PitchingTube.Controllers
         //
         // GET: /Account/LogOn
 
-        public ActionResult LogOn()
-        {
-            if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
-            return View();
-        }
+        //public ActionResult LogOn()
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //        return RedirectToAction("Index", "Home");
+        //    return View();
+        //}
 
         //
         // POST: /Account/LogOn
