@@ -15,5 +15,7 @@ namespace PitchingTube.Models
         public string Role { get; set; }
         public string Contacts { get; set; }
         public string Email { get; set; }
+        public int Nomination { get; set; }
+        public int Pending { get; set; }
     }
 }

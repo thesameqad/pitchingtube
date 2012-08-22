@@ -240,7 +240,7 @@ namespace PitchingTube.Data
             public string Description { get; set; }
             public string Role { get; set; }
             public int Nomination { get; set; }
-            public int Panding { get; set; }
+            public int Pending { get; set; }
             public string Contacts { get; set; }
         }
 
@@ -291,7 +291,7 @@ namespace PitchingTube.Data
                             Name = x.aspnet_Users.UserName,
                             AvatarPath =
                                 repositoryP.FirstOrDefault(y => y.UserId == investor).AvatarPath.Replace("\\", "/"),
-                            Panding =
+                            Pending =
                                 repository.Query(z => z.TubeId == tubeId && z.InvestorId == x.UserId).Select(
                                     z => z.Panding).FirstOrDefault()
                         }).FirstOrDefault();
@@ -299,5 +299,7 @@ namespace PitchingTube.Data
             }
             return list;
         }
+
+        public 
     }
 }

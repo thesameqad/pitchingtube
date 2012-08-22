@@ -142,7 +142,9 @@ namespace PitchingTube.Models
                 Email = from.Email,
                 Name = from.Name,
                 Role = from.Role,
-                UserId = from.UserId
+                UserId = from.UserId,
+                Nomination = from.Nomination,
+                Pending = from.Pending
             };
         }
 

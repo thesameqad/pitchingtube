@@ -1,70 +1,58 @@
-﻿@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
+﻿@model IEnumerable<PitchingTube.Models.UserInfo>
 
 @{
     ViewBag.Title = "Results";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var entrepreneurs = Model.Where(u => u.Role == "Entrepreneur").ToList();
+    var investors = Model.Where(u => u.Role == "Investor").ToList();
 }
+
 
 <h2>Results</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            UserId
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            AvatarPath
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Role
-        </th>
-        <th>
-            Nomination
-        </th>
-        <th>
-            Panding
-        </th>
-        <th></th>
-    </tr>
+<div class="ConteinerResult">
+        <table class="resultTable">
+            <tr >
+                <td colspan="3" class="Title">ENTREPRENEUR</td>
+                <td ></td>
+                <td colspan="2" class="Title">Investor</td>
+            </tr>
+            @for (int i = 0; i < entrepreneurs.Count; i++ )
+            {
+            <tr class="Tr">
+                <td class="Number">
+                <div id="nomination">
+                    @entrepreneurs[i].Nomination
+                </div>
+                </td>
+                <td class="Zvezda"> <img src="@Url.Content("~/Content/img/Zvezda.png")" alt="" /> </td>
+                <td> <img src="@entrepreneurs[i].AvatarPath" alt="" width="60"> </td>
+                <td class="Idea"> IDEA <br><p class="DescribeIdea">@entrepreneurs[i].Description </p></td>
+                <td class="style1"><img src="@investors[i].AvatarPath" alt="" width="60" /></td>
+                <td class="Preloader"><img src="@Url.Content("/Content/img/PreloaderResult.gif")" alt=""><br/>Pending</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td class="Name" colspan="2"> @entrepreneurs[i].Name</td>
+                <td class="Name" colspan="2"> @investors[i].Name</td>
+            </tr>
+            }
+        </table>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AvatarPath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nomination)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Panding)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    <script type="text/javascript">
 
-</table>
+        $(function () {
+        timer = setInterval(GetRatings,1000);
+
+        function GetRatings()
+        {
+            $.getJSON("/Tube/GetRatings?tubeid=" + @ViewBag.TubeId, function(x) {
+                alert(x.length);
+            }); 
+
+        }
+        
+        })
+    </script>

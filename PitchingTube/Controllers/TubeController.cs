@@ -158,9 +158,17 @@ namespace PitchingTube.Controllers
 
         public ActionResult Results(int tubeId)
         {
-            var repository = new ParticipantRepository();
-            var results = repository.GetResult(tubeId);
+            var results = Util.ConverUserDataListToUserModelList(participantRepository.GetResult(tubeId));
+            ViewBag.TubeId = tubeId;
             return View(results);
+        }
+
+        public JsonResult GetRatings(int tubeId)
+        {
+            IEnumerable<int> results = participantRepository.GetResult(tubeId).Select(p => p.Nomination);
+
+            return Json(results, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
