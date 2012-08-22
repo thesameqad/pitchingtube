@@ -33,8 +33,9 @@ BEGIN
 				join aspnet_Users as u on p.UserId = u.UserId
 					join aspnet_UsersInRoles as ur on u.UserId = ur.UserId
 						join aspnet_Roles as r on ur.RoleId = r.RoleId
-			where r.RoleName = 'Entrepreneur'
+			where r.RoleName = @UserRole
 		) as k on t.TubeId = k.TubeId
+	--where t.Mode = 0
 	group by t.TubeId
 	having COUNT(k.UserId) < 5
 	order by COUNT(k.UserId) desc
