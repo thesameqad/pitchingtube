@@ -141,7 +141,7 @@
     <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="ActivationLink" Type="nvarchar" MaxLength="150" />
     <Property Name="AvatarPath" Type="nvarchar" MaxLength="200" />
-    <Property Name="Pay" Type="varchar" MaxLength="20" />
+    <Property Name="Pay" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Tubes">
     <Key>

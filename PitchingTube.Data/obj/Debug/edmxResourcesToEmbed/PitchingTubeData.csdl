@@ -215,7 +215,6 @@
   <EntityType Name="Nomination">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="EnterepreneurId" />
     </Key>
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="Int32" Name="TubeId" Nullable="false" />

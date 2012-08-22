@@ -116,7 +116,7 @@ namespace PitchingTube.Controllers
             var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
             if (role != "Investor")
             {
-                return null;
+                return RedirectToAction("Results", new { tubeId = tubeId});
             }
             else
             {

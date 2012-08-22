@@ -1694,7 +1694,7 @@ namespace PitchingTube.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Guid EnterepreneurId
         {
@@ -1704,14 +1704,11 @@ namespace PitchingTube.Data
             }
             set
             {
-                if (_EnterepreneurId != value)
-                {
-                    OnEnterepreneurIdChanging(value);
-                    ReportPropertyChanging("EnterepreneurId");
-                    _EnterepreneurId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("EnterepreneurId");
-                    OnEnterepreneurIdChanged();
-                }
+                OnEnterepreneurIdChanging(value);
+                ReportPropertyChanging("EnterepreneurId");
+                _EnterepreneurId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EnterepreneurId");
+                OnEnterepreneurIdChanged();
             }
         }
         private global::System.Guid _EnterepreneurId;

@@ -146,7 +146,7 @@
           <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="ActivationLink" Type="nvarchar" MaxLength="150" />
           <Property Name="AvatarPath" Type="nvarchar" MaxLength="200" />
-          <Property Name="Pay" Type="varchar" MaxLength="20" />
+          <Property Name="Pay" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Tubes">
           <Key>
@@ -447,7 +447,6 @@
         <EntityType Name="Nomination">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="EnterepreneurId" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="TubeId" Nullable="false" />
@@ -618,7 +617,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="PitchingTubeData" ZoomLevel="71">
+      <Diagram Name="PitchingTubeData" ZoomLevel="63">
         <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Membership" Width="1.5" PointX="5.25" PointY="4.125" Height="5.2494108072916674" />
         <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Roles" Width="1.5" PointX="0.75" PointY="8.5" Height="2.1725878906250031" />
         <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Users" Width="1.5" PointX="3" PointY="8" Height="3.3263964843750031" />

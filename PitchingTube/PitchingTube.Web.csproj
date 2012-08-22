@@ -121,6 +121,7 @@
     <Content Include="Content\img\Rocket.png" />
     <Content Include="Content\img\Romb.png" />
     <Content Include="Content\img\RoomsAvator.png" />
+    <Content Include="Content\img\star.gif" />
     <Content Include="Content\img\Video.png" />
     <Content Include="Content\img\Vvod.png" />
     <Content Include="Content\img\Zvezda.png" />
@@ -160,6 +161,7 @@
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.rating.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
