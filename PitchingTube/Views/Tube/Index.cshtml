@@ -10,8 +10,8 @@
         <h1>
             Investor</h1>
     </div>
-    <div class="alertStart" style="margin: 0 auto; text-align: center; font-size: 25px;
-        display: none">
+    <div class="alertStart" style="margin: 0 auto; text-align: center; font-size: 25px;">
+        Pitch will be started automatically in <div id="autoStartText"></div>  minutes
     </div>
     <div style="float: right; text-align: center; height: 0px; width: 250px">
         <div class="alertEn" style="margin: 0 auto; text-align: center; font-size: 25px;
@@ -27,16 +27,25 @@
     <div class="right" id="columnright" style="width: 250px">
     </div>
 </div>
+
+
+<div id="startPitchTimeout">
+    <div class="alertStart" id="startPitchTimeoutText" style="margin: 0 auto; text-align: center; font-size: 25px;
+        display: none">
+    </div>
+</div>
 <script type="text/javascript">
     var timer;
     var i = 10;
     var count = 0;
+    var autoTimeout = 10;
     function stopInterval() {
+        $('#startPitchTimeout').dialog("open");
         clearInterval(timer);
-        $(".alertStart").text("Well, starting pitch").fadeOut(5000);
+        $("#startPitchTimeoutText").text("Well, starting pitch").fadeOut(5000);
         var timer2 = setInterval(function () {
             i--;
-            $(".alertStart").text("Pitch will be starting in " + i + " seconds").show();
+            $(".alertStart").text("Pitch will be started in " + i + " seconds").show();
             if (i == 0) {
                 clearInterval(timer2);
                 $(".alertStart").hide();
@@ -46,8 +55,8 @@
         }, 1000);
     }
     $(document).ready(function () {
-        getPerticipants();
-        timer = setInterval(getPerticipants, 2000);
+        getParticipants();
+        timer = setInterval(onTimerTick, 2000);
         //Refreshes every 30 seconds
         $.ajaxSetup({ cache: false });  //Turn off caching
     });
@@ -60,7 +69,23 @@
             $('#columnright').append(tmp2);
         }
     }
-    function getPerticipants() {
+
+    function onTimerTick(){
+        getParticipants();
+        getAutoStart();
+    }
+
+    function getAutoStart(){
+        $.getJSON("/Tube/GetTubeTimeout?tubeid=@ViewBag.TubeId", function(x) {
+            var minutesLeft = autoTimeout - x.timeOut;
+            if(minutesLeft <= 0)
+                stopInterval();
+            if($("#autoStartText").text() != minutesLeft)
+                $("#autoStartText").text(minutesLeft);
+        });
+    }
+
+    function getParticipants() {
         $.getJSON("/Tube/TubePeopleList?tubeid=" + @ViewBag.TubeId, function(x) {
             if (x.leftInvestor == 0 && x.leftEntrepreneur == 0) {
                 stopInterval();
@@ -92,5 +117,15 @@
     {
         window.location.href="@Url.Content("/Tube/StartPitch")";
     } 
+
+    $('#startPitchTimeout').dialog({
+            autoOpen: false,
+            modal: true
+        });
+
+    $('#logon').click(function () {
+        
+        return false;
+    });
 
 </script>

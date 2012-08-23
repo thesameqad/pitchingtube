@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using System.Web.Security;
 using PitchingTube.Data;
 using PitchingTube.Models;
+using OpenTok;
+using System.Collections.Specialized;
+using System.Configuration;
 
 
 
@@ -20,9 +23,17 @@ namespace PitchingTube.Controllers
         private ParticipantRepository participantRepository = new ParticipantRepository();
         private PartnerRepository partnerRepository = new PartnerRepository();
         private PersonRepository personRepository = new PersonRepository();
+        private TubeRepository tubeRepository = new TubeRepository();
 
-        public ActionResult Index(int tubeId)
+        public ActionResult Index(int tubeId, string description)
         {
+            Guid userId = GetCurrentUserId();
+            participantRepository.Insert(new Participant
+            {
+                TubeId = tubeId,
+                UserId = userId,
+                Description = description
+            });
             ViewBag.TubeId = tubeId;
             return View();
         }
@@ -59,6 +70,20 @@ namespace PitchingTube.Controllers
         [HttpGet]
         public ActionResult StartPitch()
         {
+
+            OpenTokSDK opentok = new OpenTokSDK();
+            Dictionary<string, object> options = new Dictionary<string, object>();
+            //options.Add(SessionPropertyConstants.MULTIPLEXER_SWITCHTYPE, "enabled");
+            string sessionId = opentok.CreateSession(Request.ServerVariables["REMOTE_ADDR"]);
+
+
+            NameValueCollection appSettings = ConfigurationManager.AppSettings;
+
+
+
+            ViewData["apiKey"] = appSettings["opentok_key"];
+            ViewData["sessionId"] = sessionId;
+
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
 
             var tube = participantRepository.UserIsInTube(userId);
@@ -171,6 +196,23 @@ namespace PitchingTube.Controllers
                            JsonRequestBehavior = JsonRequestBehavior.AllowGet
                        };
 
+        }
+
+        public ActionResult FindTube(string description)
+        {
+            ViewBag.Description = description;
+            return View();
+        }
+
+        private Guid GetCurrentUserId()
+        {
+            string userName = Membership.GetUserNameByEmail(User.Identity.Name);
+            return Guid.Parse(Membership.GetUser(userName).ProviderUserKey.ToString());
+        }
+
+        public JsonResult GetTubeTimeout(int tubeId)
+        {
+            return Json(new { timeOut = tubeRepository.GetTubeTimeout(tubeId) }, JsonRequestBehavior.AllowGet);
         }
     }
 }

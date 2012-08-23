@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "FindTube";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ConteinerPpreloader">
+       <div class="Preloader">
+            <img src="@Url.Content("/Content/img/loading.gif")" alt="" />
+        </div>
+       <p class="Searching">Searching for the pitching tube.</p>
+       <p class="Minutes">This may take a few minutes.</p>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $.getJSON("/Home/TubeFinded", function (x) {
+            var tubeId = x.tubeId;
+            window.location.href = "/Tube/Index?tubeId="+tubeId + "&description=@ViewBag.Description";
+        });
+    })
+
+</script>
