@@ -3,7 +3,7 @@
 <script type="text/javascript">
     window.fbAsyncInit = function () {
         FB.init({ appId: '@Facebook.FacebookApplication.Current.AppId', channelURL: '@Request.Url.Scheme://@Request.Url.Authority@Url.Content("~/fbchannel.ashx")', cookie: true, xfbml: true, oauth: true });
-        FB.Event.subscribe('auth.login', function (response) { window.location.reload(); });
+        FB.Event.subscribe('auth.login', function (response) { alert('login');  window.location.reload(); });
         FB.Event.subscribe('auth.logout', function (response) { window.location.reload(); });
     };
 

@@ -119,7 +119,6 @@ namespace PitchingTube.Controllers
                     return RedirectToAction("Results", new { tubeId = tube.TubeId });
             }
 
-            //just a showcase. Will be removed in the future
             Participant currentParticipant = participantRepository.FindPartner(userId, tube.TubeId, roundNumber);
 
             UserInfo partnerModel = new UserInfo
@@ -203,6 +202,11 @@ namespace PitchingTube.Controllers
             ViewBag.TubeId = tubeId;
             return View(results);
         }
+
+
+
+
+
 
         public JsonResult GetRatings(int tubeId)
         {

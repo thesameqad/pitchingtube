@@ -36,12 +36,19 @@
                     <td rowspan="2" align="center" >
                         <a href="#" >
                             <div class="sectionHeader" style="position:relative;width:216px;height:72px;" >
-                                <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;z-index:111;">
+                                @*<div style="position:absolute;left:0px;top:0px;width:216px;height:72px;z-index:111;">
                                     <img src="../../Content/img/F.png" style="cursor:pointer" />
                                 </div>
                                 <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;overflow:hidden;z-index:333;opacity:0;filter:alpha(opacity=0);">
                                     <fb:login-button scope="email" show-faces="true" width="216"></fb:login-button>
-                                </div>  
+                                </div> *@ 
+                                <p>
+                                @if (!Facebook.Web.FacebookWebContext.Current.IsAuthenticated())
+                                {
+                                    <fb:login-button scope="email" ></fb:login-button>
+                                }
+
+                            </p>
                             </div>
                         </a>
                     </td>
