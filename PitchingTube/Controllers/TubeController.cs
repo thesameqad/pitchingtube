@@ -88,6 +88,11 @@ namespace PitchingTube.Controllers
 
             var tube = participantRepository.UserIsInTube(userId);
 
+            if (!participantRepository.CanFindPartner(userId, tube.TubeId))
+            {
+                return RedirectToAction("TubeExclude");
+            }
+
             var repository = new BaseRepository<Tube>();
             var entity = repository.Query(x => x.TubeId == tube.TubeId).FirstOrDefault();
             entity.TubeMode += 1;
@@ -103,7 +108,6 @@ namespace PitchingTube.Controllers
                     return RedirectToAction("Results", new { tubeId = tube.TubeId });
             }
 
-            //just a showcase. Will be removed in the future
             Participant currentParticipant = participantRepository.FindPartner(userId, tube.TubeId, roundNumber);
 
             UserInfo partnerModel = new UserInfo
@@ -186,6 +190,11 @@ namespace PitchingTube.Controllers
             var results = Util.ConverUserDataListToUserModelList(participantRepository.GetResult(tubeId));
             ViewBag.TubeId = tubeId;
             return View(results);
+        }
+
+        public ActionResult TubeExclude()
+        {
+            return View();
         }
 
         public JsonResult GetRatings(int tubeId)

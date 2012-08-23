@@ -312,5 +312,14 @@ namespace PitchingTube.Data
                        };
             return data;
         }
+
+        public bool CanFindPartner(Guid userId, int tubeId)
+        {
+            var participant = FirstOrDefault(p => p.UserId == userId && p.TubeId == tubeId);
+
+            return FirstOrDefault(p => p.TubeId == tubeId && p.IndexNumber == participant.IndexNumber && p.UserId != userId) != null;
+
+            
+        }
     }
 }

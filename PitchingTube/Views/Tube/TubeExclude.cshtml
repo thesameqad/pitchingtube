@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "TubeExclude";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="Message">
+           <table class="title"> 
+            <tr>
+               <td colspan="2"> We are sorry, but we can't find partner for you. Please, try to connect to another tube.</td>
+               <td></td>
+            </tr>
+            <tr>
+                <td>
+                @Html.ActionLink("Main page","Index","Home",new{ @class="Button1"})
+                </td>
+                <td>
+                @Html.ActionLink("Search again", "FindTube", "Tube", new { @class = "Button1" })
+                </td>
+            </tr>
+           </table>
+       </div>
