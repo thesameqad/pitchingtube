@@ -11,9 +11,16 @@ namespace PitchingTube.Data
         private ParticipantRepository participantRepository = new ParticipantRepository();
         private BaseRepository<aspnet_Users> userPepository = new BaseRepository<aspnet_Users>();
 
-        public List<PitchingTube.Data.ParticipantRepository.UserInfo> History(Guid UserId, Guid currentPartnerId)
+        public List<PitchingTube.Data.ParticipantRepository.UserInfo> History(Guid UserId, Guid currentPartnerId, int tubeId)
         {
-            var HistoryPartners = Query(x => x.UserId == UserId);
+            var HistoryPartners = (from partner in _objectSet
+                                   join p in _context.Participants on partner.PartnerId equals p.UserId
+                                   where p.TubeId == tubeId && partner.UserId == UserId
+                                   select partner).ToList();
+                          
+            //var HistoryPartners = Query(x => x.UserId == UserId);
+            var count = HistoryPartners.Count;
+
             var partners = new List<PitchingTube.Data.ParticipantRepository.UserInfo>();
             foreach (var partner in HistoryPartners)
             {

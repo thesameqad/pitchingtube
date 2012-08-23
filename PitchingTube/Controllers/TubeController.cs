@@ -80,7 +80,6 @@ namespace PitchingTube.Controllers
             NameValueCollection appSettings = ConfigurationManager.AppSettings;
 
 
-
             ViewData["apiKey"] = appSettings["opentok_key"];
             ViewData["sessionId"] = sessionId;
 
@@ -88,10 +87,27 @@ namespace PitchingTube.Controllers
 
             var tube = participantRepository.UserIsInTube(userId);
 
+            int countPairs = participantRepository.CountPairsInTube(tube.TubeId);
+
             var repository = new BaseRepository<Tube>();
             var entity = repository.Query(x => x.TubeId == tube.TubeId).FirstOrDefault();
-            entity.TubeMode += 1;
+
+
+            //----stub---
+            if (entity.TubeMode == TubeMode.Opened && countPairs != 5)
+                participantRepository.DeleteFromTubeSingleUsers(tube.TubeId);
+            //-----------
+
+
+            if((int) entity.TubeMode == countPairs)
+                entity.TubeMode = TubeMode.Nominations;
+            else
+                entity.TubeMode += 1;
+
             repository.Update(entity);
+
+            if (!participantRepository.IsCanFindPartner(userId, tube.TubeId))
+                return RedirectToAction("TubeExcluded", "Tube", new { tubeId = tube.TubeId });
 
             int roundNumber = (int)entity.TubeMode;
 
@@ -124,7 +140,7 @@ namespace PitchingTube.Controllers
             });
 
             //ViewBag setup 
-            ViewBag.History = Util.ConverUserDataListToUserModelList(partnerRepository.History(userId, currentParticipant.UserId));
+            ViewBag.History = Util.ConverUserDataListToUserModelList(partnerRepository.History(userId, currentParticipant.UserId, tube.TubeId));
 
             ViewBag.CurrentPairs = currentPairsModel;
 
@@ -213,6 +229,16 @@ namespace PitchingTube.Controllers
         public JsonResult GetTubeTimeout(int tubeId)
         {
             return Json(new { timeOut = tubeRepository.GetTubeTimeout(tubeId) }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult TubeExcluded(int tubeId)
+        {
+            var userId = GetCurrentUserId();
+            var participant = participantRepository.FirstOrDefault(p => p.UserId == userId && p.TubeId == tubeId);
+            ViewBag.Description = participant.Description;
+            participantRepository.Delete(participant);
+
+            return View();
         }
     }
 }

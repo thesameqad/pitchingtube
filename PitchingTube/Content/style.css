@@ -287,8 +287,8 @@ h1, h2, h3, h4, h5, h6
 .ConteinerPpreloader .Message
 {
 	background-color:#D6FACC;
-	width:600px;
-	height:180px;
+	width:800px;
+	height:200px;
 	margin: 0 auto;	
 }
 .ConteinerPpreloader .Message .title
@@ -304,19 +304,11 @@ h1, h2, h3, h4, h5, h6
 	height:40px;
 	border:none;
 	background-color:Black;
+	color: White;
 	text-align:center;
 	border-radius: 5px 5px 5px 5px;	
 	margin-top:20px;
-}
-.ConteinerPpreloader .Message .Button2
-{
-	width:120px;
-	height:40px;
-	border:none;
-	background-color:Black;
-	text-align:center;
-	border-radius: 5px 5px 5px 5px;	
-	margin-top:20px;
+	font-size: 20px;
 }
 .ConteinerResult
 {

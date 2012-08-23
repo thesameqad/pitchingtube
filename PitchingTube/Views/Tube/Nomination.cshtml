@@ -45,13 +45,17 @@
 </div>
 
 <script type="text/javascript">
-    $(function () {
-        $(".star").rating("select",0);
-        $("#submit-form").bind("click", function () {
-            for (var i = 1; i <= 5; i++)
+    $(function() {
+        $(".star").rating("select", 0);
+        $("#submit-form").bind("click", function() {
+            alert("click");
+            for (var i = 1; i <= 5; i++) {
+                alert($("#star-input-" + i).val());
                 $("#star-input-" + i).val($('input:radio[name=star' + i + ']:checked').val());
-        }
-        );
+            }
+
+        });
+
 
     });
 </script>
