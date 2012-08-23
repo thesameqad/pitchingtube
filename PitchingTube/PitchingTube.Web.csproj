@@ -265,9 +265,6 @@
     <Content Include="Views\Tube\StartPitch.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Tube\ShareContacts.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\History.cshtml" />
     <Content Include="Views\Shared\Live.cshtml" />
   </ItemGroup>

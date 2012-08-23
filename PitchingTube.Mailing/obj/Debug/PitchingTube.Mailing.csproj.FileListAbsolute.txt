@@ -22,3 +22,9 @@ C:\Users\1\Desktop\pitchingtube\PitchingTube.Mailing\bin\Debug\RazorEngine.dll
 C:\Users\1\Desktop\pitchingtube\PitchingTube.Mailing\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\1\Desktop\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.dll
 C:\Users\1\Desktop\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.pdb
+C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.dll
+C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Mailing\bin\Debug\PitchingTube.Mailing.pdb
+C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Mailing\bin\Debug\RazorEngine.dll
+C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Mailing\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.dll
+C:\Users\Dima\Desktop\pitchingtube\PitchingTube.Mailing\obj\Debug\PitchingTube.Mailing.pdb
