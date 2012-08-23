@@ -135,7 +135,8 @@ namespace PitchingTube.Controllers
             partnerRepository.Insert(new Partner()
             {
                 UserId = userId,
-                PartnerId = currentParticipant.UserId
+                PartnerId = currentParticipant.UserId,
+                //BeginPitchTime = DateTime.Now
             });
 
             //ViewBag setup 
@@ -243,6 +244,11 @@ namespace PitchingTube.Controllers
             participantRepository.Delete(participant);
 
             return View();
+        }
+
+        public JsonResult GetCurrentTimePitch(Guid userId, Guid partnerId, int delay)
+        {
+            return Json(new {leftTime = partnerRepository.GetLeftTimePitch(userId, partnerId) - delay}, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -134,7 +134,7 @@ h1, h2, h3, h4, h5, h6
 
 .containerRegistration {
     width: 100%;
-    background-color: #D6FACC;
+    background-color: #F0FFF0;
     height: auto;
     margin-top: 40px
 }
@@ -143,30 +143,53 @@ h1, h2, h3, h4, h5, h6
     width: 800px;
     margin: 0 auto;
     padding-top: 10px;
-    padding-bottom: 20px
+    padding-bottom: 20px;
 }
 .containerRegistration .frame .TableTr
 {
 	height:30px;
+}
+.containerRegistration .frame .TableTr .Grand
+{
+	font-family:Helvetica;
+	font-size:30px;
+}
+.containerRegistration .frame .TableTr .Games
+{
+	font-family:Helvetica;
+	font-size:30px;
+}
+.containerRegistration .frame .TableTr .Her
+{
+	font-family:Helvetica;
+	font-size:14px;
+	padding-right:40px;
+	padding-top:10px;
+	padding-bottom:10px;
 }
 .containerRegistration .frame .style1
 {
 	text-align: right;
 	font: 15px Helvetica Bold;	
 	width:30px;
+	background-color:#D6FACC;
+	padding-left:10px;
 }
 .containerRegistration .frame .style2
 {
 	text-align: left;	
 	padding-left:5px;
 	width:230px;
+	background-color:#D6FACC;
+	padding-left:10px;
 }
 .containerRegistration .frame .style3
 {
 	font-family:Helvetica_Light-Normal;
     font-size:40px;
-    text-align:right;
-    padding-right:20px;
+    background-color:#D6FACC;
+    padding-left:10px;
+    padding-top:20px;
 }
 .containerRegistration .frame .TextBox
 {
@@ -185,6 +208,15 @@ h1, h2, h3, h4, h5, h6
 .containerRegistration .frame .TextBox:hover 
 { 
 	border: 3px solid #3CB371; 
+}
+.containerRegistration .frame .TableTr .button
+{
+	background-color:#D6FACC;
+	padding-right:10px;	
+}
+.containerRegistration .frame .TableTr .free
+{
+	background-color:#D6FACC;	
 }
 .containerPitch{
     width: 1000px;
@@ -287,8 +319,8 @@ h1, h2, h3, h4, h5, h6
 .ConteinerPpreloader .Message
 {
 	background-color:#D6FACC;
-	width:800px;
-	height:200px;
+	width:600px;
+	height:180px;
 	margin: 0 auto;	
 }
 .ConteinerPpreloader .Message .title
@@ -304,13 +336,20 @@ h1, h2, h3, h4, h5, h6
 	height:40px;
 	border:none;
 	background-color:Black;
-	color: White;
 	text-align:center;
 	border-radius: 5px 5px 5px 5px;	
 	margin-top:20px;
-	font-size: 20px;
 }
-
+.ConteinerPpreloader .Message .Button2
+{
+	width:120px;
+	height:40px;
+	border:none;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	margin-top:20px;
+}
 .ConteinerResult
 {
 	width: 800px;
@@ -409,7 +448,6 @@ h1, h2, h3, h4, h5, h6
 	border:none;
 	font-size:18px;
 	background-color:Black;
-	color:White;
 	text-align:center;
 	border-radius: 5px 5px 5px 5px;	
 	float:right;

@@ -135,6 +135,7 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PartnerId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Contacts" Type="nchar" MaxLength="10" />
+          <Property Name="BeginPitchTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Persons">
           <Key>
@@ -146,7 +147,7 @@
           <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="ActivationLink" Type="nvarchar" MaxLength="150" />
           <Property Name="AvatarPath" Type="nvarchar" MaxLength="200" />
-          <Property Name="Pay" Type="varchar" MaxLength="50" />
+          <Property Name="Pay" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Tubes">
           <Key>
@@ -357,6 +358,7 @@
           <Property Type="Guid" Name="PartnerId" Nullable="false" />
           <Property Type="String" Name="Contacts" MaxLength="10" FixedLength="true" Unicode="true" Nullable="true" />
           <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Partners_aspnet_Users" FromRole="Partner" ToRole="aspnet_Users" />
+          <Property Type="DateTime" Name="BeginPitchTime" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -548,6 +550,7 @@
           <EntitySetMapping Name="Partners">
             <EntityTypeMapping TypeName="PitchingTubeModel.Partner">
               <MappingFragment StoreEntitySet="Partners">
+                <ScalarProperty Name="BeginPitchTime" ColumnName="BeginPitchTime" />
                 <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

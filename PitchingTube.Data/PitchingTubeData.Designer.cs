@@ -2145,6 +2145,30 @@ namespace PitchingTube.Data
         private global::System.String _Contacts;
         partial void OnContactsChanging(global::System.String value);
         partial void OnContactsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> BeginPitchTime
+        {
+            get
+            {
+                return _BeginPitchTime;
+            }
+            set
+            {
+                OnBeginPitchTimeChanging(value);
+                ReportPropertyChanging("BeginPitchTime");
+                _BeginPitchTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BeginPitchTime");
+                OnBeginPitchTimeChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _BeginPitchTime;
+        partial void OnBeginPitchTimeChanging(Nullable<global::System.DateTime> value);
+        partial void OnBeginPitchTimeChanged();
 
         #endregion
     

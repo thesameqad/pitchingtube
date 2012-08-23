@@ -62,6 +62,22 @@ namespace PitchingTube.Data
 
             if(partner == null)
                 base.Insert(newEntity);
+            //else
+            //{
+            //    _objectSet.AddObject(newEntity);
+            //}
+
+            newEntity.BeginPitchTime = DateTime.Now;
+            Update(newEntity);
+        }
+
+        public int GetLeftTimePitch(Guid userId, Guid partnerId)
+        {
+            var currentPair = FirstOrDefault(p => p.UserId == userId && p.PartnerId == partnerId);
+            var timeDiff = DateTime.Now - currentPair.BeginPitchTime;
+
+            return Convert.ToInt32(timeDiff.Value.TotalSeconds);
+
         }
     }
 }

@@ -75,6 +75,7 @@
     <EntitySetMapping Name="Partners">
       <EntityTypeMapping TypeName="PitchingTubeModel.Partner">
         <MappingFragment StoreEntitySet="Partners">
+          <ScalarProperty Name="BeginPitchTime" ColumnName="BeginPitchTime" />
           <ScalarProperty Name="Contacts" ColumnName="Contacts" />
           <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />

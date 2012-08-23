@@ -1,5 +1,7 @@
 ﻿@model PitchingTube.Models.LogOnModel
-           
+    
+    <div class="containerLogo">
+                <img src="../../Content/img/Logo.png" alt="PitchingTube" />       
 @if(Request.IsAuthenticated) {
     <img src="@Url.Content(PitchingTube.Models.Util.GetAvatarPath())" height="20px" />
     <text>Welcome @Html.ActionLink(User.Identity.Name,"AccountSettings","Account") @*<strong>@User.Identity.Name</strong>*@!
@@ -8,7 +10,7 @@
 else {
     @:[<a id="logon" href="#">Log On</a> ]@*@Html.ActionLink("Log On", "LogOn", "Account") ]*@
     <div id="dialog" title="Log On">
-        
+       
         <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
@@ -48,10 +50,10 @@ else {
                 </fieldset>
             </div>
         }
-
+       
     </div>
 }
-
+ </div> 
 <script type="text/javascript">
     $(function () {
         $('#dialog').dialog({

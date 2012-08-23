@@ -44,9 +44,10 @@
 </div>
 
 <script type="text/javascript">
-    var minutes = 2;
+    //var minutes = 2;
     var seconds = 0;
     var stopTime = true;
+    var delay = 0;
 
     var statusArray = new Array(
             { time: 120, status: "Sharing idea" },
@@ -55,31 +56,40 @@
         );
 
         $(document).ready(function () {
-
+            alert("time");
             $('#time').text("02:00");
             $('#timeStatus').text(statusArray[0].status);
 
             timer = setInterval(function () {
-            if(!stopTime){
-                seconds -= 1;
-                if (seconds == -1) {
-                    minutes -= 1;
-                    seconds = 59;
-                }
-                $('#time').text("0" + minutes + ":" + (seconds - 10 < 0 ? "0" : "") + seconds);
+           // if(!stopTime){
+                $.getJSON("/Tube/GetCurrentTimePitch?userId=@Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey&partnerId=@ViewBag.CurrentPartner.UserId&delay="+delay,
+                    function(x) {
+                        seconds = x.leftTime;
+                        var minutes = (2 * 60 - seconds) / 60;
+//                seconds -= 1;
+//                if (seconds == -1) {
+//                    minutes -= 1;
+//                    seconds = 59;
+//                }
 
-                var currentTime = minutes * 60 + seconds;
+                        seconds = seconds - 60 * minutes;
+                        $('#time').text("0" + minutes + ":" + (seconds - 10 < 0 ? "0" : "") + seconds);
 
-                for (var i = 0; i < statusArray.length; i++) {
-                    if (currentTime == statusArray[i].time)
-                        $('#timeStatus').text(statusArray[i].status);
-                }
+                        var currentTime = minutes * 60 + seconds;
 
-                if (currentTime == 0) {
-                    clearInterval(timer);
-                    newRound();
-                }
-            }
+                        for (var i = 0; i < statusArray.length; i++) {
+                            if (currentTime == statusArray[i].time)
+                                $('#timeStatus').text(statusArray[i].status);
+                        }
+
+                        if (currentTime == 0) {
+                            clearInterval(timer);
+                            newRound();
+                        }
+
+//            } else 
+//                delay += 1;
+                    });
             }, 1000);
         });
 

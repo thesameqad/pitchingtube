@@ -125,6 +125,7 @@
     <Property Type="Guid" Name="PartnerId" Nullable="false" />
     <Property Type="String" Name="Contacts" MaxLength="10" FixedLength="true" Unicode="true" Nullable="true" />
     <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Partners_aspnet_Users" FromRole="Partner" ToRole="aspnet_Users" />
+    <Property Type="DateTime" Name="BeginPitchTime" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
