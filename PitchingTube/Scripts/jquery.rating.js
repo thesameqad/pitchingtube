@@ -98,23 +98,23 @@
 				if(input.hasClass('required')) control.required = true;
 				
 				// Create 'cancel' button
-				rater.append(
-					control.cancel = $('<div class="rating-cancel"><a title="' + control.cancel + '">' + control.cancelValue + '</a></div>')
-					.mouseover(function(){
-						$(this).rating('drain');
-						$(this).addClass('star-rating-hover');
-						//$(this).rating('focus');
-					})
-					.mouseout(function(){
-						$(this).rating('draw');
-						$(this).removeClass('star-rating-hover');
-						//$(this).rating('blur');
-					})
-					.click(function(){
-					 $(this).rating('select');
-					})
-					.data('rating', control)
-				);
+//				rater.append(
+//					control.cancel = $('<div class="rating-cancel"><a title="' + control.cancel + '">' + control.cancelValue + '</a></div>')
+//					.mouseover(function(){
+//						$(this).rating('drain');
+//						$(this).addClass('star-rating-hover');
+//						//$(this).rating('focus');
+//					})
+//					.mouseout(function(){
+//						$(this).rating('draw');
+//						$(this).removeClass('star-rating-hover');
+//						//$(this).rating('blur');
+//					})
+//					.click(function(){
+//					 $(this).rating('select');
+//					})
+//					.data('rating', control)
+//				);
 				
 			}; // first element of group
 			

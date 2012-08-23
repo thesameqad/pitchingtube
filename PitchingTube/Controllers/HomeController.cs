@@ -7,6 +7,7 @@ using Facebook.Web.Mvc;
 using Facebook.Web;
 using PitchingTube.Data;
 using System.Web.Security;
+using System.Threading;
 
 namespace PitchingTube.Controllers
 {
@@ -63,22 +64,18 @@ namespace PitchingTube.Controllers
         [HttpPost]
         public ActionResult Index(string description)
         {
-            int tubeId = FindTube();
-            Guid userId = GetCurrentUserId();
-            participantRepository.Insert(new Participant
-            {
-                TubeId = tubeId,
-                UserId = userId,
-                Description = description
-            });
-            return RedirectToAction("Index", "Tube", new {tubeId = tubeId });
+            return RedirectToAction("FindTube", "Tube", new { description = description});
         }
-        
-    
 
         public ActionResult About()
         {
             return View();
+        }
+
+        public JsonResult TubeFinded()
+        {
+            Thread.Sleep(3000);
+            return Json(new {tubeId = FindTube()},JsonRequestBehavior.AllowGet);
         }
 
         private int FindTube()

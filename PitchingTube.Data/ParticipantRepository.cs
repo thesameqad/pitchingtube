@@ -73,7 +73,7 @@ namespace PitchingTube.Data
                         CreatedDate = DateTime.Now,
                         TubeMode = TubeMode.Opened
                     };
-                tubeRepository.Insert(newTube);
+                tubeRepository.Insert(newTube); 
                 return newTube.TubeId;
             }
 
@@ -131,7 +131,8 @@ namespace PitchingTube.Data
                                      && p.TubeId == newEntity.TubeId
                                select p).Count();
             newEntity.IndexNumber = indexNumber;
-            base.Insert(newEntity);
+            if(FirstOrDefault(p => p.UserId == newEntity.UserId && p.TubeId == newEntity.TubeId) == null)
+                base.Insert(newEntity);
 
         }
 

@@ -4,7 +4,7 @@
     ViewBag.Title = "StartPitch";
 }
 
-<h2>StartPitch</h2>
+<script src="http://staging.tokbox.com/v0.91/js/TB.min.js" ></script>
 
 <div class="containerPitch">
         <table >
@@ -14,7 +14,8 @@
                     <div class="question" id="timeStatus"></div>
                 </td>
                 <td class="video" rowspan="5" >
-                    <img src="@Url.Content("/Content/img/Video.png")" alt="" /> 
+                <div id="videoPanel" style="display: block"></div>
+                    @*<img src="@Url.Content("/Content/img/Video.png")" alt="" /> *@
                 </td>
                 <td class="investor">
                     CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
@@ -28,59 +29,24 @@
             @Html.Partial("Live", ((List<UserInfo>)ViewBag.CurrentPairs))
 </div>
 
-@*<p>YourPartner<br />
-    @ViewBag.CurrentPartnerId.UserId
-</p>
-
-<div id="time">
-    00:00
+<div id="pitchingDialog">
+    <div id="initializing">
+       <div class="Preloader">
+            <img src="@Url.Content("/Content/img/loading.gif")" alt="" />
+        </div>
+       <p class="Searching">Initializing Video.</p>
+       <p class="Minutes">The conversation will be started shortly.</p>
+     </div>
+     <div class="alertStart" id="nextParticipant" style="margin: 0 auto; text-align: center; font-size: 25px;
+        display: none">
+     
+     </div>
 </div>
-<div id="timeStatus">
-</div>
 
-<p>
-    Other Rooms
-</p>
-<table>
-<tr>
-@{
-    int count = 0;
-    foreach (var itemModel in Model)
-    {
-        if (itemModel.UserId != ViewBag.CurrentPartnerId.UserId &&
-           itemModel.UserId != (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey)
-        {
-            <td>
-                <img src="@Url.Content(itemModel.AvatarPath)" height="60px" /><br/>
-                @Html.DisplayFor(m => itemModel.Name)
-            </td>
-            if(count % 2 == 0)
-            {
-                <td>
-                    >
-                </td>
-            }
-            else{
-                <td>
-                    |<br/>|<br/>|<br/>|<br/>|
-                </td>
-            }
-            
-        }
-        count++;
-    }
-}
-</tr>
-</table>
-
-<div>
-    @Html.Partial("History", ViewBag.History);
-</div>
-*@
-
-<script language="javascript">
-    var minutes = 0;
-    var seconds = 10;
+<script type="text/javascript">
+    var minutes = 2;
+    var seconds = 0;
+    var stopTime = true;
 
     var statusArray = new Array(
             { time: 120, status: "Sharing idea" },
@@ -94,6 +60,7 @@
             $('#timeStatus').text(statusArray[0].status);
 
             timer = setInterval(function () {
+            if(!stopTime){
                 seconds -= 1;
                 if (seconds == -1) {
                     minutes -= 1;
@@ -110,15 +77,162 @@
 
                 if (currentTime == 0) {
                     clearInterval(timer);
-                    alert("Pitch is stopped");
                     newRound();
                 }
+            }
             }, 1000);
         });
 
     function newRound()
     {
-        window.location.href="@Url.Content("/Tube/StartPitch")";
+        var i = 10;
+        $("#initializing").hide();
+        $("#nextParticipant").show();
+        $('#pitchingDialog').dialog("open");
+        var timer2 = setInterval(function () {
+            i--;
+            $(".alertStart").text("Next conversation will be started in " + i + " seconds").show();
+            if (i == 0) {
+                clearInterval(timer2);
+                window.location.href="@Url.Content("/Tube/StartPitch")";
+            }
+        }, 1000);
+
     } 
+
+
+    //openTok
+
+    var sessionId = '@ViewData["sessionId"]';
+    $(document).ready(function () {
+        connect();
+        
+        $("#initializing").show();
+        $("#nextParticipant").hide();
+        $('#pitchingDialog').dialog("open");
+    })
+
+
+    $('#pitchingDialog').dialog({
+        autoOpen: false,
+        modal: true,
+        resizable: false
+    });
+
+    var apiKey = '17048601'; // OpenTok sample code key. Replace with your own API key.
+
+    // var sessionId = "1sdemo00955f8290f8efa648d9347d718f7e06fd"; // Replace with your session ID.
+    var token = "moderator_token"; // Should not be hard-coded. Add to the page using the OpenTok server-side libraries.
+    var subscribers = {};
+    var session;
+    var publisher;
+
+    // Un-comment either of the following to set automatic logging and exception handling.
+    // See the exceptionHandler() method below.
+    // TB.setLogLevel(TB.DEBUG);
+    TB.addEventListener("exception", exceptionHandler);
+
+    if (TB.checkSystemRequirements() != TB.HAS_REQUIREMENTS) {
+        alert("You don't have the minimum requirements to run this application."
+				  + "Please upgrade to the latest version of Flash.");
+    } else {
+        session = TB.initSession(sessionId);
+
+        // Add event listeners to the session
+        session.addEventListener("sessionConnected", sessionConnectedHandler);
+        session.addEventListener("streamCreated", streamCreatedHandler);
+        session.addEventListener("streamDestroyed", streamDestroyedHandler);
+        session.addEventListener("streamPropertyChanged", streamPropertyChangedHandler);
+    }
+
+    //--------------------------------------
+    //  OPENTOK EVENT HANDLERS
+    //--------------------------------------
+    function sessionConnectedHandler(event) {
+        subscribeToStreams(event.streams);
+
+        startPublishing();
+        stopTime = false;
+        $('#pitchingDialog').dialog("close");
+
+    }
+
+    function startPublishing() {
+        if (!publisher) {
+            var containerDiv = document.createElement('div');
+            containerDiv.className = "subscriberContainer";
+            containerDiv.setAttribute('id', 'opentok_publisher');
+            containerDiv.style.float = "left";
+            var videoPanel = document.getElementById("videoPanel");
+            videoPanel.appendChild(containerDiv);
+
+            var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
+            publisherDiv.setAttribute('id', 'replacement_div')
+            containerDiv.appendChild(publisherDiv);
+
+            var publisherProperties = new Object();
+            
+            publisherProperties.publishVideo = true;
+            publisherProperties.publishAudio = true;
+            publisherProperties.width = 690;
+            publisherProperties.height = 410;
+
+            publisher = session.publish(publisherDiv.id, publisherProperties);
+        }
+    }
+
+    var subscriber_width = [120, 160, 220];
+    var subscriber_height = [90, 120, 165];
+
+    function streamCreatedHandler(event) {
+        subscribeToStreams(event.streams);
+    }
+
+    function streamDestroyedHandler(event) {
+
+    }
+
+    function streamPropertyChangedHandler(event) {
+    }
+
+    function exceptionHandler(event) {
+        alert("Exception: " + event.code + "::" + event.message);
+    }
+
+    //--------------------------------------
+    //  LINK CLICK HANDLERS
+    //--------------------------------------
+
+    function connect() {
+        session.connect(apiKey, token);
+    }
+
+    function disconnect() {
+        session.disconnect();
+    }
+
+
+    //--------------------------------------
+    //  HELPER METHODS
+    //--------------------------------------
+    function subscribeToStreams(streams) {
+        for (i = 0; i < streams.length; i++) {
+            var stream = streams[i];
+            if (stream.connection.connectionId != session.connection.connectionId) {
+                session.subscribe(stream);
+            }
+        }
+    }
+
+    //--------------------------------------
+    //  UTILITY METHODS
+    //--------------------------------------
+    function show(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function hide(id) {
+        document.getElementById(id).style.display = 'none';
+    }
 
 </script>
