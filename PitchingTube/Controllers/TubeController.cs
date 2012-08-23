@@ -47,22 +47,26 @@ namespace PitchingTube.Controllers
             return new JsonResult() { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        [HttpGet]
-        public ActionResult ShareContacts(int tubeId)
+
+        public JsonResult ShareContacts(int tubeId)
         {
             var role = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault();
             if (role != "Investor")
             {
                 return null;
             }
+            else
             {
                 Guid Userid = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
                 var PartnerId = participantRepository.FindPartner(Userid, tubeId, (int)participantRepository.UserIsInTube(Userid).Mode);
                 var model = personRepository.Query(x => x.UserId == Userid).FirstOrDefault();
 
-                ViewBag.Email = PartnerId.aspnet_Users.aspnet_Membership.Email;
+               // ViewBag.Email = PartnerId.aspnet_Users.aspnet_Membership.Email;
+                var history = partnerRepository.FirstOrDefault(x => x.UserId == Userid && x.PartnerId == PartnerId.UserId);
+                history.Contacts = "true";
+                partnerRepository.Update(history);
 
-                return View(model);
+                return Json(new { Email = PartnerId.aspnet_Users.aspnet_Membership.Email, Skype = model.Skype, Phone = model.Phone }, JsonRequestBehavior.AllowGet);
             }
 
         }

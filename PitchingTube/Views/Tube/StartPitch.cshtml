@@ -21,12 +21,16 @@
                     CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
                     <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
                     </td>
-                <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description</td>
+                <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description>
+                      <div class="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none></div>
+                      <input type="text" id="SC" name="ShareContactsButton" />
+                </td>
             </tr>
             @Html.Partial("History", ((IEnumerable<UserInfo>)ViewBag.History))
             </table>
 
             @Html.Partial("Live", ((List<UserInfo>)ViewBag.CurrentPairs))
+
 </div>
 
 <div id="pitchingDialog">
@@ -82,7 +86,15 @@
             }
             }, 1000);
         });
-
+     $("#SC").bind("click", function () 
+                         {
+                             $.getJSON("/Tube/ShareContacts?tubeid=" + @ViewBag.TubeId, function(x) 
+                             {
+                                $(".Contacts").html("Email:"+x.Email).show();
+                                $(".Contacts").html("Skype:"+x.Skype).show();
+                                $(".Contacts").html("Phone:"+x.Phone).show();
+                             });
+                         }
     function newRound()
     {
         var i = 10;
