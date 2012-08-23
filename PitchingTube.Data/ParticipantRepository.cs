@@ -138,6 +138,9 @@ namespace PitchingTube.Data
 
         public Participant FindPartner(Guid userId, int tubeId, int roundNumber)
         {
+
+            int countPairs = CountPairsInTube(tubeId);
+
             string roleName = (from u in _context.aspnet_Users
                                where u.UserId == userId
                                select u.aspnet_Roles.FirstOrDefault().RoleName).FirstOrDefault();
@@ -149,13 +152,13 @@ namespace PitchingTube.Data
             {
                 roleName = "Entrepreneur";
                 indexNumber += roundNumber;
-                indexNumber = indexNumber >= 5 ? indexNumber - 5 : indexNumber;
+                indexNumber = indexNumber >= countPairs ? indexNumber - countPairs : indexNumber;
             }
             else
             {
                 roleName = "Investor";
                 indexNumber -= roundNumber;
-                indexNumber = indexNumber <= -1 ? indexNumber + 5 : indexNumber;
+                indexNumber = indexNumber <= -1 ? indexNumber + countPairs : indexNumber;
             }
 
             var participant = (from p in _objectSet
@@ -171,7 +174,7 @@ namespace PitchingTube.Data
 
         public List<UserInfo> FindCurrentPairs(Guid userId, Guid partnerId, int tubeId, int roundNumber)
         {
-
+            int countPairs = CountPairsInTube(tubeId);
 
             List<UserInfo> currentPairs = new List<UserInfo>();
 
@@ -210,7 +213,7 @@ namespace PitchingTube.Data
                 int indexNumber = (int) inv.IndexNumber + roundNumber;
 
                 var hisPair = (from e in entrepreneurs
-                               where e.IndexNumber == (indexNumber >= 5 ? indexNumber - 5 : indexNumber)
+                               where e.IndexNumber == (indexNumber >= countPairs ? indexNumber - countPairs : indexNumber)
                                select e).FirstOrDefault();
 
                 currentPairs.Add(new UserInfo
@@ -311,6 +314,45 @@ namespace PitchingTube.Data
                            pending = results.Where(p => p.Role == "Investor").Select(p => p.Pending)
                        };
             return data;
+        }
+
+        public bool IsCanFindPartner(Guid userId, int tubeId)
+        {
+            var participant = FirstOrDefault(p => p.UserId == userId && p.TubeId == tubeId);
+
+            return FirstOrDefault(p => p.TubeId == tubeId && p.UserId != userId && p.IndexNumber == participant.IndexNumber) != null;
+        }
+
+        public int CountPairsInTube(int tubeId)
+        {
+            var count = (from p in _objectSet
+                          where p.TubeId == tubeId
+                          group p by p.IndexNumber
+                          into p
+                          where p.Count() == 2
+                          select p).Count();
+            
+            return count;
+        }
+
+        public void DeleteFromTubeSingleUsers(int tubeId)
+        {
+            var singleUsers = (from p in _objectSet
+                              where p.TubeId == tubeId
+                              group p by p.IndexNumber
+                              into p
+                              where p.Count() == 1
+                              select p).ToList();
+
+            //for (int i = 0; i < singleUsers.Count; i++)
+            //{
+            //    Delete(singleUsers[i].FirstOrDefault());
+            //}
+
+            foreach (var user in singleUsers)
+            {                
+                Delete(user.FirstOrDefault());
+            }
         }
     }
 }
