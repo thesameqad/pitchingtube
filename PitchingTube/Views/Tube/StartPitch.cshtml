@@ -22,8 +22,8 @@
                     <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
                     </td>
                 <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description>
-                      <div class="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none></div>
-                      <input type="text" id="SC" name="ShareContactsButton" />
+                      <div id="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none;"></div>
+                      <input type="button" id="SC" name="ShareContactsButton" value="Share Contacts"/>
                 </td>
             </tr>
             @Html.Partial("History", ((IEnumerable<UserInfo>)ViewBag.History))
@@ -49,9 +49,9 @@
 
 <script type="text/javascript">
     //var minutes = 2;
-    var seconds = 0;
+    //var seconds = 120;
     var stopTime = true;
-    var delay = 0;
+    //var delay = 0;
 
     var statusArray = new Array(
             { time: 120, status: "Sharing idea" },
@@ -65,18 +65,23 @@
             $('#timeStatus').text(statusArray[0].status);
 
             timer = setInterval(function () {
-           // if(!stopTime){
-                $.getJSON("/Tube/GetCurrentTimePitch?userId=@Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey&partnerId=@ViewBag.CurrentPartner.UserId&delay="+delay,
+            if(!stopTime){
+                $.getJSON("/Tube/GetCurrentTimePitch",
                     function(x) {
-                        seconds = x.leftTime;
-                        var minutes = (2 * 60 - seconds) / 60;
-//                seconds -= 1;
-//                if (seconds == -1) {
-//                    minutes -= 1;
-//                    seconds = 59;
-//                }
+                       // alert(x.leftTime);
 
-                        seconds = seconds - 60 * minutes;
+                        var seconds = x.leftTime;
+                        var minutes = 0;
+                        for (var j=0; j<2; j++) {
+                            if(seconds - 60 >= 0) {
+                                minutes += 1;
+                                seconds = seconds - 60;
+                            } else {
+                                break;
+                            }
+                            
+                        }
+
                         $('#time').text("0" + minutes + ":" + (seconds - 10 < 0 ? "0" : "") + seconds);
 
                         var currentTime = minutes * 60 + seconds;
@@ -90,21 +95,20 @@
                             clearInterval(timer);
                             newRound();
                         }
-
-//            } else 
-//                delay += 1;
                     });
+            } 
+
+                   
             }, 1000);
+       });
+        
+        $("#SC").bind("click", function() {
+            $.getJSON("/Tube/ShareContacts?tubeid=" + @ViewBag.TubeId, function(x) {
+                $("#Contacts").html("Email:" + x.Email + "<br/>Skype:"+ x.Skype + "<br/>Phone:" + x.Phone).show();
+                
+            });
         });
-     $("#SC").bind("click", function () 
-                         {
-                             $.getJSON("/Tube/ShareContacts?tubeid=" + @ViewBag.TubeId, function(x) 
-                             {
-                                $(".Contacts").html("Email:"+x.Email).show();
-                                $(".Contacts").html("Skype:"+x.Skype).show();
-                                $(".Contacts").html("Phone:"+x.Phone).show();
-                             });
-                         }
+        
     function newRound()
     {
         var i = 10;

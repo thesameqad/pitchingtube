@@ -7,7 +7,9 @@
     <div class="containerInvestors">
     @if(ViewBag.Pay=="no") 
     {
-        <input type="button" value="Start free trial" />
+        @*<input type="button" value="Start free trial" />*@
+        @Html.ActionLink("Start free trial","AccountPlan","Home")
+        @*<input type="button" value="Start free trial" class="Button1" id="startFreeTrialButton" style="color: white"/>*@
     }
     else
     {

@@ -228,11 +228,11 @@ namespace PitchingTube.Data
         }
         public string GetPay(Guid userId)
         {
-            //var pay = (from u in _context.Persons
-            //           where u.UserId == userId
-            //           select u.Pay).FirstOrDefault();
-            //return pay;
-            return null;
+            var pay = (from u in _context.Persons
+                       where u.UserId == userId
+                       select u.Pay).FirstOrDefault();
+            return pay;
+           // return null;
         }
 
         public class UserInfo

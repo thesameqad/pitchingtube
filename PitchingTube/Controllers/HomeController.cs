@@ -38,7 +38,10 @@ namespace PitchingTube.Controllers
                 Session["currentTube"] = tube;
             }
 
-            if (User.IsInRole("Investor"))
+            //Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault()
+
+            //if (User.IsInRole("Investor"))
+            if (Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault() == "Investor")
             {
                 Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
                 if (participantRepository.GetPay(userId) == "no")
@@ -92,6 +95,11 @@ namespace PitchingTube.Controllers
         {
             string userName = Membership.GetUserNameByEmail(User.Identity.Name);
             return Guid.Parse(Membership.GetUser(userName).ProviderUserKey.ToString()); 
+        }
+
+        public ActionResult AccountPlan()
+        {
+            return View();
         }
     }
 }

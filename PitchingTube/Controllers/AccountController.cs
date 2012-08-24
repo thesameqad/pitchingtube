@@ -156,7 +156,8 @@ namespace PitchingTube.Controllers
                                 Skype = model.Skype,
                                 UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
                                 ActivationLink = activationLink.Split('$')[1],
-                                AvatarPath = avatarPath
+                                AvatarPath = avatarPath,
+                                Pay = "no"
                             };
                         personRepository.Insert(newPerson);
                         

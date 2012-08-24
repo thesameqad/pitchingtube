@@ -63,9 +63,15 @@
                 </tr>
                 <tr class="TableTr">
                     <td rowspan="2" align="center" ><a href="#" >
-                            <asp:Label class="sectionHeader" runat="server" ID="Label4">
-                            <img src="../../Content/img/F.png" alt="" /><br/>
-                            </asp:Label></a></td>
+                            <div class="sectionHeader" style="position:relative;width:216px;height:72px;" >
+                                <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;z-index:111;">
+                                    <img src="../../Content/img/F.png" style="cursor:pointer" />
+                                </div>
+                                <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;overflow:hidden;z-index:333;opacity:0;filter:alpha(opacity=0);">
+                                    <fb:login-button scope="email" show-faces="true" width="216"></fb:login-button>
+                                </div>  
+                            </div>
+                        </a></td>
                     <td class="style1">
                         @Html.LabelFor(m => m.Password)
                     </td>
@@ -89,15 +95,26 @@
                     <td style="font-size:18px" align="center">Вход через <br>Facebook</td>
                     <td class="style1">
                         @Html.LabelFor(m => m.AvatarPath)
-                    </td>   
-                    <td class="style2">
+                    </td>  
+                    <td class="style3">
+                        <input type="file" name="fileUpload" id="fileUpload" onchange="readURL(this)" class="file"/>
+		                <input type="text" class="TextBoxN" value="" id="AvatarPathTextBox"/>
+                        <input type="button" id="Button1" class="button1" value="Open"/>
+                         @if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
+                         {
+                            <img id="avatarPreview" src="@Model.AvatarPath" height="40"/>
+                            <input type="hidden" name="AvatarPath" id="AvatarPath" value="@Model.AvatarPath"/>
+                         }
+                     </td>    
+                   @* <td class="style2">
+
                         <input class="TextBox" type="file" name="fileUpload" id="fileUpload" onchange="readURL(this) " />
                         @if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
                         {
                             <img id="avatarPreview" src="@Model.AvatarPath" height="40"/>
                             <input type="hidden" name="AvatarPath" id="AvatarPath" value="@Model.AvatarPath"/>
                         }
-                    </td>
+                    </td>*@
                     <td class="free"></td>
                 </tr>
                  <tr class="TableTr">
@@ -107,123 +124,16 @@
                         @Html.RadioButtonFor(m => m.Role, "Entrepreneur", true)Entrepreneur
                         @Html.RadioButtonFor(m => m.Role, "Investor", false)Investor
                     </td>
-                    <td rowspan="3" class="button"><a href="#" style="padding-left:15px; font-size:25px">
-                            <asp:Label class="sectionHeader" runat="server" ID="Label7">
-                            <img src="../../Content/img/btn-go.png" alt="" /><br/><span style="padding-left:25px">Start</span>
-                            </asp:Label></a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-        
-       @* <div class="frame">
-            <table style="width: 100%">
-                <tr class="TableTr">
-                    <td class="style3" rowspan="2" style="width: 40px">REGISTRATION <br>FORM</td>
-                    <td class="style1">
-                        @Html.LabelFor(m => m.UserName)
-                    </td>
-                    <td class="style2" >
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.UserName)
-                    </td>
-                </tr>
-                <tr class="TableTr">
-                    <td class="style1">
-                        @Html.LabelFor(m => m.Email)
-                    </td>
-                    <td class="style2">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.Email)
-                    </td>
-                </tr>
-                <tr class="TableTr">
-                    <td rowspan="2" align="center" >
-                        <a href="#" >
-                            <div class="sectionHeader" style="position:relative;width:216px;height:72px;" >
-                                <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;z-index:111;">
-                                    <img src="../../Content/img/F.png" style="cursor:pointer" />
-                                </div>
-                                <div style="position:absolute;left:0px;top:0px;width:216px;height:72px;overflow:hidden;z-index:333;opacity:0;filter:alpha(opacity=0);">
-                                    <fb:login-button scope="email" show-faces="true" width="216"></fb:login-button>
-                                </div>  
-                            </div>
-                        </a>
-                    </td>
-                    <td class="style1">
-                        @Html.LabelFor(m => m.Skype)
-                    </td>
-                    <td class="style2">
-                        @Html.TextBoxFor(m => m.Skype, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.Skype)
-                    </td>
-                </tr>
-                <tr class="TableTr" >
-                    <td class="style1" >
-                        @Html.LabelFor(m => m.Phone)
-                    </td>
-                    <td class="style2" >
-                        @Html.TextBoxFor(m => m.Phone, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.Phone)
-                    </td>
-                </tr>
-                <tr class="TableTr">
-                    <td style="font-size: 18px" align="center">Вход через <br/>Facebook</td>
-                    <td class="style3"></td>
-                    <td class="style1">
-                        @Html.LabelFor(m => m.Password)
-                    </td>
-                    <td class="style2">
-                        @Html.PasswordFor(m => m.Password, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.Password)
-                    </td>
-                    
-                </tr>
-                <tr class="TableTr">
-                    <td style="font-size: 18px" align="center">Вход через <br/>Facebook</td>
-                    <td class="style1">
-                        @Html.LabelFor(m => m.ConfirmPassword)
-                    </td>
-                    <td class="style2">
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                    </td>
-                    <td rowspan="3">
+                   <td rowspan="3" class="button">
                         <div class="sectionHeader" id="Label7">
                             <input type="image" src="../../Content/img/btn-go.png" alt="" style="padding-left: 15px; font-size: 25px" /><br/>
                             <span style="padding-left:25px; font-size: 25px;color: #474747;text-decoration: none">Start</span>
                         </div>
                     </td>
-
                 </tr>
-                <tr class="TableTr">
-                    <td class="style3" ></td>
-                    <td class="style1"></td>    
-                    <td class="style2">
-                        @Html.RadioButtonFor(m => m.Role, "Entrepreneur", true)Entrepreneur
-                        @Html.RadioButtonFor(m => m.Role, "Investor", false)Investor
-                    </td>
-                </tr>
-                <tr class="TableTr">
-                    <td class="style3"></td>
-                    <td class="style1">
-                        @Html.LabelFor(m => m.AvatarPath)
-                    </td>
-                    <td class="style2">
-                        <input class="TextBox" type="file" name="fileUpload" id="fileUpload" onchange="readURL(this)" />
-                        @if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
-                        {
-                            <img id="avatarPreview" src="@Model.AvatarPath" height="40"/>
-                            <input type="hidden" name="AvatarPath" id="AvatarPath" value="@Model.AvatarPath"/>
-                        }
-                    </td>
-                    
-
-                </tr>
-
             </table>
-        </div>*@
+        </div>
+    </div>
         
         <script type="text/javascript">
             function readURL(input) {
@@ -232,6 +142,7 @@
 
                     reader.onload = function (e) {
                         $('#avatarPreview').attr('src', e.target.result);
+                        $('#AvatarPathTextBox').attr('value', e.target.result);
                     }
 
                     reader.readAsDataURL(input.files[0]);

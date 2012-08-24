@@ -67,8 +67,8 @@ namespace PitchingTube.Data
             //    _objectSet.AddObject(newEntity);
             //}
 
-            newEntity.BeginPitchTime = DateTime.Now;
-            Update(newEntity);
+            //newEntity.BeginPitchTime = DateTime.Now;
+            //Update(newEntity);
         }
 
         public int GetLeftTimePitch(Guid userId, Guid partnerId)

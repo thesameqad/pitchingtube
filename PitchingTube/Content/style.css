@@ -93,6 +93,17 @@ h1, h2, h3, h4, h5, h6
     padding-bottom: 30px
 }
 
+.containerInvestors .Button1
+{
+	width:120px;
+	height:40px;
+	border:none;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	margin-top:20px;
+}
+
 .txtIdea {
     background-color: #D6FACC;
     border-radius: 8px 0 0 8px;
@@ -340,6 +351,8 @@ h1, h2, h3, h4, h5, h6
 	border-radius: 5px 5px 5px 5px;	
 	margin-top:20px;
 }
+
+
 .ConteinerPpreloader .Message .Button2
 {
 	width:120px;

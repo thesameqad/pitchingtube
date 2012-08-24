@@ -35,6 +35,9 @@ namespace PitchingTube.Controllers
                 Description = description
             });
             ViewBag.TubeId = tubeId;
+
+            Session["leftTime"] = 0;
+
             return View();
         }
 
@@ -96,22 +99,27 @@ namespace PitchingTube.Controllers
             var repository = new BaseRepository<Tube>();
             var entity = repository.Query(x => x.TubeId == tube.TubeId).FirstOrDefault();
 
+            //if user reload page
+            if ((int)Session["leftTime"] == 0)
+            {
+                Session["leftTime"] = 120;
 
-            //----stub---
-            if (entity.TubeMode == TubeMode.Opened && countPairs != 5)
-                participantRepository.DeleteFromTubeSingleUsers(tube.TubeId);
-            //-----------
+                //----stub---
+                if (entity.TubeMode == TubeMode.Opened && countPairs != 5)
+                    participantRepository.DeleteFromTubeSingleUsers(tube.TubeId);
+                //-----------
 
 
-            if((int) entity.TubeMode == countPairs)
-                entity.TubeMode = TubeMode.Nominations;
-            else
-                entity.TubeMode += 1;
+                if ((int) entity.TubeMode == countPairs)
+                    entity.TubeMode = TubeMode.Nominations;
+                else
+                    entity.TubeMode += 1;
 
-            repository.Update(entity);
+                repository.Update(entity);
 
-            if (!participantRepository.IsCanFindPartner(userId, tube.TubeId))
-                return RedirectToAction("TubeExcluded", "Tube", new { tubeId = tube.TubeId });
+                if (!participantRepository.IsCanFindPartner(userId, tube.TubeId))
+                    return RedirectToAction("TubeExcluded", "Tube", new {tubeId = tube.TubeId});
+            }
 
             int roundNumber = (int)entity.TubeMode;
 
@@ -140,15 +148,18 @@ namespace PitchingTube.Controllers
             {
                 UserId = userId,
                 PartnerId = currentParticipant.UserId,
-                //BeginPitchTime = DateTime.Now
+                BeginPitchTime = DateTime.Now
             });
 
+           
             //ViewBag setup 
             ViewBag.History = Util.ConverUserDataListToUserModelList(partnerRepository.History(userId, currentParticipant.UserId, tube.TubeId));
 
             ViewBag.CurrentPairs = currentPairsModel;
 
             ViewBag.CurrentPartner = partnerModel;
+
+            ViewBag.TubeId = tube.TubeId;
 
             return View();
 
@@ -250,9 +261,21 @@ namespace PitchingTube.Controllers
             return View();
         }
 
-        public JsonResult GetCurrentTimePitch(Guid userId, Guid partnerId, int delay)
+        //public JsonResult GetCurrentTimePitch(Guid userId, Guid partnerId, int delay)
+        //{
+        //    var time = DateTime.Now - (DateTime)Session["CreatedTime"];
+        //    return Json(new { leftTime = Convert.ToInt32(time.TotalSeconds - delay) }, JsonRequestBehavior.AllowGet);
+        //    //return Json(new {leftTime = partnerRepository.GetLeftTimePitch(userId, partnerId) - delay}, JsonRequestBehavior.AllowGet);
+        //}
+
+
+        public JsonResult GetCurrentTimePitch()
         {
-            return Json(new {leftTime = partnerRepository.GetLeftTimePitch(userId, partnerId) - delay}, JsonRequestBehavior.AllowGet);
+            Session["leftTime"] = (int) Session["leftTime"] - 1;
+            return Json(new { leftTime = (int) Session["leftTime"] }, JsonRequestBehavior.AllowGet);
+            //return Json(new {leftTime = partnerRepository.GetLeftTimePitch(userId, partnerId) - delay}, JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }
