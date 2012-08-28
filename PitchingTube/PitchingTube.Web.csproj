@@ -80,6 +80,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\NoCacheAttribute.cs" />
     <Compile Include="Models\OpenTok.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Util.cs" />

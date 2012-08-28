@@ -15,7 +15,8 @@
     $(function () {
         $.getJSON("/Home/TubeFinded", function (x) {
             var tubeId = x.tubeId;
-            window.location.href = "/Tube/Index?tubeId="+tubeId + "&description=@ViewBag.Description";
+            alert(tubeId);
+            window.location.href = "/Tube/Index?tubeId=" + tubeId + "&description=@ViewBag.Description";
         });
     })
 

@@ -8,6 +8,8 @@ using Facebook.Web;
 using PitchingTube.Data;
 using System.Web.Security;
 using System.Threading;
+using System.Configuration;
+using PitchingTube.Models;
 
 namespace PitchingTube.Controllers
 {
@@ -75,6 +77,7 @@ namespace PitchingTube.Controllers
             return View();
         }
 
+        [NoCache]
         public JsonResult TubeFinded()
         {
             Thread.Sleep(3000);
@@ -86,8 +89,12 @@ namespace PitchingTube.Controllers
             //I don't know why, but it is not work. It is always return "Entrepreneur"
             //string userRole = User.IsInRole("Investor") ? "Investor" : "Entrepreneur";
 
+
+
             string userRole = Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault() ;
-            var tubeId = participantRepository.FindBestMatchingTube(userRole);
+
+            bool autoFillingEnabled = Convert.ToBoolean(ConfigurationManager.AppSettings["AutoFillingEnabled"]);
+            var tubeId = participantRepository.FindBestMatchingTube(userRole, autoFillingEnabled);
             return tubeId;
         }
 

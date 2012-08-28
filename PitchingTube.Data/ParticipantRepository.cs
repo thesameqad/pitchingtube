@@ -12,7 +12,6 @@ namespace PitchingTube.Data
     {
         private BaseRepository<Tube> tubeRepository = new BaseRepository<Tube>();
 
-
         private int findTube(string userRole)
         {
             int tubeId = 0;
@@ -50,6 +49,108 @@ namespace PitchingTube.Data
                 string error = e.Message;
             }
             return tubeId;
+        }
+
+        public int FindBestMatchingTube(string userRole, bool autoFillingEnabled)
+        {
+             
+
+            if (!autoFillingEnabled)
+                return FindBestMatchingTube(userRole);
+            // auto filling
+            int investorsCount = userRole == "Investor" ? 3 : 4;
+            int entrepreneursCount = userRole == "Entrepreneur" ? 3 : 4;
+
+            // 1. Find 4 investors and 3 entrepreneurs
+
+            var investorsList = (from p in _context.Persons
+                           join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                           //join pa in _context.Participants on aspnet_User.UserId equals pa.UserId
+                           where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Investor"
+                           && p.IsBot == true && !aspnet_User.Participants.Any()
+                           select p).ToList();
+
+            var entrepreneursList = (from p in _context.Persons
+                                 join aspnet_User in _context.aspnet_Users on p.UserId equals aspnet_User.UserId
+                                 //join pa in _context.Participants on aspnet_User.UserId equals pa.UserId
+                                 where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur"
+                                 && p.IsBot == true && !aspnet_User.Participants.Any()
+                                 select p).ToList();
+
+            if(investorsList.Count < 4 || entrepreneursList.Count < 3 )
+                return FindBestMatchingTube(userRole);
+
+
+            // 2. Create new tube
+            var newTube = new Tube
+            {
+                CreatedDate = DateTime.Now,
+                TubeMode = TubeMode.Opened
+            };
+            tubeRepository.Insert(newTube);
+
+            List<string> investorsDescriptions = new List<string>
+            {
+                "Early stage investments in web startups",
+                "Social startups",
+                "Great ideas ...",
+                "Augment Reality please",
+                "Anything but location based",
+                "Seeking for inspiration",
+                "Solar enegry please",
+                "Something fun",
+                "Big and ambitiuos",
+                "Needs for the minimum 3x extit",
+                "Small and easy"
+            };
+
+            Random rand = new Random();
+            //3. Adding them to the tube
+            foreach(var investor in investorsList.Take(investorsCount))
+            {
+                int randomIndex = rand.Next(0,investorsCount);
+                string description = investorsDescriptions[randomIndex];
+                investorsDescriptions.RemoveAt(randomIndex);
+                Insert(new Participant
+                {
+                    TubeId = newTube.TubeId,
+                    UserId = investor.UserId,
+                    Description = description
+                });
+            }
+
+            List<string> entrepreneursDescriptions = new List<string>
+            {
+                "Startup for investors",
+                "Salers and ships idea",
+                "Online shop",
+                "Ebay-like startup",
+                "Connections tree idea",
+                "Airtime copycat in India",
+                "Automobile petrol exchange",
+                "Social network for writers ",
+                "Green startup",
+                "Alcohol-metr",
+                "Prague stakehouse reviews",
+                "Social game",
+                "Seeking for the party startup"
+            };
+
+            foreach (var entrepreneur in entrepreneursList.Take(entrepreneursCount))
+            {
+                int randomIndex = rand.Next(0, entrepreneursCount);
+                string description = entrepreneursDescriptions[randomIndex];
+                entrepreneursDescriptions.RemoveAt(randomIndex);
+                Insert(new Participant
+                {
+                    TubeId = newTube.TubeId,
+                    UserId = entrepreneur.UserId,
+                    Description = description
+                });
+            }
+
+
+            return newTube.TubeId;
         }
 
         public int FindBestMatchingTube(string userRole)
