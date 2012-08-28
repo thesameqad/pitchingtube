@@ -13,9 +13,9 @@
 <div class="ConteinerResult">
         <table class="resultTable">
             <tr >
-                <td colspan="3" class="Title">ENTREPRENEUR</td>
+                <td colspan="3" class="Title"><p style="background-color:Black;color:White;width:150px ">ENTREPRENEUR</p></td>
                 <td ></td>
-                <td colspan="2" class="Title">INVESTOR</td>
+                <td colspan="2" class="Title"><p style="background-color:Black;color:White;width:120px ">INVESTOR</p></td>
             </tr>
             @for (int i = 0; i < entrepreneurs.Count; i++ )
             {
@@ -27,7 +27,7 @@
                 </td>
                 <td class="Zvezda"> <img src="@Url.Content("~/Content/img/Zvezda.png")" alt="" /> </td>
                 <td> <img src="@entrepreneurs[i].AvatarPath" alt="" width="80"> </td>
-                <td class="Idea"> IDEA <br/><p class="DescribeIdea">@entrepreneurs[i].Description </p></td>
+                <td class="Idea"> <p style="background-color:Black;color:White;width:45px ">IDEA</p> <br/><p class="DescribeIdea">@entrepreneurs[i].Description </p></td>
                 <td class="style1"><img src="@investors[i].AvatarPath" alt="" width="80" /></td>
                 <td class="Preloader" id="@String.Format("state{0}",i)"><img class="loading" src="@Url.Content("/Content/img/PreloaderResult.gif")" alt="" /><br/>Pending</td>
             </tr>

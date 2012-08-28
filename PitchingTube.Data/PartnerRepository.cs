@@ -19,7 +19,7 @@ namespace PitchingTube.Data
                                    select partner).ToList();
                           
             //var HistoryPartners = Query(x => x.UserId == UserId);
-            var count = HistoryPartners.Count;
+            //var count = HistoryPartners.Count;
 
             var partners = new List<PitchingTube.Data.ParticipantRepository.UserInfo>();
             foreach (var partner in HistoryPartners)
@@ -53,30 +53,29 @@ namespace PitchingTube.Data
             int tubeId = user.Participants.FirstOrDefault().TubeId;
 
             var partner = (from p in _context.Partners
-                          join pa in _context.Participants on p.UserId equals pa.UserId
-                          join t in _context.Tubes on pa.TubeId equals t.TubeId
-                          where p.UserId == newEntity.UserId
-                          && p.PartnerId == newEntity.PartnerId
-                          && t.TubeId == tubeId
-                          select p).FirstOrDefault();
+                           join pa in _context.Participants on p.UserId equals pa.UserId
+                           join t in _context.Tubes on pa.TubeId equals t.TubeId
+                           where (p.UserId == newEntity.UserId
+                                  && p.PartnerId == newEntity.PartnerId
+                                  && t.TubeId == tubeId)
+                               || (p.UserId == newEntity.PartnerId
+                                   && p.PartnerId == newEntity.UserId
+                                   && t.TubeId == tubeId)
+                           select p).FirstOrDefault();
 
-            if(partner == null)
+            if (partner == null)
                 base.Insert(newEntity);
-            //else
-            //{
-            //    _objectSet.AddObject(newEntity);
-            //}
-
-            //newEntity.BeginPitchTime = DateTime.Now;
-            //Update(newEntity);
         }
 
-        public int GetLeftTimePitch(Guid userId, Guid partnerId)
+        public int GetLeftTimePitch(Guid userId, Guid partnerId, DateTime minDateTime)
         {
-            var currentPair = FirstOrDefault(p => p.UserId == userId && p.PartnerId == partnerId);
-            var timeDiff = DateTime.Now - currentPair.BeginPitchTime;
+            var currentPair = FirstOrDefault(p => (p.UserId == userId && p.PartnerId == partnerId) || (p.UserId == partnerId && p.PartnerId == userId));
 
-            return Convert.ToInt32(timeDiff.Value.TotalSeconds);
+            int timeDiff = 0;
+            if (currentPair.BeginPitchTime != null && currentPair.BeginPitchTime != minDateTime)
+                timeDiff = Convert.ToInt32((DateTime.Now - currentPair.BeginPitchTime).Value.TotalSeconds);
+
+            return timeDiff;
 
         }
     }

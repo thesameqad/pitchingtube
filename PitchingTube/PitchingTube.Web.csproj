@@ -105,6 +105,7 @@
     <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\All.png" />
     <Content Include="Content\img\Avatar.png" />
+    <Content Include="Content\img\BlackRectangle.png" />
     <Content Include="Content\img\BlackStar.png" />
     <Content Include="Content\img\btn-go.png" />
     <Content Include="Content\img\F.png" />
@@ -297,8 +298,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>7668</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>51824</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

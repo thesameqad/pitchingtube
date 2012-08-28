@@ -17,13 +17,13 @@
                 <div id="videoPanel" style="display: block"></div>
                     @*<img src="@Url.Content("/Content/img/Video.png")" alt="" /> *@
                 </td>
-                <td class="investor">
+               <td class="investor">
                     CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
                     <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
+                    <input type="button" id="SC" class="ShareContactButton" name="ShareContactsButton" value="Share Contacts"/>
                     </td>
                 <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description>
                       <div id="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none;"></div>
-                      <input type="button" id="SC" name="ShareContactsButton" value="Share Contacts"/>
                 </td>
             </tr>
             @Html.Partial("History", ((IEnumerable<UserInfo>)ViewBag.History))
@@ -35,23 +35,30 @@
 
 <div id="pitchingDialog">
     <div id="initializing">
-       <div class="Preloader">
+        <div class="Preloader">
             <img src="@Url.Content("/Content/img/loading.gif")" alt="" />
         </div>
-       <p class="Searching">Initializing Video.</p>
-       <p class="Minutes">The conversation will be started shortly.</p>
-     </div>
-     <div class="alertStart" id="nextParticipant" style="margin: 0 auto; text-align: center; font-size: 25px;
-        display: none">
+        <p class="Searching">Initializing Video.</p>
+        <p class="Minutes">The conversation will be started shortly.</p>
+    </div>
+    <div class="alertStart" id="nextParticipant" style="margin: 0 auto; text-align: center; font-size: 25px;
+	                                                                                                                                                                                                                          display: none">
      
-     </div>
+    </div>
+</div>
+
+<div id="waitOfflainUserDialog">
+    Your partner is off-line.
+</div>
+
+<div id="waitUserDialog">
+    Your partner is not ready yet.
 </div>
 
 <script type="text/javascript">
-    //var minutes = 2;
-    //var seconds = 120;
+    
     var stopTime = true;
-    //var delay = 0;
+    var waitTime = 0;
 
     var statusArray = new Array(
             { time: 120, status: "Sharing idea" },
@@ -60,17 +67,17 @@
         );
 
         $(document).ready(function () {
-            alert("time");
+           // alert("time");
             $('#time').text("02:00");
             $('#timeStatus').text(statusArray[0].status);
 
             timer = setInterval(function () {
             if(!stopTime){
-                $.getJSON("/Tube/GetCurrentTimePitch",
+                $.getJSON("/Tube/GetCurrentTimePitch?partnerId=@ViewBag.CurrentPartner.UserId",
                     function(x) {
                        // alert(x.leftTime);
 
-                        var seconds = x.leftTime;
+                        var seconds = 120 - x.leftTime;
                         var minutes = 0;
                         for (var j=0; j<2; j++) {
                             if(seconds - 60 >= 0) {
@@ -95,9 +102,33 @@
                             clearInterval(timer);
                             newRound();
                         }
+                        
+//                        $.getJSON("/Tube/IsPatrtnerOnline?partnerId=",
+//                            function(x) {
+//                                if(x.isOnline)
+//                                    $('#waitOfflainUserDialog').dialog("close");
+//                                else 
+//                                    $('#waitOfflainUserDialog').dialog("open");
+//                       
+//                            });
                     });
-            } 
 
+                
+
+            } 
+            $.getJSON("/Tube/IsSecondReady?partnerId=@ViewBag.CurrentPartner.UserId",
+                function(x) {
+                    if(!x.isReady) {
+                        waitTime += 1;
+                        $('#waitUserDialog').dialog("open");
+                        if(waitTime >= 120)
+                            newRound();
+                    }
+                    else {
+                        $('#waitUserDialog').dialog("close");
+                        waitTime = 0;
+                    }
+                });
                    
             }, 1000);
        });
@@ -109,6 +140,19 @@
             });
         });
         
+
+    $('#waitOfflainUserDialog').dialog({
+        autoOpen: false,
+        modal: true,
+        resizable: false
+    });
+    
+    $('#waitUserDialog').dialog({
+        autoOpen: false,
+        modal: true,
+        resizable: false
+    });
+
     function newRound()
     {
         var i = 10;
@@ -180,7 +224,7 @@
         startPublishing();
         stopTime = false;
         $('#pitchingDialog').dialog("close");
-
+        $.get("/Tube/SetStartPitchTime?partnerId=@ViewBag.CurrentPartner.UserId");
     }
 
     function startPublishing() {

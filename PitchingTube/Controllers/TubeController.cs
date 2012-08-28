@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using PitchingTube.Data;
@@ -9,6 +9,7 @@ using PitchingTube.Models;
 using OpenTok;
 using System.Collections.Specialized;
 using System.Configuration;
+
 
 
 
@@ -24,6 +25,8 @@ namespace PitchingTube.Controllers
         private PartnerRepository partnerRepository = new PartnerRepository();
         private PersonRepository personRepository = new PersonRepository();
         private TubeRepository tubeRepository = new TubeRepository();
+        private DateTime minDateTime = new DateTime(1753, 1, 1, 0, 0, 0);
+
 
         public ActionResult Index(int tubeId, string description)
         {
@@ -36,7 +39,8 @@ namespace PitchingTube.Controllers
             });
             ViewBag.TubeId = tubeId;
 
-            Session["leftTime"] = 0;
+           // Session["leftTime"] = 0;
+            HttpContext.Application[tubeId.ToString()] = 0;
 
             return View();
         }
@@ -47,7 +51,7 @@ namespace PitchingTube.Controllers
             var model = participantRepository.TubeParticipants(tubeId);
             var leftInvestor = 5 - model.Count(x => x.Role == "Investor");
             var leftEntrepreneur = 5 - model.Count(x => x.Role == "Entrepreneur");
-            return new JsonResult() { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
 
@@ -58,20 +62,16 @@ namespace PitchingTube.Controllers
             {
                 return null;
             }
-            else
-            {
-                Guid Userid = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
-                var PartnerId = participantRepository.FindPartner(Userid, tubeId, (int)participantRepository.UserIsInTube(Userid).Mode);
-                var model = personRepository.Query(x => x.UserId == Userid).FirstOrDefault();
+            var userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
+            var partnerId = participantRepository.FindPartner(userId, tubeId, (int)participantRepository.UserIsInTube(userId).Mode);
+            var model = personRepository.Query(x => x.UserId == userId).FirstOrDefault();
 
-               // ViewBag.Email = PartnerId.aspnet_Users.aspnet_Membership.Email;
-                var history = partnerRepository.FirstOrDefault(x => x.UserId == Userid && x.PartnerId == PartnerId.UserId);
-                history.Contacts = "true";
-                partnerRepository.Update(history);
+            // ViewBag.Email = PartnerId.aspnet_Users.aspnet_Membership.Email;
+            var history = partnerRepository.FirstOrDefault(x => x.UserId == userId && x.PartnerId == partnerId.UserId);
+            history.Contacts = "true";
+            partnerRepository.Update(history);
 
-                return Json(new { Email = PartnerId.aspnet_Users.aspnet_Membership.Email, Skype = model.Skype, Phone = model.Phone }, JsonRequestBehavior.AllowGet);
-            }
-
+            return Json(new { Email = partnerId.aspnet_Users.aspnet_Membership.Email, Skype = model.Skype, Phone = model.Phone }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -90,43 +90,48 @@ namespace PitchingTube.Controllers
             ViewData["apiKey"] = appSettings["opentok_key"];
             ViewData["sessionId"] = sessionId;
 
+
+
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
 
             var tube = participantRepository.UserIsInTube(userId);
 
             int countPairs = participantRepository.CountPairsInTube(tube.TubeId);
 
-            var repository = new BaseRepository<Tube>();
-            var entity = repository.Query(x => x.TubeId == tube.TubeId).FirstOrDefault();
-
-            //if user reload page
-            if ((int)Session["leftTime"] == 0)
+            if ((int)HttpContext.Application[tube.TubeId.ToString()] == countPairs * 2)
+                HttpContext.Application[tube.TubeId.ToString()] = 0;
+            
+            var entity = tubeRepository.Query(x => x.TubeId == tube.TubeId).FirstOrDefault();
+            
+            //----stub---
+            if (entity.TubeMode == TubeMode.Opened && countPairs != 5)
+                participantRepository.DeleteFromTubeSingleUsers(tube.TubeId);
+            //-----------
+            
+            if((int)HttpContext.Application[tube.TubeId.ToString()] == 0)
             {
-                Session["leftTime"] = 120;
-
-                //----stub---
-                if (entity.TubeMode == TubeMode.Opened && countPairs != 5)
-                    participantRepository.DeleteFromTubeSingleUsers(tube.TubeId);
-                //-----------
-
-
-                if ((int) entity.TubeMode == countPairs)
+                if ((int)entity.TubeMode == countPairs)
                     entity.TubeMode = TubeMode.Nominations;
                 else
                     entity.TubeMode += 1;
 
-                repository.Update(entity);
-
-                if (!participantRepository.IsCanFindPartner(userId, tube.TubeId))
-                    return RedirectToAction("TubeExcluded", "Tube", new {tubeId = tube.TubeId});
+                tubeRepository.Update(entity);
             }
+            HttpContext.Application[tube.TubeId.ToString()] = (int) HttpContext.Application[tube.TubeId.ToString()] + 1;
+
+
+            if (!participantRepository.IsCanFindPartner(userId, tube.TubeId))
+                return RedirectToAction("TubeExcluded", "Tube", new {tubeId = tube.TubeId});
 
             int roundNumber = (int)entity.TubeMode;
 
             if (entity.TubeMode >= TubeMode.Nominations)
             {
                 if(User.IsInRole("Investor"))
+                {
+                    entity.TubeMode = TubeMode.Nominations;
                     return RedirectToAction("Nomination", new { tubeId = tube.TubeId });
+                }
                 else
                     return RedirectToAction("Results", new { tubeId = tube.TubeId });
             }
@@ -144,12 +149,13 @@ namespace PitchingTube.Controllers
 
             List<UserInfo> currentPairsModel = Util.ConverUserDataListToUserModelList(participantRepository.FindCurrentPairs(userId,currentParticipant.UserId, tube.TubeId, roundNumber));
 
-            partnerRepository.Insert(new Partner()
-            {
-                UserId = userId,
-                PartnerId = currentParticipant.UserId,
-                BeginPitchTime = DateTime.Now
-            });
+            
+            partnerRepository.Insert(new Partner
+                                            {
+                                                UserId = userId,
+                                                PartnerId = currentParticipant.UserId,
+                                            });
+            
 
            
             //ViewBag setup 
@@ -176,17 +182,26 @@ namespace PitchingTube.Controllers
             }
             else
             {
-                var model = participantRepository.Query(x => x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
-                    .Select(x => new ParticipantRepository.UserInfo()
-                    {
-                        UserId = x.UserId,
-                        Name = x.aspnet_Users.UserName,
-                        Description = x.Description,
-                        AvatarPath = personRepository.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
-                        Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
-                    }
-                    );
-                ViewData["tubeId"] = tubeId;
+                var model =
+                    Util.ConverUserDataListToUserModelList(participantRepository.Query(
+                        x =>
+                        x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
+                                                               .Select(x => new ParticipantRepository.UserInfo()
+                                                                                {
+                                                                                    UserId = x.UserId,
+                                                                                    Name = x.aspnet_Users.UserName,
+                                                                                    Description = x.Description,
+                                                                                    AvatarPath =
+                                                                                        personRepository.FirstOrDefault(
+                                                                                            y => y.UserId == x.UserId).
+                                                                                        AvatarPath.Replace("\\", "/"),
+                                                                                    Role =
+                                                                                        x.aspnet_Users.aspnet_Roles.
+                                                                                        FirstOrDefault().RoleName
+                                                                                }
+                                                               ).ToList()
+                        );
+            ViewData["tubeId"] = tubeId;
                 return View(model);
             }
 
@@ -261,19 +276,56 @@ namespace PitchingTube.Controllers
             return View();
         }
 
-        //public JsonResult GetCurrentTimePitch(Guid userId, Guid partnerId, int delay)
+        public JsonResult GetCurrentTimePitch(Guid partnerId)
+        {
+            Guid userId = GetCurrentUserId();
+            return Json(new { leftTime = partnerRepository.GetLeftTimePitch(userId, partnerId, minDateTime)}, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //public JsonResult GetCurrentTimePitch()
         //{
-        //    var time = DateTime.Now - (DateTime)Session["CreatedTime"];
-        //    return Json(new { leftTime = Convert.ToInt32(time.TotalSeconds - delay) }, JsonRequestBehavior.AllowGet);
+        //    Session["leftTime"] = (int) Session["leftTime"] - 1;
+        //    return Json(new { leftTime = (int) Session["leftTime"] }, JsonRequestBehavior.AllowGet);
         //    //return Json(new {leftTime = partnerRepository.GetLeftTimePitch(userId, partnerId) - delay}, JsonRequestBehavior.AllowGet);
         //}
 
 
-        public JsonResult GetCurrentTimePitch()
+        [HttpGet]
+        public void SetStartPitchTime(Guid partnerId)
         {
-            Session["leftTime"] = (int) Session["leftTime"] - 1;
-            return Json(new { leftTime = (int) Session["leftTime"] }, JsonRequestBehavior.AllowGet);
-            //return Json(new {leftTime = partnerRepository.GetLeftTimePitch(userId, partnerId) - delay}, JsonRequestBehavior.AllowGet);
+            Guid userId = GetCurrentUserId();
+
+            Partner updatePartner = partnerRepository.FirstOrDefault(p => (p.UserId == userId && p.PartnerId == partnerId) || (p.UserId == partnerId && p.PartnerId == userId));
+
+            if (updatePartner.BeginPitchTime == null)
+            {
+                updatePartner.BeginPitchTime = minDateTime;
+                partnerRepository.Update(updatePartner);
+            }
+            else
+                if (updatePartner.BeginPitchTime == minDateTime)
+                {
+                    updatePartner.BeginPitchTime = DateTime.Now;
+                    partnerRepository.Update(updatePartner);
+                }
+
+        }
+
+        public ActionResult IsPatrtnerOnline(Guid partnerId)
+        {
+            MembershipUser partner = Membership.GetUser(partnerId);
+            return Json(new {isOnline = partner.IsOnline}, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult IsSecondReady(Guid partnerId)
+        {
+            Guid userId = GetCurrentUserId();
+
+            Partner pair = partnerRepository.FirstOrDefault(p => (p.UserId == userId && p.PartnerId == partnerId) || (p.UserId == partnerId && p.PartnerId == userId));
+
+            return Json(new {isReady = pair.BeginPitchTime != null && pair.BeginPitchTime != minDateTime},
+                        JsonRequestBehavior.AllowGet);
         }
 
 
