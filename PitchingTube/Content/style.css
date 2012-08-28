@@ -63,7 +63,9 @@ h1, h2, h3, h4, h5, h6
 .containerToolbar .toolbar {
     float: right;
     height: 100%;
-    width: 120px;
+    width: 220px;
+    text-align:center;
+    background-image:url(../Content/img/BlackRectangle.png);
 }
 
 .containerMain {
@@ -77,7 +79,17 @@ h1, h2, h3, h4, h5, h6
 .containerLogo {
     width: 800px;
     margin: 0 auto;
-    padding-top: 10px
+    padding-top: 10px;
+    padding-bottom:40px;
+}
+.containerLogo .containerLogoLogotype
+{
+	float:left;	
+}
+.containerLogo .ConteinerUserLogin
+{
+    float:right;
+    vertical-align:text-top;		
 }
 
 .containerInvestors {
@@ -439,6 +451,7 @@ h1, h2, h3, h4, h5, h6
 .ConteinerResult .Idea .DescribeIdea
 {
 	padding-right:50px;	
+	width:400px;
 }
 .ConteinerResult .Preloader
 {

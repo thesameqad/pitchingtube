@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PitchingTube.Data.ParticipantRepository.UserInfo>
+﻿@model IEnumerable<PitchingTube.Models.UserInfo>
 
 @{
     ViewBag.Title = "Nomination";
@@ -10,7 +10,7 @@
 <div class="ConteinerNomination">
     @using (Html.BeginForm(new { tubeId = ViewData["tubeId"] }))
     {
-        <p style="font-size: 22px; padding-left: 10px">INVESTOR</p>
+        <p style="font-size: 22px; padding-left: 10px; background-color:Black;color:White; width:120px ">INVESTOR</p>
         <table class="">
             @foreach (var item in Model)
             {
@@ -23,7 +23,7 @@
                         @Html.DisplayFor(modelItem => item.Name) 
                     </td>
                     <td class="Idea">
-                        IDEA <br/>
+                        <p style="background-color:Black;color:White; width:45px">IDEA</p> <br/>
                         <p class="DescribeIdea"> @Html.DisplayFor(modelItem => item.Description) </p>
                     </td>
                     <td>
@@ -47,11 +47,10 @@
 <script type="text/javascript">
     $(function() {
         $(".star").rating("select", 0);
-        $("#submit-form").bind("click", function() {
+        $('#submit-form').bind('click', function() {
             alert("click");
             for (var i = 1; i <= 5; i++) {
-                alert($("#star-input-" + i).val());
-                $("#star-input-" + i).val($('input:radio[name=star' + i + ']:checked').val());
+                $('#star-input-' + i).val($('input:radio[name=star' + i + ']:checked').val());
             }
 
         });
