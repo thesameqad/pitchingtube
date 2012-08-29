@@ -21,5 +21,6 @@ namespace PitchingTube.Data
 
             return Convert.ToInt32(timeDiff.TotalMinutes);
         }
+
     }
 }

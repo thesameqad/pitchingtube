@@ -2,16 +2,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="@Url.Content("~/Content/tube.css")" rel="stylesheet" type="text/css" />
-<div style="margin: 0 auto; width: 900px; height: 90px">
+<div style="margin-top:40px; width: 900px; height: 90px">
     <div style="float: left; text-align: center; height: 0px; width: 250px">
         <div class="alertIn" style="margin: 0 auto; text-align: center; font-size: 25px;
             display: none">
         </div>
         <h1>
             Investor</h1>
-    </div>
-    <div class="alertStart" style="margin: 0 auto; text-align: center; font-size: 25px;">
-        Pitch will be started automatically in <div id="autoStartText"></div>  minutes
     </div>
     <div style="float: right; text-align: center; height: 0px; width: 250px">
         <div class="alertEn" style="margin: 0 auto; text-align: center; font-size: 25px;
@@ -116,7 +113,7 @@
     function startPitch()
     {
         $.post('/Tube/SetTubeMode?mode=1', function() {
-            window.location.href="@Url.Content("/Tube/StartPitch)";
+            window.location.href="@Url.Content("/Tube/StartPitch")";
         });
 
         

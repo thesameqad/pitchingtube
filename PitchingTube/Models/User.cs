@@ -17,5 +17,6 @@ namespace PitchingTube.Models
         public string Email { get; set; }
         public int Nomination { get; set; }
         public int Pending { get; set; }
+        public bool isPublish { get; set; }
     }
 }

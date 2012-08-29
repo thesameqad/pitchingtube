@@ -85,6 +85,7 @@ h1, h2, h3, h4, h5, h6
 .containerLogo .containerLogoLogotype
 {
 	float:left;	
+	padding-bottom:40px;
 }
 .containerLogo .ConteinerUserLogin
 {
@@ -277,17 +278,17 @@ h1, h2, h3, h4, h5, h6
     height: 100%;
     margin: 0 auto;
     padding-top: 30px;
-    padding-left:200px;
+    padding-left:150px;
     padding-bottom:70px;
     text-align: center;
 }
 .containerPitch .Tr{
     height:60px;
-    font:20px PFDinTextPro-Thin;
+    font:20px HELVETICA;
 }
 .containerPitch .time
 {
-	font:70px PFDinTextPro-Thin;
+	font:70px HELVETICA;
 	text-align:right;
 	padding-right:5px;	
 	vertical-align:top;
@@ -298,14 +299,14 @@ h1, h2, h3, h4, h5, h6
 }
 .containerPitch .investor
 {
-	font:20px PFDinTextPro-Thin;	
+	font:20px Tahoma;	
 	text-align:left;
 	padding-left:5px;
 	background-color:#D6FACC;
 }
 .containerPitch .question
 {
-	font:20px PFDinTextPro-Thin;	
+	font:20px HELVETICA;	
 	text-align:right;
 	padding-right:5px;
 }
@@ -318,11 +319,11 @@ h1, h2, h3, h4, h5, h6
 	width:55px;
 }
 
-.containerPitch .style3 .ShareContactButton
+.containerPitch .ShareContactButton
 { 
 	background-color:Black;
 	border-radius: 5px 5px 5px 5px;
-	width:60px;
+	width:100px;
 	height:30px;
 	color:White; 
 }
@@ -457,6 +458,7 @@ h1, h2, h3, h4, h5, h6
 	font-weight: bold;
 	font-family:Helvetica Neue;
 	vertical-align:super;
+	width:400px;
 }
 .ConteinerResult .Idea .DescribeIdea
 {

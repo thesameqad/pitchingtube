@@ -38,7 +38,10 @@ namespace PitchingTube.Controllers
                 }
                 else if (tube.TubeMode == TubeMode.Nominations)
                 {
-                    return RedirectToAction("Results", "Tube", new { tube.TubeId });
+                    if(User.IsInRole("Investor"))
+                        return RedirectToAction("Nomination", "Tube", new { tube.TubeId });
+                    else
+                        return RedirectToAction("Results", "Tube", new { tube.TubeId });
                 }
 
                 Session["currentTube"] = tube;
