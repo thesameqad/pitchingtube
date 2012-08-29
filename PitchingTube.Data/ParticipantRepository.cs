@@ -340,6 +340,7 @@ namespace PitchingTube.Data
             public int Nomination { get; set; }
             public int Pending { get; set; }
             public string Contacts { get; set; }
+            public bool IsPublish { get; set; }
         }
 
         public List<UserInfo> GetResult(int tubeId)
@@ -374,6 +375,7 @@ namespace PitchingTube.Data
                                 AvatarPath =
                                     repositoryP.FirstOrDefault(y => y.UserId == enterepreneurId).AvatarPath.Replace(
                                         "\\", "/"),
+                                IsPublish = repositoryP.FirstOrDefault(p => p.UserId == x.EnterepreneurId).IsPublish ?? false
                             }).FirstOrDefault();
                 list.Add(model);
             }

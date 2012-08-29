@@ -5,25 +5,32 @@
 }
 
 <h2>Account Settings</h2>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>You settings</legend>
 
-<fieldset>
-    <legend>You settings</legend>
+        <div class="display-label">UserName</div>
+        <div class="display-field">
+            @Html.TextBoxFor(model => model.Name)
+        </div>
 
-    <div class="display-label">UserName</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+        <div class="display-label">Email</div>
+        <div class="display-field">
+            @Html.TextBoxFor(model => model.Email)
+        </div>
 
-    <div class="display-label">Email</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
+        <p>
+            @Html.ActionLink("Change password", "ChangePassword", "Account")
+        </p>
+        <p>
+            @Html.CheckBoxFor(model => model.isPublish, new {@id = "publish"})publish results to the facebook
+        </p>
+        <p>
+            <input type="submit" value="Save Changes" />
+        </p>
+    </fieldset>
+}
+<script type="text/javascript">
 
-    <p>
-        @Html.ActionLink("Change password", "ChangePassword", "Account")
-    </p>
-    <p>
-        @Html.CheckBoxFor(model => model.isPublish, new {@id = "publish"})publish results to the facebook
-    </p>
-</fieldset>
-
+</script>

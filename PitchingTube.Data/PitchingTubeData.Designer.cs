@@ -4392,6 +4392,30 @@ namespace PitchingTube.Data
         private Nullable<global::System.Boolean> _IsBot;
         partial void OnIsBotChanging(Nullable<global::System.Boolean> value);
         partial void OnIsBotChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsPublish
+        {
+            get
+            {
+                return _IsPublish;
+            }
+            set
+            {
+                OnIsPublishChanging(value);
+                ReportPropertyChanging("IsPublish");
+                _IsPublish = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsPublish");
+                OnIsPublishChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsPublish;
+        partial void OnIsPublishChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsPublishChanged();
 
         #endregion
     

@@ -80,10 +80,6 @@
             <End Role="Tubes" EntitySet="Tubes" />
             <End Role="Participants" EntitySet="Participants" />
           </AssociationSet>
-          <AssociationSet Name="FK_Partners_aspnet_Users" Association="PitchingTubeModel.Store.FK_Partners_aspnet_Users">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-            <End Role="Partners" EntitySet="Partners" />
-          </AssociationSet>
           <AssociationSet Name="FK_Persons_aspnet_Users" Association="PitchingTubeModel.Store.FK_Persons_aspnet_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="Persons" EntitySet="Persons" />
@@ -273,6 +269,7 @@
           <Property Name="AvatarPath" Type="nvarchar" MaxLength="200" />
           <Property Name="Pay" Type="bit" />
           <Property Name="IsBot" Type="bit" />
+          <Property Name="IsPublish" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -457,18 +454,6 @@
             </Principal>
             <Dependent Role="Participants">
               <PropertyRef Name="TubeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Partners_aspnet_Users">
-          <End Role="aspnet_Users" Type="PitchingTubeModel.Store.aspnet_Users" Multiplicity="1" />
-          <End Role="Partners" Type="PitchingTubeModel.Store.Partners" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Partners">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -772,6 +757,7 @@
           <Property Type="Boolean" Name="Pay" />
           <Property Type="Boolean" Name="IsBot" />
           <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="Person" ToRole="aspnet_Users" />
+          <Property Type="Boolean" Name="IsPublish" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1149,6 +1135,7 @@
           <EntitySetMapping Name="Persons">
             <EntityTypeMapping TypeName="PitchingTubeModel.Person">
               <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
                 <ScalarProperty Name="IsBot" ColumnName="IsBot" />
                 <ScalarProperty Name="Pay" ColumnName="Pay" />
                 <ScalarProperty Name="AvatarPath" ColumnName="AvatarPath" />

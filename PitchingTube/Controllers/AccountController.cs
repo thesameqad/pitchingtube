@@ -157,7 +157,8 @@ namespace PitchingTube.Controllers
                                 UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
                                 ActivationLink = activationLink.Split('$')[1],
                                 AvatarPath = avatarPath,
-                                Pay = false
+                                Pay = false,
+                                IsPublish = false
                             };
                         personRepository.Insert(newPerson);
                         
@@ -269,13 +270,30 @@ namespace PitchingTube.Controllers
         {
 
             MembershipUser currentUser = Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name));
+
+            var person = personRepository.FirstOrDefault(p => p.UserId == (Guid) currentUser.ProviderUserKey);
+
             UserInfo user = new UserInfo
             {
                 Name = currentUser.UserName,
-                Email = currentUser.Email
+                Email = currentUser.Email,
+                isPublish = person.IsPublish ?? false
             };           
             
             return View(user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AccountSettings(UserInfo model)
+        {
+            Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
+
+            var person = personRepository.FirstOrDefault(p => p.UserId == userId);
+            person.IsPublish = model.isPublish;
+            personRepository.Update(person);
+
+            return View(model);
         }
 
         public ActionResult FogotPassword()
