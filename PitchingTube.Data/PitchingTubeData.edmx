@@ -271,7 +271,7 @@
           <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="ActivationLink" Type="nvarchar" MaxLength="150" />
           <Property Name="AvatarPath" Type="nvarchar" MaxLength="200" />
-          <Property Name="Pay" Type="varchar" MaxLength="50" />
+          <Property Name="Pay" Type="bit" />
           <Property Name="IsBot" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -769,7 +769,7 @@
           <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ActivationLink" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="AvatarPath" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Pay" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Pay" />
           <Property Type="Boolean" Name="IsBot" />
           <NavigationProperty Name="aspnet_Users" Relationship="PitchingTubeModel.FK_Persons_aspnet_Users" FromRole="Person" ToRole="aspnet_Users" />
         </EntityType>
@@ -1209,10 +1209,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="PitchingTubeData" ZoomLevel="63">
-        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="14.25" Height="2.557190755208353" />
-        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Membership" Width="1.5" PointX="6" PointY="15.75" Height="5.4417122395833246" />
+        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="14.25" Height="2.5571907552083513" />
+        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Membership" Width="1.5" PointX="6" PointY="15.75" Height="5.441712239583353" />
         <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Paths" Width="1.5" PointX="3" PointY="12.75" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="5.25" PointY="13" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="PitchingTubeModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="5.25" PointY="13" Height="1.7879850260416106" />
         <EntityTypeShape EntityType="PitchingTubeModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="5.25" PointY="9.75" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Profile" Width="1.5" PointX="10.5" PointY="13.375" Height="2.1725878906249818" />
         <EntityTypeShape EntityType="PitchingTubeModel.aspnet_Roles" Width="1.5" PointX="3" PointY="22" Height="2.3648893229166674" />
@@ -1247,12 +1247,12 @@
           <ConnectorPoint PointX="9" PointY="17.25" />
         </AssociationConnector>
         <AssociationConnector Association="PitchingTubeModel.FK__aspnet_Me__UserI__22AA2996" >
-          <ConnectorPoint PointX="8.25" PointY="19.220856119791662" />
-          <ConnectorPoint PointX="7.5" PointY="19.220856119791662" />
+          <ConnectorPoint PointX="8.25" PointY="19.220856119791677" />
+          <ConnectorPoint PointX="7.5" PointY="19.220856119791677" />
         </AssociationConnector>
         <AssociationConnector Association="PitchingTubeModel.FK__aspnet_Pe__PathI__628FA481" >
-          <ConnectorPoint PointX="4.5" PointY="13.893992513020834" />
-          <ConnectorPoint PointX="5.25" PointY="13.893992513020834" />
+          <ConnectorPoint PointX="4.5" PointY="13.893992513020805" />
+          <ConnectorPoint PointX="5.25" PointY="13.893992513020805" />
         </AssociationConnector>
         <AssociationConnector Association="PitchingTubeModel.FK__aspnet_Pe__PathI__68487DD7" >
           <ConnectorPoint PointX="3.75" PointY="12.75" />

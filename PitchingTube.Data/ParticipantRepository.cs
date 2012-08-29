@@ -185,7 +185,7 @@ namespace PitchingTube.Data
         public Tube UserIsInTube(Guid userId)
         {
             var participant = FirstOrDefault(p => p.UserId == userId);
-            return participant != null ? participant.Tube : null;
+            return participant != null && participant.Tube.TubeMode != TubeMode.Closed ? participant.Tube : null;
         }
 
         public void RemoveUserFromAllTubes(Guid userId)
@@ -327,14 +327,7 @@ namespace PitchingTube.Data
 
             return currentPairs;
         }
-        public string GetPay(Guid userId)
-        {
-            var pay = (from u in _context.Persons
-                       where u.UserId == userId
-                       select u.Pay).FirstOrDefault();
-            return pay;
-           // return null;
-        }
+
 
         public class UserInfo
         {

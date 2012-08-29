@@ -164,7 +164,10 @@
             $(".alertStart").text("Next conversation will be started in " + i + " seconds").show();
             if (i == 0) {
                 clearInterval(timer2);
-                window.location.href="@Url.Content("/Tube/StartPitch")";
+                $.post('/Tube/SetTubeMode?mode=@ViewBag.NextMode', function() {
+                    alert("next mode is @ViewBag.NextMode")
+                    window.location.href="/Tube/StartPitch";
+                });
             }
         }, 1000);
 

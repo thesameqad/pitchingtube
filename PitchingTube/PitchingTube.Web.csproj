@@ -74,13 +74,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TubeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\NoCacheAttribute.cs" />
+    <Compile Include="Models\Attributes.cs" />
     <Compile Include="Models\OpenTok.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Util.cs" />
