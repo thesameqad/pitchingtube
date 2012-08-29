@@ -59,13 +59,24 @@ namespace PitchingTube.Models
                 }
                 else if (tube.TubeMode == TubeMode.Nominations)
                 {
+                    BaseRepository<Nomination> nominationRepository = new BaseRepository<Nomination>();
 
-                    var newRouteValueDictionary = new RouteValueDictionary
-                    {
-                        {"controller", "Tube"},
-                        {"action", "Results"},
-                        {"tubeId", tube.TubeId}
-                    };
+                    var user = filterContext.HttpContext.User;
+
+                    Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(user.Identity.Name)).ProviderUserKey;
+
+                    var investors = nominationRepository.FirstOrDefault(n => n.InvestorId == userId && n.TubeId == tube.TubeId);
+
+                    var newRouteValueDictionary = new RouteValueDictionary();
+
+                    newRouteValueDictionary.Add("controller", "Tube");
+
+                    if(filterContext.HttpContext.User.IsInRole("Investor") && investors == null)
+                        newRouteValueDictionary.Add("action", "Nomination");
+                    else
+                        newRouteValueDictionary.Add("action", "Results");
+
+                    newRouteValueDictionary.Add("tubeId", tube.TubeId);
 
                     if (currentRouteValueDictionary["controller"].ToString() != newRouteValueDictionary["controller"].ToString() || currentRouteValueDictionary["action"].ToString() != newRouteValueDictionary["action"].ToString())
                         filterContext.Result = new RedirectToRouteResult(newRouteValueDictionary);

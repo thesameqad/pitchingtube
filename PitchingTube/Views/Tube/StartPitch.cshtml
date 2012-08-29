@@ -23,7 +23,7 @@
                     <input type="button" id="SC" class="ShareContactButton" name="ShareContactsButton" value="Share Contacts" style="background-color:Black;color:White"/>
                     </td>
                 <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description>
-                      <div id="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none;"></div>
+                     <strong> <div id="Contacts" style="font-size:16px"></div></strong>
                 </td>
             </tr>
             @Html.Partial("History", ((IEnumerable<UserInfo>)ViewBag.History))
@@ -56,14 +56,14 @@
 </div>
 
 <script type="text/javascript">
-    
+
     var stopTime = true;
     var waitTime = 0;
 
     var statusArray = new Array(
-            { time: 120, status: "Sharing idea" },
-            { time: 60, status: "Asking questions" },
-            { time: 20, status: "Exchanging contacts" }
+            { time: 120, status: "SHARING IDEA" },
+            { time: 60, status: "ASKING QUESTIONS" },
+            { time: 20, status: "EXCHANGING CONTACTS" }
         );
 
         $(document).ready(function () {
@@ -103,37 +103,39 @@
                             newRound();
                         }
                         
-//                        $.getJSON("/Tube/IsPatrtnerOnline?partnerId=",
-//                            function(x) {
-//                                if(x.isOnline)
-//                                    $('#waitOfflainUserDialog').dialog("close");
-//                                else 
-//                                    $('#waitOfflainUserDialog').dialog("open");
-//                       
-//                            });
                     });
-
+                
+                    $.getJSON("/Tube/IsSecondReady?partnerId=@ViewBag.CurrentPartner.UserId",
+                        function(x) {
+                            if(!x.isReady) {
+                                waitTime += 1;
+                                $('#waitUserDialog').dialog("open");
+                                if(waitTime >= 10) {
+                                    clearInterval(timer);
+                                    newRound();
+                                }
+                            }
+                            else {
+                                $('#waitUserDialog').dialog("close");
+                                waitTime = 0;
+//                                $.getJSON("/Tube/IsPatrtnerOnline?partnerId=",
+//                                    function(x) {
+//                                        if(x.isOnline)
+//                                            $('#waitOfflainUserDialog').dialog("close");
+//                                        else 
+//                                            $('#waitOfflainUserDialog').dialog("open");
+//                       
+//                                    });
+                            }
+                        });
                 
 
             } 
-            $.getJSON("/Tube/IsSecondReady?partnerId=@ViewBag.CurrentPartner.UserId",
-                function(x) {
-                    if(!x.isReady) {
-                        waitTime += 1;
-                        $('#waitUserDialog').dialog("open");
-                        if(waitTime >= 120) {
-                            clearInterval(timer);
-                            newRound();
-                        }
-                        
-                    }
-                    else {
-                        $('#waitUserDialog').dialog("close");
-                        waitTime = 0;
-                    }
-                });
+            
                    
             }, 1000);
+            
+            $.ajaxSetup({ cache: false });  //Turn off caching
        });
         
         $("#SC").bind("click", function() {

@@ -79,7 +79,7 @@ namespace PitchingTube.Controllers
             if (!participantRepository.IsCanFindPartner(userId, tube.TubeId))
                 return RedirectToAction("TubeExcluded", "Tube", new { tubeId = tube.TubeId });
 
-            //int countPairs = participantRepository.CountPairsInTube(tube.TubeId);
+            int countPairs = participantRepository.CountPairsInTube(tube.TubeId);
 
             //Tube tubeWasChanged = HttpContext.Cache.Get("TubeChanged") == null ? null : (Tube)HttpContext.Cache["TubeChanged"];
 
@@ -128,13 +128,12 @@ namespace PitchingTube.Controllers
 
             int roundNumber = (int)tube.TubeMode;
 
-            if (tube.TubeMode >= TubeMode.Nominations)
+            if ((int)tube.TubeMode > countPairs)
             {
+                SetTubeMode((int)TubeMode.Nominations);
+
                 if(User.IsInRole("Investor"))
-                {
-                    tube.TubeMode = TubeMode.Nominations;
                     return RedirectToAction("Nomination", new { tubeId = tube.TubeId });
-                }
                 else
                     return RedirectToAction("Results", new { tubeId = tube.TubeId });
             }
@@ -190,22 +189,18 @@ namespace PitchingTube.Controllers
                     Util.ConverUserDataListToUserModelList(participantRepository.Query(
                         x =>
                         x.TubeId == tubeId && x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur")
-                                                               .Select(x => new ParticipantRepository.UserInfo()
-                                                                                {
-                                                                                    UserId = x.UserId,
-                                                                                    Name = x.aspnet_Users.UserName,
-                                                                                    Description = x.Description,
-                                                                                    AvatarPath =
-                                                                                        personRepository.FirstOrDefault(
-                                                                                            y => y.UserId == x.UserId).
-                                                                                        AvatarPath.Replace("\\", "/"),
-                                                                                    Role =
-                                                                                        x.aspnet_Users.aspnet_Roles.
-                                                                                        FirstOrDefault().RoleName
-                                                                                }
-                                                               ).ToList()
+                            .Select(x => new ParticipantRepository.UserInfo()
+                                {
+                                    UserId = x.UserId,
+                                    Name = x.aspnet_Users.UserName,
+                                    Description = x.Description,
+                                    AvatarPath = personRepository.FirstOrDefault(y => y.UserId == x.UserId).AvatarPath.Replace("\\", "/"),
+                                    Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName
+                                }
+                            ).ToList()
                         );
-            ViewData["tubeId"] = tubeId;
+
+                ViewData["tubeId"] = tubeId;
                 return View(model);
             }
 
@@ -314,12 +309,20 @@ namespace PitchingTube.Controllers
             return Json(new { isReady = pair.BeginPitchTime != null && pair.BeginPitchTime != minDateTime },
                         JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public void SetTubeMode(int mode)
         {
             var tube = Session["currentTube"] as Tube;
             if (tube == null) return;
-            tube.TubeMode = (TubeMode)Enum.ToObject(typeof(TubeMode), mode);
+            if(tube.Mode != mode)
+            {
+                tube = tubeRepository.FirstOrDefault(t => t.TubeId == tube.TubeId);
+                tube.TubeMode = (TubeMode)Enum.ToObject(typeof(TubeMode), mode);
+                tubeRepository.Update(tube);
+            }
+            
+            
             Session["currentTube"] = tube;
         }
 

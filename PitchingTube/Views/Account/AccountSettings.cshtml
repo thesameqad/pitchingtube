@@ -11,7 +11,7 @@
 
     <div class="display-label">UserName</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.UserName)
+        @Html.DisplayFor(model => model.Name)
     </div>
 
     <div class="display-label">Email</div>
@@ -20,10 +20,10 @@
     </div>
 
     <p>
-        @Html.ActionLink("Change password", "ChangePassword", "Account");
+        @Html.ActionLink("Change password", "ChangePassword", "Account")
     </p>
     <p>
-        @Html.ActionLink("Change my settings", "", "");
+        @Html.CheckBoxFor(model => model.isPublish, new {@id = "publish"})publish results to the facebook
     </p>
 </fieldset>
 

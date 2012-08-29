@@ -346,12 +346,14 @@ namespace PitchingTube.Data
         {
             var repository = new BaseRepository<Nomination>();
             var repositoryP = new BaseRepository<Person>();
+            var userRepository = new BaseRepository<aspnet_Users>();
             var list = new List<UserInfo>();
+
             var enterepreneursId = repository.Query(
                 x =>
-                x.TubeId == tubeId && x.Panding == 1 &&
-                x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName == "Entrepreneur").Select(x => x.EnterepreneurId).
+                x.TubeId == tubeId && x.Panding == 1).Select(x => x.EnterepreneurId).
                 Distinct();
+
             foreach (var enterepreneurId in enterepreneursId)
             {
                 var model =
@@ -359,7 +361,7 @@ namespace PitchingTube.Data
                         Select(x => new UserInfo()
                             {
                                 UserId = x.EnterepreneurId,
-                                Name = x.aspnet_Users.UserName,
+                                Name = userRepository.FirstOrDefault(u => u.UserId == x.EnterepreneurId).UserName,
                                 Description =
                                     new ParticipantRepository().FirstOrDefault(
                                         z => z.TubeId == tubeId && z.UserId == enterepreneurId).Description,
@@ -368,7 +370,7 @@ namespace PitchingTube.Data
                                         y =>
                                         y.TubeId == tubeId && y.EnterepreneurId == enterepreneurId && x.Panding == 1).
                                         Sum(y => y.Rating),
-                                Role = x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName,
+                                Role = "Entrepreneur",//x.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName,
                                 AvatarPath =
                                     repositoryP.FirstOrDefault(y => y.UserId == enterepreneurId).AvatarPath.Replace(
                                         "\\", "/"),
