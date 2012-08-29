@@ -157,7 +157,7 @@ namespace PitchingTube.Controllers
                                 UserId = Guid.Parse(currentUser.ProviderUserKey.ToString()),
                                 ActivationLink = activationLink.Split('$')[1],
                                 AvatarPath = avatarPath,
-                                Pay = "no"
+                                Pay = false
                             };
                         personRepository.Insert(newPerson);
                         

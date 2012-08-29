@@ -4350,7 +4350,7 @@ namespace PitchingTube.Data
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Pay
+        public Nullable<global::System.Boolean> Pay
         {
             get
             {
@@ -4360,13 +4360,13 @@ namespace PitchingTube.Data
             {
                 OnPayChanging(value);
                 ReportPropertyChanging("Pay");
-                _Pay = StructuralObject.SetValidValue(value, true);
+                _Pay = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Pay");
                 OnPayChanged();
             }
         }
-        private global::System.String _Pay;
-        partial void OnPayChanging(global::System.String value);
+        private Nullable<global::System.Boolean> _Pay;
+        partial void OnPayChanging(Nullable<global::System.Boolean> value);
         partial void OnPayChanged();
     
         /// <summary>

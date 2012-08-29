@@ -14,39 +14,20 @@ using PitchingTube.Models;
 namespace PitchingTube.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private ParticipantRepository participantRepository = new ParticipantRepository();
 
+        [TubeRedirection]
         public ActionResult Index()
         {
-            var tube = participantRepository.UserIsInTube(GetCurrentUserId());
-
-            if (tube != null)
-            {
-                switch (tube.TubeMode)
-                {
-                    case TubeMode.Opened:
-                        return RedirectToAction("Index", "Tube", new { tube.TubeId });
-                    case TubeMode.FirstPitch:
-                        //Redirect to FirstPitch page
-                        break;
-                    case TubeMode.Closed:
-                        break;
-                    default:
-                        break;
-                }
-
-                Session["currentTube"] = tube;
-            }
-
+            ViewBag.Pay = "yes";
             //Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault()
 
             //if (User.IsInRole("Investor"))
             if (Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault() == "Investor")
             {
-                Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
-                if (participantRepository.GetPay(userId) == "no")
+                Guid userId = GetCurrentUserId();
+                if (!(personRepository.GetPay(userId) ?? false))
                 {
                     ViewBag.Pay = "no";
                 }
@@ -77,7 +58,7 @@ namespace PitchingTube.Controllers
             return View();
         }
 
-        [NoCache]
+        [NoCacheAttribute]
         public JsonResult TubeFinded()
         {
             Thread.Sleep(3000);
@@ -98,14 +79,11 @@ namespace PitchingTube.Controllers
             return tubeId;
         }
 
-        private Guid GetCurrentUserId()
-        {
-            string userName = Membership.GetUserNameByEmail(User.Identity.Name);
-            return Guid.Parse(Membership.GetUser(userName).ProviderUserKey.ToString()); 
-        }
-
         public ActionResult AccountPlan()
         {
+            //set trial
+            personRepository.SetPay(GetCurrentUserId(), true);
+            
             return View();
         }
     }

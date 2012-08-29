@@ -86,7 +86,7 @@
     }
 
     function getParticipants() {
-        $.getJSON("/Tube/TubePeopleList?tubeid=" + @ViewBag.TubeId, function(x) {
+        $.getJSON("/Tube/TubePeopleList?tubeid=@ViewBag.TubeId", function(x) {
             if (x.leftInvestor == 0 && x.leftEntrepreneur == 0) {
                 stopInterval();
             } else {
@@ -115,7 +115,11 @@
 
     function startPitch()
     {
-        window.location.href="@Url.Content("/Tube/StartPitch")";
+        $.post('/Tube/SetTubeMode?mode=1', function() {
+            window.location.href="@Url.Content("/Tube/StartPitch)";
+        });
+
+        
     } 
 
     $('#startPitchTimeout').dialog({
