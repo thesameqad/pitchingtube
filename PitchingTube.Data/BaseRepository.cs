@@ -42,7 +42,7 @@ namespace PitchingTube.Data
         }
         public virtual IEnumerable<T> Query(Expression<Func<T, bool>> query)
         {
-            return _objectSet.Where(query).ToList();
+             return _objectSet.Where(query).ToList();
 
         }
         public virtual T FirstOrDefault(Expression<Func<T, bool>> query)

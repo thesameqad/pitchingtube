@@ -20,7 +20,7 @@
                <td class="investor">
                     CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
                     <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
-                    <input type="button" id="SC" class="ShareContactButton" name="ShareContactsButton" value="Share Contacts"/>
+                    <input type="button" id="SC" class="ShareContactButton" name="ShareContactsButton" value="Share Contacts" style="background-color:Black;color:White"/>
                     </td>
                 <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description>
                       <div id="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none;"></div>
@@ -121,8 +121,11 @@
                     if(!x.isReady) {
                         waitTime += 1;
                         $('#waitUserDialog').dialog("open");
-                        if(waitTime >= 120)
+                        if(waitTime >= 120) {
+                            clearInterval(timer);
                             newRound();
+                        }
+                        
                     }
                     else {
                         $('#waitUserDialog').dialog("close");
