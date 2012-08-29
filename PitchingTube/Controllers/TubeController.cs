@@ -54,11 +54,18 @@ namespace PitchingTube.Controllers
         [HttpGet,TubeRedirection]
         public ActionResult StartPitch()
         {
-
-            OpenTokSDK opentok = new OpenTokSDK();
-            Dictionary<string, object> options = new Dictionary<string, object>();
             //options.Add(SessionPropertyConstants.MULTIPLEXER_SWITCHTYPE, "enabled");
-            string sessionId = opentok.CreateSession(Request.ServerVariables["REMOTE_ADDR"]);
+
+            string sessionId = HttpContext.Cache["sessionId"] == null ? null : HttpContext.Cache["sessionId"].ToString();
+
+            if (sessionId == null)
+            {
+                OpenTokSDK opentok = new OpenTokSDK();
+                Dictionary<string, object> options = new Dictionary<string, object>();
+                options.Add(SessionPropertyConstants.P2P_PREFERENCE, "enabled");
+                sessionId = opentok.CreateSession(Request.ServerVariables["REMOTE_ADDR"]);
+                HttpContext.Cache["sessionId"] = sessionId;
+            }
 
 
             NameValueCollection appSettings = ConfigurationManager.AppSettings;

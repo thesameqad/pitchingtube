@@ -14,17 +14,51 @@
                     <div class="question" id="timeStatus"></div>
                 </td>
                 <td class="video" rowspan="5" >
-                <div id="videoPanel" style="display: block"></div>
+                <div id="videoPanel" style="display: block">
+                <img src="@Url.Content("/Content/img/Video.png")" alt="" />
+                </div>
+                
                     @*<img src="@Url.Content("/Content/img/Video.png")" alt="" /> *@
                 </td>
                <td class="investor">
-                    CURRENT <br/> @ViewBag.CurrentPartner.Role <br />
-                    <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
-                    <input type="button" id="SC" class="ShareContactButton" name="ShareContactsButton" value="Share Contacts" style="background-color:Black;color:White"/>
-                    </td>
-                <td class="style3">@ViewBag.CurrentPartner.Name @ViewBag.CurrentPartner.Description>
-                      <div id="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none;"></div>
-                </td>
+                       <table>
+                       <tr>
+                       <td colspan="3">
+                        <span>ME</span>
+                       </td>
+                       </tr>
+                       <tr>
+                       <td colspan="3">
+                        <div id="subscriberId"></div>
+                       </td>
+                       </tr>
+                       <tr>
+                        <td colspan="3">
+                            <span>CURRENT </span><span>@ViewBag.CurrentPartner.Role</span>
+                        </td>
+                       </tr>
+                       <tr>
+                        <td colspan="3">
+                            @ViewBag.CurrentPartner.Name
+                        </td>
+                       </tr>                       
+                       <tr>
+                        <td>
+                            <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
+                        </td>
+                        <td>
+                            @ViewBag.CurrentPartner.Description>
+                        </td>
+                       </tr>
+                       <tr>
+                        <td colspan="3">
+                            <input type="button" id="SC" class="ShareContactButton" name="ShareContactsButton" value="Share Contacts" style="background-color:Black;color:White"/>
+                            <div id="Contacts" style="margin: 0 auto; text-align: center; font-size: 25px;display: none;"></div>
+                        </td>
+                       </tr>
+                       </table> 
+                    
+                 </td>
             </tr>
             @Html.Partial("History", ((IEnumerable<UserInfo>)ViewBag.History))
             </table>
@@ -235,25 +269,24 @@
 
     function startPublishing() {
         if (!publisher) {
-            var containerDiv = document.createElement('div');
-            containerDiv.className = "subscriberContainer";
-            containerDiv.setAttribute('id', 'opentok_publisher');
-            containerDiv.style.float = "left";
-            var videoPanel = document.getElementById("videoPanel");
-            videoPanel.appendChild(containerDiv);
+                var containerDiv = document.createElement('div');
+                containerDiv.className = "publisherContainer";
+                containerDiv.setAttribute('id', 'opentok_publisher');
 
-            var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
-            publisherDiv.setAttribute('id', 'replacement_div')
-            containerDiv.appendChild(publisherDiv);
+                var videoPanel = document.getElementById("subscriberId");
+                videoPanel.innerHTML = containerDiv.innerHTML;
 
-            var publisherProperties = new Object();
-            
-            publisherProperties.publishVideo = true;
-            publisherProperties.publishAudio = true;
-            publisherProperties.width = 690;
-            publisherProperties.height = 410;
+                var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
+                publisherDiv.setAttribute('id', 'replacement_div1')
+                containerDiv.appendChild(publisherDiv);
 
-            publisher = session.publish(publisherDiv.id, publisherProperties);
+
+                var publisherProperties = new Object();
+                
+                publisherProperties.width = 200;
+                publisherProperties.height = 140;
+
+                publisher = session.publish(publisherDiv.id, publisherProperties);
         }
     }
 
@@ -295,7 +328,26 @@
         for (i = 0; i < streams.length; i++) {
             var stream = streams[i];
             if (stream.connection.connectionId != session.connection.connectionId) {
-                session.subscribe(stream);
+             // Create a div for the subscriber to replace
+                var containerDiv = document.createElement('div');
+                containerDiv.className = "subscriberContainer";
+                containerDiv.setAttribute('id', 'opentok_subscriber');
+                containerDiv.style.float = "left";
+                var videoPanel = document.getElementById("videoPanel");
+                videoPanel.appendChild(containerDiv);
+
+                var subscriberDiv = document.createElement('div'); // Create a div for the publisher to replace
+                subscriberDiv.setAttribute('id', 'replacement_div')
+                containerDiv.appendChild(subscriberDiv);
+     
+                var publisherProperties = new Object();
+                
+                publisherProperties.publishVideo = true;
+                publisherProperties.publishAudio = true;
+                publisherProperties.width = 690;
+                publisherProperties.height = 410;
+                
+                session.subscribe(stream,subscriberDiv.id, publisherProperties);
             }
         }
     }
