@@ -149,7 +149,7 @@
                             if(!x.isReady) {
                                 waitTime += 1;
                                 $('#waitUserDialog').dialog("open");
-                                if(waitTime >= 10) {
+                                if(waitTime >= 120) {
                                     clearInterval(timer);
                                     newRound();
                                 }
@@ -157,14 +157,14 @@
                             else {
                                 $('#waitUserDialog').dialog("close");
                                 waitTime = 0;
-//                                $.getJSON("/Tube/IsPatrtnerOnline?partnerId=",
-//                                    function(x) {
-//                                        if(x.isOnline)
-//                                            $('#waitOfflainUserDialog').dialog("close");
-//                                        else 
-//                                            $('#waitOfflainUserDialog').dialog("open");
-//                       
-//                                    });
+                                $.getJSON("/Tube/IsPatrtnerOnline?partnerId=@ViewBag.CurrentPartner.UserId",
+                                    function(x) {
+                                        if(x.isOnline)
+                                            $('#waitOfflainUserDialog').dialog("close");
+                                        else 
+                                            $('#waitOfflainUserDialog').dialog("open");
+                       
+                                    });
                             }
                         });
                 
