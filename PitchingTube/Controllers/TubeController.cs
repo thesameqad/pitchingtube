@@ -265,8 +265,7 @@ namespace PitchingTube.Controllers
 
         public JsonResult IsPatrtnerOnline(Guid partnerId)
         {
-            MembershipUser partner = Membership.GetUser(partnerId);
-            return Json(new { isOnline = partner.IsOnline }, JsonRequestBehavior.AllowGet);
+            return Json(new { isOnline = (bool)HttpContext.Cache[partnerId.ToString()] }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ShareContacts(int tubeId)

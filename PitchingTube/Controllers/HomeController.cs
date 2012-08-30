@@ -23,10 +23,13 @@ namespace PitchingTube.Controllers
             ViewBag.Pay = "yes";
             //Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault()
 
+            Guid userId = GetCurrentUserId();
+            HttpContext.Cache[userId.ToString()] = true;
+
             //if (User.IsInRole("Investor"))
             if (Roles.GetRolesForUser(Membership.GetUserNameByEmail(User.Identity.Name)).FirstOrDefault() == "Investor")
             {
-                Guid userId = GetCurrentUserId();
+                
                 if (!(personRepository.GetPay(userId) ?? false))
                 {
                     ViewBag.Pay = "no";
