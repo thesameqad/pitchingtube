@@ -37,8 +37,11 @@ namespace PitchingTube.Controllers
             });
             ViewBag.TubeId = tubeId;
 
+            if (personRepository.FirstOrDefault(p => p.UserId == userId).IsBot ?? false)
+                HttpContext.Cache[userId.ToString()+"online"] = false;
+
            // Session["leftTime"] = 0;
-            HttpContext.Application[tubeId.ToString()] = 0;
+            //HttpContext.Application[tubeId.ToString()] = 0;
 
             return View();
         }
@@ -262,7 +265,7 @@ namespace PitchingTube.Controllers
 
         public JsonResult IsPatrtnerOnline(Guid partnerId)
         {
-            return Json(new { isOnline = (bool)HttpContext.Cache[partnerId.ToString()] }, JsonRequestBehavior.AllowGet);
+            return Json(new { isOnline = (bool)HttpContext.Cache[partnerId.ToString()+"online"] }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ShareContacts(int tubeId)
