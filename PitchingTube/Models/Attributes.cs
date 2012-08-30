@@ -61,6 +61,8 @@ namespace PitchingTube.Models
                 {
                     BaseRepository<Nomination> nominationRepository = new BaseRepository<Nomination>();
 
+                    PersonRepository personRepository = new PersonRepository();
+
                     var user = filterContext.HttpContext.User;
 
                     Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(user.Identity.Name)).ProviderUserKey;
@@ -71,7 +73,9 @@ namespace PitchingTube.Models
 
                     newRouteValueDictionary.Add("controller", "Tube");
 
-                    if(filterContext.HttpContext.User.IsInRole("Investor") && investors == null)
+                    string roleName = personRepository.GetRoleName(userId);
+
+                    if(roleName == "Investor" && investors == null)
                         newRouteValueDictionary.Add("action", "Nomination");
                     else
                         newRouteValueDictionary.Add("action", "Results");

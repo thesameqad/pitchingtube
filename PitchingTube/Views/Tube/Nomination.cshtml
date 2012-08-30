@@ -10,8 +10,8 @@
 <div class="ConteinerNomination">
     @using (Html.BeginForm(new { tubeId = ViewData["tubeId"] }))
     {
-        <p style="font-size: 22px; padding-left: 10px; background-color:Black;color:White; width:120px ">INVESTOR</p>
-        <table class="">
+        <p style="font-size: 22px; padding-left: 10px; background-color:Black;color:White; width:100%; ">ESTIMATE ENTREPRENEURS</p>
+        <table style="width:100%">
             @foreach (var item in Model)
             {
                 index++;
@@ -19,12 +19,12 @@
                     <td>
                         <img src="@item.AvatarPath" alt="" width="60"/> 
                     </td>
-                    <td class="FIO">
+                    <td class="Name">
                         @Html.DisplayFor(modelItem => item.Name) 
                     </td>
                     <td class="Idea">
                         <p style="background-color:Black;color:White; width:45px">IDEA</p> <br/>
-                        <p class="DescribeIdea"> @Html.DisplayFor(modelItem => item.Description) </p>
+                        <p class="ideaDescription"> @Html.DisplayFor(modelItem => item.Description) </p>
                     </td>
                     <td>
                         @for (int i = 1; i <= 10; i++)
@@ -39,22 +39,22 @@
             }
            
         </table>
-        <input type="submit" value="Done" class="Button1" id="submit-form" style="color: white"/>
-        <p style="font-size: 18px; float: right">If you are finished, puch </p>
+        <input type="submit" value="Done" class="doneButton" id="submit-form" style="color: white"/>
+        <p style="font-size: 18px; float: right">If you are finished, push </p>
     }
 </div>
 
 <script type="text/javascript">
     $(function() {
-        $(".star").rating("select", 0);
+        
         $('#submit-form').bind('click', function() {
-            alert("click");
             for (var i = 1; i <= 5; i++) {
                 $('#star-input-' + i).val($('input:radio[name=star' + i + ']:checked').val());
             }
 
         });
 
+        $(".star").rating("select", 0);
 
-    });
+    })
 </script>

@@ -21,5 +21,10 @@ namespace PitchingTube.Data
             Update(person);
         }
 
+        public string GetRoleName(Guid userId)
+        {
+            return FirstOrDefault(p => p.UserId == userId).aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName;
+        }
+
     }
 }

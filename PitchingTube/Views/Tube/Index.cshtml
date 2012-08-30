@@ -2,34 +2,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="@Url.Content("~/Content/tube.css")" rel="stylesheet" type="text/css" />
-<div style="margin-top:40px; width: 900px; height: 90px">
-    <div style="float: left; text-align: center; height: 0px; width: 250px">
-        <div class="alertIn" style="margin: 0 auto; text-align: center; font-size: 25px;
-            display: none">
-        </div>
-        <h1>
-            Investor</h1>
-    </div>
-    <div style="float: right; text-align: center; height: 0px; width: 250px">
-        <div class="alertEn" style="margin: 0 auto; text-align: center; font-size: 25px;
-            display: none">
-        </div>
-        <h1>
-            Entrepreneur</h1>
-    </div>
-</div>
+
+
+
 <div class="content" style="height: 400px; margin: 0 auto; width: 900px">
+<div style="clear:both"></div>
+<div class="secondInfoHeader" style="text-align:center">
+The pitch will be started automatically in <span id="autoStartText"></span> minutes
+</div>
     <div class="left" id="columnleft" style="width: 250px">
+    
+    <div class="alertIn" style="margin: 0 auto; text-align: center; font-size: 25px;
+            display: none">
+        </div>
+        <h1 class="blackWhiteHeader">
+            Investors</h1>
+
     </div>
+    <div style="text-align:center;vertical-align:middle;">
+        <img src="/Content/img/PreloaderResult.gif" alt="" />   
+    </div>
+
     <div class="right" id="columnright" style="width: 250px">
+    
+    <div class="alertEn" style="margin: 0 auto; text-align: center; font-size: 25px;
+            display: none">
+        </div>
+            <h1 class="blackWhiteHeader">
+            Entrepreneurs</h1>
+    
     </div>
 </div>
 
 
 <div id="startPitchTimeout">
-    <div class="alertStart" id="startPitchTimeoutText" style="margin: 0 auto; text-align: center; font-size: 25px;
-        display: none">
-    </div>
+            <div class="Preloader" style="text-align:center;">
+                <img src="@Url.Content("/Content/img/icon-timer.png")" alt="" />
+            </div>
+            <span class="secondInfoHeader" style="width:400px;">
+                Pitch will be started in <span id="startPitchTimeoutText"></span> seconds
+            </span>
 </div>
 <script type="text/javascript">
     var timer;
@@ -39,13 +51,12 @@
     function stopInterval() {
         $('#startPitchTimeout').dialog("open");
         clearInterval(timer);
-        $("#startPitchTimeoutText").text("Well, starting pitch").fadeOut(5000);
         var timer2 = setInterval(function () {
             i--;
-            $(".alertStart").text("Pitch will be started in " + i + " seconds").show();
+            $("#startPitchTimeoutText").text(i);
             if (i == 0) {
                 clearInterval(timer2);
-                $(".alertStart").hide();
+                $(".secondInfoHeader").text("Ready, Steady, Go!!!");
                 startPitch();
 
             }
@@ -59,10 +70,10 @@
     });
     function Insertp(i, x) {
         if (x[i].Role == "Investor") {
-            var tmp = '<div class="participant-container left"><div class="avatar"><img src="' + x[i].AvatarPath + '" alt="user-avatar" class="right"/><div class="investorname"><h2>' + x[i].Name + '</h2></div><div>' + x[i].Description + '</div></div></div>';
+            var tmp = '<div class="participant-container left"><div class="avatar"><img src="' + x[i].AvatarPath + '" alt="user-avatar" class="right"/><div class="investorname"><h2>' + x[i].Name + '</h2></div><div class="ideaDescription">' + x[i].Description + '</div></div></div>';
             $('#columnleft').append(tmp);
         } else {
-            var tmp2 = '<div class="participant-container right"><div class="avatar"><img src="' + x[i].AvatarPath + '" alt="user-avatar" class="left"/><div class="entrepreunername"><h2>' + x[i].Name + '</h2></div><div>' + x[i].Description + '</div></div></div>';
+            var tmp2 = '<div class="participant-container right"><div class="avatar"><img src="' + x[i].AvatarPath + '" alt="user-avatar" class="left"/><div class="entrepreunername"><h2>' + x[i].Name + '</h2></div><div class="ideaDescription">' + x[i].Description + '</div></div></div>';
             $('#columnright').append(tmp2);
         }
     }
@@ -88,14 +99,14 @@
                 stopInterval();
             } else {
                 if (x.leftEntrepreneur > 1) {
-                    $(".alertEn").html("Left " + x.leftEntrepreneur + " entrepreneurs").show();
+                    $(".alertEn").html("" + x.leftEntrepreneur + " left").show();
                 } else {
-                    $(".alertEn").html("Left " + x.leftEntrepreneur + " entrepreneur").show();
+                    $(".alertEn").html("" + x.leftEntrepreneur + " left").show();
                 }
                 if (x.leftInvestor > 1) {
-                    $(".alertIn").html("Left " + x.leftInvestor + " investors").show();
+                    $(".alertIn").html("" + x.leftInvestor + " left").show();
                 } else {
-                    $(".alertIn").html("Left " + x.leftInvestor + " investor").show();
+                    $(".alertIn").html("" + x.leftInvestor + " left").show();
                 }
             }
             if(count < x.model.length) {
@@ -120,9 +131,11 @@
     } 
 
     $('#startPitchTimeout').dialog({
-            autoOpen: false,
-            modal: true
-        });
+        autoOpen: false,
+        modal: true,
+        resizable: false,
+        width: 'auto'
+    });
 
     $('#logon').click(function () {
         
