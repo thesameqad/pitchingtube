@@ -10,6 +10,7 @@ using OpenTok;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Web.Caching;
+using Facebook.Web;
 
 
 
@@ -235,6 +236,7 @@ namespace PitchingTube.Controllers
         {
             var results = Util.ConverUserDataListToUserModelList(participantRepository.GetResult(tubeId));
             ViewBag.TubeId = tubeId;
+            
             return View(results);
         }
 
@@ -351,6 +353,36 @@ namespace PitchingTube.Controllers
 
         }
 
+        [HttpPost]
+        public void PublishToFacebookWall(int tubeId)
+        {
+            var user = Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name));
+
+            if (personRepository.FirstOrDefault(p => p.UserId == (Guid)user.ProviderUserKey).IsPublish == true && Roles.GetRolesForUser(user.UserName)[0] != "Investor")
+            {
+                var client = new FacebookWebClient(FacebookWebContext.Current.AccessToken);
+
+                var nominations =
+                    participantRepository.GetResult(tubeId).FirstOrDefault(p => p.UserId == (Guid) user.ProviderUserKey)
+                        .Nomination;
+
+                var parameters = new Dictionary<string, object>
+                                     {
+                                         {
+                                             "message",
+                                             String.Format(
+                                                 "Pitch was awarded by investors for {0} points at pitchingtube.com", nominations)
+                                         },
+                                         {"name", "Pitching Tube"},
+                                         {"link", "http://www.pitchingtube.com"},
+                                         {"description", "description"}
+                                        // {"picture","../../Content/img/Logo.png"}
+                                     };
+
+                client.Post("me/feed", parameters);
+            }
+
+        }
 
 
 

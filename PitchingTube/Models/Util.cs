@@ -144,7 +144,8 @@ namespace PitchingTube.Models
                 Role = from.Role,
                 UserId = from.UserId,
                 Nomination = from.Nomination,
-                Pending = from.Pending
+                Pending = from.Pending,
+                isPublish = from.IsPublish
             };
         }
 

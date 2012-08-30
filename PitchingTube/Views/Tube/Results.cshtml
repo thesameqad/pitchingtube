@@ -45,11 +45,14 @@
 
   
     <script type="text/javascript">
+        var published = false;
+        var countInvestors = 0;
 
         $(function() {
             timer = setInterval(GetRatings, 1000);
 
             function GetRatings() {
+                countInvestors = 0;
                 $.getJSON("/Tube/GetRatings?tubeid=" + @ViewBag.TubeId, function(x) {
                     for (var i = 0; i < x.nomination.length; i++) {
                         
@@ -64,12 +67,43 @@
                             $(stateId).html("<img class=\"completed\"src=\"/Content/img/Galochka.png\" alt=\"\"> <p class=\"Pending\">Completed</p>");
                             $(stateId).removeClass("Preloader").addClass("Galochka");
                         }
-                            
+                        
+                        if(x.pending[i] == 1)
+                            countInvestors += 1;
+                        
                     }
+                        if(countInvestors == @investors.Count && published == false) {
+                            published = true;
+                            $.post("/Tube/PublishToFacebookWall?tubeid=@ViewBag.TubeId", function() {
+                                alert("post");
+                            });
+                            
+                        }
+
 
                 });
 
             }
 
         });
+        
+//    function postonwall()  
+//    {  
+//        FB.api('/me/feed', 'post',  
+//        {  
+//            message: 'Pitch was awarded by investors for {n} points at pitchingtube.com',  
+//            link:'http://www.pitchingtube.com',  
+//            name:'Pitching Tube',  
+//            picture:'../../Content/img/Logo.png',  
+//            description:''  
+//        }, 
+//            function(response) {  
+//                if (!response || response.error) {  
+//                    alert('Oops! User Denied Access');  
+//                } else {  
+//                    alert('Success: Content Published');  
+//                }  
+//        });  
+//    }  
+
     </script>
