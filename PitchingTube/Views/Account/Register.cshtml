@@ -24,8 +24,8 @@
                         @Html.LabelFor(m => m.UserName)
                     </td>
                     <td class="style2" >
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "TextBox" , @id = "name"})
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @id = "nameMessage" })
                     </td>
                     <td class="free"></td>
                 </tr>
@@ -35,8 +35,8 @@
                         @Html.LabelFor(m => m.Email)
                     </td>
                     <td class="style2">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "TextBox" })
-                        @Html.ValidationMessageFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "TextBox" , @id = "emailRegister"})
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @id = "emailRegisterMessage" })
                     </td>
                     <td class="free"></td>
                 </tr>
@@ -135,6 +135,23 @@
         </div>
                      
         <script type="text/javascript">
+
+            $('#emailRegister').blur(function () {
+                $.getJSON("/Account/IfFieldExistInDatabase?fieldValue=" + $(this).val() + "&type=email",
+                function (x) {
+                    if (x.isExist)
+                        $('#emailRegisterMessage').text("Email is already exist");
+                });
+            });
+
+            $('#name').blur(function () {
+                $.getJSON("/Account/IfFieldExistInDatabase?fieldValue=" + $(this).val() + "&type=name",
+                function (x) {
+                    if (x.isExist)
+                        $('#nameMessage').text("User name is already exist");
+                });
+            });
+
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();

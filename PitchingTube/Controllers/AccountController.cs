@@ -338,6 +338,18 @@ namespace PitchingTube.Controllers
             return View();
         }
 
+        public JsonResult IfFieldExistInDatabase(string fieldValue, string type)
+        {
+            bool result = false;
+
+            if (type == "name")
+                result = Membership.GetUser(fieldValue) == null ? false : true;
+            if (type == "email")
+                result = Membership.GetUserNameByEmail(fieldValue) == null ? false : true;
+
+            return Json(new {isExist = result}, JsonRequestBehavior.AllowGet);
+        }
+
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
