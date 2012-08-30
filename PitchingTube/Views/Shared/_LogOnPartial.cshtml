@@ -7,9 +7,9 @@
 @if(Request.IsAuthenticated) {
     <table>
         <tr>
-            <td><strong> @Html.ActionLink(User.Identity.Name, "AccountSettings", "Account") </strong></td>
-            <td><img src="@Url.Content(PitchingTube.Models.Util.GetAvatarPath())" height="20px"  ></td> 
-            <td> <strong> @Html.ActionLink(" | Exit", "LogOff", "Account") </strong></td>   
+            <td><span style="font-size:14px; font-weight:bold;"> @Html.ActionLink(User.Identity.Name, "AccountSettings", "Account") </span></td>
+            <td><img src="@Url.Content(PitchingTube.Models.Util.GetAvatarPath())" height="30px"  ></td> 
+            <td> <span style="font-size:14px; font-weight:bold;"> @Html.ActionLink(" | Exit", "LogOff", "Account") </span></td>   
         </tr>  
     </table>
 }

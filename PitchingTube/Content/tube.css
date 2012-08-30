@@ -7,9 +7,11 @@
 .left
 {
     float: left;
+    padding:3px;
 }
 .right
 {
+    padding:3px;
     float: right;
 }
 .participant-container
@@ -20,9 +22,11 @@
 {
     padding-left: 10px;
     height: 80px;
+    font-weight:bold;
 }
 .entrepreunername
 {
     height: 80px;
     padding-left: 85px;
+    font-weight:bold;
 }

@@ -57,26 +57,6 @@ namespace PitchingTube.Controllers
         {
             //options.Add(SessionPropertyConstants.MULTIPLEXER_SWITCHTYPE, "enabled");
 
-            string sessionId = HttpContext.Cache["sessionId"] == null ? null : HttpContext.Cache["sessionId"].ToString();
-
-            if (sessionId == null)
-            {
-                OpenTokSDK opentok = new OpenTokSDK();
-                Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add(SessionPropertyConstants.P2P_PREFERENCE, "enabled");
-                sessionId = opentok.CreateSession(Request.ServerVariables["REMOTE_ADDR"]);
-                HttpContext.Cache["sessionId"] = sessionId;
-            }
-
-
-            NameValueCollection appSettings = ConfigurationManager.AppSettings;
-
-
-            ViewData["apiKey"] = appSettings["opentok_key"];
-            ViewData["sessionId"] = sessionId;
-
-
-
             Guid userId = (Guid)Membership.GetUser(Membership.GetUserNameByEmail(User.Identity.Name)).ProviderUserKey;
 
             var tube = Session["currentTube"] as Tube;
@@ -147,6 +127,23 @@ namespace PitchingTube.Controllers
             }
 
             Participant currentParticipant = participantRepository.FindPartner(userId, tube.TubeId, roundNumber);
+
+            string sessionId = HttpContext.Cache[userId.ToString()] == null ? null : HttpContext.Cache[userId.ToString()].ToString();
+
+            if (sessionId == null)
+            {
+                OpenTokSDK opentok = new OpenTokSDK();
+                Dictionary<string, object> options = new Dictionary<string, object>();
+                options.Add(SessionPropertyConstants.P2P_PREFERENCE, "enabled");
+                sessionId = opentok.CreateSession(Request.ServerVariables["REMOTE_ADDR"]);
+                HttpContext.Cache[currentParticipant.UserId.ToString()] = sessionId;
+            }
+
+            NameValueCollection appSettings = ConfigurationManager.AppSettings;
+
+
+            ViewData["apiKey"] = appSettings["opentok_key"];
+            ViewData["sessionId"] = sessionId;
 
             UserInfo partnerModel = new UserInfo
             {

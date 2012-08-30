@@ -4,18 +4,32 @@
     ViewBag.Title = "History";
 }
 
-<tr class="Tr">
-                    <td ></td>
-                    <td >HISTORY</td>
-                    <td  ></td>
-</tr>
+<tr class="Tr" style="text-align:left;">
+<td></td>
+                    <td >
+                    <table>
+                    <tr>
+                        <td colspan="2">HISTORY</td>
+                    </tr>
 @{
     foreach (var itemModel in Model)
     {
-        <tr class="Tr">
-                    <td  ></td>
-                    <td ><img src="@itemModel.AvatarPath" alt="" width="60" /> </td>
-                    <td class="style4" >@itemModel.Name<br /> @itemModel.Description</td>
+        <tr style="text-align:left;">
+                    <td>
+                        <img src="@itemModel.AvatarPath" alt="" width="60" />
+                    </td>
+                    <td>
+                    <div style="padding:2px;">
+                        <span class="Name" style="font-weight:bold;">@itemModel.Name</span>
+                    <br />
+                        <span class="ideaDescription"> @itemModel.Description</span>
+                    </div>
+                    
+                    </td>
         </tr>
     }
 }
+
+</table>
+</td>
+</tr>

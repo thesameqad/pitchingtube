@@ -57,14 +57,15 @@ h1, h2, h3, h4, h5, h6
     width: 800px;
     margin: 0 auto;
     height: 36px;
-    padding-top: 5px
 }
 
 .containerToolbar .toolbar {
     float: right;
     height: 100%;
-    width: 220px;
-    text-align:center;
+    width: 160px;
+    padding-left:40px;
+    padding-bottom:5px;
+    padding-top:5px;
     background-image:url(../Content/img/BlackRectangle.png);
 }
 
@@ -164,17 +165,14 @@ h1, h2, h3, h4, h5, h6
 }
 .containerRegistration .frame .TableTr .Grand
 {
-	font-family:Helvetica;
 	font-size:30px;
 }
 .containerRegistration .frame .TableTr .Games
 {
-	font-family:Helvetica;
 	font-size:30px;
 }
 .containerRegistration .frame .TableTr .Her
 {
-	font-family:Helvetica;
 	font-size:14px;
 	padding-right:40px;
 	padding-top:10px;
@@ -183,7 +181,6 @@ h1, h2, h3, h4, h5, h6
 .containerRegistration .frame .style1
 {
 	text-align: right;
-	font: 15px Helvetica Bold;	
 	width:30px;
 	background-color:#D6FACC;
 	padding-left:10px;
@@ -198,7 +195,6 @@ h1, h2, h3, h4, h5, h6
 }
 .containerRegistration .frame .style3
 {
-	font-family:Helvetica_Light-Normal;
     font-size:40px;
     background-color:#D6FACC;
     padding-left:10px;
@@ -209,7 +205,6 @@ h1, h2, h3, h4, h5, h6
 	width:220px;
 	height:25px;	
 	background-color:Honeydew;
-	font: 15px Helvetica Bold;
 	border:0px ;
 	border-radius: 5px 5px 5px 5px;
 	margin: 5px 0 0 0;
@@ -246,7 +241,6 @@ h1, h2, h3, h4, h5, h6
 	border-color: inherit;
 	border-width: 0px;
 	background-color:Honeydew;
-	font: 15px Helvetica Bold;
 	border-radius: 5px 5px 5px 5px;
 	margin-left:-210px;
 	vertical-align:middle;
@@ -276,7 +270,6 @@ h1, h2, h3, h4, h5, h6
 .containerPitch{
     width: 1000px;
     height: 100%;
-    margin: 0 auto;
     padding-top: 30px;
     padding-left:150px;
     padding-bottom:70px;
@@ -284,11 +277,11 @@ h1, h2, h3, h4, h5, h6
 }
 .containerPitch .Tr{
     height:60px;
-    font:20px HELVETICA;
+    font-size:20px;
 }
 .containerPitch .time
 {
-	font:70px HELVETICA;
+	font-size:70px;
 	text-align:right;
 	padding-right:5px;	
 	vertical-align:top;
@@ -299,14 +292,14 @@ h1, h2, h3, h4, h5, h6
 }
 .containerPitch .investor
 {
-	font:20px Tahoma;	
+	font-size:20px;	
 	text-align:left;
 	padding-left:5px;
 	background-color:#D6FACC;
 }
 .containerPitch .question
 {
-	font:20px HELVETICA;	
+	font-size:20px;	
 	text-align:right;
 	padding-right:5px;
 }
@@ -331,7 +324,6 @@ h1, h2, h3, h4, h5, h6
 .containerPitch .style4
 {
 	text-align:left;
-	font:18px PFDinTextPro-Light;	
 }
 .containerPitch .OtherRooms
 {
@@ -348,15 +340,12 @@ h1, h2, h3, h4, h5, h6
 .containerPitch .OtherRooms .LeftRoomTrFIO
 {
 	height:60px;
-	vertical-align:top;	
-	font:18px PFDinTextPro-Light;	
+	vertical-align:top;		
 	text-align:left;
 }
 .containerPitch .OtherRooms .RightRoomTrFIO
 {
 	height:60px;
-	vertical-align:top;	
-	font:18px PFDinTextPro-Light;	
 	text-align:right;
 }
 .ConteinerPpreloader 
@@ -373,7 +362,7 @@ h1, h2, h3, h4, h5, h6
 }
 .ConteinerPpreloader .Searching
 {
-	font: 40px Tahoma;
+	font-size: 40px;
 	color:#696969;			
 }
 .ConteinerPpreloader .Minutes
@@ -447,7 +436,7 @@ h1, h2, h3, h4, h5, h6
 	vertical-align:super;
 	text-align:left;	
 }
-.ConteinerResult .Name
+.Name
 {
 	font-size:18px;
 	padding-bottom:30px;
@@ -508,7 +497,7 @@ h1, h2, h3, h4, h5, h6
     font:18px Helvetica Bold;
     vertical-align:bottom;
 }
-.ConteinerNomination  .Button1
+.doneButton
 {
 	width:80px;
 	height:40px;
@@ -525,4 +514,30 @@ h1, h2, h3, h4, h5, h6
     width: 800px;
     height: 4em;
     margin: 0 auto;
+}
+
+.blackWhiteHeader
+{
+    background-color:Black;
+    padding:3px;
+    color:White; 
+}
+
+.mainInfoHeader
+{
+	font-size: 40px;
+	color:#696969;
+}	
+
+.secondInfoHeader
+{
+    font: 35px Tahoma;
+	color:#696969;	
+}
+
+.ideaDescription
+{
+    font-size:20px;
+    font-weight:normal;
+    font-style:italic;
 }

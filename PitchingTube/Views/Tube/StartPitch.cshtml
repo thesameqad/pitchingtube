@@ -15,7 +15,9 @@
                 </td>
                 <td class="video" rowspan="5" >
                 <div id="videoPanel" style="display: block">
-                <img src="@Url.Content("/Content/img/Video.png")" alt="" />
+                <div id="loading_image">
+                    <img src="@Url.Content("/Content/img/Video.png")" alt="" />
+                </div>
                 </div>
                 
                     @*<img src="@Url.Content("/Content/img/Video.png")" alt="" /> *@
@@ -24,7 +26,7 @@
                        <table>
                        <tr>
                        <td colspan="3">
-                        <span>ME</span>
+                        <span class="blackWhiteHeader">Me</span>
                        </td>
                        </tr>
                        <tr>
@@ -34,12 +36,12 @@
                        </tr>
                        <tr>
                         <td colspan="3">
-                            <span>CURRENT </span><span>@ViewBag.CurrentPartner.Role</span>
+                            <span class="blackWhiteHeader">@ViewBag.CurrentPartner.Role</span>
                         </td>
                        </tr>
                        <tr>
                         <td colspan="3">
-                            @ViewBag.CurrentPartner.Name
+                            <span class="Name">@ViewBag.CurrentPartner.Name</span>
                         </td>
                        </tr>                       
                        <tr>
@@ -47,7 +49,7 @@
                             <img src="@ViewBag.CurrentPartner.AvatarPath" alt="" width="90" />
                         </td>
                         <td>
-                            @ViewBag.CurrentPartner.Description>
+                            <span class="ideaDescription">@ViewBag.CurrentPartner.Description</span>
                         </td>
                        </tr>
                        <tr>
@@ -67,13 +69,16 @@
 
 </div>
 
-<div id="pitchingDialog">
+<div id="pitchingDialog" style="width:700px;">
     <div id="initializing">
-        <div class="Preloader">
-            <img src="@Url.Content("/Content/img/loading.gif")" alt="" />
+        <div style="text-align:center;">
+            <div class="Preloader">
+                <img src="@Url.Content("/Content/img/loading.gif")" alt="" />
+            </div>
+        
+            <p class="mainInfoHeader">Initializing Video.</p>
+            <p class="secondInfoHeader">The conversation will be started shortly.</p>
         </div>
-        <p class="Searching">Initializing Video.</p>
-        <p class="Minutes">The conversation will be started shortly.</p>
     </div>
     <div class="alertStart" id="nextParticipant" style="margin: 0 auto; text-align: center; font-size: 25px;
 	                                                                                                                                                                                                                          display: none">
@@ -183,13 +188,15 @@
     $('#waitOfflainUserDialog').dialog({
         autoOpen: false,
         modal: true,
-        resizable: false
+        resizable: false,
+        width: 'auto'
     });
     
     $('#waitUserDialog').dialog({
         autoOpen: false,
         modal: true,
-        resizable: false
+        resizable: false,
+        width: 'auto'
     });
 
     function newRound()
@@ -204,7 +211,6 @@
             if (i == 0) {
                 clearInterval(timer2);
                 $.post('/Tube/SetTubeMode?mode=@ViewBag.NextMode', function() {
-                    alert("next mode is @ViewBag.NextMode")
                     window.location.href="/Tube/StartPitch";
                 });
             }
@@ -228,7 +234,8 @@
     $('#pitchingDialog').dialog({
         autoOpen: false,
         modal: true,
-        resizable: false
+        resizable: false,
+        width: 'auto'
     });
 
     var apiKey = '17048601'; // OpenTok sample code key. Replace with your own API key.
@@ -276,10 +283,10 @@
                 containerDiv.setAttribute('id', 'opentok_publisher');
 
                 var videoPanel = document.getElementById("subscriberId");
-                videoPanel.innerHTML = containerDiv.innerHTML;
+                videoPanel.appendChild(containerDiv);
 
                 var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
-                publisherDiv.setAttribute('id', 'replacement_div1')
+                publisherDiv.setAttribute('id', 'replacement_div')
                 containerDiv.appendChild(publisherDiv);
 
 
@@ -336,6 +343,7 @@
                 containerDiv.setAttribute('id', 'opentok_subscriber');
                 containerDiv.style.float = "left";
                 var videoPanel = document.getElementById("videoPanel");
+                $("#loading_image").hide();
                 videoPanel.appendChild(containerDiv);
 
                 var subscriberDiv = document.createElement('div'); // Create a div for the publisher to replace
@@ -348,7 +356,7 @@
                 publisherProperties.publishAudio = true;
                 publisherProperties.width = 690;
                 publisherProperties.height = 410;
-                
+                alert(subscriberDiv.id);
                 session.subscribe(stream,subscriberDiv.id, publisherProperties);
             }
         }
