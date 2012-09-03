@@ -37,11 +37,17 @@ namespace PitchingTube.Controllers
             });
             ViewBag.TubeId = tubeId;
 
-            if (personRepository.FirstOrDefault(p => p.UserId == userId).IsBot ?? false)
-                HttpContext.Cache[userId.ToString()+"online"] = false;
 
-           // Session["leftTime"] = 0;
-            //HttpContext.Application[tubeId.ToString()] = 0;
+            //stub
+            var participants = participantRepository.Query(x => x.TubeId == tubeId).ToList();
+            foreach (var participant in participants)
+            {
+                if (personRepository.FirstOrDefault(p => p.UserId == participant.UserId).IsBot ?? false || personRepository.FirstOrDefault(p => p.UserId == participant.UserId).IsBot == false)
+                    HttpContext.Cache[userId.ToString() + "online"] = false;
+            }
+
+            
+
 
             return View();
         }

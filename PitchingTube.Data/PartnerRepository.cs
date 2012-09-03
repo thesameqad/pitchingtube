@@ -15,15 +15,23 @@ namespace PitchingTube.Data
         {
             var HistoryPartners = (from partner in _objectSet
                                    join p in _context.Participants on partner.PartnerId equals p.UserId
-                                   where p.TubeId == tubeId && partner.UserId == UserId
+                                   where p.TubeId == tubeId && (partner.UserId == UserId || partner.UserId == currentPartnerId)
                                    select partner).ToList();
                           
             //var HistoryPartners = Query(x => x.UserId == UserId);
             //var count = HistoryPartners.Count;
 
-            var partners = new List<PitchingTube.Data.ParticipantRepository.UserInfo>();
+            var partners = new List<ParticipantRepository.UserInfo>();
             foreach (var partner in HistoryPartners)
             {
+                if(partner.UserId == currentPartnerId)
+                {
+                    var temp = partner.UserId;
+                    partner.UserId = partner.PartnerId;
+                    partner.PartnerId = temp;
+                }
+                
+
                 var repository = new BaseRepository<Person>();
                 var person = repository.FirstOrDefault(x => x.UserId == partner.PartnerId);
                 var avatar = person.AvatarPath.Replace("\\", "/");
@@ -33,7 +41,7 @@ namespace PitchingTube.Data
 
                 if (partner.PartnerId != currentPartnerId)
                 {
-                    partners.Add(new PitchingTube.Data.ParticipantRepository.UserInfo()
+                    partners.Add(new ParticipantRepository.UserInfo()
                     {
                         Name = user.UserName,
                         AvatarPath = avatar,
