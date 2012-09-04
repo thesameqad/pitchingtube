@@ -249,6 +249,12 @@ namespace PitchingTube.Controllers
             return View(results);
         }
 
+        [HttpPost]
+        public ActionResult Results()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         public ActionResult FindTube(string description)
         {
