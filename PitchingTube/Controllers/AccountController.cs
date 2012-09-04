@@ -116,7 +116,7 @@ namespace PitchingTube.Controllers
             if (ModelState.IsValid)
             {
                 MembershipCreateStatus createStatus;
-                try{
+                //try{
                     if (Membership.FindUsersByEmail(model.Email).Count != 0)
                     {
                         ModelState.AddModelError(string.Empty, "The email address is in use");
@@ -169,13 +169,13 @@ namespace PitchingTube.Controllers
                         ModelState.AddModelError("", ErrorCodeToString(createStatus));
                     }
 
-                }
-                catch(Exception ex)
-                {
-                    Membership.DeleteUser(model.UserName);
+                //}
+                //catch(Exception ex)
+                //{
+                    //Membership.DeleteUser(model.UserName);
                     
-                    ModelState.AddModelError("", ex);
-                }
+                    //ModelState.AddModelError("", ex);
+                //}
             }
             
 

@@ -8,6 +8,8 @@
 }
 
 <div class="ConteinerResult">
+@using (Html.BeginForm())
+{
 <p style="font-size: 22px; padding-left: 10px; width:100%; "></p>
         <table class="resultTable">
             <tr >
@@ -40,7 +42,7 @@
       <input type="submit" value="Again" class="doneButton" id="submit-form" style="color: white"/>
         <p style="font-size: 18px; float: right">If you are done, push </p>
 
-
+}
 </div>
 
   
@@ -92,24 +94,6 @@
             }
 
         });
-        
-//    function postonwall()  
-//    {  
-//        FB.api('/me/feed', 'post',  
-//        {  
-//            message: 'Pitch was awarded by investors for {n} points at pitchingtube.com',  
-//            link:'http://www.pitchingtube.com',  
-//            name:'Pitching Tube',  
-//            picture:'../../Content/img/Logo.png',  
-//            description:''  
-//        }, 
-//            function(response) {  
-//                if (!response || response.error) {  
-//                    alert('Oops! User Denied Access');  
-//                } else {  
-//                    alert('Success: Content Published');  
-//                }  
-//        });  
-//    }  
+          
 
     </script>

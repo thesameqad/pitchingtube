@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using RazorEngine.Configuration;
 using RazorEngine;
 using RazorEngine.Templating;
-using RazorEngine.Text;
 using System.Reflection;
 using System.IO;
 using System.Web.Mvc;
@@ -21,41 +20,10 @@ namespace PitchingTube.Mailing
         private const string Namespace = "PitchingTube.Mailing.Variables.";
         private const string Extension = ".cshtml";
 
-        public static string Parse<T>(string templateID, string template, T model, bool wrap, bool encode = true)
+        public static string Parse<T>(string template, T model, bool encode = true)
         {
-            var variables = GetVariables(templateID);
-            var pattern = "(" + string.Join("|", variables.Select(Regex.Escape)) + ")";
+            string text = Razor.Parse<T>(template, model);
 
-            var templateConfig = new TemplateServiceConfiguration
-                                     {
-                                         EncodedStringFactory = encode
-                                                ? (IEncodedStringFactory)
-                                                    new HtmlEncodedStringFactory()
-                                                : new RawStringFactory()
-                                     };
-            templateConfig.BaseTemplateType = typeof(HtmlTemplateBase<>);
-
-            var templateService = new TemplateService(templateConfig);
-
-            Razor.SetTemplateService(templateService);
-
-            string text = Regex.Replace(template, pattern, match =>
-                {
-                    var variable = match.Groups[1].Value;
-                    var templateName = variable.Trim('#');
-
-                    string variableTemplate = GetVariableTemplate(templateID, templateName);
-                    return templateService.Parse(variableTemplate, model);
-                });
-
-            if (wrap)
-            {
-                string wrapTemplate = GetVariableTemplate(templateID, "_Wrap");
-                if (wrapTemplate != null)
-                {
-                    return templateService.Parse<string>(wrapTemplate, text);
-                }
-            }
             return text;
         }
 
@@ -69,6 +37,9 @@ namespace PitchingTube.Mailing
                 .Where(n => !n.StartsWith("_"))
                 .Select(FormatVariable);
             
+            //BaseRepository<EmailVars> emailVarsRepository = 
+
+
             return names.ToArray();
         }
 

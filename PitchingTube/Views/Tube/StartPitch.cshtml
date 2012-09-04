@@ -224,6 +224,8 @@
     var sessionId = '@ViewData["sessionId"]';
     $(document).ready(function () {
         connect();
+        alert(sessionId);
+        alert("tube mode = @ViewBag.TubeId");
         
         $("#initializing").show();
         $("#nextParticipant").hide();

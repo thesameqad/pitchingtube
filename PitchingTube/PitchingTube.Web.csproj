@@ -15,6 +15,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,8 +48,11 @@
       <HintPath>..\packages\FacebookWebMvc.5.4.1.0\lib\net40\Facebook.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -57,19 +61,15 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
@@ -194,16 +194,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PitchingTube.Data\PitchingTube.Data.csproj">
-      <Project>{2E17E90E-D1B0-4563-9BDA-4CF5823DFD1C}</Project>
-      <Name>PitchingTube.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PitchingTube.Mailing\PitchingTube.Mailing.csproj">
-      <Project>{0E8634D8-2196-4111-A730-44C64E54CDC0}</Project>
-      <Name>PitchingTube.Mailing</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Account\AccountSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +238,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\AccountPlan.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PitchingTube.Data\PitchingTube.Data.csproj">
+      <Project>{2E17E90E-D1B0-4563-9BDA-4CF5823DFD1C}</Project>
+      <Name>PitchingTube.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PitchingTube.Mailing\PitchingTube.Mailing.csproj">
+      <Project>{0E8634D8-2196-4111-A730-44C64E54CDC0}</Project>
+      <Name>PitchingTube.Mailing</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
