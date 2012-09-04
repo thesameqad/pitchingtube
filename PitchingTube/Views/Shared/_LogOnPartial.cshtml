@@ -31,8 +31,8 @@ else
                         @Html.LabelFor(m => m.Email)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(m => m.Email)
-                        @Html.ValidationMessageFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new{@id = "email"})
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @id = "emailMessage" })
                     </div>
 
                     <div class="editor-label">
@@ -66,14 +66,22 @@ else
 <script type="text/javascript">
     $(function () {
         $('#dialog').dialog({
-                autoOpen: false,
-                modal: true,
-                resizable:false
-            });
+            autoOpen: false,
+            modal: true,
+            resizable: false
+        });
 
         $('#logon').click(function () {
             $('#dialog').dialog("open");
             return false;
+        });
+
+        $('#email').blur(function () {
+            $.getJSON("/Account/IfFieldExistInDatabase?fieldValue=" + $(this).val() + "&type=email",
+                function (x) {
+                    if (!x.isExist)
+                        $('#emailMessage').text("Email is not exist");
+                });
         });
 
     });

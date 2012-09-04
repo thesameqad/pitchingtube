@@ -47,18 +47,18 @@ namespace PitchingTube
             ParticipantRepository participantRepository = new ParticipantRepository();
             participantRepository.RemoveUserFromAllTubes(userId);
 
-            HttpContext.Current.Cache[userId.ToString()] = false;
+            HttpContext.Current.Cache[userId.ToString() + "online"] = false;
 
         }
 
         protected void Session_Start(Object sender, EventArgs e)
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 string userName = Membership.GetUserNameByEmail(User.Identity.Name);
                 Guid userId = Guid.Parse(Membership.GetUser(userName).ProviderUserKey.ToString());
 
-                HttpContext.Current.Cache[userId.ToString()] = true;
+                HttpContext.Current.Cache[userId.ToString() + "online"] = true;
             }
             
         }

@@ -52,10 +52,13 @@
             timer = setInterval(GetRatings, 1000);
 
             function GetRatings() {
-                countInvestors = 0;
+                //countInvestors = 0;
                 $.getJSON("/Tube/GetRatings?tubeid=" + @ViewBag.TubeId, function(x) {
                     for (var i = 0; i < x.nomination.length; i++) {
                         
+                        if(i == 0)
+                            countInvestors = 0;
+
                         var nominationId = "#nomination" + i;
                         if ($(nominationId).text() != x.nomination[i])
                             $(nominationId).text(x.nomination[i]);
@@ -76,6 +79,9 @@
                             published = true;
                             $.post("/Tube/PublishToFacebookWall?tubeid=@ViewBag.TubeId", function() {
                                 alert("post");
+                            });
+                             $.post('/Tube/SetTubeMode?mode=7', function() {
+                                 alert('Pitch was closed!');
                             });
                             
                         }

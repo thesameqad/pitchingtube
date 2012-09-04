@@ -149,7 +149,7 @@
                             if(!x.isReady) {
                                 waitTime += 1;
                                 $('#waitUserDialog').dialog("open");
-                                if(waitTime >= 120) {
+                                if(waitTime >= 20) {
                                     clearInterval(timer);
                                     newRound();
                                 }
