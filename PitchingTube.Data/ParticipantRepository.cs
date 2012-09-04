@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Security;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace PitchingTube.Data
 {
@@ -17,12 +18,9 @@ namespace PitchingTube.Data
             int tubeId = 0;
             try
             {
-                SqlConnectionStringBuilder connectionstring = new SqlConnectionStringBuilder();
-                connectionstring.DataSource = @".\SQLEXPRESS";
-                connectionstring.InitialCatalog = "PitchingTube";
-                connectionstring.IntegratedSecurity = true;
+                string connectionString = ConfigurationManager.ConnectionStrings["PitchingTube"].ConnectionString;
 
-                SqlConnection connection = new SqlConnection(connectionstring.ConnectionString);
+                SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
 
                 SqlCommand command = new SqlCommand();
