@@ -10,12 +10,12 @@ namespace PitchingTube.Data
     {
         public string GetSubject<T>(T model)
         {
-            return EmailParser.Parse(EmailTemplateID, Subject, model, false, false);
+            return EmailParser.Parse(Subject, model, false);
         }
 
         public string GetBody<T>(T model)
         {
-            return EmailParser.Parse(EmailTemplateID, Template, model, true, true);
+            return EmailParser.Parse(Template, model, true);
         }
     }
 }

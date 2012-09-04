@@ -33,6 +33,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Persons_aspnet_Users", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.aspnet_Users), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Person), true)]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_Participants_Tubes", "Tube", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.Tube), "Participant", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.Participant), true)]
 [assembly: EdmRelationshipAttribute("PitchingTubeModel", "aspnet_UsersInRoles", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Roles), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.aspnet_Users))]
+[assembly: EdmRelationshipAttribute("PitchingTubeModel", "FK_EmailVars_EmailTemplate", "EmailTemplate", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PitchingTube.Data.EmailTemplate), "EmailVar", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PitchingTube.Data.EmailVar), true)]
 
 #endregion
 
@@ -327,22 +328,6 @@ namespace PitchingTube.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<sysdiagram> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Tube> Tubes
         {
             get
@@ -355,6 +340,22 @@ namespace PitchingTube.Data
             }
         }
         private ObjectSet<Tube> _Tubes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<EmailVar> EmailVars
+        {
+            get
+            {
+                if ((_EmailVars == null))
+                {
+                    _EmailVars = base.CreateObjectSet<EmailVar>("EmailVars");
+                }
+                return _EmailVars;
+            }
+        }
+        private ObjectSet<EmailVar> _EmailVars;
 
         #endregion
         #region AddTo Methods
@@ -480,19 +481,19 @@ namespace PitchingTube.Data
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagram sysdiagram)
-        {
-            base.AddObject("sysdiagrams", sysdiagram);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Tubes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTubes(Tube tube)
         {
             base.AddObject("Tubes", tube);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the EmailVars EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmailVars(EmailVar emailVar)
+        {
+            base.AddObject("EmailVars", emailVar);
         }
 
         #endregion
@@ -3509,6 +3510,201 @@ namespace PitchingTube.Data
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_EmailVars_EmailTemplate", "EmailVar")]
+        public EntityCollection<EmailVar> EmailVars
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EmailVar>("PitchingTubeModel.FK_EmailVars_EmailTemplate", "EmailVar");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EmailVar>("PitchingTubeModel.FK_EmailVars_EmailTemplate", "EmailVar", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="EmailVar")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class EmailVar : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new EmailVar object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="emailTemplateID">Initial value of the EmailTemplateID property.</param>
+        public static EmailVar CreateEmailVar(global::System.Int64 id, global::System.String emailTemplateID)
+        {
+            EmailVar emailVar = new EmailVar();
+            emailVar.Id = id;
+            emailVar.EmailTemplateID = emailTemplateID;
+            return emailVar;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int64 _Id;
+        partial void OnIdChanging(global::System.Int64 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EmailTemplateID
+        {
+            get
+            {
+                return _EmailTemplateID;
+            }
+            set
+            {
+                OnEmailTemplateIDChanging(value);
+                ReportPropertyChanging("EmailTemplateID");
+                _EmailTemplateID = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("EmailTemplateID");
+                OnEmailTemplateIDChanged();
+            }
+        }
+        private global::System.String _EmailTemplateID;
+        partial void OnEmailTemplateIDChanging(global::System.String value);
+        partial void OnEmailTemplateIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Value");
+                OnValueChanged();
+            }
+        }
+        private global::System.String _Value;
+        partial void OnValueChanging(global::System.String value);
+        partial void OnValueChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PitchingTubeModel", "FK_EmailVars_EmailTemplate", "EmailTemplate")]
+        public EmailTemplate EmailTemplate
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmailTemplate>("PitchingTubeModel.FK_EmailVars_EmailTemplate", "EmailTemplate").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmailTemplate>("PitchingTubeModel.FK_EmailVars_EmailTemplate", "EmailTemplate").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<EmailTemplate> EmailTemplateReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmailTemplate>("PitchingTubeModel.FK_EmailVars_EmailTemplate", "EmailTemplate");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EmailTemplate>("PitchingTubeModel.FK_EmailVars_EmailTemplate", "EmailTemplate", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -4460,161 +4656,6 @@ namespace PitchingTube.Data
         }
 
         #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="PitchingTubeModel", Name="sysdiagram")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagram : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new sysdiagram object.
-        /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
-        {
-            sysdiagram sysdiagram = new sysdiagram();
-            sysdiagram.name = name;
-            sysdiagram.principal_id = principal_id;
-            sysdiagram.diagram_id = diagram_id;
-            return sysdiagram;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 principal_id
-        {
-            get
-            {
-                return _principal_id;
-            }
-            set
-            {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
-            }
-        }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
-        {
-            get
-            {
-                return _diagram_id;
-            }
-            set
-            {
-                if (_diagram_id != value)
-                {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
-                }
-            }
-        }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("version");
-                OnversionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] definition
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_definition);
-            }
-            set
-            {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
-            }
-        }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
-
-        #endregion
-    
     }
     
     /// <summary>
