@@ -198,7 +198,7 @@ namespace PitchingTube.Data
 
         public List<UserInfo> TubeParticipants(int tubeId)
         {
-            var participants = Query(x => x.TubeId == tubeId);
+            var participants = Query(x => x.TubeId == tubeId).OrderBy(x => x.IndexNumber);
             var users = new List<UserInfo>();
             foreach (var participant in participants)
             {
@@ -215,6 +215,8 @@ namespace PitchingTube.Data
                         AvatarPath = avatar
                     });
             }
+
+           
             return users;
         }
 
@@ -229,7 +231,9 @@ namespace PitchingTube.Data
                                where aspnet_User.aspnet_Roles.FirstOrDefault().RoleName == roleName
                                      && p.TubeId == newEntity.TubeId
                                select p).Count();
+
             newEntity.IndexNumber = indexNumber;
+
             if(FirstOrDefault(p => p.UserId == newEntity.UserId && p.TubeId == newEntity.TubeId) == null)
                 base.Insert(newEntity);
 
