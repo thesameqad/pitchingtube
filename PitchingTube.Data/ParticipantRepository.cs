@@ -205,7 +205,7 @@ namespace PitchingTube.Data
                 var repository = new BaseRepository<Person>();
                 var person = repository.FirstOrDefault(x => x.UserId == participant.UserId);
                 var avatar = person.AvatarPath.Replace("\\", "/");
-                var role = Roles.GetRolesForUser(participant.aspnet_Users.UserName).FirstOrDefault();
+                var role = person.aspnet_Users.aspnet_Roles.FirstOrDefault().RoleName;//Roles.GetRolesForUser(participant.aspnet_Users.UserName).FirstOrDefault();
                 users.Add(new UserInfo()
                     {
                         UserId = person.UserId,

@@ -46,7 +46,10 @@ The pitch will be started automatically in <span id="autoStartText"></span> minu
 <script type="text/javascript">
     var timer;
     var i = 10;
-    var count = 0;
+    //var count = 0;
+    var countI = 0;
+    var countE = 0;
+    
     var autoTimeout = 10;
     function stopInterval() {
         $('#startPitchTimeout').dialog("open");
@@ -109,14 +112,24 @@ The pitch will be started automatically in <span id="autoStartText"></span> minu
                     $(".alertIn").html("" + x.leftInvestor + " left").show();
                 }
             }
-            if(count < x.model.length) {
-                for (var i = count; i < x.model.length; i++)
-                    Insertp(i, x.model);
-                count = x.model.length;
+            
+            if(countI < x.investors.length) {
+                for (var i = countI; i < x.investors.length; i++)
+                    Insertp(i, x.investors);
+                countI = x.investors.length;
             }
-            if(count == 0)
-                for (var i = 0; i < x.model.length; i++)
-                    Insertp(i, x.model);
+            if(countI == 0)
+                for (var i = 0; i < x.investors.length; i++)
+                    Insertp(i, x.investors);
+            
+            if(countE < x.entrepreneurs.length) {
+                for (var i = countE; i < x.entrepreneurs.length; i++)
+                    Insertp(i, x.entrepreneurs);
+                countE = x.entrepreneurs.length;
+            }
+            if(countE == 0)
+                for (var i = 0; i < x.entrepreneurs.length; i++)
+                    Insertp(i, x.entrepreneurs);
      
         });
     }

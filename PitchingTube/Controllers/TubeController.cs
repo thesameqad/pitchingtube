@@ -56,9 +56,13 @@ namespace PitchingTube.Controllers
         public ActionResult TubePeopleList(int tubeId)
         {
             var model = participantRepository.TubeParticipants(tubeId);
-            var leftInvestor = 5 - model.Count(x => x.Role == "Investor");
-            var leftEntrepreneur = 5 - model.Count(x => x.Role == "Entrepreneur");
-            return new JsonResult { Data = new { model, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            var entrepreneurs = model.Where(m => m.Role == "Entrepreneur");
+            var investors = model.Where(m => m.Role == "Investor");
+
+            var leftInvestor = 5 - investors.ToList().Count;
+            var leftEntrepreneur = 5 - entrepreneurs.ToList().Count;
+            return new JsonResult { Data = new {entrepreneurs, investors, leftInvestor, leftEntrepreneur }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         [HttpGet,TubeRedirection]
