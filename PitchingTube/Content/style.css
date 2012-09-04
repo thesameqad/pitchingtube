@@ -148,16 +148,15 @@ h1, h2, h3, h4, h5, h6
 
 .containerRegistration {
     width: 100%;
-    background-color: #F0FFF0;
     height: auto;
     margin-top: 40px
 }
 
 .containerRegistration .frame{
-    width: 800px;
-    margin: 0 auto;
-    padding-top: 10px;
-    padding-bottom: 20px;
+
+margin: 30px auto 0px;
+text-align: center;
+padding-bottom: 40px;
 }
 .containerRegistration .frame .TableTr
 {
@@ -209,14 +208,6 @@ h1, h2, h3, h4, h5, h6
 	border-radius: 5px 5px 5px 5px;
 	margin: 5px 0 0 0;
 }
-.containerRegistration .frame .TextBox:focus 
-{ 
-	border: 3px solid #3CB371; 
-}
-.containerRegistration .frame .TextBox:hover 
-{ 
-	border: 3px solid #3CB371; 
-}
 .containerRegistration .frame .TableTr .button
 {
 	background-color:#D6FACC;
@@ -226,7 +217,7 @@ h1, h2, h3, h4, h5, h6
 {
 	background-color:#D6FACC;	
 }
-.containerRegistration .frame .TableTr .file
+.file
 {
 	opacity: 0;
 	z-index:2;
