@@ -80,10 +80,10 @@
                         if(countInvestors == @investors.Count && published == false) {
                             published = true;
                             $.post("/Tube/PublishToFacebookWall?tubeid=@ViewBag.TubeId", function() {
-                                alert("post");
+                                //alert("post");
                             });
                              $.post('/Tube/SetTubeMode?mode=7', function() {
-                                 alert('Pitch was closed!');
+                                 //alert('Pitch was closed!');
                             });
                             
                         }

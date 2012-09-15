@@ -10,6 +10,7 @@ html, body, form
 
 body
 {
+    overflow-x:hidden;
     font: 12px Helvetica, Arial, sans-serif, Tahoma, Verdana;
     color: #474747;
     background-image:url("../Content/img/Fon.png")
@@ -149,9 +150,12 @@ h1, h2, h3, h4, h5, h6
 width: 800px;
 height: 100%;
 margin: 0 auto;
-padding-top: 60px;
 text-align: center;
-background-color: #F0FFF0;
+}
+
+.valmes
+{
+    font-weight:bold;
 }
 
 .containerRegistration .frame{
@@ -187,8 +191,7 @@ padding-bottom: 40px;
 	padding-left:10px;
 }
 .containerRegistration .frame .style2
-{
-	text-align: left;	
+{	
 	padding-left:5px;
 	width:230px;
 	background-color:#D6FACC;
@@ -503,6 +506,21 @@ padding-bottom: 40px;
 	margin-left:10px;
 	margin-top:7px;
 }
+
+.simpleButton
+{
+    width:480px;
+	height:40px;
+	border:none;
+	font-size:22px;
+	background-color:Black;
+	text-align:center;
+	border-radius: 5px 5px 5px 5px;	
+	float:right;
+	margin-top:7px;
+	color:White;
+	margin-right:100px;
+}
 .footer {
     width: 800px;
     height: 4em;
@@ -525,6 +543,12 @@ padding-bottom: 40px;
 .secondInfoHeader
 {
     font: 35px Tahoma;
+	color:#696969;	
+}
+
+.regularInfoHeader
+{
+    font: 20px Tahoma;
 	color:#696969;	
 }
 

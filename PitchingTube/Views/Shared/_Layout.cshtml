@@ -21,9 +21,9 @@
             <div class="stripe"><img src="../../Content/img/Polosa.png" alt="" /></div>
             <div class="containerToolbar">
                 <div class="toolbar">
-                    <a href="#" style="padding-right:3px;"><img src="../../Content/img/icon-facebook.png" alt="" /></a>
-                    <a href="#" style="padding-right:3px;"><img src="../../Content/img/icon-google-plus.png" alt="" /></a>
-                    <a href="#" style="padding-right:3px;"><img src="../../Content/img/icon-twitter.png" alt="" /></a>
+                    <a href="https://www.facebook.com/PitchingTube" style="padding-right:3px;"><img src="../../Content/img/icon-facebook.png" alt="" /></a>
+                    <a href="https://plus.google.com/u/0/110380181897584329573" style="padding-right:3px;"><img src="../../Content/img/icon-google-plus.png" alt="" /></a>
+                    <a href="https://twitter.com/PitchingTube" style="padding-right:3px;"><img src="../../Content/img/icon-twitter.png" alt="" /></a>
                 </div>
             </div>
             <div id="logindisplay">
@@ -38,28 +38,19 @@
         <div class="footer">
             <b>@DateTime.Now.Year </b> Copyright <b>PitchingTube</b>
         </div>
-       
-        @*<div id="page">
-   
-            <div id="header">
-                <div id="TextLogo" style="float:left;"> PITCHING<br /><strong>TUBE</strong></div>
+<script type="text/javascript">
 
-                <div id="Logo" style="float:left;">
-                    <img src="@Url.Content("~/Content/img/logo.png")" alt="" />
-                </div>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34591613-1']);
+    _gaq.push(['_setDomainName', 'pitchingtube.com']);
+    _gaq.push(['_trackPageview']);
 
-                <div id="logindisplay">
-                    @Html.Partial("_LogOnPartial")
-                </div>
-                <div style="clear:both"></div>
-            </div>
-            <div id="MainBody">
-                @RenderBody()
-                @{ Html.RenderPartial("FacebookInit"); }
-            </div>
-            <div id="footer">
-                <p> 2012 <font color="#B5B5B5">Copyright</font> PichingTube </p>
-            </div>
-        </div> *@
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
     </body>
 </html>

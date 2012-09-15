@@ -123,21 +123,21 @@ namespace PitchingTube.Controllers
                         return View(model);
                     }
                     
-                    var currentUser = Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, false, null, out createStatus);
+                    var currentUser = Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
                     Roles.AddUserToRole(model.UserName,model.Role);
 
                     if (createStatus == MembershipCreateStatus.Success)
                     {
                         string activationLink = Util.GetAuthKey(Guid.Parse(currentUser.ProviderUserKey.ToString()), model.Email, model.Password);
-                        var emailModel = new
-                        {
-                            UserName = model.UserName,
-                            Url = string.Format("{0}/Account/Home/?auth={1}", Util.BaseUrl, activationLink)
-                        };
-                        MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("activation", emailModel);
-                        mail.To.Add(model.Email);
+                        //var emailModel = new
+                        //{
+                        //    UserName = model.UserName,
+                        //    Url = string.Format("{0}/Account/Home/?auth={1}", Util.BaseUrl, activationLink)
+                        //};
+                        //MailMessage mail = PitchingTubeEntities.Current.GenerateEmail("activation", emailModel);
+                        //mail.To.Add(model.Email);
 
-                        Mailer.SendMail(mail);
+                        //Mailer.SendMail(mail);
 
                         string avatarPath = "";
                         if (fileUpload != null)
@@ -161,8 +161,10 @@ namespace PitchingTube.Controllers
                                 IsPublish = false
                             };
                         personRepository.Insert(newPerson);
+
+                        FormsAuthentication.SetAuthCookie(model.Email, true);
                         
-                        return RedirectToAction("ActivationRequest");
+                        return RedirectToAction("Index","Home");
                     }
                     else
                     {

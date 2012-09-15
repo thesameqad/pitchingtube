@@ -3,8 +3,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="containerInvestors">
 
-Your trial account is activated. 
-<p>
-@Html.ActionLink("Main page","Index","Home",new {@class = "Button1"})
-</p>
+<div class="mainInfoHeader" style="text-align:center;">
+    Your trial account is activated<br />
+    for 30 days
+</div>
+<div style="text-align:center"> 
+@Html.ActionLink("Main page","Index","Home",new {@class = "simpleButton",@style="color:White"})
+</div>
+
+</div>

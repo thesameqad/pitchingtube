@@ -148,7 +148,7 @@ namespace PitchingTube.Controllers
                 OpenTokSDK opentok = new OpenTokSDK();
                 Dictionary<string, object> options = new Dictionary<string, object>();
                 options.Add(SessionPropertyConstants.P2P_PREFERENCE, "enabled");
-                sessionId = opentok.CreateSession(Request.ServerVariables["REMOTE_ADDR"]);
+                sessionId = opentok.CreateSession("::1");
                 HttpContext.Cache[currentParticipant.UserId.ToString()] = sessionId;
             }
 

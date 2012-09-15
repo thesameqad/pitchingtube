@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net.Mail;
+using System.Net;
 
 namespace PitchingTube.Mailing
 {
@@ -25,6 +26,8 @@ namespace PitchingTube.Mailing
             message.BodyEncoding = Encoding.UTF8;
 
             var client = new SmtpClient();
+            client.Credentials = CredentialCache.DefaultNetworkCredentials;
+
             client.Send(message);
         }
 
